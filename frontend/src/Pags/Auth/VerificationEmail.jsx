@@ -1,24 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
 
-function LoginPage() {
+function RecoverPasswordPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const registeredEmail = "usuario@teste.com";
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!email || !password) {
-      alert("Por favor, preencha o e-mail e a senha para fazer login.");
+    if (!email) {
+      alert("Por favor, preencha o e-mail para recuperar sua senha.");
       return;
     }
 
-    console.log("Email:", email, "Senha:", password);
-    alert(`Login simulado!\nEmail: ${email}\nSenha: ${password}`);
+    if (email.toLowerCase() === registeredEmail) {
+      console.log("E-mail correto. Navegando e enviando state...");
+
+      // 👇 AQUI ESTÁ A CORREÇÃO CRÍTICA 👇
+      // O segundo argumento { state: ... } deve estar DENTRO do parêntese.
+      navigate("/verify-code", { state: { email: email } });
+    } else {
+      alert("E-mail não encontrado em nosso sistema. Tente novamente.");
+    }
   };
 
   return (
@@ -27,8 +35,12 @@ function LoginPage() {
         <div className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-xl">
             <h1 className="text-4xl md:text-5xl text-gray-800 mb-8 text-left">
-              Acesse sua conta
+              Recupere sua Conta
             </h1>
+            <p className="text-gray-600 mb-8">
+              Digite "<strong>usuario@teste.com</strong>" para simular um e-mail
+              válido.
+            </p>
             <form onSubmit={handleSubmit} className="space-y-6">
               <InputField
                 label="E-mail:"
@@ -41,58 +53,32 @@ function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="border-4 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500"
               />
-              <InputField
-                label="Senha:"
-                htmlFor="password"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Digite sua Senha..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border-4 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500"
-              />
               <Button
                 type="submit"
                 primary
                 className="w-full mt-6 text-lg md:text-xl flex justify-center items-center"
               >
-                Entrar
+                Continuar
               </Button>
             </form>
-
             <div className="mt-6 text-center space-y-3">
               <Link
-                to="/verification-email"
+                to="/"
                 className="text-sm text-blue-600 hover:text-blue-800 text-[20px]"
               >
-                Esqueci a senha
+                Voltar para o Login
               </Link>
-              <p className="text-sm text-gray-600 text-[18px]">
-                Não tem uma conta?{" "}
-                <Link
-                  to="/register"
-                  className="text-blue-600 hover:text-blue-800 font-semibold text-[18px]"
-                >
-                  Cadastre-se
-                </Link>
-              </p>
             </div>
           </div>
         </div>
-
         <div className="flex justify-between items-end mt-8 w-full">
           <img
             src={logoRecife}
             alt="Logo Recife Proteção"
             className="h-10 md:h-36 lg:h-24"
           />
-          <button className="py-2 px-5 border border-transparent rounded-[4px] shadow-sm text-base md:text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Acesso ONGs
-          </button>
         </div>
       </div>
-
       <div
         className="hidden lg:block w-1/2 bg-cover bg-center"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
@@ -101,4 +87,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RecoverPasswordPage;

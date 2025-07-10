@@ -43,7 +43,6 @@ function RegisterPage() {
   return (
     <div className="min-h-screen bg-white text-white font-sans flex flex-col items-center">
       <div className="w-full flex justify-between items-center p-6 lg:p-8">
-        <div></div>
         <div className="flex items-center space-x-4 ml-auto">
           <span className="text-gray-800 text-lg">Já tem uma conta?</span>{" "}
           <Link to="/">
