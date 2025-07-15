@@ -165,4 +165,100 @@ authRouter.post('/login', (req, res) => {
     })(req, res);
 });
 
+authRouter.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ message: 'O campo de e-mail é obrigatório.' });
+        }
+
+        // 1. Encontra o usuário pelo e-mail
+        const user = await Mongo.db.collection(usersCollection).findOne({ email: email });
+
+        // IMPORTANTE: Por segurança, não informe se o e-mail foi encontrado ou não.
+        // Apenas retorne sucesso para não permitir que descubram e-mails cadastrados.
+        if (!user) {
+            return res.status(200).json({ message: 'Se um usuário com este e-mail existir, um link de recuperação foi enviado.' });
+        }
+
+        // 2. Gera um token único e seguro para a redefinição de senha
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        const tenMinutes = 10 * 60 * 1000; // Token expira em 10 minutos
+        const expires = new Date(Date.now() + tenMinutes);
+
+        // 3. Salva o token e a data de expiração no documento do usuário
+        await Mongo.db.collection(usersCollection).updateOne(
+            { _id: user._id },
+            { $set: { resetPasswordToken: resetToken, resetPasswordExpires: expires } }
+        );
+
+        // 4. Cria o link de redefinição para o front-end
+    
+        const resetLink = `http://localhost:5173/recover-password/${resetToken}`;
+
+        // 5. Configura e envia o e-mail
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: { user: process.env.AUTH_EMAIL, pass: process.env.AUTH_PASS }
+        });
+
+        const mailOptions = {
+            from: process.env.AUTH_EMAIL,
+            to: user.email,
+            subject: "Recuperação de Senha",
+            html: `<p>Você solicitou a recuperação de senha.</p><p>Clique neste <a href="${resetLink}">link</a> para redefinir sua senha.</p><p>Este link é válido por 10 minutos.</p>`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        
+        // 6. Responde ao front-end
+        res.status(200).json({ message: 'Se um usuário com este e-mail existir, um link de recuperação foi enviado.' });
+
+    } catch (error) {
+        console.error("Erro em /forgot-password:", error);
+        res.status(500).json({ message: 'Erro interno no servidor.' });
+    }
+});
+
+// ROTA PARA REDEFINIR A SENHA
+authRouter.post('/reset-password/:token', async (req, res) => {
+    try {
+        const { token } = req.params;
+        const { password } = req.body;
+
+        if (!password || password.length < 8) {
+            return res.status(400).json({ message: 'A senha é obrigatória e precisa ter no mínimo 8 caracteres.' });
+        }
+
+        // 1. Encontra o usuário pelo token e verifica se não expirou
+        const user = await Mongo.db.collection(usersCollection).findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: new Date() } // $gt (greater than)
+        });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Token de recuperação inválido ou expirado.' });
+        }
+
+        // 2. Cria um novo hash e salt para a nova senha
+        const salt = crypto.randomBytes(16);
+        const hashedPassword = await hashWithSalt(password, salt);
+
+        // 3. Atualiza a senha do usuário e remove o token para que não seja reutilizado
+        await Mongo.db.collection(usersCollection).updateOne(
+            { _id: user._id },
+            {
+                $set: { password: hashedPassword, salt: salt },
+                $unset: { resetPasswordToken: "", resetPasswordExpires: "" } // Remove os campos do token
+            }
+        );
+
+        res.status(200).json({ message: 'Senha redefinida com sucesso!' });
+
+    } catch (error) {
+        console.error("Erro em /reset-password:", error);
+        res.status(500).json({ message: 'Erro interno no servidor.' });
+    }
+});
+
 export default authRouter;
