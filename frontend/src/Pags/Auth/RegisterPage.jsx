@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Importe o componente Link
+import axios from 'axios'; 
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
-import axios from "axios"
 
 function RegisterPage() {
   const [projectName, setProjectName] = useState("");
@@ -51,14 +51,15 @@ function RegisterPage() {
     alert(errorMessage);
   }
 };
+  
+  
 
   return (
     <div className="min-h-screen bg-white text-white font-sans flex flex-col items-center">
       <div className="w-full flex justify-between items-center p-6 lg:p-8">
-        <div></div>
         <div className="flex items-center space-x-4 ml-auto">
           <span className="text-gray-800 text-lg">Já tem uma conta?</span>{" "}
-          <Link to="/">
+          <Link to="/login">
             <Button primary className="py-2 px-6">
               Acessar
             </Button>

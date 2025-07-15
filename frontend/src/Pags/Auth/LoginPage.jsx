@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // O import já estava correto
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
@@ -80,7 +80,7 @@ function LoginPage() {
 
             <div className="mt-6 text-center space-y-3">
               <Link
-                to="#"
+                to="/verification-email"
                 className="text-sm text-blue-600 hover:text-blue-800 text-[20px]"
               >
                 Esqueci a senha
