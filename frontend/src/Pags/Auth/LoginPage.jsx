@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // O import já estava correto
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
@@ -8,6 +8,7 @@ import InputField from "../../Components/InputField/";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +20,8 @@ function LoginPage() {
 
     console.log("Email:", email, "Senha:", password);
     alert(`Login simulado!\nEmail: ${email}\nSenha: ${password}`);
+
+    navigate("/");
   };
 
   return (

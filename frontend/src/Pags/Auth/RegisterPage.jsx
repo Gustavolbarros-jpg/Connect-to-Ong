@@ -45,7 +45,7 @@ function RegisterPage() {
       <div className="w-full flex justify-between items-center p-6 lg:p-8">
         <div className="flex items-center space-x-4 ml-auto">
           <span className="text-gray-800 text-lg">Já tem uma conta?</span>{" "}
-          <Link to="/">
+          <Link to="/login">
             <Button primary className="py-2 px-6">
               Acessar
             </Button>
