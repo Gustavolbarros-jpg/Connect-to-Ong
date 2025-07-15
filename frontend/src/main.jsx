@@ -19,7 +19,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verification-email" element={<VerificationEmail />} />
         <Route path="/verify-code" element={<VerifyCode />} />
-        <Route path="/recover-password" element={<RecoverPasswordPage />} />
+        <Route path="/recover-password/:token" element={<RecoverPasswordPage />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
