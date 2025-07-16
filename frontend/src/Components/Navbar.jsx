@@ -5,7 +5,7 @@ function Navbar() {
 
   return (
     <header className="bg-white fixed top-0 w-full z-50">
-      <nav className="py-6 flex justify-center// font-semibold">
+      <nav className="flex justify-center py-6 // font-semibold // shadow-lg">
 
         {/* Logo */}
         <div className="container my-auto flex justify-start ml-5">
