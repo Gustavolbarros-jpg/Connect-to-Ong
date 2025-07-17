@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
@@ -8,9 +9,8 @@ import InputField from "../../Components/InputField/";
 function RecoverPasswordPage() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const registeredEmail = "usuario@teste.com";
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email) {
@@ -18,17 +18,29 @@ function RecoverPasswordPage() {
       return;
     }
 
-    if (email.toLowerCase() === registeredEmail) {
-      console.log("E-mail correto. Navegando e enviando state...");
+    try {
+      // ======================================================================
+      // ✅ ESTE É O PONTO CRÍTICO: CHAMANDO O ENDPOINT DE RECUPERAÇÃO DE SENHA
+      // ======================================================================
+      await axios.post('http://localhost:3000/auth/forgot-password', {
+        email: email,
+      });
 
-      // 👇 AQUI ESTÁ A CORREÇÃO CRÍTICA 👇
-      // O segundo argumento { state: ... } deve estar DENTRO do parêntese.
+      // Se a requisição for bem-sucedida, avisa o usuário e navega
+      alert("Se este e-mail estiver cadastrado, um código de verificação foi enviado para sua caixa de entrada.");
+      
+      // Navega para a página de verificação de código, passando o e-mail
       navigate("/verify-code", { state: { email: email } });
-    } else {
-      alert("E-mail não encontrado em nosso sistema. Tente novamente.");
+
+    } catch (error) {
+      // Captura qualquer erro do backend (ex: e-mail não encontrado)
+      const errorMessage = error.response?.data?.message || "E-mail não encontrado ou erro no servidor.";
+      console.error("Erro ao solicitar recuperação de senha:", error);
+      alert(errorMessage);
     }
   };
 
+  // O front-end (JSX) correto para a página de recuperação
   return (
     <div className="flex min-h-screen font-sans bg-gray-50">
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
@@ -38,8 +50,7 @@ function RecoverPasswordPage() {
               Recupere sua Conta
             </h1>
             <p className="text-gray-600 mb-8">
-              Digite "<strong>usuario@teste.com</strong>" para simular um e-mail
-              válido.
+              Digite o seu e-mail cadastrado para enviarmos um código de verificação.
             </p>
             <form onSubmit={handleSubmit} className="space-y-6">
               <InputField

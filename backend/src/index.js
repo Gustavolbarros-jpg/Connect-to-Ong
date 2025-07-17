@@ -2,10 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import { Mongo } from './database/mongo.js'
 import {config} from 'dotenv'
-import authRouter from './auth/auth.js'
+
 import userRouter from './routes/users.js'
-import plateRouter from './routes/plates.js'
-import orderRouter from './routes/orders.js'
+import authRouter from './auth/auth.js'; 
 
 config()
 
@@ -26,15 +25,13 @@ async function main() {
         res.send({
             success: true,
             statusCode: 200,
-            body: 'Welcome to My Gastronomy'
+            body: 'Welcome to Connect To Ong'
         })
     })
     //routers
     app.use('/users',userRouter)
-
-    app.use('/auth',authRouter)
-    app.use('/plates',plateRouter)
-    app.use('/orders',orderRouter)
+    app.use('/auth', authRouter);
+    
     app.listen(port, () => {
         console.log(`Server running on: http://${hostname}:${port}`)
     })
