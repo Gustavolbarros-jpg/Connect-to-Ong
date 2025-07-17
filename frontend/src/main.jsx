@@ -10,7 +10,7 @@ import RecoverPasswordPage from "./Pags/Auth/RecoverPasswordPage.jsx";
 import HomePage from "./Pags/Home/HomePage.jsx";
 
 import InfoPage from "./Pags/InfoPage/InfoPage.jsx";
-import ProfilePage from "./Pags/InfoPage/ProfilePage.jsx";
+import ProfilePage from "./Pags/ProfilePage/ProfilePage.jsx";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
