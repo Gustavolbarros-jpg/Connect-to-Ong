@@ -1,42 +1,47 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // O import já estava correto
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"; // 1. Importar o axios
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
-import axios from "axios"
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => { // Transforme a função em async
-  event.preventDefault();
+  // 2. Lógica de envio para o backend
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  if (!email || !password) {
-    alert("Por favor, preencha o e-mail e a senha para fazer login.");
-    return;
-  }
+    if (!email || !password) {
+      alert("Por favor, preencha o e-mail e a senha para fazer login.");
+      return;
+    }
 
-  try {
-    // Substitua 'http://seu-backend.com/login' pelo endpoint real do seu backend
-    const response = await axios.post('http://localhost:3000/auth/login', {
-      email: email,
-      password: password,
-    });
+    try {
+      // Faz a requisição POST para a rota de login do backend
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        email: email,
+        password: password,
+      });
 
-    // Se o login for bem-sucedido:
-    console.log("Resposta do servidor:", response.data);
-    alert("Login realizado com sucesso!");
-    // Aqui, você pode redirecionar o usuário ou salvar o token de autenticação
-    // Ex: window.location.href = '/dashboard';
+      console.log("Resposta do servidor:", response.data);
+      alert("Login realizado com sucesso!");
 
-  } catch (error) {
-    // Se ocorrer um erro:
-    console.error("Erro ao fazer login:", error.response?.data || error.message);
-    alert("Falha no login. Verifique suas credenciais.");
-  }
-};
+      
+
+      // Navega para a página principal após o login bem-sucedido
+      navigate("/");
+
+    } catch (error) {
+      // Captura e exibe a mensagem de erro vinda do backend ou uma mensagem padrão
+      const errorMessage = error.response?.data?.message || "E-mail ou senha incorretos. Tente novamente.";
+      console.error("Erro ao fazer login:", error);
+      alert(errorMessage);
+    }
+  };
 
   return (
     <div className="flex min-h-screen font-sans bg-gray-50">
