@@ -21,7 +21,7 @@ function InfoPage() {
                 Conectamos o conhecimento acadêmico às necessidades reais das
                 ONGs
               </p>
-              <button className="w-[200px] h-[60px] bg-blue-700 font-bold focus:outline-none rounded-[4px] hover:bg-blue-600">
+              <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600">
                 Quero Participar!
               </button>
             </div>
