@@ -11,6 +11,7 @@ import HomePage from "./Pags/Home/HomePage.jsx";
 
 import InfoPage from "./Pags/InfoPage/InfoPage.jsx";
 import ProfilePage from "./Pags/InfoPage/ProfilePage.jsx";
+import OngPage from "./Pags/OngPage/OngPage.jsx";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -26,6 +27,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<HomePage />} />
         <Route path="/university" element={<InfoPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/ongs" element={<OngPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

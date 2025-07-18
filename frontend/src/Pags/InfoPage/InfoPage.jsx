@@ -5,12 +5,12 @@ import Footer from "../../Components/Footer/";
 
 function InfoPage() {
   return (
-    <div className="font-roboto h-screen" style={{ color: "#001449" }}>
+    <div className="font-roboto h-screen text-[#001449]">
       <Navbar />
       <main className="min-h-screen min-w-screem bg-[#F4F0F0]">
         <section
           className="flex justify-start items-center // text-white // w-full h-screen bg-no-repeat bg-center bg-cover"
-          style={{ backgroundImage: 'url("/InfoPage/BGImage.png")' }}
+          style={{ backgroundImage: "url('/InfoPage/BGImage.png')" }}
         >
           <div className="relative z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%]">
             <div className="flex-column // w-full max-w-[700px] pl-12">
