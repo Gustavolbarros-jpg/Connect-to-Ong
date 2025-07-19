@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 
+import BGImage from "../../assets/images/InfoPage/BGImage.png";
+import imageSection from "../../assets/images/InfoPage/imageSection.png";
+import icone1 from "../../assets/images/InfoPage/icone1.png";
+import icone2 from "../../assets/images/InfoPage/icone2.png";
+import icone3 from "../../assets/images/InfoPage/icone3.png";
+
+
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 
@@ -9,9 +16,7 @@ function InfoPage() {
       <Navbar />
       <main className="min-h-screen min-w-screem bg-[#F4F0F0]">
         <section
-          className="flex justify-start items-center // text-white // w-full h-screen bg-no-repeat bg-center bg-cover"
-          style={{ backgroundImage: "url('/InfoPage/BGImage.png')" }}
-        >
+          className="flex justify-start items-center // text-white // w-full h-screen bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url('${BGImage}')` }} >
           <div className="relative z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%]">
             <div className="flex-column // w-full max-w-[700px] pl-12">
               <h1 className="text-[40px] pb-4">
@@ -36,7 +41,7 @@ function InfoPage() {
           <div className="flex flex-col space-y-8 max-w-lg md:max-w-xl w-full text-[18px] md:text-[20px]">
             <div className="flex gap-4 text-[18px] md:text-[20px]">
               <img
-                src="/InfoPage/icone1.png"
+                src={icone1}
                 alt="Ícone correntes"
                 className="w-12 h-12"
               />
@@ -47,7 +52,7 @@ function InfoPage() {
             </div>
             <div className="flex gap-4 text-[18px] md:text-[20px]">
               <img
-                src="/InfoPage/icone2.png"
+                src={icone2}
                 alt="Ícone globo"
                 className="w-12 h-12"
               />
@@ -58,7 +63,7 @@ function InfoPage() {
             </div>
             <div className="flex gap-4 text-[18px] md:text-[20px]">
               <img
-                src="/InfoPage/icone3.png"
+                src={icone3}
                 alt="Ícone ponte"
                 className="w-12 h-12"
               />
@@ -74,7 +79,7 @@ function InfoPage() {
           <div className="container flex flex-col items-center justify-center gap-8 md:h-full md:flex-row md:items-center md:gap-12">
             <div className="w-full md:w-1/2 flex justify-center md:justify-center">
               <img
-                src="/InfoPage/imageSection.png"
+                src={imageSection}
                 alt="Universidades e ONGs colaborando"
                 className="w-full max-w-sm md:max-w-full h-auto rounded-lg shadow-lg"
               />
