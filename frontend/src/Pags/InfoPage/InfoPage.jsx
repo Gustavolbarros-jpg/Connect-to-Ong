@@ -24,10 +24,10 @@ function InfoPage() {
               </h1>
               <p className="text-xl pb-6">
                 Conectamos o conhecimento acadêmico às necessidades reais das
-                ONGs
+                ONGs.
               </p>
               <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600">
-                Quero Participar!
+                <a href="/register">Quero Participar!</a>
               </button>
             </div>
           </div>

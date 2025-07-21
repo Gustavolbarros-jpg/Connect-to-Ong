@@ -91,7 +91,7 @@ function LoginPage() {
             className="h-10 md:h-36 lg:h-24"
           />
           <button className="py-2 px-5 border border-transparent rounded-[4px] shadow-sm text-base md:text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Acesso ONGs
+            <a href="/ongs">Acesso ONGs</a> 
           </button>
         </div>
       </div>

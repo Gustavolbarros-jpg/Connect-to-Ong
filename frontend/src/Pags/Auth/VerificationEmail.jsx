@@ -63,7 +63,7 @@ function RecoverPasswordPage() {
             </form>
             <div className="mt-6 text-center space-y-3">
               <Link
-                to="/"
+                to="/login"
                 className="text-sm text-blue-600 hover:text-blue-800 text-[20px]"
               >
                 Voltar para o Login

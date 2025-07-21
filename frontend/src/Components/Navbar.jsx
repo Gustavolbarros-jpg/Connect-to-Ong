@@ -34,7 +34,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                href="#"
+                href="/ongs"
                 className="text-blue-600 hover:text-blue-800 text-[20px]"
               >
                 ONGs
