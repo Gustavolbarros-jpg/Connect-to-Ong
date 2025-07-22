@@ -9,6 +9,10 @@ import VerifyCode from "./Pags/Auth/VerifyCode.jsx";
 import RecoverPasswordPage from "./Pags/Auth/RecoverPasswordPage.jsx";
 import HomePage from "./Pags/Home/HomePage.jsx";
 
+import InfoPage from "./Pags/InfoPage/InfoPage.jsx";
+import ProfilePage from "./Pags/ProfilePage/ProfilePage.jsx";
+import OngPage from "./Pags/OngPage/OngPage.jsx";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
@@ -19,8 +23,11 @@ createRoot(document.getElementById("root")).render(
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verification-email" element={<VerificationEmail />} />
         <Route path="/verify-code" element={<VerifyCode />} />
-        <Route path="/recover-password/:token" element={<RecoverPasswordPage />} />
+        <Route path="/recover-password" element={<RecoverPasswordPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/university" element={<InfoPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/ongs" element={<OngPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
