@@ -31,7 +31,7 @@ function HomePage() {
                   desenvolvem soft skills e geram impacto real.
                 </p>
                 <a
-                  href="/register"
+                  href="/stepe-one"
                   className="mt-8 inline-block bg-white text-blue-700 font-bold py-3 px-6 rounded-md hover:bg-gray-200 text-lg md:text-xl"
                 >
                   Começar projeto agora!
