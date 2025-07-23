@@ -11,7 +11,7 @@ import Footer from "../../Components/Footer/";
 
 function HomePage() {
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white font-roboto">
       <Navbar />
       <main className="pt-24">
         <section className="relative h-[95vh]">
@@ -20,19 +20,19 @@ function HomePage() {
             alt="foto da main"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="relative z-10 h-full flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[50%]">
-            <div className="container mx-auto px-6 text-white">
+          <div className="relative z-10 h-full flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[50%] font-roboto">
+            <div className="container ml-12 text-white">
               <div className="max-w-2xl">
                 <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                   Conecte-se a ONGs e transforme sua pesquisa em impacto social.
                 </h1>
-                <p className="mt-5 text-xl md:text-2xl text-gray-200">
+                <p className="mt-5 text-xl text-gray-200 ">
                   Conectamos universidades e ONGs em projetos sociais que
                   desenvolvem soft skills e geram impacto real.
                 </p>
                 <a
                   href="/register"
-                  className="mt-8 inline-block bg-white text-blue-700 font-bold py-3 px-6 rounded-md hover:bg-gray-200 text-lg md:text-xl"
+                  className="mt-8 inline-block bg-white text-blue-700 font-bold py-3 px-6 rounded-md hover:bg-gray-200 text-lg"
                 >
                   Começar projeto agora!
                 </a>
