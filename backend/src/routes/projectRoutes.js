@@ -1,8 +1,11 @@
 import express from 'express'
 import ProjectControllers from '../controllers/projectController.js'
+import { verifyToken } from '../middlewares/verifyToken.js' 
 
 const projectRouter = express.Router()
 const projectController = new ProjectControllers()
+
+projectRouter.use(verifyToken);
 
 // get all projects
 projectRouter.get('/', async (req, res) => {

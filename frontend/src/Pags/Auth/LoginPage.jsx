@@ -26,6 +26,13 @@ function LoginPage() {
         email: email,
         password: password,
       });
+      // 1. Extrair o token e o usuário da resposta
+      const { token, user } = response.data;
+
+      // 2. Salvar no localStorage do navegador
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
 
       console.log("Resposta do servidor:", response.data);
       alert("Login realizado com sucesso!");
