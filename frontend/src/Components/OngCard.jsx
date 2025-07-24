@@ -6,7 +6,7 @@ function OngCard({ ong }) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   // Define um limite para a descrição antes de ser expandida
-  const DESCRIPTION_LIMIT = 150; 
+  const DESCRIPTION_LIMIT = 300; 
   const shortDescription = ong.description.substring(0, DESCRIPTION_LIMIT);
   const needsExpansion = ong.description.length > DESCRIPTION_LIMIT;
 
@@ -30,11 +30,11 @@ function OngCard({ ong }) {
 
       {/* Seção da Descrição Principal - CLICÁVEL PARA EXPANDIR */}
 
-      <p className="text-gray-600 text-base mb-4 flex-grow cursor-pointer" onClick={toggleDescriptionExpansion}>{isDescriptionExpanded ? ong.description : shortDescription}{needsExpansion && (<span className="text-blue-600 hover:underline ml-1">{isDescriptionExpanded ? '...ver menos' : '...ver mais'}</span>)}</p>
+      <p className="text-gray-600 text-base mb-4 flex-grow cursor-pointer" onClick={toggleDescriptionExpansion}>{isDescriptionExpanded ? ong.description : shortDescription}{needsExpansion && (<span className="text-blue-600 hover:underline ml-1">{isDescriptionExpanded ? 'ver menos' : 'ver mais'}</span>)}</p>
 
-      {/* Seção das Tags (Área de Atuação, Localidade, Tipo de Projeto) */}
+      {/* Seção das Tags (Área de Atuação, Localidade) */}
 
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4 mt-[40px]">
         {ong.location && (<span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">{ong.location}</span>)}
         {ong.area && (<span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">{ong.area}</span>)}
         
