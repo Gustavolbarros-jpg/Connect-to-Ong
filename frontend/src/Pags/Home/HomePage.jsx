@@ -11,31 +11,28 @@ import Footer from "../../Components/Footer/";
 
 function HomePage() {
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white font-roboto">
       <Navbar />
-      <main className="pt-24">
-        <section className="relative h-[95vh]">
+      <main className="pt-24 min-w-screem">
+        <section className="relative h-[95vh] w-full">
           <img
             src={fotoMain}
             alt="foto da main"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="relative z-10 h-full flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[50%]">
-            <div className="container mx-auto px-6 text-white">
-              <div className="max-w-2xl">
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <div className="relative z-10 h-full flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[50%] font-roboto">
+            <div className="container ml-12 md:mb-[140px] text-white">
+              <div className="max-w-3xl">
+                <h1 className="text-4xl md:text-5xl font-bold leading-tight w-100%">
                   Conecte-se a ONGs e transforme sua pesquisa em impacto social.
                 </h1>
-                <p className="mt-5 text-xl md:text-2xl text-gray-200">
+                <p className="mt-5 text-xl text-gray-200 w-[600px] ">
                   Conectamos universidades e ONGs em projetos sociais que
                   desenvolvem soft skills e geram impacto real.
                 </p>
-                <a
-                  href="/stepe-one"
-                  className="mt-8 inline-block bg-white text-blue-700 font-bold py-3 px-6 rounded-md hover:bg-gray-200 text-lg md:text-xl"
-                >
-                  Começar projeto agora!
-                </a>
+              <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600 mt-[24px]">
+                <a href="/register">Começar projeto agora!</a>
+              </button>
               </div>
             </div>
           </div>
@@ -46,7 +43,7 @@ function HomePage() {
             fortalecem competências.
           </h1>
 
-          <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 mt-16 max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 mt-16 max-w-[1500px] mx-auto">
             {/* Card 1 */}
             <div className="w-full bg-white rounded-lg p-8 shadow-lg">
               <img
@@ -90,12 +87,12 @@ function HomePage() {
           </div>
         </section>
 
-        <section className="bg-white py-20 px-4">
+        <section className="bg-white py-20 px-4 w-full">
           <h1 className="text-blue-950 font-semibold text-4xl md:text-5xl text-center">
             Como Funciona?
           </h1>
 
-          <div className="flex flex-col md:flex-row justify-center items-start gap-12 lg:gap-20 mt-20 max-w-7xl mx-auto">
+          <div className="flex flex-col container md:flex-row justify-center items-start gap-12 lg:gap-20 mt-20 max-w-7xl mx-auto">
             <div className="flex flex-col items-center text-center">
               <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
                 <img src={registerIcon} alt="icone cadastro" className="w-32" />

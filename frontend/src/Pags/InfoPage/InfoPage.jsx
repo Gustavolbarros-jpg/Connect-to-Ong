@@ -17,14 +17,13 @@ function InfoPage() {
       <main className="min-h-screen min-w-screem bg-[#F4F0F0]">
         <section
           className="flex justify-start items-center // text-white // w-full h-screen bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url('${BGImage}')` }} >
-          <div className="relative z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%]">
+          <div className="relative z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%] font-roboto">
             <div className="flex-column // w-full max-w-[700px] pl-12">
-              <h1 className="text-[40px] pb-4">
-                A Universidade como Agente de Transformação Social
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight pb-4">
+                Potencialize a Extensão da sua Universidade.
               </h1>
               <p className="text-xl pb-6">
-                Conectamos o conhecimento acadêmico às necessidades reais das
-                ONGs.
+                Nossa plataforma conecta seus cursos e alunos a projetos de ONGs, criando oportunidades de aprendizado prático e pesquisa aplicada.
               </p>
               <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600">
                 <a href="/register">Quero Participar!</a>
