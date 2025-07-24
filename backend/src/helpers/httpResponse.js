@@ -6,6 +6,12 @@ export const ok=(body)=> {
         body
 
     }}
+export const created = (body) => {
+    return{
+        success: true,
+        statusCode: 201,
+        body,
+}}
 export const notFound =()=>{ 
     return{
         success :false,
