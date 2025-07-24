@@ -5,6 +5,7 @@ import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
+import InputBack from "../../assets/images/voltar.png";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -46,6 +47,9 @@ function LoginPage() {
   return (
     <div className="flex min-h-screen font-sans bg-gray-50">
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
+      <div className="relative pt-4 pl-4 pb-[70px] md:pb-2">
+        <a href="/" className="absolute"><img src={InputBack} alt="Voltar" className="h-8 md:h-8 lg:h-8"/></a>
+      </div>
         <div className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-xl">
             <h1 className="text-4xl md:text-5xl text-gray-800 mb-8 text-left">
@@ -86,15 +90,15 @@ function LoginPage() {
             <div className="mt-6 text-center space-y-3">
               <Link
                 to="/verification-email"
-                className="text-sm text-blue-600 hover:text-blue-800 text-[20px]"
+                className="text-[20px] text-blue-600 hover:text-blue-800 text-[20px]"
               >
                 Esqueci a senha
               </Link>
-              <p className="text-sm text-gray-600 text-[18px]">
+              <p className="text-[20px] text-gray-600 text-[18px]">
                 Não tem uma conta?{" "}
                 <Link
                   to="/register"
-                  className="text-blue-600 hover:text-blue-800 font-semibold text-[18px]"
+                  className="text-blue-600 hover:text-blue-800 font-semibold text-[20px]"
                 >
                   Cadastre-se
                 </Link>
@@ -107,7 +111,7 @@ function LoginPage() {
           <img
             src={logoRecife}
             alt="Logo Recife Proteção"
-            className="h-10 md:h-36 lg:h-24"
+            className="h-19 md:h-36 lg:h-24"
           />
           <button className="py-2 px-5 border border-transparent rounded-[4px] shadow-sm text-base md:text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Acesso ONGs

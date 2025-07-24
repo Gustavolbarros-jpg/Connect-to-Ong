@@ -120,7 +120,7 @@ function OngPage() {
         <div className="font-roboto h-screen w-full text-[#001449]">
             <Navbar /> 
             <main className="min-h-screen w-full bg-[#F4F0F0] pt-16 md:pt-20 lg:pt-24">
-                <section className="container mx-auto p-4 md:p-8 max-w-6xl bg-white rounded-lg shadow-md mt-4">
+                <section className="container mx-auto p-4 md:p-8 max-w-6xl rounded-lg mt-4">
                     <div className="relative mb-4">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <img src="" alt="" className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"/>
@@ -130,14 +130,14 @@ function OngPage() {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4">
                         <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
 
-                            <select className="form-select border border-gray-300 rounded-[4px] py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto" value={selectedArea} onChange={handleAreaChange}>
+                            <select className="form-select border border-gray-300 rounded-[4px] bg-white py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto" value={selectedArea} onChange={handleAreaChange}>
                                 <option value="">Área de Atuação</option>
                                 {loadingFilterOptions ? (<option disabled>Carregando...</option>) : 
                                 errorFilterOptions ? (<option disabled>Erro ao carregar</option>) : 
                                 (areasOptions.map(area => (<option key={area} value={area}>{area}</option>)))}
                             </select>
 
-                            <select className="form-select border border-gray-300 rounded-[4px] py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto" value={selectedLocation} onChange={handleLocationChange}>
+                            <select className="form-select border border-gray-300 rounded-[4px] bg-white py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto" value={selectedLocation} onChange={handleLocationChange}>
                                 <option value="">Localidade</option>
                                 {loadingFilterOptions ? (<option disabled>Carregando...</option>) : 
                                 errorFilterOptions ? ( <option disabled>Erro ao carregar</option>) : 
@@ -147,14 +147,14 @@ function OngPage() {
                         </div>
                         {/* Botões de Ação */}
                         <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto mt-4 md:mt-0 justify-center">
-                            <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-[4px] hover:bg-gray-300 w-full md:w-auto" onClick={handleClearFilters}>Remover Filtros</button>
+                            <button className="bg-gray-200 text-gray-800 bg-white py-2 px-4 rounded-[4px] hover:bg-gray-300 w-full md:w-auto" onClick={handleClearFilters}>Remover Filtros</button>
                         </div>
                     </div>
                 </section>
 
                 {/* --- Seção para Exibir os Cards das ONGs Filtradas --- */}
 
-                <section className="container mx-auto p-4 md:p-8 max-w-6xl mt-8">
+                <section className="container mx-auto p-4 md:p-8 max-w-6xl mt-8 ">
                     {loadingOngs && <p className="text-center text-gray-500">Carregando ONGs...</p>}
                     {errorOngs && <p className="text-center text-red-500">{errorOngs}</p>}
                     {!loadingOngs && !errorOngs && filteredOngs.length > 0 ? (
