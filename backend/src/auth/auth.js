@@ -2,14 +2,11 @@ import express from 'express'
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
 import crypto from 'crypto'
-import { Mongo } from '../database/mongo.js'
+import prisma from '../prisma/prismaClient.js'
 import jwt from 'jsonwebtoken'
-import { ObjectId } from 'mongodb'
 import nodemailer from 'nodemailer'
 import { v4 as uuidv4 } from 'uuid'
 
-const usersCollection = 'users'
-const verificationsCollection = 'userVerifications'
 
 // --- FUNÇÃO AUXILIAR PARA HASHING ---
 function hashWithSalt(data, salt) {
@@ -24,15 +21,19 @@ function hashWithSalt(data, salt) {
 // --- ESTRATÉGIA DE LOGIN DO PASSPORT ---
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, callback) => {
     try {
-        const user = await Mongo.db.collection(usersCollection).findOne({ email: email });
-
+        const user = await prisma.users.findUnique({
+            where: {email: email}
+        })
         if (!user) {
             return callback(null, false, { message: 'Credenciais inválidas.' });
         }
 
-        const hashedPassword = await hashWithSalt(password, user.salt.buffer);
+        const saltBuf = Buffer.from(user.salt, 'hex')
+        const passBuf = Buffer.from(user.password, 'hex')
 
-        if (!crypto.timingSafeEqual(user.password.buffer, hashedPassword)) {
+        const hashedInput = await hashWithSalt(password, saltBuf);
+
+        if (!crypto.timingSafeEqual(passBuf, hashedInput)) {
             return callback(null, false, { message: 'Credenciais inválidas.' });
         }
         
@@ -49,33 +50,28 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
 }));
 
 // --- FUNÇÃO AUXILIAR PARA ENVIO DE E-MAIL ---
-const sendVerificationEmail = async (userId, email) => {
+const sendVerificationEmail = async (userId, email, uniqueString) => {
     try {
         const transporter = nodemailer.createTransport({
             service: "gmail",
-            auth: { user: process.env.AUTH_EMAIL, pass: process.env.AUTH_PASS }
+            auth: {
+                user: process.env.AUTH_EMAIL,
+                pass: process.env.AUTH_PASS
+            }
         });
 
-        const uniqueString = uuidv4() + userId.toString();
         const verificationLink = `${process.env.APP_URL}/auth/verify/${userId}/${uniqueString}`;
 
         const mailOptions = {
             from: process.env.AUTH_EMAIL,
             to: email,
             subject: "Verifique seu E-mail",
-            html: `<p>Verifique seu endereço de e-mail para completar o cadastro.</p><p>Este link <b>expira em 6 horas</b>.</p><p>Clique <a href="${verificationLink}">aqui</a> para prosseguir.</p>`,
+            html: `
+                <p>Verifique seu endereço de e-mail para completar o cadastro.</p>
+                <p>Este link <b>expira em 6 horas</b>.</p>
+                <p>Clique <a href="${verificationLink}">aqui</a> para prosseguir.</p>
+            `,
         };
-
-        const salt = crypto.randomBytes(16);
-        const hashedUniqueString = await hashWithSalt(uniqueString, salt);
-
-        await Mongo.db.collection(verificationsCollection).insertOne({
-            userId: userId,
-            uniqueString: hashedUniqueString,
-            salt: salt,
-            createdAt: new Date(),
-            expiresAt: new Date(Date.now() + 21600000), // 6 horas
-        });
 
         await transporter.sendMail(mailOptions);
 
@@ -92,33 +88,73 @@ authRouter.post('/signup', async (req, res) => {
     try {
         let { fullname, email, password, institution } = req.body;
 
-        if (!fullname || !email || !password || !institution) return res.status(400).send({ message: 'Nome, e-mail, instituição e senha são obrigatórios.' });
-        if (password.length < 8) return res.status(400).send({ message: 'A senha precisa ter no mínimo 8 caracteres.' });
-        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.trim())) return res.status(400).send({ message: 'Formato de e-mail inválido.' });
+        if (!fullname || !email || !password || !institution)
+            return res.status(400).send({ message: 'Nome, e-mail, instituição e senha são obrigatórios.' });
 
-        const existingUser = await Mongo.db.collection(usersCollection).findOne({ email: email.trim() });
-        if (existingUser) return res.status(409).send({ message: 'Um usuário com este e-mail já existe.' });
+        if (password.length < 8)
+            return res.status(400).send({ message: 'A senha precisa ter no mínimo 8 caracteres.' });
+
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.trim()))
+            return res.status(400).send({ message: 'Formato de e-mail inválido.' });
+
+        const existingUser = await prisma.users.findUnique({ where: { email: email.trim() } });
+        if (existingUser)
+            return res.status(409).send({ message: 'Um usuário com este e-mail já existe.' });
 
         const salt = crypto.randomBytes(16);
         const hashedPassword = await hashWithSalt(password, salt);
 
-        const result = await Mongo.db.collection(usersCollection).insertOne({
-            fullname: fullname.trim(),
-            email: email.trim(),
-            institution: institution.trim(),
-            password: hashedPassword,
-            salt: salt,
-            verified: false,
-            createdAt: new Date(),
+        const userId = uuidv4(); // cria o ID UUID manualmente
+        console.log("userId (tipo e valor):", typeof userId, userId);
+        
+        console.log({
+        passwordString: password.toString('hex').slice(0, 10),
+        saltString: salt.toString('hex').slice(0, 10)
         });
 
-        if (result.insertedId) {
-            await sendVerificationEmail(result.insertedId, email.trim());
-            return res.status(201).send({ status: "PENDING", message: "Cadastro realizado com sucesso! Um e-mail de verificação foi enviado." });
-        }
+        
+        await prisma.users.create({
+            data: {
+                id: userId,
+                fullname: fullname.trim(),
+                email: email.trim(),
+                institution: institution.trim(),
+                password: hashedPassword.toString('hex'),
+                salt: salt.toString('hex'),
+                verified: false,
+            }
+        });
+
+        // Geração do código único de verificação
+        const verificationId = uuidv4();
+        const uniqueStringPlain = uuidv4() + userId;
+        const verificationSalt = crypto.randomBytes(16);
+
+        const hashedUniqueString = await hashWithSalt(uniqueStringPlain, verificationSalt);
+
+        const expiresAt = new Date(Date.now() + 6 * 60 * 60 * 1000); // expira em 6 horas
+
+        await prisma.user_verifications.create({
+            data: {
+                id: verificationId,
+                user_id: userId,
+                unique_string: hashedUniqueString,
+                salt: verificationSalt,
+                expires_at: expiresAt,
+                created_at: new Date()
+            }
+        });
+
+        await sendVerificationEmail(userId, email, uniqueStringPlain);
+
+        return res.status(201).send({
+            status: "PENDING",
+            message: "Cadastro realizado com sucesso! Um e-mail de verificação foi enviado."
+        });
+
     } catch (error) {
         console.error("Erro na rota de signup:", error);
-        return res.status(500).send({ message: "Ocorreu um erro interno no servidor." });
+        return res.status(500).send({ message: "Erro interno no servidor." });
     }
 });
 
@@ -126,30 +162,57 @@ authRouter.post('/signup', async (req, res) => {
 authRouter.get("/verify/:userId/:uniqueString", async (req, res) => {
     try {
         const { userId, uniqueString } = req.params;
-        const verificationRecord = await Mongo.db.collection(verificationsCollection).findOne({ userId: new ObjectId(userId) });
 
-        if (!verificationRecord) throw new Error("Link de verificação inválido ou já utilizado.");
-        if (verificationRecord.expiresAt < new Date()) {
-            await Mongo.db.collection(verificationsCollection).deleteOne({ userId: new ObjectId(userId) });
-            await Mongo.db.collection(usersCollection).deleteOne({ _id: new ObjectId(userId) });
+        // Busca o registro de verificação associado ao usuário
+        const verificationRecord = await prisma.user_verifications.findUnique({
+            where: { user_id: userId }
+        });
+
+        if (!verificationRecord) {
+            throw new Error("Link de verificação inválido ou já utilizado.");
+        }
+
+        // Verifica se o link já expirou
+        if (verificationRecord.expires_at < new Date()) {
+            await prisma.user_verifications.delete({ where: { user_id: userId } });
+            await prisma.users.delete({ where: { id: userId } });
+
             throw new Error("O link de verificação expirou. Por favor, cadastre-se novamente.");
         }
 
-        const hashedStringFromUrl = await hashWithSalt(uniqueString, verificationRecord.salt.buffer);
+        // Gera o hash com o salt armazenado
+        const hashedStringFromUrl = await hashWithSalt(
+            uniqueString,
+            verificationRecord.salt
+        );
 
-        if (!crypto.timingSafeEqual(verificationRecord.uniqueString.buffer, hashedStringFromUrl)) {
+        // Compara de forma segura
+        const storedHash = verificationRecord.unique_string;
+        if (!crypto.timingSafeEqual(storedHash, hashedStringFromUrl)) {
             throw new Error("Link de verificação inválido.");
         }
 
-        await Mongo.db.collection(usersCollection).updateOne({ _id: new ObjectId(userId) }, { $set: { verified: true } });
-        await Mongo.db.collection(verificationsCollection).deleteOne({ userId: new ObjectId(userId) });
+        // Atualiza o usuário como verificado
+        await prisma.users.update({
+            where: { id: userId },
+            data: { verified: true }
+        });
 
-        res.status(200).send(`<h1>E-mail verificado com sucesso!</h1><p>Sua conta foi verificada.</p>`);
+        // Remove o registro de verificação
+        await prisma.user_verifications.delete({ where: { user_id: userId } });
+
+        res.status(200).send(`
+            <h1>E-mail verificado com sucesso!</h1>
+            <p>Sua conta foi ativada com êxito.</p>
+        `);
     } catch (error) {
-        console.error(error);
-        res.status(400).send(`<p><b>Erro na verificação:</b> ${error.message}</p>`);
+        console.error("Erro na verificação:", error);
+        res.status(400).send(`
+            <p><b>Erro na verificação:</b> ${error.message}</p>
+        `);
     }
 });
+
 
 // ROTA DE LOGIN (login)
 authRouter.post('/login', (req, res) => {
@@ -173,27 +236,28 @@ authRouter.post('/forgot-password', async (req, res) => {
         }
 
         // 1. Encontra o usuário pelo e-mail
-        const user = await Mongo.db.collection(usersCollection).findOne({ email: email });
+        const user = await prisma.users.findUnique({ where: { email } });
 
-        // IMPORTANTE: Por segurança, não informe se o e-mail foi encontrado ou não.
-        // Apenas retorne sucesso para não permitir que descubram e-mails cadastrados.
+        // Por segurança, não revela se o e-mail existe
         if (!user) {
             return res.status(200).json({ message: 'Se um usuário com este e-mail existir, um link de recuperação foi enviado.' });
         }
 
-        // 2. Gera um token único e seguro para a redefinição de senha
+        // 2. Gera o token de redefinição de senha
         const resetToken = crypto.randomBytes(32).toString('hex');
-        const tenMinutes = 10 * 60 * 1000; // Token expira em 10 minutos
+        const tenMinutes = 10 * 60 * 1000;
         const expires = new Date(Date.now() + tenMinutes);
 
-        // 3. Salva o token e a data de expiração no documento do usuário
-        await Mongo.db.collection(usersCollection).updateOne(
-            { _id: user._id },
-            { $set: { resetPasswordToken: resetToken, resetPasswordExpires: expires } }
-        );
+        // 3. Atualiza o usuário com o token e expiração
+        await prisma.users.update({
+            where: { email },
+            data: {
+                resetPasswordToken: resetToken,
+                resetPasswordExpires: expires
+            }
+        });
 
-        // 4. Cria o link de redefinição para o front-end
-    
+        // 4. Cria o link para o front-end
         const resetLink = `http://localhost:5173/recover-password/${resetToken}`;
 
         // 5. Configura e envia o e-mail
@@ -210,8 +274,7 @@ authRouter.post('/forgot-password', async (req, res) => {
         };
 
         await transporter.sendMail(mailOptions);
-        
-        // 6. Responde ao front-end
+
         res.status(200).json({ message: 'Se um usuário com este e-mail existir, um link de recuperação foi enviado.' });
 
     } catch (error) {
@@ -219,6 +282,7 @@ authRouter.post('/forgot-password', async (req, res) => {
         res.status(500).json({ message: 'Erro interno no servidor.' });
     }
 });
+
 
 // ROTA PARA REDEFINIR A SENHA
 authRouter.post('/reset-password/:token', async (req, res) => {
@@ -230,34 +294,40 @@ authRouter.post('/reset-password/:token', async (req, res) => {
             return res.status(400).json({ message: 'A senha é obrigatória e precisa ter no mínimo 8 caracteres.' });
         }
 
-        // 1. Encontra o usuário pelo token e verifica se não expirou
-        const user = await Mongo.db.collection(usersCollection).findOne({
-            resetPasswordToken: token,
-            resetPasswordExpires: { $gt: new Date() } // $gt (greater than)
+        // 1. Encontra o usuário pelo token e verifica se ainda está válido
+        const user = await prisma.users.findFirst({
+            where: {
+                resetPasswordToken: token,
+                resetPasswordExpires: {
+                    gt: new Date()
+                }
+            }
         });
 
         if (!user) {
             return res.status(400).json({ message: 'Token de recuperação inválido ou expirado.' });
         }
 
-        // 2. Cria um novo hash e salt para a nova senha
+        // 2. Cria novo salt e hash da senha
         const salt = crypto.randomBytes(16);
         const hashedPassword = await hashWithSalt(password, salt);
 
-        // 3. Atualiza a senha do usuário e remove o token para que não seja reutilizado
-        await Mongo.db.collection(usersCollection).updateOne(
-            { _id: user._id },
-            {
-                $set: { password: hashedPassword, salt: salt },
-                $unset: { resetPasswordToken: "", resetPasswordExpires: "" } // Remove os campos do token
+        // 3. Atualiza a senha e limpa os campos de recuperação
+        await prisma.user.update({
+            where: { id: user.id },
+            data: {
+                password: hashedPassword.toString('hex'),
+                salt: salt.toString('hex'),
+                resetPasswordToken: null,
+                resetPasswordExpires: null
             }
-        );
+        });
 
-        res.status(200).json({ message: 'Senha redefinida com sucesso!' });
+        return res.status(200).json({ message: 'Senha redefinida com sucesso!' });
 
     } catch (error) {
         console.error("Erro em /reset-password:", error);
-        res.status(500).json({ message: 'Erro interno no servidor.' });
+        return res.status(500).json({ message: 'Erro interno no servidor.' });
     }
 });
 
