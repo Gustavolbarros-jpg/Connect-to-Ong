@@ -26,6 +26,8 @@ model users {
   institution   String?             @db.VarChar(255)
   password      String              @db.VarChar(255)
   salt          String              @db.VarChar(255)
+  description   String?
+  photoUrl      String?
   verified      Boolean?            @default(false)
 
   verifications user_verifications[] @relation("UserVerifications")

@@ -10,6 +10,8 @@ userRouter.get('/', async (req, res) => {
 
 
 userRouter.delete('/:id',async (req,res) => {
+  const { id } = req.params;
+  console.log("ID recebido para delete:", id);
   const {success,statusCode,body}= await userControllers.deleteUsers(req.params.id)
   res.status(statusCode).send({success,statusCode,body})})
 
