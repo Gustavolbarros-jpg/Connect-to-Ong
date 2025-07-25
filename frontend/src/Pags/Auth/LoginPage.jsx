@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // 1. Importar o axios
+import axios from "axios";
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
@@ -10,58 +10,85 @@ import InputBack from "../../assets/images/voltar.png";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // 2. Lógica de envio para o backend
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("");
 
     if (!email || !password) {
-      alert("Por favor, preencha o e-mail e a senha para fazer login.");
+      setError("Por favor, preencha todos os campos.");
       return;
     }
 
+    // 👉 NOVO: LÓGICA PARA LOGIN DE TESTE
+    // Se o email e a senha corresponderem aos dados de teste, simula o login.
+    if (email === "teste@teste.com" && password === "123456") {
+      console.log("Efetuando login de teste...");
+
+      // 1. Cria um objeto de usuário e um token falsos
+      const fakeUser = {
+        name: "Usuário Teste",
+        email: "teste@teste.com",
+      };
+      const fakeToken = "fake-jwt-token-for-testing";
+
+      // 2. Salva os dados falsos no localStorage
+      localStorage.setItem("token", fakeToken);
+      localStorage.setItem("user", JSON.stringify(fakeUser));
+
+      // 3. Navega para a página inicial
+      navigate("/");
+
+      // 4. Impede que o resto da função (chamada à API) seja executado
+      return;
+    }
+    // Fim da lógica de teste
+
+    // Se não for o login de teste, a função continua normalmente...
     try {
-      // Faz a requisição POST para a rota de login do backend
-      const response = await axios.post('http://localhost:3000/auth/login', {
+      const response = await axios.post("http://localhost:3000/auth/login", {
         email: email,
         password: password,
       });
-      // 1. Extrair o token e o usuário da resposta
+
       const { token, user } = response.data;
 
-      // 2. Salvar no localStorage do navegador
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
 
-
-      console.log("Resposta do servidor:", response.data);
-      alert("Login realizado com sucesso!");
-
-      
-
-      // Navega para a página principal após o login bem-sucedido
       navigate("/");
-
     } catch (error) {
-      // Captura e exibe a mensagem de erro vinda do backend ou uma mensagem padrão
-      const errorMessage = error.response?.data?.message || "E-mail ou senha incorretos. Tente novamente.";
-      console.error("Erro ao fazer login:", error);
-      alert(errorMessage);
+      const errorMessage =
+        error.response?.data?.message ||
+        "E-mail ou senha incorretos. Tente novamente.";
+
+      console.error("Erro ao fazer login:", error.response || error);
+      setError(errorMessage);
     }
   };
 
   return (
     <div className="flex min-h-screen font-sans bg-gray-50">
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
-      <div className="relative pt-4 pl-4 pb-[70px] md:pb-2">
-        <a href="/" className="absolute"><img src={InputBack} alt="Voltar" className="h-8 md:h-8 lg:h-8"/></a>
-      </div>
+        <div className="relative pt-4 pl-4 pb-[70px] md:pb-2">
+          <a href="/" className="absolute">
+            <img src={InputBack} alt="Voltar" className="h-8 md:h-8 lg:h-8" />
+          </a>
+        </div>
         <div className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-xl">
             <h1 className="text-4xl md:text-5xl text-gray-800 mb-8 text-left">
               Acesse sua conta
             </h1>
+
+            {error && (
+              <div className="mb-4 rounded-[4px] bg-red-100 p-4 text-center text-[18px] font-semibold text-red-700">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <InputField
                 label="E-mail:"
@@ -97,11 +124,11 @@ function LoginPage() {
             <div className="mt-6 text-center space-y-3">
               <Link
                 to="/verification-email"
-                className="text-[20px] text-blue-600 hover:text-blue-800 text-[20px]"
+                className="text-[20px] text-blue-600 hover:text-blue-800"
               >
                 Esqueci a senha
               </Link>
-              <p className="text-[20px] text-gray-600 text-[18px]">
+              <p className="text-[18px] text-gray-600">
                 Não tem uma conta?{" "}
                 <Link
                   to="/register"

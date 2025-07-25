@@ -30,9 +30,9 @@ function HomePage() {
                   Conectamos universidades e ONGs em projetos sociais que
                   desenvolvem soft skills e geram impacto real.
                 </p>
-              <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600 mt-[24px]">
-                <a href="/register">Começar projeto agora!</a>
-              </button>
+                <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600 mt-[24px]">
+                  <a href="/register">Começar projeto agora!</a>
+                </button>
               </div>
             </div>
           </div>
