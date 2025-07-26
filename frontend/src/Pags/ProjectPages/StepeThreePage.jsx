@@ -3,13 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import Button from "../../Components/Button/";
+import ProgressBar from "../../Components/ProgressBar/";
 
 function StepeThreePage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // LÓGICA DE CORREÇÃO APLICADA AQUI
-  // Garante que 'state' e suas propriedades internas sejam objetos seguros.
   const state = location.state || {};
   const projectDetails = state.projectDetails || {};
   const selectedOng = state.selectedOng || null;
@@ -34,59 +33,10 @@ function StepeThreePage() {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
-        <div className="max-w-4xl mx-auto">
-          {/* Indicador de Etapas */}
-          <div className="flex items-center justify-center mb-12">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">Detalhes do Projeto</p>
-            </div>
-            <div className="flex-auto border-t-2 border-blue-600 mx-4"></div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">Conexão com a ONG</p>
-            </div>
-            <div className="flex-auto border-t-2 border-blue-600 mx-4"></div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                3
-              </div>
-              <p className="mt-2 text-sm font-semibold text-blue-600">
-                Confirmar projeto
-              </p>
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <ProgressBar currentStep={2} totalSteps={3} />
 
-          {/* Card de Resumo */}
-          <div className="bg-white p-8 rounded-lg shadow-md">
+          <div className="bg-white p-8 rounded-lg shadow-md mt-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               Resumo do Projeto e Conexão
             </h2>
@@ -196,7 +146,7 @@ function StepeThreePage() {
               )}
             </div>
             <div className="mt-10 flex justify-between items-center">
-              <Button type="button" onClick={handleGoBack} secondary>
+              <Button type="button" onClick={handleGoBack} primary>
                 Voltar
               </Button>
               <Button type="button" onClick={handleConfirm} primary>

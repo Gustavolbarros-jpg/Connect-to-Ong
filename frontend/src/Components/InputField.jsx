@@ -17,9 +17,7 @@ const InputField = ({
     <div>
       <label
         htmlFor={htmlFor}
-        className={`block text-[20px] text-gray-700 ${
-          labelClassName || ""
-        }`}
+        className={`block text-[20px] text-gray-700 ${labelClassName || ""}`}
       >
         {label}
       </label>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../Components/Button/";
+import Navigate from "react-router-dom";
 
 function ProjectsSection() {
   const [projects, setProjects] = useState([
@@ -21,6 +22,7 @@ function ProjectsSection() {
   ]);
 
   const handleCreateProject = () => {
+    Navigate;
     alert("Função para criar um projeto");
   };
 
@@ -43,7 +45,7 @@ function ProjectsSection() {
     <section className="bg-white p-8 rounded-lg shadow-md mt-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Seus Projetos</h1>
-        <Button onClick={handleCreateProject} primary>
+        <Button href="/stepe-one" onClick={handleCreateProject} primary>
           Criar Projeto
         </Button>
       </div>
