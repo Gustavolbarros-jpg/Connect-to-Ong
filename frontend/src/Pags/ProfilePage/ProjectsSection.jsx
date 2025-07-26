@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Button from "../../Components/Button/";
-import Navigate from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ProjectsSection() {
+  // 1. INICIALIZE O HOOK AQUI
+  const navigate = useNavigate();
+
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -21,9 +24,9 @@ function ProjectsSection() {
     },
   ]);
 
+  // 2. CHAME A FUNÇÃO 'navigate' AQUI
   const handleCreateProject = () => {
-    Navigate;
-    alert("Função para criar um projeto");
+    navigate("/stepe-one");
   };
 
   const handleViewProject = (id) => {
@@ -45,7 +48,7 @@ function ProjectsSection() {
     <section className="bg-white p-8 rounded-lg shadow-md mt-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Seus Projetos</h1>
-        <Button href="/stepe-one" onClick={handleCreateProject} primary>
+        <Button onClick={handleCreateProject} primary>
           Criar Projeto
         </Button>
       </div>
