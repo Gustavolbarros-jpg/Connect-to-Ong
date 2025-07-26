@@ -31,5 +31,26 @@ model users {
   verified      Boolean?            @default(false)
 
   verifications user_verifications[] @relation("UserVerifications")
+  projetos      projetos[]          @relation("UserProjetos")
+}
+
+model projetos {
+  id                    String   @id @default(uuid()) @db.Uuid
+  nome_projeto          String   @db.VarChar(255)
+  area_interesse        String   @db.VarChar(255)
+  soft_skills           String   @db.VarChar(500)
+  quantidade_alunos     Int
+  descricao_projeto     String   @db.Text
+  professores_atrelados String   @db.VarChar(500)
+  horas_extensao        Int
+  tempo_previsto        Int
+  ong_selecionada       String?  @db.VarChar(255)
+  categoria_ong         String?  @db.VarChar(255)
+  status                String   @default("Aguardando Conexão") @db.VarChar(100)
+  created_at            DateTime @default(now()) @db.Timestamptz(6)
+  updated_at            DateTime @updatedAt @db.Timestamptz(6)
+  
+  user_id               String   @db.Uuid
+  user                  users    @relation("UserProjetos", fields: [user_id], references: [id])
 }
 

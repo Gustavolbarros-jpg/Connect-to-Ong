@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import Button from "../../Components/Button/";
@@ -18,13 +19,52 @@ function StepeThreePage() {
     navigate(-1);
   };
 
-  const handleConfirm = () => {
-    console.log("DADOS FINAIS CONFIRMADOS:", {
-      projectDetails,
-      selectedOng,
-    });
-    alert("Projeto confirmado com sucesso!");
-    navigate("/");
+  const handleConfirm = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Você precisa estar logado para criar um projeto');
+        navigate('/login');
+        return;
+      }
+
+      const projectData = {
+        nome_projeto: projectDetails.nameProject,
+        area_interesse: projectDetails.areaInterest,
+        soft_skills: projectDetails.softSkills,
+        quantidade_alunos: projectDetails.numberStudents,
+        descricao_projeto: projectDetails.descriptionProject,
+        professores_atrelados: projectDetails.teacher,
+        horas_extensao: projectDetails.extensionHours,
+        tempo_previsto: projectDetails.expectedTime,
+        ong_selecionada: selectedOng?.name || null,
+        categoria_ong: selectedOng?.category || null
+      };
+
+      console.log("Enviando dados para o backend:", projectData);
+
+      const response = await axios.post('http://localhost:3000/projects', projectData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log("Resposta do backend:", response.data);
+      alert("Projeto criado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      console.error("Erro ao criar projeto:", error);
+      
+      if (error.response?.data?.tokenExpired) {
+        alert('Sua sessão expirou. Você será redirecionado para a tela de login.');
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+        return;
+      }
+      
+      alert("Erro ao criar projeto. Tente novamente.");
+    }
   };
 
   const displayData = (data) =>

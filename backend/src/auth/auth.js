@@ -4,7 +4,6 @@ import LocalStrategy from 'passport-local'
 import crypto from 'crypto'
 import prisma from '../prisma/prismaClient.js'
 import jwt from 'jsonwebtoken'
-import nodemailer from 'nodemailer'
 import { v4 as uuidv4 } from 'uuid'
 
 
@@ -37,9 +36,10 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
             return callback(null, false, { message: 'Credenciais inválidas.' });
         }
         
-        if (!user.verified) {
-            return callback(null, false, { message: 'Por favor, verifique seu e-mail antes de fazer login.' });
-        }
+        // Remover verificação de e-mail - cadastro direto
+        // if (!user.verified) {
+        //     return callback(null, false, { message: 'Por favor, verifique seu e-mail antes de fazer login.' });
+        // }
 
         const { password: userPass, salt, ...restOfUser } = user;
         return callback(null, restOfUser);
@@ -49,37 +49,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }));
 
-// --- FUNÇÃO AUXILIAR PARA ENVIO DE E-MAIL ---
-const sendVerificationEmail = async (userId, email, uniqueString) => {
-    try {
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.AUTH_EMAIL,
-                pass: process.env.AUTH_PASS
-            }
-        });
-
-        const verificationLink = `${process.env.APP_URL}/auth/verify/${userId}/${uniqueString}`;
-
-        const mailOptions = {
-            from: process.env.AUTH_EMAIL,
-            to: email,
-            subject: "Verifique seu E-mail",
-            html: `
-                <p>Verifique seu endereço de e-mail para completar o cadastro.</p>
-                <p>Este link <b>expira em 6 horas</b>.</p>
-                <p>Clique <a href="${verificationLink}">aqui</a> para prosseguir.</p>
-            `,
-        };
-
-        await transporter.sendMail(mailOptions);
-
-    } catch (error) {
-        console.error("Erro no envio do e-mail de verificação:", error);
-        throw new Error("Ocorreu um erro ao enviar o e-mail de verificação.");
-    }
-};
+// Função de envio de email removida - cadastro direto
 
 const authRouter = express.Router();
 
@@ -121,35 +91,13 @@ authRouter.post('/signup', async (req, res) => {
                 institution: institution.trim(),
                 password: hashedPassword.toString('hex'),
                 salt: salt.toString('hex'),
-                verified: false,
+                verified: true, // Usuário já verificado - cadastro direto
             }
         });
-
-        // Geração do código único de verificação
-        const verificationId = uuidv4();
-        const uniqueStringPlain = uuidv4() + userId;
-        const verificationSalt = crypto.randomBytes(16);
-
-        const hashedUniqueString = await hashWithSalt(uniqueStringPlain, verificationSalt);
-
-        const expiresAt = new Date(Date.now() + 6 * 60 * 60 * 1000); // expira em 6 horas
-
-        await prisma.user_verifications.create({
-            data: {
-                id: verificationId,
-                user_id: userId,
-                unique_string: hashedUniqueString,
-                salt: verificationSalt,
-                expires_at: expiresAt,
-                created_at: new Date()
-            }
-        });
-
-        await sendVerificationEmail(userId, email, uniqueStringPlain);
 
         return res.status(201).send({
-            status: "PENDING",
-            message: "Cadastro realizado com sucesso! Um e-mail de verificação foi enviado."
+            status: "SUCCESS",
+            message: "Cadastro realizado com sucesso! Você já pode fazer login."
         });
 
     } catch (error) {
@@ -158,60 +106,7 @@ authRouter.post('/signup', async (req, res) => {
     }
 });
 
-// ROTA DE VERIFICAÇÃO DE E-MAIL
-authRouter.get("/verify/:userId/:uniqueString", async (req, res) => {
-    try {
-        const { userId, uniqueString } = req.params;
-
-        // Busca o registro de verificação associado ao usuário
-        const verificationRecord = await prisma.user_verifications.findUnique({
-            where: { user_id: userId }
-        });
-
-        if (!verificationRecord) {
-            throw new Error("Link de verificação inválido ou já utilizado.");
-        }
-
-        // Verifica se o link já expirou
-        if (verificationRecord.expires_at < new Date()) {
-            await prisma.user_verifications.delete({ where: { user_id: userId } });
-            await prisma.users.delete({ where: { id: userId } });
-
-            throw new Error("O link de verificação expirou. Por favor, cadastre-se novamente.");
-        }
-
-        // Gera o hash com o salt armazenado
-        const hashedStringFromUrl = await hashWithSalt(
-            uniqueString,
-            verificationRecord.salt
-        );
-
-        // Compara de forma segura
-        const storedHash = verificationRecord.unique_string;
-        if (!crypto.timingSafeEqual(storedHash, hashedStringFromUrl)) {
-            throw new Error("Link de verificação inválido.");
-        }
-
-        // Atualiza o usuário como verificado
-        await prisma.users.update({
-            where: { id: userId },
-            data: { verified: true }
-        });
-
-        // Remove o registro de verificação
-        await prisma.user_verifications.delete({ where: { user_id: userId } });
-
-        res.status(200).send(`
-            <h1>E-mail verificado com sucesso!</h1>
-            <p>Sua conta foi ativada com êxito.</p>
-        `);
-    } catch (error) {
-        console.error("Erro na verificação:", error);
-        res.status(400).send(`
-            <p><b>Erro na verificação:</b> ${error.message}</p>
-        `);
-    }
-});
+// Rota de verificação de email removida - cadastro direto
 
 
 // ROTA DE LOGIN (login)
