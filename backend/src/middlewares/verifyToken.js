@@ -26,7 +26,10 @@ export const verifyToken = (req, res, next) => {
             return res.status(401).send({
                 success: false,
                 statusCode: 401,
-                body: { message: 'Token expirado. Por favor, faça login novamente.' }
+                body: { 
+                    message: 'Token expirado. Por favor, faça login novamente.',
+                    tokenExpired: true
+                }
             });
         }
         return res.status(403).send({

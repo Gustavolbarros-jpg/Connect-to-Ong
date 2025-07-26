@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import apiClient from "../../api/tokenInterceptor";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import Button from "../../Components/Button/";
@@ -43,12 +43,7 @@ function StepeThreePage() {
 
       console.log("Enviando dados para o backend:", projectData);
 
-      const response = await axios.post('http://localhost:3000/projects', projectData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+                        const response = await apiClient.post('/projects', projectData);
 
       console.log("Resposta do backend:", response.data);
       alert("Projeto criado com sucesso!");
@@ -56,12 +51,8 @@ function StepeThreePage() {
     } catch (error) {
       console.error("Erro ao criar projeto:", error);
       
-      if (error.response?.data?.tokenExpired) {
-        alert('Sua sessão expirou. Você será redirecionado para a tela de login.');
-        localStorage.removeItem('token');
-        window.location.href = '/login';
-        return;
-      }
+                        // Token expiration is now handled by the interceptor
+                  console.error("Erro ao criar projeto:", error);
       
       alert("Erro ao criar projeto. Tente novamente.");
     }

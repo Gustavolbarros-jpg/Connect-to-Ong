@@ -118,7 +118,7 @@ authRouter.post('/login', (req, res) => {
         }
         if (!user) return res.status(401).send({ message: info.message || "Credenciais inválidas." });
         
-        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '7m' });
+        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2m' });
         return res.status(200).send({ message: "Login realizado com sucesso", user, token });
     })(req, res);
 });
