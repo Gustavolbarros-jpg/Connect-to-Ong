@@ -9,6 +9,8 @@ import icone3 from "../../assets/images/InfoPage/icone3.png";
 
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
+import OngList from "../../Components/OngList/";
+
 
 function InfoPage() {
   return (

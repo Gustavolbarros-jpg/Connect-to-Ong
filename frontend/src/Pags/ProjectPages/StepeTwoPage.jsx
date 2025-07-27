@@ -1,206 +1,119 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../../Components/Navbar/";
-import Footer from "../../Components/Footer/";
-import Button from "../../Components/Button/";
-import ProgressBar from "../../Components/ProgressBar";
+import { useLocation, useNavigate } from "react-router-dom"; // Para navegação e dados de rota
+
+import Navbar from "../../Components/Navbar/"; // Ajuste o caminho
+import Footer from "../../Components/Footer/"; // Ajuste o caminho
+import ProgressBar from "../../Components/ProgressBar"; // Ajuste o caminho
+
+// Importe o novo componente OngList
+import OngList from "../../Components/OngList"; // Ajuste o caminho
+
+// Você pode remover os mockOngs daqui, pois OngList gerencia a própria busca
+// const mockOngs = [ ... ]; 
 
 function StepeTwoPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Recebe os detalhes do projeto da página anterior (StepeOnePage)
   const { projectDetails } = location.state || {};
 
-  const mockOngs = [
-    {
-      id: 1,
-      name: "Grupo Paz e Amor",
-      category: "Desenvolvimento Sustentável",
-      description: "Desde 1987...",
-      tags: ["Barris", "Esportes", "Terceira idade"],
-    },
-    {
-      id: 2,
-      name: "Crescer e Aprender",
-      category: "Educação Infantil",
-      description: "Oferecemos reforço escolar...",
-      tags: ["Boa Viagem", "Crianças", "Educação"],
-    },
-    {
-      id: 3,
-      name: "Mar Verde",
-      category: "Meio Ambiente",
-      description: "Atuamos na limpeza de praias...",
-      tags: ["Pina", "Meio Ambiente", "Voluntariado"],
-    },
-    {
-      id: 4,
-      name: "Mãos que Ajudam",
-      category: "Assistência Social",
-      description: "Distribuição de cestas básicas...",
-      tags: ["Recife Antigo", "Social", "Famílias"],
-    },
-  ];
-
+  // Estado para armazenar a ID da ONG que o usuário selecionou
   const [selectedOngId, setSelectedOngId] = useState(null);
+  // Estado para armazenar o OBJETO completo da ONG selecionada (útil para passar adiante)
+  const [selectedOngDetails, setSelectedOngDetails] = useState(null);
 
-  const handleGoBack = () => {
-    navigate(-1);
+
+  // Função chamada quando o botão "Selecionar" de um OngCard é clicado
+  const handleOngSelected = (ong) => {
+    // Se a ONG clicada já for a selecionada, deseleciona
+    if (selectedOngId === ong.id) {
+      setSelectedOngId(null);
+      setSelectedOngDetails(null);
+    } else {
+      // Senão, seleciona a nova ONG
+      setSelectedOngId(ong.id);
+      setSelectedOngDetails(ong); // Salva os detalhes completos da ONG
+      // Opcional: rolar para o topo da página para ver a ONG selecionada
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+    }
   };
 
+  // Lógica para o botão "Voltar"
+  const handleGoBack = () => {
+    navigate(-1); // Volta para a página anterior no histórico
+  };
+
+  // Lógica para o botão "Continuar"
   const handleContinue = () => {
     if (!selectedOngId) {
-      alert("Por favor, selecione uma ONG para continuar.");
+      alert("Por favor, selecione uma ONG para continuar com o seu projeto.");
       return;
     }
 
-    const selectedOng = mockOngs.find((ong) => ong.id === selectedOngId);
-
+    // Navega para a próxima etapa, passando os detalhes do projeto e a ONG selecionada
     navigate("/stepe-three", {
       state: {
-        projectDetails: projectDetails,
-        selectedOng: selectedOng,
+        projectDetails: projectDetails, // Detalhes do projeto da StepeOnePage
+        selectedOng: selectedOngDetails, // Detalhes da ONG selecionada nesta etapa
       },
     });
   };
 
   return (
+    // Contêiner principal da página
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar />
+      <Navbar /> {/* Renderiza a Navbar */}
 
+      {/* Conteúdo principal da página */}
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
         <div className="max-w-5xl mx-auto">
-          <ProgressBar currentStep={1} totalSteps={3} />
+          {/* Barra de Progresso do Cadastro */}
+          <ProgressBar currentStep={2} totalSteps={3} /> {/* Ajuste o currentStep conforme esta seja a segunda etapa */}
 
           <div className="mt-8">
-            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-              <div className="relative mb-4">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg
-                    className="h-5 w-5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+
+            <OngList
+              showActionButton={true}
+              actionButtonText="Selecionar"
+              onActionClick={handleOngSelected}
+              selectedOngId={selectedOngId}
+            />
+
+            {/* Exibe o resumo da ONG selecionada acima da lista de busca */}
+            {selectedOngDetails && (
+              <div className="bg-white rounded-lg shadow-md p-4 mb-8 border-2 border-blue-500">
+                  <h2 className="text-xl font-semibold mb-2">ONG Selecionada:</h2>
+                  <p className="text-gray-700">{selectedOngDetails.name} - {selectedOngDetails.description.substring(0, 80)}...</p>
+                  <button 
+                      className="mt-4 bg-red-500 text-white py-1 px-3 rounded text-sm hover:bg-red-600"
+                      onClick={() => handleOngSelected(selectedOngDetails)} // Clicar deseleciona
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Você tem interesse em uma ONG específica, pesquise aqui..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                />
+                      Mudar Seleção
+                  </button>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-                <select className="col-span-1 md:col-span-1 border border-gray-300 rounded-md p-2 text-gray-700">
-                  <option>Área de atuação</option>
-                </select>
-                <select className="col-span-1 md:col-span-1 border border-gray-300 rounded-md p-2 text-gray-700">
-                  <option>Local</option>
-                </select>
-                <select className="col-span-1 md:col-span-1 border border-gray-300 rounded-md p-2 text-gray-700">
-                  <option>Categoria</option>
-                </select>
-                <select className="col-span-1 md:col-span-1 border border-gray-300 rounded-md p-2 text-gray-700">
-                  <option>Tipo de Projeto</option>
-                </select>
-                <button className="col-span-1 text-sm text-gray-600 hover:text-gray-900">
-                  Remover Filtros
-                </button>
-                <Button type="button" className="col-span-1">
-                  Filtrar
-                </Button>
-              </div>
-            </div>
-            <div className="space-y-6">
-              {mockOngs.map((ong) => (
-                <div
-                  key={ong.id}
-                  className={`bg-white p-6 rounded-lg shadow-md border-2 ${
-                    selectedOngId === ong.id
-                      ? "border-blue-500"
-                      : "border-transparent"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row items-start gap-6">
-                    <div className="flex-shrink-0 w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-10 h-10 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="flex-grow">
-                      <h3 className="text-xl font-bold text-gray-800">
-                        {ong.name}
-                      </h3>
-                      <p className="text-sm text-gray-500 mb-2">
-                        {ong.category}
-                      </p>
-                      <p className="text-gray-700 mb-4">{ong.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {ong.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex-shrink-0 w-full sm:w-auto">
-                      <Button
-                        type="button"
-                        onClick={() => setSelectedOngId(ong.id)}
-                        primary
-                      >
-                        {selectedOngId === ong.id
-                          ? "Selecionado"
-                          : "Conecte-se"}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center items-center mt-8 space-x-1">
-              <button className="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-200">
-                {"<"}
-              </button>
-              <button className="px-3 py-1 rounded-md bg-blue-600 text-white">
-                1
-              </button>
-              <button className="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-200">
-                2
-              </button>
-              <button className="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-200">
-                {">"}
-              </button>
-            </div>
+            )}
+
+            {/* Botões de Navegação (Voltar e Continuar) */}
             <div className="mt-10 flex justify-between items-center">
-              <Button type="button" onClick={handleGoBack} primary>
+              <button
+                onClick={handleGoBack}
+                className="bg-blue-600 text-white text-[20px] py-2 px-5 rounded-[4px] hover:bg-blue-800"
+              >
                 Voltar
-              </Button>
-              <Button type="button" primary onClick={handleContinue}>
+              </button>
+              <button
+                onClick={handleContinue}
+                className={`bg-blue-600 text-white text-[20px] py-2 px-5 rounded-[4px] hover:bg-blue-800 ${!selectedOngId ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={!selectedOngId} // Desabilita se nenhuma ONG estiver selecionada
+              >
                 Continuar
-              </Button>
+              </button>
             </div>
           </div>
         </div>
       </main>
+
       <Footer />
     </div>
   );
