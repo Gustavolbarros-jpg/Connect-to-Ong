@@ -19,12 +19,12 @@ function Navbar() {
   }
 
   const activeLinkClasses =
-    "text-blue-600 font-bold text-[22px] underline decoration-blue-600 decoration-2 underline-offset-4";
+    "text-white font-bold text-[20px] bg-blue-600 hover:bg-blue-800 py-2 px-5 rounded-[4px] decoration-blue-600";
   const inactiveLinkClasses =
-    "text-gray-600 hover:text-blue-600 text-[22px] transition-colors duration-300";
+    "text-blue-600 hover:text-blue-800 text-[20px] transition-colors duration-300";
 
   const ctaLinkClasses =
-    "text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-700 text-[20px] font-semibold";
+    "text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-800 text-[20px] font-semibold";
 
   return (
     <header className="bg-white fixed top-0 w-full z-50">
@@ -67,42 +67,45 @@ function Navbar() {
                 ONGs
               </NavLink>
             </li>
-
-            {/* 👇 ADICIONADO O LINK "CRIAR PROJETO" PARA DESKTOP AQUI 👇 */}
-            {user && (
-              <li>
-                <NavLink to="/stepe-one" className={ctaLinkClasses}>
-                  Criar Projeto
-                </NavLink>
-              </li>
-            )}
           </ul>
         </div>
 
-        <div className="hidden md:flex items-center justify-end gap-5 flex-shrink-0">
+        <div className=" hidden md:flex items-center justify-end gap-5 flex-shrink-0">
           {user ? (
-            <div className="relative flex items-center gap-2">
-              <span className="text-gray-700 text-[20px]">
-                Olá, {user.name || "Usuário"}!
-              </span>
-              <img
-                src={menuIcon}
-                alt="Menu do Perfil"
-                title="Menu do Perfil"
-                className="h-10 w-10 cursor-pointer mx-4 transition-transform hover:scale-110 ml-2"
+            <div className="relative flex items-center gap-5">
+              <span 
+                className="text-blue-600 hover:text-blue-800 text-[20px] cursor-pointer inline-flex items-center" /* <<< Adicionado inline-flex e items-center */
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
-              />
+              >
+                Olá, {user.name || "Usuário"}! 
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true" 
+                className="w-8 h-8">
+                  <path d="M7 10l5 5 5-5H7z" /> 
+                </svg>
+              </span>
+              
+            {/* 👇 ADICIONADO O LINK "CRIAR PROJETO" PARA DESKTOP AQUI 👇 */}
+            {user && (
+                <NavLink to="/stepe-one" className={ctaLinkClasses}>
+                  Criar Projeto
+                </NavLink>
+            )}
+              
               {isProfileOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+                <div className="font-bold absolute top-full right-0 mt-6 mr-48 w-48 bg-white shadow-glow rounded-[4px] py-1 z-2">
                   <Link
                     to="/profile"
-                    className="block px-4 py-2 text-[18px] text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-[20px] text-blue-600 hover:tex-blue-800 hover:bg-gray-100"
                   >
                     Meu Perfil
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-[18px] text-red-600 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-[20px] text-red-600 hover:bg-gray-100"
                   >
                     Sair
                   </button>
@@ -115,11 +118,11 @@ function Navbar() {
                 to="/login"
                 className="text-blue-600 hover:text-blue-800 text-[20px]"
               >
-                Login
+                Acessar Conta
               </Link>
               <Link
                 to="/register"
-                className="text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-700 text-[20px]"
+                className="text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-800 text-[20px]"
               >
                 Cadastre-se
               </Link>
@@ -162,12 +165,12 @@ function Navbar() {
       {/* Menu Mobile Dropdown */}
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg px-5 pb-5 absolute top-full left-0 w-full">
-          <ul className="flex flex-col items-center gap-4 pt-4">
+          <ul className="text-[20px] font-bold flex flex-col items-center gap-4 pt-4">
             <li>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? "font-bold text-blue-600" : "text-gray-700"
+                  isActive ? "bg-blue-600 py-2 px-5 rounded-[4px] text-white hover:bg-blue-800" : "text-blue-600 hover:text-blue-800"
                 }
               >
                 Início
@@ -177,7 +180,7 @@ function Navbar() {
               <NavLink
                 to="/university"
                 className={({ isActive }) =>
-                  isActive ? "font-bold text-blue-600" : "text-gray-700"
+                  isActive ? "bg-blue-600 py-2 px-5 rounded-[4px] text-white hover:bg-blue-800" : "text-blue-600 hover:text-blue-800"
                 }
               >
                 Universidade
@@ -187,7 +190,7 @@ function Navbar() {
               <NavLink
                 to="/ongs"
                 className={({ isActive }) =>
-                  isActive ? "font-bold text-blue-600" : "text-gray-700"
+                  isActive ? "bg-blue-600 py-2 px-5 rounded-[4px] text-white hover:bg-blue-800" : "text-blue-600 hover:text-blue-800"
                 }
               >
                 ONGs
@@ -197,7 +200,7 @@ function Navbar() {
             {/* 👇 ADICIONADA A VERIFICAÇÃO "user &&" NO LINK MOBILE TAMBÉM 👇 */}
             {user && (
               <li>
-                <NavLink to="/stepe-one" className="text-blue-600 font-bold">
+                <NavLink to="/stepe-one" className="text-white bg-blue-600 hover:bg-blue-800 font-bold bg-black py-2 px-5 rounded-[4px]">
                   Criar Projeto
                 </NavLink>
               </li>
@@ -208,25 +211,25 @@ function Navbar() {
               <>
                 <Link
                   to="/profile"
-                  className="text-blue-600 font-bold text-lg hover:text-blue-800"
+                  className="text-blue-600 font-bold text-[20px] hover:text-blue-800"
                 >
                   Meu Perfil
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-red-500 font-bold text-lg"
+                  className="text-red-500 font-bold text-[20px]"
                 >
                   Sair
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="text-blue-600 font-bold text-lg">
-                  Login
+                <Link to="/login" className="text-blue-600 hover:text-blue-800 font-bold text-[20px]">
+                  Acessar Contar
                 </Link>
                 <Link
                   to="/register"
-                  className="w-full text-center text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-700 text-lg"
+                  className="w-full text-center font-bold text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-800 text-[20px]"
                 >
                   Cadastre-se
                 </Link>

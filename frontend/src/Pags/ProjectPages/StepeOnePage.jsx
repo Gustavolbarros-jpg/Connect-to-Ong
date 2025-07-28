@@ -4,17 +4,20 @@ import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import InputField from "../../Components/InputField/";
 import Button from "../../Components/Button/";
+import ProgressBar from "../../Components/ProgressBar/";
 
 function StepeOnePage() {
   const navigate = useNavigate();
 
+  // ... (seus states e a função handleSubmit permanecem iguais)
   const [nameProject, setNameProject] = useState("");
   const [areaInterest, setAreaInterest] = useState("");
   const [softSkills, setSoftSkills] = useState("");
   const [numberStudents, setNumberStudents] = useState("");
   const [teacher, setTeacher] = useState("");
   const [extensionHours, setExtensionHours] = useState("");
-  const [expectedTime, setExpectedTime] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [descriptionProject, setDescriptionProject] = useState("");
 
   const handleSubmit = (event) => {
@@ -27,7 +30,8 @@ function StepeOnePage() {
       numberStudents,
       teacher,
       extensionHours,
-      expectedTime,
+      startDate,
+      endDate,
       descriptionProject,
     };
 
@@ -39,34 +43,12 @@ function StepeOnePage() {
       <Navbar />
 
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-12">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                1
-              </div>
-              <p className="mt-2 text-sm font-semibold text-blue-600">
-                Detalhes do Projeto
-              </p>
-            </div>
-            <div className="flex-auto border-t-2 border-gray-300 mx-4"></div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-white border-2 border-gray-300 rounded-full flex items-center justify-center text-gray-500 font-bold">
-                2
-              </div>
-              <p className="mt-2 text-sm text-gray-500">Conexão com a ONG</p>
-            </div>
-            <div className="flex-auto border-t-2 border-gray-300 mx-4"></div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-white border-2 border-gray-300 rounded-full flex items-center justify-center text-gray-500 font-bold">
-                3
-              </div>
-              <p className="mt-2 text-sm text-gray-500">Confirmar projeto</p>
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <ProgressBar currentStep={0} totalSteps={3} />
+
           <form
             onSubmit={handleSubmit}
-            className="bg-white p-8 rounded-lg shadow-md"
+            className="bg-white p-8 rounded-lg shadow-md mt-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
               <div className="flex flex-col gap-y-6">
@@ -115,15 +97,23 @@ function StepeOnePage() {
                   onChange={(e) => setExtensionHours(e.target.value)}
                 />
                 <InputField
-                  label="Tempo previsto"
-                  type="text"
-                  placeholder="Digite o tempo previsto..."
-                  value={expectedTime}
-                  onChange={(e) => setExpectedTime(e.target.value)}
+                  label="Data de Inicio Prevista"
+                  type="date"
+                  placeholder="Escolha a data de inicio do projeto..."
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  className="placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500"
+                />
+                <InputField
+                  label="Data de Conclusão Prevista"
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  placeholder="Escolha a data de conclusão do projeto..."
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-[20px] font-medium text-gray-700 mb-1">
                   Descrição do Projeto
                 </label>
                 <textarea
@@ -131,7 +121,7 @@ function StepeOnePage() {
                   value={descriptionProject}
                   onChange={(e) => setDescriptionProject(e.target.value)}
                   rows="5"
-                  className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full px-3 py-3 border-4 border-blue-600 rounded-[4px] shadow-sm placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[20px]"
                 ></textarea>
               </div>
             </div>
@@ -143,6 +133,7 @@ function StepeOnePage() {
           </form>
         </div>
       </main>
+
       <Footer />
     </div>
   );
