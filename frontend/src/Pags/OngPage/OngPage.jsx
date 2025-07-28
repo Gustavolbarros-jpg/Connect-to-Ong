@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import lupa from "../../assets/images/OngPage/lupa.png";
-
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import OngCard from "../../Components/OngCard";
+
+import imagesection from "../../assets/images/OngPage/bgImage.png"
+
 
 // --- Simulação de Dados do Banco de Dados (será substituído pela chamada à API) ---
 const allOngsData = [
@@ -120,12 +121,14 @@ function OngPage() {
         <div className="font-roboto h-screen w-full text-[#001449]">
             <Navbar /> 
             <main className="min-h-screen w-full bg-[#F4F0F0] pt-16 md:pt-20 lg:pt-24">
+                <section className="w-full h-36 bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url('${imagesection}')` }}>
+                </section>
                 <section className="container mx-auto p-4 md:p-8 max-w-6xl rounded-lg mt-4">
                     <div className="relative mb-4">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <img src="" alt="" className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"/>
+                            <img src='{lupa}' alt="" className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"/>
                         </div>
-                        <input type="text" placeholder="Você tem interesse em uma ONG's específica, pesquise aqui..."className="w-full text-xs md:text-base p-3 pl-10 border border-gray-300 rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"value={searchTerm } onChange={handleSearchChange}/>
+                        <input type="text" placeholder="Você tem interesse em uma ONG's específica, pesquise aqui..."className="w-full text-base md:text-[20px] p-3 pl-10 border border-gray-300 rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"value={searchTerm } onChange={handleSearchChange}/>
                     </div>
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4">
                         <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import apiClient from "../../api/tokenInterceptor";
 import backgroundImage from "../../assets/images/background-login.png";
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
@@ -48,7 +48,7 @@ function LoginPage() {
 
     // Se não for o login de teste, a função continua normalmente...
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
+      const response = await apiClient.post("/auth/login", {
         email: email,
         password: password,
       });

@@ -31,6 +31,7 @@ export default class UserControllers {
       return ok(result)
       
     } catch (error) {
+      console.error('Erro ao atualizar usuário:', error)
       return serverError(error)
       
     }

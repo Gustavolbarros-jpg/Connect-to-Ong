@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Importe o componente Link
-import axios from 'axios'; 
+import apiClient from '../../api/tokenInterceptor'; 
 import logoRecife from "../../assets/images/logo-recife.png";
 import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
@@ -34,7 +34,7 @@ function RegisterPage() {
 
   try {
     
-    const response = await axios.post('http://localhost:3000/auth/signup', {
+    const response = await apiClient.post('/auth/signup', {
       fullname: projectName,        // Mapeando: frontend(projectName) -> backend(fullname)
       email: institutionalEmail,    // Mapeando: frontend(institutionalEmail) -> backend(email)
       institution: institutionalName,
