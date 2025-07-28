@@ -23,6 +23,16 @@ function StepeOnePage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Calcular tempo previsto em meses baseado nas datas
+    let expectedTime = 0;
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end - start);
+      const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44)); // média de dias por mês
+      expectedTime = diffMonths;
+    }
+
     const projectDetails = {
       nameProject,
       areaInterest,
@@ -32,6 +42,7 @@ function StepeOnePage() {
       extensionHours,
       startDate,
       endDate,
+      expectedTime,
       descriptionProject,
     };
 
@@ -91,7 +102,7 @@ function StepeOnePage() {
                 />
                 <InputField
                   label="Horas de Extensão Oferecidas"
-                  type="text"
+                  type="number"
                   placeholder="Digite as Horas de Extensão oferecidas..."
                   value={extensionHours}
                   onChange={(e) => setExtensionHours(e.target.value)}

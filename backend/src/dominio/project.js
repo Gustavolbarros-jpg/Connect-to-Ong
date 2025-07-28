@@ -9,19 +9,28 @@ export default class ProjectDataAccess {
             console.log('Prisma client:', prisma);
             console.log('Prisma projetos:', prisma.projetos);
             
+            // Validar e converter campos numéricos
+            const quantidade_alunos = parseInt(projectData.quantidade_alunos) || 0;
+            const horas_extensao = parseInt(projectData.horas_extensao) || 0;
+            const tempo_previsto = parseInt(projectData.tempo_previsto) || 0;
+            
             const result = await prisma.projetos.create({
                 data: {
                     nome_projeto: projectData.nome_projeto,
                     area_interesse: projectData.area_interesse,
                     soft_skills: projectData.soft_skills,
-                    quantidade_alunos: parseInt(projectData.quantidade_alunos),
+                    quantidade_alunos: quantidade_alunos,
                     descricao_projeto: projectData.descricao_projeto,
                     professores_atrelados: projectData.professores_atrelados,
-                    horas_extensao: parseInt(projectData.horas_extensao),
-                    tempo_previsto: parseInt(projectData.tempo_previsto),
+                    horas_extensao: horas_extensao,
+                    tempo_previsto: tempo_previsto,
                     ong_selecionada: projectData.ong_selecionada || null,
                     categoria_ong: projectData.categoria_ong || null,
-                    user_id: projectData.user_id
+                    user: {
+                        connect: {
+                            id: projectData.user_id
+                        }
+                    }
                 }
             });
             
@@ -99,7 +108,8 @@ export default class ProjectDataAccess {
             for (const field of allowedFields) {
                 if (updateData[field] !== undefined) {
                     if (field === 'quantidade_alunos' || field === 'horas_extensao' || field === 'tempo_previsto') {
-                        filteredData[field] = parseInt(updateData[field]);
+                        const value = parseInt(updateData[field]);
+                        filteredData[field] = isNaN(value) ? 0 : value;
                     } else {
                         filteredData[field] = updateData[field];
                     }

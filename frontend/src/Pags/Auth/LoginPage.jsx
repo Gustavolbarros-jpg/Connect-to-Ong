@@ -22,31 +22,7 @@ function LoginPage() {
       return;
     }
 
-    // 👉 NOVO: LÓGICA PARA LOGIN DE TESTE
-    // Se o email e a senha corresponderem aos dados de teste, simula o login.
-    if (email === "teste@teste.com" && password === "123456") {
-      console.log("Efetuando login de teste...");
 
-      // 1. Cria um objeto de usuário e um token falsos
-      const fakeUser = {
-        name: "Usuário Teste",
-        email: "teste@teste.com",
-      };
-      const fakeToken = "fake-jwt-token-for-testing";
-
-      // 2. Salva os dados falsos no localStorage
-      localStorage.setItem("token", fakeToken);
-      localStorage.setItem("user", JSON.stringify(fakeUser));
-
-      // 3. Navega para a página inicial
-      navigate("/");
-
-      // 4. Impede que o resto da função (chamada à API) seja executado
-      return;
-    }
-    // Fim da lógica de teste
-
-    // Se não for o login de teste, a função continua normalmente...
     try {
       const response = await apiClient.post("/auth/login", {
         email: email,
