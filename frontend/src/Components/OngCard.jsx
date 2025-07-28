@@ -14,10 +14,7 @@ function OngCard({ ong, showActionButton, actionButtonText, onActionClick, isSel
   };
 
   return (
-    // Aplica a borda condicional com base na prop 'isSelected'
-    <div className={`bg-white rounded-lg shadow-md p-6 flex flex-col justify-between h-auto border-2 ${isSelected ? "border-blue-500" : "border-transparent"}`}>
-
-
+    <div className={`bg-white rounded-lg shadow-md p-6 flex flex-col justify-between h-auto border-2 ${isSelected ? "border-blue-600" : "border-transparent"}`}>
 
       {/* Seção Superior: Logo, Nome e Subtítulo/Área */}
       <section className="flex items-center mb-4">
@@ -28,7 +25,7 @@ function OngCard({ ong, showActionButton, actionButtonText, onActionClick, isSel
         />
         <div className="flex flex-col">
           <h3 className="text-xl font-bold text-gray-800 leading-tight">{ong.name}</h3>
-          <p className="text-sm text-gray-500 mt-1 leading-tight">{ong.subtitle || `Área: ${ong.area}`}</p>
+          <p className="text-[18px] text-gray-500 mt-1 leading-tight">{ong.subtitle || `Área: ${ong.area}`}</p>
         </div>
       </section>
 
@@ -37,7 +34,7 @@ function OngCard({ ong, showActionButton, actionButtonText, onActionClick, isSel
       {/* Seção da Descrição Principal - CLICÁVEL PARA EXPANDIR */}
       <section>
         <p
-          className="text-gray-600 text-base mb-4 flex-grow cursor-pointer"
+          className="text-gray-600 text-[20px] mb-4 flex-grow cursor-pointer"
           onClick={toggleDescriptionExpansion}
         >
           {isDescriptionExpanded ? ong.description : shortDescription}

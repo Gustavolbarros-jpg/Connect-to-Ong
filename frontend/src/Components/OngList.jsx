@@ -186,7 +186,7 @@ const renderPageNumbers = () => {
   return (
     <div className="w-full">
       {/* Seção da Barra de Pesquisa e Filtros */}
-      <section className="container mx-auto p-4 md:p-8 max-w-6xl bg-blue-600 rounded-[4px] shadow-md mt-4">
+      <section className="container mx-auto p-4 md:p-8 max-w-6xl bg-white rounded-[4px] shadow-md mt-4">
         {/* Campo de Busca */}
         <div className="relative mb-4">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -208,7 +208,7 @@ const renderPageNumbers = () => {
 
             {/* Select de Área de Atuação */}
             <select
-              className="form-select bg-white border border-white rounded-[4px] py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto"
+              className="form-select bg-blue-600 hover:bg-blue-800 text-white font-semibold border border-white rounded-[4px] h-[46px] px-2 text-[20px]"
               value={selectedArea}
               onChange={handleAreaChange}
             >
@@ -228,7 +228,7 @@ const renderPageNumbers = () => {
 
             {/* Select de Localidade */}
             <select
-              className="form-select bg-white border border-white rounded-[4px] py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto"
+              className="form-select bg-blue-600 hover:bg-blue-800 font-semibold text-white border border-white rounded-[4px] py-2 px-5 text-[20px]"
               value={selectedLocation}
               onChange={handleLocationChange}
             >
@@ -245,14 +245,9 @@ const renderPageNumbers = () => {
             </select>
           </div>
           {/* Botões de Ação */}
-          <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto mt-4 md:mt-0 justify-center">
-            <button
-              className=" bg-white text-[#001449] text-[18px] py-2 px-4 rounded-[4px] hover:bg-gray-300 w-full md:w-auto"
-              onClick={handleClearFilters}
-            >
+            <button className="font-semibold bg-blue-600 text-white text-[20px] py-2 px-5 rounded-[4px] hover:bg-blue-800"onClick={handleClearFilters}>
               Remover Filtros
             </button>
-          </div>
         </div>
       </section>
 
