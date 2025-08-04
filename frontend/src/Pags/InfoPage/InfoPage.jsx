@@ -6,7 +6,6 @@ import icone1 from "../../assets/images/InfoPage/icone1.png";
 import icone2 from "../../assets/images/InfoPage/icone2.png";
 import icone3 from "../../assets/images/InfoPage/icone3.png";
 
-
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 
