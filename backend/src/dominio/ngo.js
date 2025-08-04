@@ -24,10 +24,25 @@ export default class OngDataAccess {
         }
     }
 
-    async findAll() {
+    
+    async findAll(filters = {}) {
         try {
+            const whereClause = {}; 
+
+            
+            if (filters.area) {
+                
+                whereClause.match_area = { 
+                    contains: filters.area, 
+                    mode: 'insensitive'     
+                };
+            }
+
             const result = await prisma.ong.findMany({
-                orderBy: { nome_ong: 'asc' },
+                where: whereClause, 
+                orderBy: {
+                    id: 'asc' 
+                }
             });
             return result;
         } catch (error) {
@@ -38,8 +53,14 @@ export default class OngDataAccess {
 
     async findById(ongId) {
         try {
+            const numericId = parseInt(ongId, 10);
+
+            if (isNaN(numericId)) {
+                return null; 
+            }
+            
             const result = await prisma.ong.findUnique({
-                where: { id: ongId },
+                where: { id: numericId },
             });
             return result;
         } catch (error) {

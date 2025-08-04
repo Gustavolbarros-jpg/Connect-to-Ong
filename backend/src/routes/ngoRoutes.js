@@ -1,3 +1,5 @@
+// src/routes/ngoRoutes.js
+
 import express from 'express';
 import NgoControllers from '../controllers/ngoController.js'; 
 import { verifyToken } from '../middlewares/verifyToken.js';
@@ -5,9 +7,10 @@ import { verifyToken } from '../middlewares/verifyToken.js';
 const ngoRouter = express.Router();
 const ngoController = new NgoControllers(); 
 
-// Rota pública para listar todas as ONGs
+// Rota pública para listar todas as ONGs (agora com filtros!)
 ngoRouter.get('/', async (req, res) => {
-    const { success, statusCode, body } = await ngoController.getAllNgos();
+
+    const { success, statusCode, body } = await ngoController.getAllNgos(req.query);
     res.status(statusCode).send({ success, statusCode, body });
 });
 
