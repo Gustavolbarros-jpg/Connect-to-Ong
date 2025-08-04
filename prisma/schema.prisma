@@ -94,5 +94,5 @@ model Ong {
   Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co   String? @map(" Qual mensagem você mandaria para as pessoas que ainda não co") @db.VarChar(2048)
   A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara  String? @map("A sua entidade serve refeições? se sim, a cozinha que prepara") @db.VarChar(512)
 
-  @@map("tabela_ongs")
+  @@map("ongs")
 }
