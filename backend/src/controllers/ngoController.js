@@ -28,13 +28,20 @@ export default class NgoControllers {
     }
 
     async getNgoById(ongId) {
+        console.log('--- INICIANDO BUSCA POR ID:', ongId, '---'); // Log de início
         try {
             const ong = await this.dataAccess.findById(ongId);
+            console.log('Resultado da busca no banco:', ong); // Veremos se o resultado é 'null'
+
             if (!ong) {
+                console.log('ONG não encontrada. Retornando erro 404.'); 
                 return notFound('ONG não encontrada');
             }
+
+            console.log('ONG encontrada com sucesso. Retornando 200 OK.'); 
             return ok(ong);
         } catch (error) {
+            console.log('Ocorreu um erro no controller:', error);
             return serverError(error);
         }
     }

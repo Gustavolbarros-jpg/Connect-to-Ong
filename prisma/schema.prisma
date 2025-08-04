@@ -52,6 +52,34 @@ model projetos {
 }
 
 model Ong {
+  nome_ong                                                     String? @map("Nome da ONG/Projeto")
+  Motivo_da_cria__o_do_projeto_                                String? @map("Motivo da criação do projeto\n")
+  Sobre                                                        String?
+  Respons_vel_para_contato                                     String? @map(" Responsável para contato")
+  CNPJ_                                                        String? @map("CNPJ ")
+  quantidade_pessoas_assistidas                                String?
+  metas                                                        String? @map("Metas de curto, médio e longo prazo")
+  Causa_da_Organiza__o_                                        String? @map("Causa da Organização\n")
+  area                                                         String? @map("Área")
+  match_area                                                   String? @map("Match")
+  objetivos_ods                                                String?
+  Atividades_que_o_projeto_desenvolve_                         String? @map("Atividades que o projeto desenvolve\n")
+  possui_funcionarios                                          String?
+  A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_  String? @map("A sua organização possui funcionários?\nSe sim, quantos são?")
+  Funcionamento__da_organiza__o                                String? @map("Funcionamento  da organização")
+  Endere_o                                                     String? @map("Endereço")
+  RPA                                                          Float?
+  contato_divulgacao                                           String? @map("Contato para divulgação")
+  Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__ String? @map("Espaço para informarem\nas redes sociais da sua Organização:\n")
+  possui_produto_social                                        String?
+  mensagem_para_voluntarios                                    String?
+  serve_refeicoes_cozinha_propria                              String?
+  id                                                           Int     @id(map: "ongs_pk") @default(autoincrement()) @map("id_ongs")
+
+  @@map("ongs")
+}
+
+model tabela_ongs {
   id                                                             Int     @id @default(autoincrement())
   nome_ong                                                       String? @db.VarChar(255)
   motivo_criacao                                                 String?
@@ -93,6 +121,12 @@ model Ong {
   Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_  String? @map("Vocês possuem algum produto social? Explicando melhor: Vocês ") @db.VarChar(1024)
   Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co   String? @map(" Qual mensagem você mandaria para as pessoas que ainda não co") @db.VarChar(2048)
   A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara  String? @map("A sua entidade serve refeições? se sim, a cozinha que prepara") @db.VarChar(512)
-
-  @@map("ongs")
+  quantidade_pessoas_assistidas                                  String? @db.VarChar(512)
+  objetivos_ods                                                  String? @db.VarChar(1024)
+  possui_funcionarios_quantos                                    String? @db.VarChar(128)
+  possui_produto_social_quais                                    String? @db.VarChar(1024)
+  mensagem_para_voluntarios_doadores                             String? @db.VarChar(2048)
+  serve_refeicoes_cozinha_propria                                String? @db.VarChar(512)
+  Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con      String? @map("Motivo da cria��o do projeto\n;Sobre; Respons�vel para con") @db.VarChar(512)
+  Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__      String? @map("Espa�o para informarem\nas redes sociais da sua Organiza��") @db.VarChar(256)
 }

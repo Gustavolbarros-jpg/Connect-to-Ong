@@ -27,21 +27,42 @@ export default class OngDataAccess {
     
     async findAll(filters = {}) {
         try {
-            const whereClause = {}; 
+            const whereClause = {};
 
-            
+            // Filtro 1: Por área (já existe)
             if (filters.area) {
-                
                 whereClause.match_area = { 
-                    contains: filters.area, 
-                    mode: 'insensitive'     
+                    contains: filters.area,
+                    mode: 'insensitive'
+                };
+            }
+
+            // Filtro 2: Por CNPJ (já existe)
+            if (filters.has_cnpj === 'true') {
+                whereClause.cnpj = {
+                    not: null
+                };
+            }
+
+            // Filtro 3: Por Nome da ONG (A NOVA LÓGICA)
+            if (filters.nome) {
+                whereClause.nome_ong = { // O nome do campo no seu banco
+                    contains: filters.nome,
+                    mode: 'insensitive'
+                };
+            }
+
+            if (filters.localizacao) {
+                whereClause.Endere_o = { // O nome do campo do endereço no seu banco
+                    contains: filters.localizacao,
+                    mode: 'insensitive'
                 };
             }
 
             const result = await prisma.ong.findMany({
-                where: whereClause, 
+                where: whereClause,
                 orderBy: {
-                    id: 'asc' 
+                    id: 'asc'
                 }
             });
             return result;
