@@ -6,10 +6,18 @@ import InputField from "../../Components/InputField/";
 import Button from "../../Components/Button/";
 import ProgressBar from "../../Components/ProgressBar/";
 
+// MODIFICAÇÃO: Adicionando a lista de áreas de interesse
+const mockAreas = [
+  "Cultura", "Arte", "Esporte", "Saúde", "Bem-Estar",
+  "Educação", "Formação", "Assistência Social", "Alimentar", "Pessoas com Deficiência",
+  "Tecnologia", "Inclusão Digital", "Profissionalização", "Capacitação",
+  "Proteção Animal", "Bem-estar Animal", "Meio Ambiente", "Sustentabilidade",
+  "Empoderamento Feminino"
+];
+
 function StepeOnePage() {
   const navigate = useNavigate();
 
-  // ... (seus states e a função handleSubmit permanecem iguais)
   const [nameProject, setNameProject] = useState("");
   const [areaInterest, setAreaInterest] = useState("");
   const [softSkills, setSoftSkills] = useState("");
@@ -23,13 +31,18 @@ function StepeOnePage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Calcular tempo previsto em meses baseado nas datas
+    // Validação para garantir que uma área de interesse foi selecionada
+    if (!areaInterest) {
+      alert("Por favor, selecione uma área de interesse.");
+      return;
+    }
+
     let expectedTime = 0;
     if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
       const diffTime = Math.abs(end - start);
-      const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44)); // média de dias por mês
+      const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44));
       expectedTime = diffMonths;
     }
 
@@ -69,58 +82,75 @@ function StepeOnePage() {
                   placeholder="Digite o nome do projeto..."
                   value={nameProject}
                   onChange={(e) => setNameProject(e.target.value)}
+                  required
                 />
-                <InputField
-                  label="Área de Interesse"
-                  type="text"
-                  placeholder="Digite a área de interesse..."
-                  value={areaInterest}
-                  onChange={(e) => setAreaInterest(e.target.value)}
-                />
+                
+                {/* MODIFICAÇÃO: Substituição do InputField por um <select> */}
+                <div>
+                  <label htmlFor="area-interesse" className="block text-[20px] font-medium text-gray-700 mb-1">
+                    Área de Interesse
+                  </label>
+                  <select
+                    id="area-interesse"
+                    value={areaInterest}
+                    onChange={(e) => setAreaInterest(e.target.value)}
+                    required
+                    className="mt-1 block w-full p-3 border border-gray-300 rounded-[4px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[20px] bg-white"
+                  >
+                    <option value="" disabled>Selecione uma área...</option>
+                    {mockAreas.map((area, index) => (
+                      <option key={index} value={area}>{area}</option>
+                    ))}
+                  </select>
+                </div>
+
                 <InputField
                   label="Soft Skills que busca desenvolver"
                   type="text"
-                  placeholder="Digite a soft skills que busca desenvolver..."
+                  placeholder="Comunicação, liderança, etc..."
                   value={softSkills}
                   onChange={(e) => setSoftSkills(e.target.value)}
+                  required
                 />
                 <InputField
                   label="Quantidade de Alunos no projeto"
                   type="number"
-                  placeholder="Digite a quantidade de alunos no projeto..."
+                  placeholder="Digite a quantidade de alunos..."
                   value={numberStudents}
                   onChange={(e) => setNumberStudents(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col gap-y-6">
                 <InputField
                   label="Professores atrelados"
                   type="text"
-                  placeholder="Digite os professores atrelados ao projeto..."
+                  placeholder="Digite os nomes dos professores..."
                   value={teacher}
                   onChange={(e) => setTeacher(e.target.value)}
+                  required
                 />
                 <InputField
                   label="Horas de Extensão Oferecidas"
                   type="number"
-                  placeholder="Digite as Horas de Extensão oferecidas..."
+                  placeholder="Digite o total de horas..."
                   value={extensionHours}
                   onChange={(e) => setExtensionHours(e.target.value)}
+                  required
                 />
                 <InputField
                   label="Data de Inicio Prevista"
                   type="date"
-                  placeholder="Escolha a data de inicio do projeto..."
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500"
+                  required
                 />
                 <InputField
                   label="Data de Conclusão Prevista"
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  placeholder="Escolha a data de conclusão do projeto..."
+                  required
                 />
               </div>
               <div className="md:col-span-2">
@@ -132,7 +162,8 @@ function StepeOnePage() {
                   value={descriptionProject}
                   onChange={(e) => setDescriptionProject(e.target.value)}
                   rows="5"
-                  className="mt-1 block w-full px-3 py-3 border-4 border-blue-600 rounded-[4px] shadow-sm placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[20px]"
+                  required
+                  className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-[4px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-[20px]"
                 ></textarea>
               </div>
             </div>

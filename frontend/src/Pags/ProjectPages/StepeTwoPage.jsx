@@ -28,7 +28,8 @@ function StepeTwoPage() {
 
   const [selectedOng, setSelectedOng] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedArea, setSelectedArea] = useState("");
+  // MODIFICAÇÃO: O estado de 'selectedArea' agora inicia com o valor de 'areaInterest' vindo da Step One.
+  const [selectedArea, setSelectedArea] = useState(projectDetails?.areaInterest || "");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [ongs, setOngs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -117,9 +118,8 @@ function StepeTwoPage() {
     navigate(-1);
   };
 
-  // MODIFICAÇÃO 1: A função agora aceita um parâmetro opcional `ong`.
   const handleContinue = (ong = null) => {
-    const ongToContinue = ong || selectedOng; // Prioriza a ONG passada no clique, senão usa a do estado.
+    const ongToContinue = ong || selectedOng;
 
     if (!ongToContinue) {
       alert("Por favor, selecione uma ONG para continuar.");
@@ -129,7 +129,7 @@ function StepeTwoPage() {
     navigate("/stepe-three", {
       state: {
         projectDetails: projectDetails,
-        selectedOng: ongToContinue, // Navega com a ONG correta.
+        selectedOng: ongToContinue,
       },
     });
   };
@@ -242,7 +242,7 @@ function StepeTwoPage() {
                       {selectedOng?.id === ong.id ? (
                         <button
                           className="w-full px-4 py-2 rounded-md font-medium transition-colors duration-200 bg-green-500 text-white hover:bg-green-600"
-                          onClick={() => handleContinue(ong)} // MODIFICAÇÃO 2: Passa a ONG específica para a função.
+                          onClick={() => handleContinue(ong)}
                         >
                           CONECTAR-SE
                         </button>
