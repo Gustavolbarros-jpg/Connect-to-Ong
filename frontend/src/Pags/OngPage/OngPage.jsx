@@ -159,6 +159,34 @@ function OngPage() {
     const handleOpenDetails = (ong) => setSelectedOng(ong);
     const handleCloseDetails = () => setSelectedOng(null);
 
+    // Adiciona função de teste para verificar áreas sem resultados
+    const checkEmptyAreas = useCallback(async () => {
+        const validAreas = [];
+        
+        for (const area of mockAreas) {
+            const params = new URLSearchParams();
+            params.append('area', area);
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/ongs?${params}`);
+                const data = await response.json();
+                
+                if (data.success && data.body && data.body.length > 0) {
+                    validAreas.push(area);
+                }
+            } catch (error) {
+                console.error(`Erro ao verificar área ${area}:`, error);
+            }
+        }
+        
+        setAreasOptions(validAreas);
+    }, []);
+
+    // Adiciona useEffect para executar o teste uma vez
+    useEffect(() => {
+        checkEmptyAreas();
+    }, [checkEmptyAreas]);
+
     return (
         <div className="font-roboto h-screen w-full text-[#001449]">
             <Navbar /> 
