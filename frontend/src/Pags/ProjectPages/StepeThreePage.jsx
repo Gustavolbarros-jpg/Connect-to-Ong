@@ -1,24 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiClient from "../../api/tokenInterceptor";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import Button from "../../Components/Button/";
+import ProgressBar from "../../Components/ProgressBar";
+import Modal from "../../Components/Modal"; // <<< Importe o componente Modal
 
 function StepeThreePage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // LÓGICA DE CORREÇÃO APLICADA AQUI
-  // Garante que 'state' e suas propriedades internas sejam objetos seguros.
   const state = location.state || {};
   const projectDetails = state.projectDetails || {};
   const selectedOng = state.selectedOng || null;
+
+  // --- NOVO ESTADO: Visibilidade do modal ---
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
+  // --- NOVO: Função para abrir o modal ---
+  const handleOpenConfirmModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // --- NOVO: Função para fechar o modal ---
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  // --- Função que agora CONTERÁ a Lógica de Chamada à API ---
   const handleConfirm = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -42,19 +56,17 @@ function StepeThreePage() {
       };
 
       console.log("Enviando dados para o backend:", projectData);
-
-                        const response = await apiClient.post('/projects', projectData);
+      
+      const response = await apiClient.post('/projects', projectData);
 
       console.log("Resposta do backend:", response.data);
       alert("Projeto criado com sucesso!");
       navigate("/");
     } catch (error) {
       console.error("Erro ao criar projeto:", error);
-      
-                        // Token expiration is now handled by the interceptor
-                  console.error("Erro ao criar projeto:", error);
-      
       alert("Erro ao criar projeto. Tente novamente.");
+    } finally {
+      handleModalClose(); // <<< IMPORTANTE: Fechar o modal após a tentativa da API
     }
   };
 
@@ -70,18 +82,8 @@ function StepeThreePage() {
           <div className="flex items-center justify-center mb-12">
             <div className="flex flex-col items-center text-center">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
               <p className="mt-2 text-sm text-gray-600">Detalhes do Projeto</p>
@@ -89,18 +91,8 @@ function StepeThreePage() {
             <div className="flex-auto border-t-2 border-blue-600 mx-4"></div>
             <div className="flex flex-col items-center text-center">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
               <p className="mt-2 text-sm text-gray-600">Conexão com a ONG</p>
@@ -199,18 +191,8 @@ function StepeThreePage() {
               {selectedOng ? (
                 <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-md">
                   <div className="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-8 h-8 text-gray-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
+                    <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
                   <div>
@@ -230,7 +212,7 @@ function StepeThreePage() {
               <Button type="button" onClick={handleGoBack} secondary>
                 Voltar
               </Button>
-              <Button type="button" onClick={handleConfirm} primary>
+              <Button type="button" onClick={handleOpenConfirmModal} primary> {/* << AQUI: Clica para abrir o modal */}
                 Confirmar Tudo
               </Button>
             </div>
@@ -238,6 +220,17 @@ function StepeThreePage() {
         </div>
       </main>
       <Footer />
+
+      {/* --- Renderização do Modal --- */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onContinue={handleConfirm} // << AQUI: Ação de continuar chama a API
+        continueText="Sim, Confirmar"
+      >
+        <h2 className="text-2xl font-bold text-blue-800 mb-4">Confirmação Final</h2>
+        <p className="text-gray-700">Você tem certeza que deseja confirmar o projeto com a ONG "{selectedOng?.name}"? Após a confirmação, a ONG será notificada.</p>
+      </Modal>
     </div>
   );
 }
