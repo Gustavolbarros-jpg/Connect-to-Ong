@@ -106,7 +106,7 @@ function OngPage() {
         setAreasOptions(validAreas);
     }, []);
 
-    // Adiciona useEffect para executar o teste uma vez
+   
     useEffect(() => {
         checkEmptyAreas();
     }, [checkEmptyAreas]);
@@ -199,4 +199,5 @@ function OngPage() {
 
 
 export default OngPage;
+
 
