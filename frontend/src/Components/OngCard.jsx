@@ -80,5 +80,3 @@ function OngCard({ ong, showActionButton, actionButtonText, onActionClick, isSel
     </div>
   );
 }
-
-export default OngCard;

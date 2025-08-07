@@ -12,15 +12,13 @@ export const created = (body) => {
         statusCode: 201,
         body,
 }}
-export const notFound =()=>{ 
-    return{
-        success :false,
-        statusCode:400,
-        body: {
-            text: "Not Found"
-        }
-
-    }}
+export const notFound = (message) => { 
+    return {
+        success: false,
+        statusCode: 404,
+        body: { message: message } 
+    }
+}
 export const serverError = (error)=>{
     return{
         success :false,
