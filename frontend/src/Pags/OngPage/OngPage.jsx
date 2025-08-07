@@ -191,3 +191,10 @@ function OngPage() {
                 {selectedOng && (
                     <OngDetailModal ong={selectedOng} onClose={handleCloseDetails} />
                 )}
+            </main>
+            <Footer />
+        </div>
+    );
+}
+
+export default OngPage;
