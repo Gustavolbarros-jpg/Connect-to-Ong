@@ -73,7 +73,7 @@ function InfoPage() {
           </div>
         </section>
 
-        <section className="w-full h-[700px] bg-[#1474FF] flex items-center justify-center">
+        <section className="w-full h-[700px] bg-blue-600 flex items-center justify-center">
           <div className="container flex flex-col items-center justify-center gap-8 md:h-full md:flex-row md:items-center md:gap-12">
             <div className="w-full md:w-1/2 flex justify-center md:justify-center">
               <img

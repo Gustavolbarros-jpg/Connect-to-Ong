@@ -34,7 +34,7 @@ function LoginPage() {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       const errorMessage =
         error.response?.data?.message ||

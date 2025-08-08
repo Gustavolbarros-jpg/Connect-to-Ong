@@ -61,7 +61,7 @@ function StepeThreePage() {
 
       console.log("Resposta do backend:", response.data);
       alert("Projeto criado com sucesso!");
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       console.error("Erro ao criar projeto:", error);
       alert("Erro ao criar projeto. Tente novamente.");

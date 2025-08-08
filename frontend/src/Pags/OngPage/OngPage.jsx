@@ -120,8 +120,8 @@ function OngPage() {
                 </section>
 
                 {/* Seção de busca e filtros */}
-                <section className="container mx-auto p-4 md:p-8 max-w-6xl rounded-lg mt-4">
-                    <div className="relative mb-4">
+                <section className="container mx-auto p-4 md:p-8 max-w-6xl rounded-lg mt-4 bg-white rounded-[4px]">
+                    <div className="relative mb-4 ">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <img src={lupaImage} alt="Ícone de pesquisa" className="h-5 w-5" />
                         </div>
@@ -159,7 +159,7 @@ function OngPage() {
                         </div>
                         <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto mt-4 md:mt-0 justify-center">
                             <button 
-                                className="bg-gray-200 text-gray-800 bg-white py-2 px-4 rounded-[4px] hover:bg-gray-300 w-full md:w-auto" 
+                                className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-[4px] hover:bg-blue-800 w-full md:w-auto" 
                                 onClick={handleClearFilters}
                             >
                                 Remover Filtros
