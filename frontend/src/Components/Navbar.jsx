@@ -19,18 +19,18 @@ function Navbar() {
   }
 
   const activeLinkClasses =
-    "text-white font-bold text-[20px] bg-blue-600 hover:bg-blue-800 py-2 px-5 rounded-[4px] decoration-blue-600";
+    "text-white font-bold text-[20px] bg-blue-600 hover:bg-blue-800 py-2 px-5 rounded-[4px] flex justify-center";
   const inactiveLinkClasses =
-    "text-blue-600 hover:text-blue-800 text-[20px] transition-colors duration-300";
+    "text-blue-600 hover:text-blue-800 text-[20px] transition-colors duration-300 flex justify-center";
 
   const ctaLinkClasses =
-    "text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-800 text-[20px] font-semibold";
+    "text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-800 text-[20px] font-semibold flex justify-center";
 
   return (
     <header className="bg-white fixed top-0 w-full z-50">
       <nav className="relative flex items-center justify-between px-5 py-7 font-semibold shadow-lg">
         <div className="flex-shrink-0">
-          <Link to="/" className="text-blue-600 font-bold text-[20px]">
+          <Link to="/" className="text-blue-600 font-bold text-[20px] ">
             NDA
           </Link>
         </div>
@@ -74,7 +74,7 @@ function Navbar() {
           {user ? (
             <div className="relative flex items-center gap-5">
               <span 
-                className="text-blue-600 hover:text-blue-800 text-[20px] cursor-pointer inline-flex items-center" /* <<< Adicionado inline-flex e items-center */
+                className="text-blue-600 hover:text-blue-800 text-[20px] cursor-pointer inline-flex items-center transition-colors duration-300" /* <<< Adicionado inline-flex e items-center */
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
               >
                 Olá, {user.name || "Usuário"}! 

@@ -20,12 +20,12 @@ function InfoPage() {
           <div className="relative z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%] font-roboto">
             <div className="flex-column // w-full max-w-[700px] pl-12">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight pb-4">
-                Potencialize a Extensão da sua Universidade.
+                Potencialize a extensão da sua universidade.
               </h1>
               <p className="text-xl pb-6">
                 Nossa plataforma conecta seus cursos e alunos a projetos de ONGs, criando oportunidades de aprendizado prático e pesquisa aplicada.
               </p>
-              <button className="w-[200px] h-[60px] bg-[#1474FF] font-bold focus:outline-none rounded-[4px] hover:bg-blue-600">
+              <button className="px-5 py-2 bg-blue-600 font-semibold text-[20px] focus:outline-none rounded-[4px] hover:bg-blue-800">
                 <a href="/register">Quero Participar!</a>
               </button>
             </div>
@@ -84,7 +84,7 @@ function InfoPage() {
               />
             </div>
 
-            <div className="w-full text-white text-center justify-cente md:w-1/2 md:text-start">
+            <div className="w-full text-white text-center md:w-1/2 md:text-start">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Como as universidades participam?
               </h2>
