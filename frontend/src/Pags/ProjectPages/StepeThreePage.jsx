@@ -5,7 +5,7 @@ import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import Button from "../../Components/Button/";
 import ProgressBar from "../../Components/ProgressBar";
-import Modal from "../../Components/Modal"; // <<< Importe o componente Modal
+import Modal from "../../Components/Modal";
 
 function StepeThreePage() {
   const navigate = useNavigate();
@@ -15,24 +15,20 @@ function StepeThreePage() {
   const projectDetails = state.projectDetails || {};
   const selectedOng = state.selectedOng || null;
 
-  // --- NOVO ESTADO: Visibilidade do modal ---
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  // --- NOVO: Função para abrir o modal ---
   const handleOpenConfirmModal = () => {
     setIsModalOpen(true);
   };
 
-  // --- NOVO: Função para fechar o modal ---
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  // --- Função que agora CONTERÁ a Lógica de Chamada à API ---
   const handleConfirm = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -52,7 +48,7 @@ function StepeThreePage() {
         horas_extensao: projectDetails.extensionHours,
         tempo_previsto: projectDetails.expectedTime,
         ong_selecionada: selectedOng?.name || null,
-        categoria_ong: selectedOng?.category || null
+        categoria_ong: selectedOng?.area || null // Usando 'area' como categoria
       };
 
       console.log("Enviando dados para o backend:", projectData);
@@ -66,7 +62,7 @@ function StepeThreePage() {
       console.error("Erro ao criar projeto:", error);
       alert("Erro ao criar projeto. Tente novamente.");
     } finally {
-      handleModalClose(); // <<< IMPORTANTE: Fechar o modal após a tentativa da API
+      handleModalClose();
     }
   };
 
@@ -78,141 +74,88 @@ function StepeThreePage() {
       <Navbar />
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
         <div className="max-w-4xl mx-auto">
-          {/* Indicador de Etapas */}
-          <div className="flex items-center justify-center mb-12">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">Detalhes do Projeto</p>
-            </div>
-            <div className="flex-auto border-t-2 border-blue-600 mx-4"></div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">Conexão com a ONG</p>
-            </div>
-            <div className="flex-auto border-t-2 border-blue-600 mx-4"></div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                3
-              </div>
-              <p className="mt-2 text-sm font-semibold text-blue-600">
-                Confirmar projeto
-              </p>
-            </div>
-          </div>
+          
+          {/* ProgressBar reutilizável */}
+          <ProgressBar currentStep={3} totalSteps={3} />
 
           {/* Card de Resumo */}
-          <div className="bg-white p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          <div className="bg-white p-6 md:p-8 rounded-[4px] shadow-md mt-8">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 text-center">
               Resumo do Projeto e Conexão
             </h2>
+            
+            {/* Detalhes do Projeto */}
             <div className="border-b border-gray-200 pb-6">
-              <h3 className="text-lg font-semibold text-blue-700 mb-4">
+              <h3 className="text-lg font-semibold text-[#001449] mb-4">
                 Detalhes do Projeto
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm md:text-base">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Nome do Projeto
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.nameProject)}
-                  </p>
+                  <p className="font-medium text-gray-500">Nome do Projeto</p>
+                  <p className="text-gray-800">{displayData(projectDetails.nameProject)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Professores atrelados
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.teacher)}
-                  </p>
+                  <p className="font-medium text-gray-500">Professores atrelados</p>
+                  <p className="text-gray-800">{displayData(projectDetails.teacher)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Área de Interesse
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.areaInterest)}
-                  </p>
+                  <p className="font-medium text-gray-500">Área de Interesse</p>
+                  <p className="text-gray-800">{displayData(projectDetails.areaInterest)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Horas de Extensão
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.extensionHours)}
-                  </p>
+                  <p className="font-medium text-gray-500">Horas de Extensão</p>
+                  <p className="text-gray-800">{displayData(projectDetails.extensionHours)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Soft Skills
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.softSkills)}
-                  </p>
+                  <p className="font-medium text-gray-500">Soft Skills</p>
+                  <p className="text-gray-800">{displayData(projectDetails.softSkills)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Tempo Previsto
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.expectedTime)}
-                  </p>
+                  <p className="font-medium text-gray-500">Tempo Previsto</p>
+                  <p className="text-gray-800">{displayData(projectDetails.expectedTime)} meses</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Quantidade de Alunos
-                  </p>
-                  <p className="text-gray-800">
-                    {displayData(projectDetails.numberStudents)}
-                  </p>
+                  <p className="font-medium text-gray-500">Quantidade de Alunos</p>
+                  <p className="text-gray-800">{displayData(projectDetails.numberStudents)}</p>
                 </div>
-                <div className="md:col-span-2">
-                  <p className="text-sm font-medium text-gray-500">
-                    Descrição do Projeto
-                  </p>
-                  <p className="text-gray-800 whitespace-pre-wrap">
+                <div className="sm:col-span-2">
+                  <p className="font-medium text-gray-500">Descrição do Projeto</p>
+                  {/* Classe 'break-words' adicionada para quebrar o texto */}
+                  <p className="text-gray-800 whitespace-pre-wrap break-words">
                     {displayData(projectDetails.descriptionProject)}
                   </p>
                 </div>
               </div>
             </div>
+
+            {/* ONG Selecionada */}
             <div className="pt-6">
-              <h3 className="text-lg font-semibold text-blue-700 mb-4">
+              <h3 className="text-lg font-semibold text-[#001449] mb-4">
                 ONG Selecionada
               </h3>
               {selectedOng ? (
-                <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-md">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                    <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </div>
+                <div className="flex items-center gap-4 bg-blue-100 p-4 rounded-[4px]">
+                  <img 
+                    src={selectedOng.logo || '/logo-ong-placeholder.png'} 
+                    alt={`Logo da ${selectedOng.name}`}
+                    className="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-full object-cover"
+                  />
                   <div>
-                    <p className="font-bold text-gray-800">
-                      {selectedOng.name}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {selectedOng.category}
-                    </p>
+                    <p className="font-bold text-gray-800">{selectedOng.name}</p>
+                    <p className="text-sm text-gray-600">{selectedOng.area}</p>
                   </div>
                 </div>
               ) : (
                 <p className="text-gray-500">Nenhuma ONG foi selecionada.</p>
               )}
             </div>
-            <div className="mt-10 flex justify-between items-center">
-              <Button type="button" onClick={handleGoBack} secondary>
+
+            {/* Botões de Navegação */}
+            <div className="mt-10 flex flex-col-reverse sm:flex-row justify-between items-center gap-4">
+              <Button type="button" onClick={handleGoBack} primary className="w-full sm:w-auto text-[20px]">
                 Voltar
               </Button>
-              <Button type="button" onClick={handleOpenConfirmModal} primary> {/* << AQUI: Clica para abrir o modal */}
+              <Button type="button" onClick={handleOpenConfirmModal} primary className="w-full sm:w-auto text-[20px]">
                 Confirmar Tudo
               </Button>
             </div>
@@ -221,15 +164,15 @@ function StepeThreePage() {
       </main>
       <Footer />
 
-      {/* --- Renderização do Modal --- */}
+      {/* Modal de Confirmação */}
       <Modal
         isOpen={isModalOpen}
         onClose={handleModalClose}
-        onContinue={handleConfirm} // << AQUI: Ação de continuar chama a API
+        onContinue={handleConfirm}
         continueText="Sim, Confirmar"
       >
-        <h2 className="text-2xl font-bold text-blue-800 mb-4">Confirmação Final</h2>
-        <p className="text-gray-700">Você tem certeza que deseja confirmar o projeto com a ONG "{selectedOng?.name}"? Após a confirmação, a ONG será notificada.</p>
+        <h2 className="text-xl md:text-2xl font-bold text-blue-800 mb-4">Confirmação Final</h2>
+        <p className="text-gray-700 text-base">Você tem certeza que deseja confirmar o projeto com a ONG "{selectedOng?.name}"? Após a confirmação, a ONG será notificada.</p>
       </Modal>
     </div>
   );

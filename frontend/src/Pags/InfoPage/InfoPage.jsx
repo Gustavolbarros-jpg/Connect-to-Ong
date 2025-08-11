@@ -97,7 +97,7 @@ function InfoPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer variant="white"/>
     </div>
   );
 }
