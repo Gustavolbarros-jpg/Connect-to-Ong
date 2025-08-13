@@ -1,7 +1,5 @@
-import { PrismaClient } from '../../../generated/prisma/index.js'
-import { parse, isBefore, startOfToday } from 'date-fns'
-
-const prisma = new PrismaClient();
+import prisma from '../prisma/prismaClient.js';
+import { parse, isBefore, startOfToday } from 'date-fns';
 
 export default class ProjectDataAccess {
     async create(projectData) {
@@ -29,10 +27,6 @@ export default class ProjectDataAccess {
                 validationError.isValidationError = true;
                 throw validationError;
             }
-
-            console.log('Dados recebidos para criar projeto:', projectData);
-            console.log('Prisma client:', prisma);
-            console.log('Prisma projetos:', prisma.projetos);
             
             const quantidade_alunos = parseInt(projectData.quantidade_alunos) || 0;
             const horas_extensao = parseInt(projectData.horas_extensao) || 0;
@@ -48,19 +42,11 @@ export default class ProjectDataAccess {
                     professores_atrelados: projectData.professores_atrelados,
                     horas_extensao: horas_extensao,
                     tempo_previsto: tempo_previsto,
-                    ong_selecionada: projectData.ong_selecionada || null,
-                    categoria_ong: projectData.categoria_ong || null,
-                    data_inicio: dataInicioObj,
-                    data_fim: dataFimObj,
-                    user: {
-                        connect: {
-                            id: projectData.user_id
-                        }
-                    }
-                }
+                    data_inicio: data_inicio,
+                    data_fim: data_fim,
+                    user_id: projectData.user_id
+                },
             });
-            
-            console.log('Projeto criado com sucesso:', result);
             return result;
         } catch (error) {
             console.error('Erro ao criar projeto:', error);

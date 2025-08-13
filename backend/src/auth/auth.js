@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import prisma from '../prisma/prismaClient.js'
 import jwt from 'jsonwebtoken'
 import { v4 as uuidv4 } from 'uuid'
+import nodemailer from 'nodemailer'
 
 
 // --- FUNÇÃO AUXILIAR PARA HASHING ---
@@ -208,7 +209,7 @@ authRouter.post('/reset-password/:token', async (req, res) => {
         const hashedPassword = await hashWithSalt(password, salt);
 
         // 3. Atualiza a senha e limpa os campos de recuperação
-        await prisma.user.update({
+        await prisma.users.update({
             where: { id: user.id },
             data: {
                 password: hashedPassword.toString('hex'),

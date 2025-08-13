@@ -1,4 +1,3 @@
-
 export const ok=(body)=> {
     return{
         success :true,
@@ -31,6 +30,6 @@ export const serverError = (error)=>{
     return{
         success :false,
         statusCode:500,
-        error
+        body: { error: error.message }
 
 }}
