@@ -1,5 +1,5 @@
 import { PrismaClient } from '../../../generated/prisma/index.js'
-import { parseISO, isBefore, startOfToday } from 'date-fns'
+import { parse, isBefore, startOfToday } from 'date-fns'
 
 const prisma = new PrismaClient();
 
@@ -14,8 +14,9 @@ export default class ProjectDataAccess {
                 throw validationError;
             }
 
-            const dataInicioObj = parseISO(data_inicio);
-            const dataFimObj = parseISO(data_fim);
+            const dateFormat = 'dd-MM-yyyy';
+            const dataInicioObj = parse(data_inicio, dateFormat, new Date());
+            const dataFimObj = parse(data_fim, dateFormat, new Date());
 
             if (isBefore(dataInicioObj, startOfToday())) {
                 const validationError = new Error('A data de início não pode ser no passado.');
