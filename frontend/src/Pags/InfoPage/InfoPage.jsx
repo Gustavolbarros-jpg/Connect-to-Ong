@@ -9,10 +9,10 @@ import icone3 from "../../assets/images/InfoPage/icone3.png";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 
-function InfoPage() {
+function InfoPage({onLogout}) {
   return (
     <div className="font-roboto h-screen text-[#001449]">
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <main className="min-h-screen min-w-screem bg-[#F4F0F0]">
         <section
           className="flex justify-start items-center // text-white // w-full h-screen bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url('${BGImage}')` }} >

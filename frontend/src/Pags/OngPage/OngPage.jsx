@@ -11,7 +11,7 @@ import BGImage from "../../assets/images/OngPage/bgImage.png"; // Imagem do cabe
  * Ela usa o componente OngList para exibir os dados e gerencia
  * a abertura do modal de detalhes.
  */
-function OngPage() {
+function OngPage({onLogout}) {
     // Estado para controlar qual ONG está selecionada para ver os detalhes no modal
     const [selectedOng, setSelectedOng] = useState(null);
 
@@ -28,7 +28,7 @@ function OngPage() {
 
     return (
         <div className="font-roboto h-full min-h-screen w-full bg-[#F4F0F0] text-[#001449]">
-            <Navbar />
+            <Navbar onLogout={onLogout} />
             
             <main className="w-full pt-16 md:pt-20 lg:pt-24 pb-12">
                 {/* Seção do cabeçalho com imagem de fundo e título */}

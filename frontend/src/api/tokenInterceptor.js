@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-// Event to trigger token expired modal
+// Evento para disparar o modal de token expirado
 export const triggerTokenExpired = () => {
   const event = new CustomEvent('tokenExpired');
   window.dispatchEvent(event);
 };
 
-// Create axios instance with interceptors
+// Cria a instância do axios
 const apiClient = axios.create({
   baseURL: 'http://localhost:3000',
   headers: {
@@ -14,7 +14,7 @@ const apiClient = axios.create({
   },
 });
 
-// Request interceptor to add token
+// Interceptor de Requisição para adicionar o token
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -28,19 +28,28 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle token expiration
+// Interceptor de Resposta para lidar com renovação e expiração do token
 apiClient.interceptors.response.use(
   (response) => {
+    // --- INÍCIO DA LÓGICA DE ATUALIZAÇÃO DO TOKEN ---
+    // Verifica se a resposta veio com o cabeçalho 'x-new-token'
+    const newToken = response.headers['x-new-token'];
+    
+    // Se existir um novo token, atualiza o localStorage.
+    if (newToken) {
+      localStorage.setItem('token', newToken);
+    }
+    // --- FIM DA LÓGICA DE ATUALIZAÇÃO DO TOKEN ---
+    
     return response;
   },
   (error) => {
-    // Check if error is due to token expiration
+    // A lógica de erro permanece a mesma.
+    // Ela agora só será acionada se o usuário ficar inativo por mais de 15 minutos.
     if (error.response?.status === 401 || 
         error.response?.data?.tokenExpired ||
-        error.response?.data?.message?.includes('token') ||
-        error.response?.data?.message?.includes('unauthorized')) {
+        error.response?.data?.body?.message?.includes('expirado')) {
       
-      // Trigger token expired event
       triggerTokenExpired();
     }
     
@@ -48,4 +57,4 @@ apiClient.interceptors.response.use(
   }
 );
 
-export default apiClient; 
+export default apiClient;

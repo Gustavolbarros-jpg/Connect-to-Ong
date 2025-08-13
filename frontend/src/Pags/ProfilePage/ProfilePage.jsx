@@ -6,7 +6,7 @@ import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import ProjectsSection from "./ProjectsSection";
 
-function ProfilePage() {
+function ProfilePage( {onLogout}) {
   const [nome, setNome] = useState("Seu Nome Completo");
   const [email, setEmail] = useState("seu.email@institucional.com");
   const [departamento, setDepartamento] = useState("Departamento de Exemplo");
@@ -49,7 +49,7 @@ function ProfilePage() {
 
   return (
     <div className="bg-gray-200 font-sans">
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <main className="pt-24 pb-24">
         <section className="relative flex justify-center items-center border-b-4 border-gray-400">
           <div className="flex p-16 relative translate-x-8 gap-16 items-center">

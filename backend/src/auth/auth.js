@@ -114,12 +114,14 @@ authRouter.post('/signup', async (req, res) => {
 authRouter.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
         if (error) {
-            console.error("Erro capturado pela estratégia do Passport:", error); // <-- A LINHA MÁGICA
+            console.error("Erro capturado pela estratégia do Passport:", error);
             return res.status(500).send({ message: "Erro durante a autenticação" });
         }
         if (!user) return res.status(401).send({ message: info.message || "Credenciais inválidas." });
         
-        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2m' });
+        
+        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2d' }); 
+        
         return res.status(200).send({ message: "Login realizado com sucesso", user, token });
     })(req, res);
 });
