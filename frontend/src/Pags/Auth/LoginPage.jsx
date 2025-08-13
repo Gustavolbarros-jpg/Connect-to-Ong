@@ -7,7 +7,7 @@ import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
 import InputBack from "../../assets/images/voltar.png";
 
-function LoginPage() {
+function LoginPage({ onLogin }) {
   const navigate = useNavigate();
 
   // Estados para os dados do formulário, erros de validação e erro da API
@@ -17,6 +17,7 @@ function LoginPage() {
   });
   const [validationErrors, setValidationErrors] = useState({});
   const [apiError, setApiError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Novo estado para loading
 
   // Função genérica para atualizar o estado do formulário
   const handleChange = (e) => {
@@ -25,13 +26,13 @@ function LoginPage() {
       ...prevState,
       [name]: value,
     }));
-    // Limpa o erro do campo quando o utilizador começa a corrigir
+    
     if (validationErrors[name]) {
       setValidationErrors(prevErrors => ({ ...prevErrors, [name]: null }));
     }
-    // Limpa o erro da API ao tentar corrigir os dados
+    
     if(apiError) {
-        setApiError("");
+      setApiError("");
     }
   };
 
@@ -49,36 +50,64 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setApiError(""); // Limpa erros antigos da API
+    setApiError("");
     
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setValidationErrors(formErrors);
-      return; // Impede o envio se houver erros de validação
+      return;
     }
 
+    setIsLoading(true); // Ativa estado de loading
+
     try {
-      const response = await apiClient.post("/auth/login", {
+      // Limpeza completa antes do novo login
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      
+      // Força uma nova instância do axios para evitar cache
+      const freshApiClient = apiClient.create();
+      const response = await freshApiClient.post("/auth/login", {
         email: formData.email,
         password: formData.password,
       });
 
-      const { token, user } = response.data;
+      // Verificação robusta da resposta
+      if (!response.data?.token) {
+        throw new Error("Token não recebido do servidor");
+      }
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user || {}));
+
+      // Reset do formulário após login bem-sucedido
+      setFormData({ email: "", password: "" });
+      
+      if (onLogin) {
+        onLogin(); // Notifica o App sobre o login
+      }
 
       navigate("/profile");
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message ||
-        "E-mail ou senha incorretos. Tente novamente.";
-
-      console.error("Erro ao fazer login:", error.response || error);
-      setApiError(errorMessage); // Define o erro vindo da API
+      console.error("Erro no login:", error);
+      
+      // Limpeza em caso de erro
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      
+      setApiError(
+        error.response?.data?.message || 
+        "Erro ao conectar com o servidor. Tente novamente."
+      );
+    } finally {
+      setIsLoading(false); // Desativa loading em qualquer caso
     }
   };
 
+  /* 
+   * 🔥 Seu JSX original mantido integralmente
+   * Apenas adicionado estado de loading no botão
+   */
   return (
     <div className="flex min-h-screen font-sans bg-gray-50">
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
@@ -130,8 +159,9 @@ function LoginPage() {
                 type="submit"
                 primary
                 className="w-full mt-6 text-lg md:text-xl flex justify-center items-center"
+                disabled={isLoading}
               >
-                Entrar
+                {isLoading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
 

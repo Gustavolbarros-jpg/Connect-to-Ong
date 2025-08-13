@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import menuIcon from "../assets/images/menuIcon.png";
 
-function Navbar() {
+function Navbar({ onLogout }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -12,12 +12,6 @@ function Navbar() {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  }
-
   const activeLinkClasses =
     "text-white font-bold text-[20px] bg-blue-600 hover:bg-blue-800 py-2 px-5 rounded-[4px] decoration-blue-600";
   const inactiveLinkClasses =
@@ -26,6 +20,11 @@ function Navbar() {
   const ctaLinkClasses =
     "text-white bg-blue-600 rounded-[4px] py-2 px-5 hover:bg-blue-800 text-[20px] font-semibold";
 
+  const handleLogoutClick = () => {
+    setIsProfileOpen(false);
+    setIsOpen(false);
+    onLogout(); // Chama a função de logout passada pelo componente pai
+  };
   return (
     <header className="bg-white fixed top-0 w-full z-50">
       <nav className="relative flex items-center justify-between px-5 py-7 font-semibold shadow-lg">
@@ -104,7 +103,7 @@ function Navbar() {
                     Meu Perfil
                   </Link>
                   <button
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                     className="block w-full text-left px-4 py-2 text-[20px] text-red-600 hover:bg-gray-100"
                   >
                     Sair
@@ -216,7 +215,7 @@ function Navbar() {
                   Meu Perfil
                 </Link>
                 <button
-                  onClick={handleLogout}
+                  onClick={handleLogoutClick}
                   className="text-red-500 font-bold text-[20px]"
                 >
                   Sair

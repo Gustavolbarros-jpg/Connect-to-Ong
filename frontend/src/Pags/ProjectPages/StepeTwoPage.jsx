@@ -7,7 +7,7 @@ import ProgressBar from "../../Components/ProgressBar"; // Ajuste o caminho
 import OngList from "../../Components/OngList"; // Ajuste o caminho
 import Button from "../../Components/Button"; // Importa o componente Button
 
-function StepeTwoPage() {
+function StepeTwoPage({onLogout}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -60,7 +60,7 @@ function StepeTwoPage() {
   return (
     // Contêiner principal da página
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar /> {/* Renderiza a Navbar */}
+      <Navbar onLogout={onLogout} />
 
       {/* Conteúdo principal da página */}
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">

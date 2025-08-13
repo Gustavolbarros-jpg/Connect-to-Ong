@@ -9,10 +9,10 @@ import resultsIcon from "../../assets/images/resultsIcon.png";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 
-function HomePage() {
+function HomePage({onLogout}) {
   return (
     <div className="bg-white font-roboto">
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <main className="pt-24 min-w-screem">
         <section className="relative h-[95vh] w-full">
           <img

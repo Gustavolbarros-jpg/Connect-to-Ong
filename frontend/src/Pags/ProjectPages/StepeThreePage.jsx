@@ -7,7 +7,7 @@ import Button from "../../Components/Button/";
 import ProgressBar from "../../Components/ProgressBar";
 import Modal from "../../Components/Modal";
 
-function StepeThreePage() {
+function StepeThreePage({onLogout}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -71,7 +71,7 @@ function StepeThreePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
         <div className="max-w-4xl mx-auto">
           

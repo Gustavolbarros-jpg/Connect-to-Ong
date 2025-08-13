@@ -16,7 +16,7 @@ const AREA_KEYWORDS = [
     "Liderança", "Meio Ambiente", "Profissionalização", "Saúde", "Sustentabilidade", "Tecnologia"
 ].sort();
 
-function StepeOnePage() {
+function StepeOnePage({onLogout}) {
   const navigate = useNavigate();
 
   // Usar um único estado para o formulário e outro para os erros
@@ -113,7 +113,7 @@ function StepeOnePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
         <div className="max-w-5xl mx-auto">
           <ProgressBar currentStep={1} totalSteps={3} />
