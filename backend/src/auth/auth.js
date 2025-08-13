@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import prisma from '../prisma/prismaClient.js'
 import jwt from 'jsonwebtoken'
 import { v4 as uuidv4 } from 'uuid'
+import * as Brevo from '@getbrevo/brevo';
 
 
 // --- FUNÇÃO AUXILIAR PARA HASHING ---
@@ -158,19 +159,27 @@ authRouter.post('/forgot-password', async (req, res) => {
         const resetLink = `http://localhost:5173/recover-password/${resetToken}`;
 
         // 5. Configura e envia o e-mail
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: { user: process.env.AUTH_EMAIL, pass: process.env.AUTH_PASS }
-        });
-
-        const mailOptions = {
-            from: process.env.AUTH_EMAIL,
-            to: user.email,
-            subject: "Recuperação de Senha",
-            html: `<p>Você solicitou a recuperação de senha.</p><p>Clique neste <a href="${resetLink}">link</a> para redefinir sua senha.</p><p>Este link é válido por 10 minutos.</p>`,
+        const apiInstance = new Brevo.TransactionalEmailsApi();
+        apiInstance.apiClient.authentications['api-key'].apiKey = process.env.BREVO_API_KEY;
+        
+        // Define o remetente (deve ser verificado na sua conta Brevo)
+        const sender = {
+            email: process.env.AUTH_EMAIL,
+            name: 'Connect-to-ONG' // O nome que aparecerá para o usuário
         };
-
-        await transporter.sendMail(mailOptions);
+        
+        // Monta o e-mail
+        await apiInstance.sendTransacEmail({
+            sender,
+            to: [{ email: user.email }],
+            subject: 'Recuperação de Senha',
+            htmlContent: `
+                <p>Você solicitou a recuperação de senha para sua conta na Connect-to-ONG.</p>
+                <p>Clique neste <a href="${resetLink}">link</a> para redefinir sua senha.</p>
+                <p>Este link é válido por 10 minutos.</p>
+                <p>Se você não solicitou isso, pode ignorar este e-mail.</p>
+            `
+        });
 
         res.status(200).json({ message: 'Se um usuário com este e-mail existir, um link de recuperação foi enviado.' });
 

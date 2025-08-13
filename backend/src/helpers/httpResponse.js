@@ -11,7 +11,15 @@ export const created = (body) => {
         success: true,
         statusCode: 201,
         body,
-}}
+    }}
+
+export const badRequest = (error) => {
+    return {
+        success: false,
+        statusCode: 400,
+        body: { message: error.message }
+    }
+}
 export const notFound = (message) => { 
     return {
         success: false,
@@ -25,6 +33,4 @@ export const serverError = (error)=>{
         statusCode:500,
         error
 
-}
-
-}
+}}

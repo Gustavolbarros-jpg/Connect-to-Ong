@@ -1,15 +1,39 @@
 import { PrismaClient } from '../../../generated/prisma/index.js'
+import { parse, isBefore, startOfToday } from 'date-fns'
 
 const prisma = new PrismaClient();
 
 export default class ProjectDataAccess {
     async create(projectData) {
         try {
+            const { data_inicio, data_fim } = projectData;
+
+            if (!data_inicio || !data_fim) {
+                const validationError = new Error('As datas de início e fim são obrigatórias.');
+                validationError.isValidationError = true; 
+                throw validationError;
+            }
+
+            const dateFormat = 'dd-MM-yyyy';
+            const dataInicioObj = parse(data_inicio, dateFormat, new Date());
+            const dataFimObj = parse(data_fim, dateFormat, new Date());
+
+            if (isBefore(dataInicioObj, startOfToday())) {
+                const validationError = new Error('A data de início não pode ser no passado.');
+                validationError.isValidationError = true;
+                throw validationError;
+            }
+
+            if (isBefore(dataFimObj, dataInicioObj)) {
+                const validationError = new Error('A data de fim não pode ser anterior à data de início.');
+                validationError.isValidationError = true;
+                throw validationError;
+            }
+
             console.log('Dados recebidos para criar projeto:', projectData);
             console.log('Prisma client:', prisma);
             console.log('Prisma projetos:', prisma.projetos);
             
-            // Validar e converter campos numéricos
             const quantidade_alunos = parseInt(projectData.quantidade_alunos) || 0;
             const horas_extensao = parseInt(projectData.horas_extensao) || 0;
             const tempo_previsto = parseInt(projectData.tempo_previsto) || 0;
@@ -26,6 +50,8 @@ export default class ProjectDataAccess {
                     tempo_previsto: tempo_previsto,
                     ong_selecionada: projectData.ong_selecionada || null,
                     categoria_ong: projectData.categoria_ong || null,
+                    data_inicio: dataInicioObj,
+                    data_fim: dataFimObj,
                     user: {
                         connect: {
                             id: projectData.user_id
@@ -143,6 +169,5 @@ export default class ProjectDataAccess {
         }
     }
 }
-
 
 

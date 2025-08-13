@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isBefore, startOfToday } from "date-fns";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import InputField from "../../Components/InputField/";
@@ -76,6 +77,9 @@ function StepeOnePage({onLogout}) {
     const start = new Date(formData.startDate);
     const end = new Date(formData.endDate);
     if (!formData.startDate) newErrors.startDate = "A data de início é obrigatória.";
+    if (formData.startDate && isBefore(start, startOfToday())) {
+      newErrors.startDate = "A data de início não pode ser no passado.";
+    }
     if (!formData.endDate) newErrors.endDate = "A data de conclusão é obrigatória.";
     if (formData.startDate && formData.endDate && start >= end) {
       newErrors.endDate = "A data de conclusão deve ser posterior à data de início.";

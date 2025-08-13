@@ -12,8 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.14.0",
-    "axios": "^1.10.0"
+
+    "@getbrevo/brevo": "^3.0.1",
+    "@prisma/client": "^6.13.0",
+    "axios": "^1.10.0",
+    "date-fns": "^4.1.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
