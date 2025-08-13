@@ -1,5 +1,5 @@
 import ProjectDataAccess from '../dominio/project.js'
-import { ok, created, notFound, serverError } from '../helpers/httpResponse.js'
+import { ok, created, notFound, serverError, badRequest } from '../helpers/httpResponse.js'
 
 export default class ProjectControllers {
 
@@ -16,10 +16,15 @@ export default class ProjectControllers {
             
             return created({ message: "Projeto criado com sucesso!", project: result });
         } catch (error) {
-            console.error('Controller: Erro ao criar projeto:', error);
-            return serverError(error);
+            if (error.isValidationError) {
+                return badRequest(error);
+            } else {
+                console.error('Controller: Erro inesperado ao criar projeto:', error);
+                return serverError(error);
+            }
         }
     }
+
 
     async getProjectById(projectId) {
         try {
