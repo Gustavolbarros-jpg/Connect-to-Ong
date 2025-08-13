@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // 1. Imports necessários do React Router e Axios
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import apiClient from "../../api/tokenInterceptor";
 import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
 import logoRecife from "../../assets/images/logo-recife.png";
@@ -37,7 +37,7 @@ function RecoverPasswordPage() {
     try {
       // 5. Requisição POST para a rota de reset do backend
       //    Enviamos o token na URL e a nova senha no corpo da requisição
-      const response = await axios.post(`http://localhost:3000/auth/reset-password/${token}`, {
+      const response = await apiClient.post(`/auth/reset-password/${token}`, {
         password: password,
       });
 

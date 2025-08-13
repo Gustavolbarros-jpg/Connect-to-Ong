@@ -7,20 +7,27 @@ export const ok=(body)=> {
 
     }}
 export const created = (body) => {
+<<<<<<< HEAD
     return{
         success: true,
         statusCode: 201,
         body,
 }}
 export const notFound =()=>{ 
+=======
+>>>>>>> origin/main
     return{
-        success :false,
-        statusCode:400,
-        body: {
-            text: "Not Found"
-        }
-
-    }}
+        success: true,
+        statusCode: 201,
+        body,
+}}
+export const notFound = (message) => { 
+    return {
+        success: false,
+        statusCode: 404,
+        body: { message: message } 
+    }
+}
 export const serverError = (error)=>{
     return{
         success :false,

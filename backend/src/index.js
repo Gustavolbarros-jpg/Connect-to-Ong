@@ -5,7 +5,8 @@ import {config} from 'dotenv'
 
 import userRouter from './routes/users.js'
 import authRouter from './auth/auth.js'; 
-
+import projectRouter from './routes/projectRoutes.js';
+import ongRouter from './routes/ngoRoutes.js';
 config()
 
 
@@ -31,6 +32,8 @@ async function main() {
     //routers
     app.use('/users',userRouter)
     app.use('/auth', authRouter);
+    app.use('/projects', projectRouter); 
+    app.use('/api/ongs', ongRouter);
     
     app.listen(port, () => {
         console.log(`Server running on: http://${hostname}:${port}`)
