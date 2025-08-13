@@ -189,7 +189,7 @@ function OngList({ showActionButton, actionButtonText, onActionClick, selectedOn
                 <button
                     key={num}
                     onClick={() => handlePageChange(num)}
-                    className={`mx-1 px-3 py-1 text-[18px] md:px-4 md:py-2 rounded-[4px] font-medium transition-colors ${
+                    className={`mx-1 px-3 py-1 text-[20px] md:px-4 md:py-2 rounded-[4px] font-medium transition-colors ${
                         currentPage === num ? 'bg-blue-800 text-white' : 'bg-blue-600 text-white text-[18px] hover:bg-blue-700'
                     }`}
                 >
@@ -219,7 +219,7 @@ function OngList({ showActionButton, actionButtonText, onActionClick, selectedOn
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
                         <select
-                            className="w-full sm:w-auto form-select bg-blue-600 hover:bg-blue-700 text-white font-semibold border-transparent rounded-[4px] py-3 px-4 text-base md:text-lg transition-colors"
+                            className="w-full sm:w-auto form-select bg-blue-600 hover:bg-blue-700 text-white font-semibold border-transparent rounded-[4px] py-3 px-4 text-[20px] transition-colors"
                             value={selectedArea}
                             onChange={handleAreaChange}
                         >
@@ -227,7 +227,7 @@ function OngList({ showActionButton, actionButtonText, onActionClick, selectedOn
                             {areasOptions.map(area => <option key={area} value={area}>{area}</option>)}
                         </select>
                         <select
-                            className="w-full sm:w-auto form-select bg-blue-600 hover:bg-blue-700 text-white font-semibold border-transparent rounded-[4px] py-2 px-4 text-base md:text-lg transition-colors"
+                            className="w-full sm:w-auto form-select bg-blue-600 hover:bg-blue-700 text-white font-semibold border-transparent rounded-[4px] py-2 px-4 text-[20px] transition-colors"
                             value={selectedLocation}
                             onChange={handleLocationChange}
                         >
@@ -236,7 +236,7 @@ function OngList({ showActionButton, actionButtonText, onActionClick, selectedOn
                         </select>
                     </div>
                     <button 
-                        className="w-full lg:w-auto font-semibold bg-blue-600 text-white text-base md:text-lg py-2 px-5 rounded-[4px] hover:bg-blue-800 transition-colors"
+                        className="w-full lg:w-auto font-semibold bg-blue-600 text-white text-[20px] py-2 px-5 rounded-[4px] hover:bg-blue-800 transition-colors"
                         onClick={handleClearFilters}
                     >
                         Remover Filtros
@@ -273,17 +273,17 @@ function OngList({ showActionButton, actionButtonText, onActionClick, selectedOn
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className="px-4 py-2 text-[18px] text-white rounded-[4px] bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-4 py-2 text-[20px] font-semibold text-white rounded-[4px] bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                         Anterior
                     </button>
-                    <div className="flex items-center gap-1 text-[18px]">
+                    <div className="flex items-center gap-1 text-[20px]">
                       {renderPageNumbers()}
                     </div>
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 text-[18px] text-white rounded-[4px] bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-4 py-2 text-[20px] font-semibold text-white rounded-[4px] bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                         Próximo
                     </button>

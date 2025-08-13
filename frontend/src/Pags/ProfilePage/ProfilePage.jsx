@@ -78,7 +78,7 @@ function ProfilePage() {
                 />
               </div>
               {isEditing && (
-                <Button onClick={handleRemoveImage} primary>
+                <Button onClick={handleRemoveImage} primary className="text-[20px] font-semibold px-5">
                   Remover Foto
                 </Button>
               )}
@@ -170,11 +170,11 @@ function ProfilePage() {
 
               <div className="w-full flex justify-end mt-4">
                 {isEditing ? (
-                  <Button onClick={handleSaveProfile} primary>
+                  <Button onClick={handleSaveProfile} primary className="text-[20px] font-semibold px-5">
                     Salvar Alterações
                   </Button>
                 ) : (
-                  <Button onClick={() => setIsEditing(true)} primary>
+                  <Button onClick={() => setIsEditing(true)} primary className="text-[20px] font-semibold px-5">
                     Editar Perfil
                   </Button>
                 )}

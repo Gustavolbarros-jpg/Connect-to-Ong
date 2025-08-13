@@ -8,25 +8,59 @@ import InputField from "../../Components/InputField/";
 import InputBack from "../../assets/images/voltar.png";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  // Estados para os dados do formulário, erros de validação e erro da API
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [validationErrors, setValidationErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+
+  // Função genérica para atualizar o estado do formulário
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+    // Limpa o erro do campo quando o utilizador começa a corrigir
+    if (validationErrors[name]) {
+      setValidationErrors(prevErrors => ({ ...prevErrors, [name]: null }));
+    }
+    // Limpa o erro da API ao tentar corrigir os dados
+    if(apiError) {
+        setApiError("");
+    }
+  };
+
+  // Função para validar os campos do formulário
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Por favor, insira um endereço de e-mail válido.";
+    }
+    if (!formData.password.trim()) {
+      newErrors.password = "Por favor, insira a sua senha.";
+    }
+    return newErrors;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError("");
-
-    if (!email || !password) {
-      setError("Por favor, preencha todos os campos.");
-      return;
+    setApiError(""); // Limpa erros antigos da API
+    
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setValidationErrors(formErrors);
+      return; // Impede o envio se houver erros de validação
     }
-
 
     try {
       const response = await apiClient.post("/auth/login", {
-        email: email,
-        password: password,
+        email: formData.email,
+        password: formData.password,
       });
 
       const { token, user } = response.data;
@@ -41,7 +75,7 @@ function LoginPage() {
         "E-mail ou senha incorretos. Tente novamente.";
 
       console.error("Erro ao fazer login:", error.response || error);
-      setError(errorMessage);
+      setApiError(errorMessage); // Define o erro vindo da API
     }
   };
 
@@ -49,9 +83,9 @@ function LoginPage() {
     <div className="flex min-h-screen font-sans bg-gray-50">
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
         <div className="relative pt-4 pl-4 pb-[70px] md:pb-2">
-          <a href="/" className="absolute">
+          <Link to="/" className="absolute z-10">
             <img src={InputBack} alt="Voltar" className="h-8 md:h-8 lg:h-8" />
-          </a>
+          </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-xl">
@@ -59,35 +93,39 @@ function LoginPage() {
               Acesse sua conta
             </h1>
 
-            {error && (
-              <div className="mb-4 rounded-[4px] bg-red-100 p-4 text-center text-[18px] font-semibold text-red-700">
-                {error}
+            {apiError && (
+              <div className="mb-4 rounded-[4px] bg-red-100 p-4 text-center text-base font-semibold text-red-700">
+                {apiError}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <InputField
-                label="E-mail:"
-                htmlFor="email"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Digite seu e-mail..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border-4 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500"
-              />
-              <InputField
-                label="Senha:"
-                htmlFor="password"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Digite sua Senha..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border-4 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500"
-              />
+              <div>
+                <InputField
+                  label="E-mail:"
+                  name="email"
+                  type="email"
+                  placeholder="Digite seu e-mail..."
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="border-2 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500 py-3 text-gray-800"
+                  labelClassName="text-gray-800"
+                />
+                {validationErrors.email && <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>}
+              </div>
+              <div>
+                <InputField
+                  label="Senha:"
+                  name="password"
+                  type="password"
+                  placeholder="Digite sua Senha..."
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="border-2 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500 py-3 text-gray-800"
+                  labelClassName="text-gray-800"
+                />
+                {validationErrors.password && <p className="text-red-500 text-sm mt-1">{validationErrors.password}</p>}
+              </div>
               <Button
                 type="submit"
                 primary
@@ -100,15 +138,15 @@ function LoginPage() {
             <div className="mt-6 text-center space-y-3">
               <Link
                 to="/verification-email"
-                className="text-[20px] text-blue-600 hover:text-blue-800"
+                className="text-lg text-blue-600 hover:text-blue-800"
               >
                 Esqueci a senha
               </Link>
-              <p className="text-[18px] text-gray-600">
+              <p className="text-base text-gray-600">
                 Não tem uma conta?{" "}
                 <Link
                   to="/register"
-                  className="text-blue-600 hover:text-blue-800 font-semibold text-[20px]"
+                  className="text-blue-600 hover:text-blue-800 font-semibold text-lg"
                 >
                   Cadastre-se
                 </Link>
@@ -121,11 +159,13 @@ function LoginPage() {
           <img
             src={logoRecife}
             alt="Logo Recife Proteção"
-            className="h-19 md:h-36 lg:h-24"
+            className="h-19 md:h-24"
           />
-          <button className="py-2 px-5 border border-transparent rounded-[4px] shadow-sm text-base md:text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Acesso ONGs
-          </button>
+          <Link to="/register-ong">
+            <Button primary>
+              Acesso ONGs
+            </Button>
+          </Link>
         </div>
       </div>
 
