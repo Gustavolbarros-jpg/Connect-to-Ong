@@ -30,7 +30,7 @@ function HomePage({onLogout}) {
                   Conectamos universidades e ONGs em projetos sociais que
                   desenvolvem soft skills e geram impacto real.
                 </p>
-                <button className="py-3 px-5 text-[20px] bg-[#1474FF] font-semibold focus:outline-none rounded-[4px] hover:bg-blue-600 mt-[24px]">
+                <button className="py-3 px-5 text-[20px] bg-blue-600 font-semibold focus:outline-none rounded-[4px] hover:bg-blue-800 mt-[24px]">
                   <a href="/register">Começar projeto agora!</a>
                 </button>
               </div>

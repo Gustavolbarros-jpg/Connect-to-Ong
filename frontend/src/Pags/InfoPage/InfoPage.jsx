@@ -47,12 +47,8 @@ function InfoPage() {
                 ONGs, criando oportunidades de aprendizado prático e pesquisa
                 aplicada.
               </p>
-
-              <button
-                onClick={handleParticipateClick}
-                className="py-3 px-5 text-[20px] bg-[#1474FF] font-semibold focus:outline-none rounded-[4px] hover:bg-blue-600 text-white"
-              >
-                Quero Participar!
+              <button className="py-3 px-5 text-[20px] bg-blue-600 font-semibold focus:outline-none rounded-[4px] hover:bg-blue-800">
+                <a href="/register">Quero Participar!</a>
               </button>
             </div>
           </div>
