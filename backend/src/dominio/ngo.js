@@ -63,9 +63,26 @@ export default class OngDataAccess {
                     id: 'asc'
                 }
             });
+            if (result && result.length > 0) {
+                console.log("!!! TESTE DATA ACCESS: ESTRUTURA DO PRIMEIRO OBJETO ONG:", result[0]);
+            }
             return result;
         } catch (error) {
             console.error('Erro ao buscar todas as ONGs:', error);
+            throw error;
+        }
+    }
+
+    async findByName(name) {
+        try {
+            const ong = await prisma.ngo.findFirst({
+                where: {
+                    name: name
+                }
+            });
+            return ong;
+        } catch (error) {
+            console.error("Erro ao buscar ONG por nome:", error);
             throw error;
         }
     }

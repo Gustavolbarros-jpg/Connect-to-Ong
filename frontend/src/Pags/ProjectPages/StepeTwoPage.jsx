@@ -53,6 +53,10 @@ function StepeTwoPage({onLogout}) {
       alert("Por favor, selecione uma ONG para continuar com o seu projeto.");
       return;
     }
+    console.log('SAINDO DO PASSO 2 -> Dados que serão enviados para o Passo 3:', {
+    projectDetails: projectDetails,
+    selectedOng: selectedOngDetails,
+    });
 
     // Navega para a próxima etapa, passando os detalhes do projeto e a ONG selecionada
     navigate("/stepe-three", {

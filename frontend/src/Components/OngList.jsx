@@ -152,13 +152,27 @@ function OngList({
 
         if (data.success && data.body) {
           const mappedOngs = data.body.map((ong) => ({
-            id: ong.id_ongs,
+            id: ong.id,
             name: ong.nome_ong,
             area: ong.match_area || "Não informada",
             location: ong.Endere_o || "Não informado",
             description: ong.Sobre || "Descrição não disponível.",
             logo: ong.logo_ong || "/logo-ong-placeholder.png",
           }));
+          const mockedOngForMatchTest = {
+            id: 9999, // ID único para teste
+            name: "ONG de Teste EEMM (Mock)",
+            area: "Educação / Tecnologia",
+            location: "CIn/UFPE, Recife",
+            description: "Esta é uma ONG de teste para a funcionalidade de match com o e-mail eemm@cin.ufpe.br.",
+            logo: null,
+            email: "gmomenezes@gmail.com"
+          };
+          
+          // Adiciona a ONG mockada no início da lista
+          mappedOngs.unshift(mockedOngForMatchTest);
+          // --- FIM: MOCK PARA TESTE DE MATCH ---
+
           setAllOngs(mappedOngs);
         } else {
           throw new Error(
