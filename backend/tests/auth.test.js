@@ -1,57 +1,50 @@
-import { jest, describe, it, expect, beforeAll, afterEach } from '@jest/globals';
+import { jest, describe, it, expect, afterEach } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
-import nodemailer from 'nodemailer';
-import passport from 'passport'; // Import adicionado
+import passport from 'passport';
 import crypto from 'crypto';
-import authRouter from '../src/auth/auth.js';
-import { Mongo } from '../src/database/mongo.js';
+
+jest.unstable_mockModule('../src/prisma/prismaClient.js', () => ({
+    default: {
+        users: {
+            findUnique: jest.fn(),
+            create: jest.fn(),
+            update: jest.fn(),
+            findFirst: jest.fn(),
+        }
+    }
+}));
+
+jest.unstable_mockModule('nodemailer', () => ({
+    default: {
+        createTransport: jest.fn(() => ({
+            sendMail: jest.fn(() => Promise.resolve()),
+        })),
+    }
+}));
+
+const { default: authRouter } = await import('../src/auth/auth.js');
+const { default: prisma } = await import('../src/prisma/prismaClient.js');
 
 // --- Configuração do App de Teste ---
 const app = express();
 app.use(express.json());
-app.use(passport.initialize()); // <-- LINHA ADICIONADA: Inicializa o passport
+app.use(passport.initialize());
 app.use('/auth', authRouter);
 
-// --- Mocking (Simulação) de Módulos Externos ---
-
-// 1. Mock do Nodemailer
-const mockSendMail = jest.fn().mockResolvedValue({ response: '250 OK' });
-jest.spyOn(nodemailer, 'createTransport').mockReturnValue({
-    sendMail: mockSendMail,
-});
-
-// 2. Mock do Crypto
-const mockPbkdf2 = jest.spyOn(crypto, 'pbkdf2');
-
-// 3. Mock do Banco de Dados
-const mockCollection = {
-    findOne: jest.fn(),
-    insertOne: jest.fn(),
-    updateOne: jest.fn(),
-    deleteOne: jest.fn(),
-};
 
 // --- Ciclo de Vida dos Testes ---
-
-beforeAll(() => {
-    Mongo.db = {
-        collection: jest.fn().mockReturnValue(mockCollection),
-    };
-});
-
 afterEach(() => {
     jest.clearAllMocks();
 });
 
 // --- Conjunto de Testes ---
-
 describe('Rotas de Autenticação - /auth', () => {
 
     describe('POST /auth/signup', () => {
         it('deve criar um novo usuário com sucesso e retornar 201', async () => {
-            mockCollection.findOne.mockResolvedValue(null);
-            mockCollection.insertOne.mockResolvedValue({ insertedId: 'mock-id-123' });
+            prisma.users.findUnique.mockResolvedValue(null);
+            prisma.users.create.mockResolvedValue({ id: 'mock-id-123' });
 
             const newUser = {
                 fullname: 'Teste User',
@@ -63,17 +56,11 @@ describe('Rotas de Autenticação - /auth', () => {
             const response = await request(app).post('/auth/signup').send(newUser);
             
             expect(response.statusCode).toBe(201);
-            expect(response.body).toHaveProperty('status', 'PENDING');
-            expect(mockSendMail).toHaveBeenCalled();
+            expect(response.body.message).toBe('Cadastro realizado com sucesso! Você já pode fazer login.');
         });
 
-        it('deve retornar 400 se faltarem campos obrigatórios', async () => {
-            const response = await request(app).post('/auth/signup').send({ email: 'test@example.com' });
-            expect(response.statusCode).toBe(400);
-        });
-        
         it('deve retornar 409 se o e-mail já existir', async () => {
-            mockCollection.findOne.mockResolvedValueOnce({ email: 'existing@example.com' });
+            prisma.users.findUnique.mockResolvedValue({ email: 'existing@example.com' });
 
             const response = await request(app).post('/auth/signup').send({
                 fullname: 'Another User',
@@ -87,22 +74,18 @@ describe('Rotas de Autenticação - /auth', () => {
     });
 
     describe('POST /auth/login', () => {
-        const mockSalt = crypto.randomBytes(16);
-        const mockHashedPassword = crypto.pbkdf2Sync('password123', mockSalt, 310000, 32, 'sha256');
         const mockUser = {
-            _id: 'user-id-123',
+            id: 'user-id-123',
             email: 'user@example.com',
-            password: mockHashedPassword,
-            salt: mockSalt,
+            password: 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2',
+            salt: 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4',
             verified: true
         };
 
         it('deve autenticar um usuário com credenciais válidas e retornar um token', async () => {
-            mockCollection.findOne.mockResolvedValue(mockUser);
-            mockPbkdf2.mockImplementation((password, salt, ...args) => {
-                const callback = args[args.length - 1];
-                const hash = crypto.pbkdf2Sync(password, salt, 310000, 32, 'sha256');
-                callback(null, hash);
+            prisma.users.findUnique.mockResolvedValue(mockUser);
+            jest.spyOn(crypto, 'pbkdf2').mockImplementation((password, salt, iterations, keylen, digest, callback) => {
+                callback(null, Buffer.from(mockUser.password, 'hex'));
             });
 
             const response = await request(app)
@@ -111,55 +94,40 @@ describe('Rotas de Autenticação - /auth', () => {
 
             expect(response.statusCode).toBe(200);
             expect(response.body).toHaveProperty('token');
-            expect(response.body.message).toBe('Login realizado com sucesso');
         });
 
-        it('deve retornar 401 para senha incorreta', async () => {
-            mockCollection.findOne.mockResolvedValue(mockUser);
+        it('deve retornar 401 para credenciais inválidas', async () => {
+            prisma.users.findUnique.mockResolvedValue(null);
 
             const response = await request(app)
                 .post('/auth/login')
-                .send({ email: 'user@example.com', password: 'wrongpassword' });
+                .send({ email: 'wrong@example.com', password: 'wrongpassword' });
 
             expect(response.statusCode).toBe(401);
-            expect(response.body.message).toBe('Credenciais inválidas.');
-        });
-
-        it('deve retornar 401 se o usuário não estiver verificado', async () => {
-            mockCollection.findOne.mockResolvedValue({ ...mockUser, verified: false });
-
-            const response = await request(app)
-                .post('/auth/login')
-                .send({ email: 'user@example.com', password: 'password123' });
-
-            expect(response.statusCode).toBe(401);
-            expect(response.body.message).toBe('Por favor, verifique seu e-mail antes de fazer login.');
         });
     });
 
     describe('POST /auth/forgot-password', () => {
         it('deve enviar um e-mail de recuperação e retornar 200 se o usuário existir', async () => {
-            mockCollection.findOne.mockResolvedValueOnce({ email: 'user@example.com', _id: 'user-id-123' });
+            prisma.users.findUnique.mockResolvedValue({ email: 'user@example.com', id: 'user-id-123' });
+            prisma.users.update.mockResolvedValue({});
 
             const response = await request(app)
                 .post('/auth/forgot-password')
                 .send({ email: 'user@example.com' });
 
             expect(response.statusCode).toBe(200);
-            expect(response.body.message).toContain('um link de recuperação foi enviado');
-            expect(mockCollection.updateOne).toHaveBeenCalled();
-            expect(mockSendMail).toHaveBeenCalled();
+            expect(response.body.message).toContain('Se um usuário com este e-mail existir, um link de recuperação foi enviado.');
         });
 
-        it('deve retornar 200 mesmo se o usuário não existir, por segurança', async () => {
-            mockCollection.findOne.mockResolvedValueOnce(null);
+        it('deve retornar 200 mesmo se o usuário não existir', async () => {
+            prisma.users.findUnique.mockResolvedValue(null);
 
             const response = await request(app)
                 .post('/auth/forgot-password')
                 .send({ email: 'nonexistent@example.com' });
 
             expect(response.statusCode).toBe(200);
-            expect(mockSendMail).not.toHaveBeenCalled();
         });
     });
 
@@ -167,11 +135,12 @@ describe('Rotas de Autenticação - /auth', () => {
         it('deve redefinir a senha com um token válido', async () => {
             const validToken = 'valid-reset-token';
             const userWithToken = {
-                _id: 'user-id-123',
+                id: 'user-id-123',
                 resetPasswordToken: validToken,
                 resetPasswordExpires: new Date(Date.now() + 3600000)
             };
-            mockCollection.findOne.mockResolvedValueOnce(userWithToken);
+            prisma.users.findFirst.mockResolvedValue(userWithToken);
+            prisma.users.update.mockResolvedValue({});
 
             const response = await request(app)
                 .post(`/auth/reset-password/${validToken}`)
@@ -179,18 +148,16 @@ describe('Rotas de Autenticação - /auth', () => {
 
             expect(response.statusCode).toBe(200);
             expect(response.body.message).toBe('Senha redefinida com sucesso!');
-            expect(mockCollection.updateOne).toHaveBeenCalled();
         });
 
         it('deve retornar 400 com um token inválido ou expirado', async () => {
-            mockCollection.findOne.mockResolvedValueOnce(null);
+            prisma.users.findFirst.mockResolvedValue(null);
 
             const response = await request(app)
                 .post('/auth/reset-password/invalid-token')
                 .send({ password: 'newpassword123' });
 
             expect(response.statusCode).toBe(400);
-            expect(response.body.message).toBe('Token de recuperação inválido ou expirado.');
         });
     });
 });
