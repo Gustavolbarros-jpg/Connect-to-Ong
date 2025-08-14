@@ -7,13 +7,16 @@
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate",
     "create-test-user": "node create-test-user.js",
-    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"bgBlue,bgCyan\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"bgBlue,bgCyan\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "test": "concurrently -n \"FRONT,BACK\" -c \"bgGreen,bgMagenta\" \"npm --prefix frontend test -- --watchAll=false\" \"npm --prefix backend test\"",
+    "test:front": "npm --prefix frontend test -- --watchAll=false",
+    "test:back": "npm --prefix backend test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@getbrevo/brevo": "^3.0.1",
-    "@prisma/client": "^6.13.0",
+    "@prisma/client": "^6.14.0",
     "axios": "^1.10.0",
     "date-fns": "^4.1.0",
     "react-idle-timer": "^5.7.2"

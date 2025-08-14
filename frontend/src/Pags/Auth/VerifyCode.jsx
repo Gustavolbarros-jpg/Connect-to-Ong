@@ -1,7 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import logoRecife from "../../assets/images/logo-recife.png";
-import aviaodepapel from "../../assets/images/aviaodepapel.png";
 
 function VerifyCode() {
   const location = useLocation();
@@ -31,15 +29,15 @@ function VerifyCode() {
           </div>
         </div>
         <div className="mt-12">
-          <img src={logoRecife} alt="Logo Recife Proteção" className="h-20" />
+          <div className="h-20 w-32 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">
+            LOGO
+          </div>
         </div>
       </div>
       <div className="w-full lg:w-[65%] flex items-center justify-center p-8 lg:p-0">
-        <img
-          src={aviaodepapel}
-          alt="Avião de Papel"
-          className="w-full h-auto max-w-4xl"
-        />
+        <div className="w-full h-auto max-w-4xl bg-gray-200 flex items-center justify-center">
+          <div className="text-gray-500 text-2xl">Avião de Papel</div>
+        </div>
       </div>
     </div>
   );
