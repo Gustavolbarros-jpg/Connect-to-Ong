@@ -7,12 +7,15 @@ import ProgressBar from "../../Components/ProgressBar"; // Ajuste o caminho
 import OngList from "../../Components/OngList"; // Ajuste o caminho
 import Button from "../../Components/Button"; // Importa o componente Button
 
-function StepeTwoPage() {
+function StepeTwoPage({onLogout}) {
   const navigate = useNavigate();
   const location = useLocation();
 
   // Recebe os detalhes do projeto da página anterior (StepeOnePage)
   const { projectDetails } = location.state || {};
+
+  // Extrai a área de interesse vinda da Etapa 1 para ser usada como filtro.
+  const initialAreaFilter = projectDetails?.areaInterest || "";
 
   // Estado para armazenar a ID da ONG que o usuário selecionou, iniciando como null
   const [selectedOngId, setSelectedOngId] = useState(null);
@@ -35,9 +38,12 @@ function StepeTwoPage() {
     }
   };
 
+  // --- ALTERAÇÃO AQUI ---
   // Lógica para o botão "Voltar"
   const handleGoBack = () => {
-    navigate(-1); // Volta para a página anterior no histórico
+    // Navega de volta para a primeira etapa, passando o estado atual do formulário
+    // para que os campos possam ser repovoados.
+    navigate("/stepe-one", { state: { projectDetails } });
   };
 
   // Lógica para o botão "Continuar"
@@ -60,7 +66,7 @@ function StepeTwoPage() {
   return (
     // Contêiner principal da página
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar /> {/* Renderiza a Navbar */}
+      <Navbar onLogout={onLogout} />
 
       {/* Conteúdo principal da página */}
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12">
@@ -75,6 +81,8 @@ function StepeTwoPage() {
               actionButtonText="Selecionar"
               onActionClick={handleOngSelected}
               selectedOngId={selectedOngId}
+              // Passa a área de interesse para o OngList para que ele possa pré-filtrar os resultados.
+              initialAreaFilter={initialAreaFilter}
             />
 
             {/* Exibe o resumo da ONG selecionada acima da lista de busca */}

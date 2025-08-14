@@ -7,7 +7,7 @@ import Button from "../../Components/Button/";
 import InputField from "../../Components/InputField/";
 import InputBack from "../../assets/images/voltar.png";
 
-function LoginPage() {
+function LoginPage({ onLogin }) {
   const navigate = useNavigate();
 
   // Estados para os dados do formulário, erros de validação e erro da API
@@ -17,21 +17,22 @@ function LoginPage() {
   });
   const [validationErrors, setValidationErrors] = useState({});
   const [apiError, setApiError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Novo estado para loading
 
   // Função genérica para atualizar o estado do formulário
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    // Limpa o erro do campo quando o utilizador começa a corrigir
+
     if (validationErrors[name]) {
-      setValidationErrors(prevErrors => ({ ...prevErrors, [name]: null }));
+      setValidationErrors((prevErrors) => ({ ...prevErrors, [name]: null }));
     }
-    // Limpa o erro da API ao tentar corrigir os dados
-    if(apiError) {
-        setApiError("");
+
+    if (apiError) {
+      setApiError("");
     }
   };
 
@@ -49,33 +50,57 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setApiError(""); // Limpa erros antigos da API
-    
+    setApiError("");
+
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setValidationErrors(formErrors);
-      return; // Impede o envio se houver erros de validação
+      return;
     }
 
+    setIsLoading(true); // Ativa estado de loading
+
     try {
-      const response = await apiClient.post("/auth/login", {
+      // Limpeza completa antes do novo login
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      // Força uma nova instância do axios para evitar cache
+      const freshApiClient = apiClient.create();
+      const response = await freshApiClient.post("/auth/login", {
         email: formData.email,
         password: formData.password,
       });
 
-      const { token, user } = response.data;
+      // Verificação robusta da resposta
+      if (!response.data?.token) {
+        throw new Error("Token não recebido do servidor");
+      }
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user || {}));
 
-      navigate("/profile");
+      // Reset do formulário após login bem-sucedido
+      setFormData({ email: "", password: "" });
+
+      if (onLogin) {
+        onLogin(); // Notifica o App sobre o login
+      }
+
+      navigate("/dashboard");
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message ||
-        "E-mail ou senha incorretos. Tente novamente.";
+      console.error("Erro no login:", error);
 
-      console.error("Erro ao fazer login:", error.response || error);
-      setApiError(errorMessage); // Define o erro vindo da API
+      // Limpeza em caso de erro
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      setApiError(
+        error.response?.data?.message ||
+          "Erro ao conectar com o servidor. Tente novamente."
+      );
+    } finally {
+      setIsLoading(false); // Desativa loading em qualquer caso
     }
   };
 
@@ -111,7 +136,11 @@ function LoginPage() {
                   className="border-2 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500 py-3 text-gray-800"
                   labelClassName="text-gray-800"
                 />
-                {validationErrors.email && <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>}
+                {validationErrors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.email}
+                  </p>
+                )}
               </div>
               <div>
                 <InputField
@@ -124,14 +153,19 @@ function LoginPage() {
                   className="border-2 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500 py-3 text-gray-800"
                   labelClassName="text-gray-800"
                 />
-                {validationErrors.password && <p className="text-red-500 text-sm mt-1">{validationErrors.password}</p>}
+                {validationErrors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.password}
+                  </p>
+                )}
               </div>
               <Button
                 type="submit"
                 primary
                 className="w-full mt-6 text-lg md:text-xl flex justify-center items-center"
+                disabled={isLoading}
               >
-                Entrar
+                {isLoading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
 
@@ -162,9 +196,7 @@ function LoginPage() {
             className="h-19 md:h-24"
           />
           <Link to="/register-ong">
-            <Button primary>
-              Acesso ONGs
-            </Button>
+            <Button primary>Acesso ONGs</Button>
           </Link>
         </div>
       </div>
