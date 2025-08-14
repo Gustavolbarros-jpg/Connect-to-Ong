@@ -7,7 +7,10 @@
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate",
     "create-test-user": "node create-test-user.js",
-    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"bgBlue,bgCyan\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"bgBlue,bgCyan\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "test": "concurrently -n \"FRONT,BACK\" -c \"bgGreen,bgMagenta\" \"npm --prefix frontend test -- --watchAll=false\" \"npm --prefix backend test\"",
+    "test:front": "npm --prefix frontend test -- --watchAll=false",
+    "test:back": "npm --prefix backend test"
   },
   "author": "",
   "license": "ISC",

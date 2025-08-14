@@ -1,6 +1,4 @@
-import { PrismaClient } from '../../../generated/prisma/index.js';
-
-const prisma = new PrismaClient();
+import prisma from '../prisma/prismaClient.js';
 
 export default class OngDataAccess {
     async create(ongData) {

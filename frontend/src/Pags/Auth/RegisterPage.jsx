@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Importe useNavigate
 import apiClient from '../../api/tokenInterceptor'; 
-import logoRecife from "../../assets/images/logo-recife.png";
-import Button from "../../Components/Button/";
-import InputField from "../../Components/InputField/";
-import InputBack from "../../assets/images/voltar.png";
+import Button from "../../Components/Button.jsx";
+import InputField from "../../Components/InputField.jsx";
 
 function RegisterPage() {
   const navigate = useNavigate(); // Hook para navegação
@@ -95,7 +93,9 @@ function RegisterPage() {
     <div className="min-h-screen bg-white text-white font-roboto flex flex-col items-center text-base md:text-lg">
       <div className="w-full flex justify-between items-center p-4 md:p-6 lg:p-8">
         <Link to="/" className="z-10">
-          <img src={InputBack} alt="Voltar" className="h-8"/>
+          <div className="h-8 w-8 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-xs">
+            ←
+          </div>
         </Link>
         <div className="flex items-center space-x-2 md:space-x-4 ml-auto">
           <span className="text-gray-800 text-sm md:text-base">Já tem uma conta?</span>
@@ -189,7 +189,9 @@ function RegisterPage() {
       </div>
 
       <div className="w-full flex justify-between items-end p-4 mt-auto">
-        <img src={logoRecife} alt="Logo Recife" className="h-12 md:h-24" />
+        <div className="h-12 md:h-24 w-32 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">
+          LOGO
+        </div>
         <Link to="/register-ong"> {/* Adicione o link correto para o cadastro de ONG */}
             <Button primary className="py-2 px-4 font-semibold text-[20px] md:text-base">
               Cadastre sua ONG
