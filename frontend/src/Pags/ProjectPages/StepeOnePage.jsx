@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// Importa o hook 'useLocation' para aceder aos dados de navegação
+import { useLocation, useNavigate } from "react-router-dom";
 import { isBefore, startOfToday } from "date-fns";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
@@ -38,19 +39,24 @@ const AREA_KEYWORDS = [
 
 function StepeOnePage({ onLogout }) {
   const navigate = useNavigate();
+  const location = useLocation(); // Hook para obter o estado da navegação
 
-  // Estado único para o formulário e para os erros
-  const [formData, setFormData] = useState({
-    nameProject: "",
-    areaInterest: "",
-    softSkills: "",
-    numberStudents: "",
-    teacher: "",
-    extensionHours: "",
-    startDate: "",
-    endDate: "",
-    descriptionProject: "",
-  });
+  // --- ALTERAÇÃO AQUI ---
+  // O estado do formulário agora é inicializado com os dados recebidos da navegação (se existirem),
+  // caso contrário, começa com os campos vazios.
+  const [formData, setFormData] = useState(
+    location.state?.projectDetails || {
+      nameProject: "",
+      areaInterest: "",
+      softSkills: "",
+      numberStudents: "",
+      teacher: "",
+      extensionHours: "",
+      startDate: "",
+      endDate: "",
+      descriptionProject: "",
+    }
+  );
 
   const [errors, setErrors] = useState({});
 
@@ -162,7 +168,7 @@ function StepeOnePage({ onLogout }) {
                 )}
               </div>
 
-              <div className="w-full md:w-1/2 px-4 mb-6">
+              <div className="w-full md:w-1/2 px-4 mb-6 relative">
                 <label
                   htmlFor="area-interesse"
                   className="block text-[20px] font-medium text-gray-700 mb-1"
