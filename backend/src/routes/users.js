@@ -21,4 +21,11 @@ userRouter.put('/:id',async (req,res) => {
   
 })
 
+userRouter.get('/:id', async (req, res) => {
+  const { id } = req.params
+  console.log('ID recebido para get:', id)
+  const { success, statusCode, body } = await userControllers.getUserById(id)
+  res.status(statusCode).send({ success, statusCode, body })
+})
+
   export default userRouter
