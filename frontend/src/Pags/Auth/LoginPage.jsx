@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../../api/tokenInterceptor";
-import backgroundImage from "../../assets/images/background-login.png";
-import logoRecife from "../../assets/images/logo-recife.png";
-import Button from "../../Components/Button/";
-import InputField from "../../Components/InputField/";
-import InputBack from "../../assets/images/voltar.png";
+import Button from "../../Components/Button.jsx";
+import InputField from "../../Components/InputField.jsx";
 
 function LoginPage({ onLogin }) {
   const navigate = useNavigate();
@@ -109,7 +106,9 @@ function LoginPage({ onLogin }) {
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
         <div className="relative pt-4 pl-4 pb-[70px] md:pb-2">
           <Link to="/" className="absolute z-10">
-            <img src={InputBack} alt="Voltar" className="h-8 md:h-8 lg:h-8" />
+            <div className="h-8 w-8 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-xs">
+              ←
+            </div>
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
@@ -190,11 +189,9 @@ function LoginPage({ onLogin }) {
         </div>
 
         <div className="flex justify-between items-end mt-8 w-full">
-          <img
-            src={logoRecife}
-            alt="Logo Recife Proteção"
-            className="h-19 md:h-24"
-          />
+          <div className="h-19 md:h-24 w-32 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">
+            LOGO
+          </div>
           <Link to="/register-ong">
             <Button primary>Acesso ONGs</Button>
           </Link>
@@ -202,9 +199,10 @@ function LoginPage({ onLogin }) {
       </div>
 
       <div
-        className="hidden lg:block w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: `url('${backgroundImage}')` }}
-      ></div>
+        className="hidden lg:block w-1/2 bg-gray-200 flex items-center justify-center"
+      >
+        <div className="text-gray-500 text-xl">Background Image</div>
+      </div>
     </div>
   );
 }
