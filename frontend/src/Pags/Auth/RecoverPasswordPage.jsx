@@ -2,8 +2,9 @@ import React, { useState } from "react";
 // 1. Imports necessários do React Router e Axios
 import { useNavigate, useParams } from "react-router-dom";
 import apiClient from "../../api/tokenInterceptor";
-import Button from "../../Components/Button.jsx";
-import InputField from "../../Components/InputField.jsx";
+import Button from "../../Components/Button/";
+import InputField from "../../Components/InputField/";
+import logoRecife from "../../assets/images/logo-recife.png";
 
 function RecoverPasswordPage() {
   const [password, setPassword] = useState("");
@@ -97,9 +98,7 @@ function RecoverPasswordPage() {
         </form>
       </div>
       <div className="w-full flex justify-between items-end p-4 lg:p-4 mt-auto">
-        <div className="h-12 md:h-36 w-32 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">
-          LOGO
-        </div>
+        <img src={logoRecife} alt="Logo Recife" className="h-12 md:h-36" />
       </div>
     </div>
   );

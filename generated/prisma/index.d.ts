@@ -4738,6 +4738,7 @@ export namespace Prisma {
     Sobre: string | null
     Respons_vel_para_contato: string | null
     CNPJ_: string | null
+    email: string | null
     quantidade_pessoas_assistidas: string | null
     metas: string | null
     Causa_da_Organiza__o_: string | null
@@ -4764,6 +4765,7 @@ export namespace Prisma {
     Sobre: string | null
     Respons_vel_para_contato: string | null
     CNPJ_: string | null
+    email: string | null
     quantidade_pessoas_assistidas: string | null
     metas: string | null
     Causa_da_Organiza__o_: string | null
@@ -4790,6 +4792,7 @@ export namespace Prisma {
     Sobre: number
     Respons_vel_para_contato: number
     CNPJ_: number
+    email: number
     quantidade_pessoas_assistidas: number
     metas: number
     Causa_da_Organiza__o_: number
@@ -4828,6 +4831,7 @@ export namespace Prisma {
     Sobre?: true
     Respons_vel_para_contato?: true
     CNPJ_?: true
+    email?: true
     quantidade_pessoas_assistidas?: true
     metas?: true
     Causa_da_Organiza__o_?: true
@@ -4854,6 +4858,7 @@ export namespace Prisma {
     Sobre?: true
     Respons_vel_para_contato?: true
     CNPJ_?: true
+    email?: true
     quantidade_pessoas_assistidas?: true
     metas?: true
     Causa_da_Organiza__o_?: true
@@ -4880,6 +4885,7 @@ export namespace Prisma {
     Sobre?: true
     Respons_vel_para_contato?: true
     CNPJ_?: true
+    email?: true
     quantidade_pessoas_assistidas?: true
     metas?: true
     Causa_da_Organiza__o_?: true
@@ -4993,6 +4999,7 @@ export namespace Prisma {
     Sobre: string | null
     Respons_vel_para_contato: string | null
     CNPJ_: string | null
+    email: string | null
     quantidade_pessoas_assistidas: string | null
     metas: string | null
     Causa_da_Organiza__o_: string | null
@@ -5038,6 +5045,7 @@ export namespace Prisma {
     Sobre?: boolean
     Respons_vel_para_contato?: boolean
     CNPJ_?: boolean
+    email?: boolean
     quantidade_pessoas_assistidas?: boolean
     metas?: boolean
     Causa_da_Organiza__o_?: boolean
@@ -5064,6 +5072,7 @@ export namespace Prisma {
     Sobre?: boolean
     Respons_vel_para_contato?: boolean
     CNPJ_?: boolean
+    email?: boolean
     quantidade_pessoas_assistidas?: boolean
     metas?: boolean
     Causa_da_Organiza__o_?: boolean
@@ -5090,6 +5099,7 @@ export namespace Prisma {
     Sobre?: boolean
     Respons_vel_para_contato?: boolean
     CNPJ_?: boolean
+    email?: boolean
     quantidade_pessoas_assistidas?: boolean
     metas?: boolean
     Causa_da_Organiza__o_?: boolean
@@ -5116,6 +5126,7 @@ export namespace Prisma {
     Sobre?: boolean
     Respons_vel_para_contato?: boolean
     CNPJ_?: boolean
+    email?: boolean
     quantidade_pessoas_assistidas?: boolean
     metas?: boolean
     Causa_da_Organiza__o_?: boolean
@@ -5136,7 +5147,7 @@ export namespace Prisma {
     id?: boolean
   }
 
-  export type OngOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nome_ong" | "Motivo_da_cria__o_do_projeto_" | "Sobre" | "Respons_vel_para_contato" | "CNPJ_" | "quantidade_pessoas_assistidas" | "metas" | "Causa_da_Organiza__o_" | "area" | "match_area" | "objetivos_ods" | "Atividades_que_o_projeto_desenvolve_" | "possui_funcionarios" | "A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_" | "Funcionamento__da_organiza__o" | "Endere_o" | "RPA" | "contato_divulgacao" | "Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__" | "possui_produto_social" | "mensagem_para_voluntarios" | "serve_refeicoes_cozinha_propria" | "id", ExtArgs["result"]["ong"]>
+  export type OngOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nome_ong" | "Motivo_da_cria__o_do_projeto_" | "Sobre" | "Respons_vel_para_contato" | "CNPJ_" | "email" | "quantidade_pessoas_assistidas" | "metas" | "Causa_da_Organiza__o_" | "area" | "match_area" | "objetivos_ods" | "Atividades_que_o_projeto_desenvolve_" | "possui_funcionarios" | "A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_" | "Funcionamento__da_organiza__o" | "Endere_o" | "RPA" | "contato_divulgacao" | "Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__" | "possui_produto_social" | "mensagem_para_voluntarios" | "serve_refeicoes_cozinha_propria" | "id", ExtArgs["result"]["ong"]>
 
   export type $OngPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ong"
@@ -5147,6 +5158,7 @@ export namespace Prisma {
       Sobre: string | null
       Respons_vel_para_contato: string | null
       CNPJ_: string | null
+      email: string | null
       quantidade_pessoas_assistidas: string | null
       metas: string | null
       Causa_da_Organiza__o_: string | null
@@ -5593,6 +5605,7 @@ export namespace Prisma {
     readonly Sobre: FieldRef<"Ong", 'String'>
     readonly Respons_vel_para_contato: FieldRef<"Ong", 'String'>
     readonly CNPJ_: FieldRef<"Ong", 'String'>
+    readonly email: FieldRef<"Ong", 'String'>
     readonly quantidade_pessoas_assistidas: FieldRef<"Ong", 'String'>
     readonly metas: FieldRef<"Ong", 'String'>
     readonly Causa_da_Organiza__o_: FieldRef<"Ong", 'String'>
@@ -7646,6 +7659,7 @@ export namespace Prisma {
     Sobre: 'Sobre',
     Respons_vel_para_contato: 'Respons_vel_para_contato',
     CNPJ_: 'CNPJ_',
+    email: 'email',
     quantidade_pessoas_assistidas: 'quantidade_pessoas_assistidas',
     metas: 'metas',
     Causa_da_Organiza__o_: 'Causa_da_Organiza__o_',
@@ -8087,6 +8101,7 @@ export namespace Prisma {
     Sobre?: StringNullableFilter<"Ong"> | string | null
     Respons_vel_para_contato?: StringNullableFilter<"Ong"> | string | null
     CNPJ_?: StringNullableFilter<"Ong"> | string | null
+    email?: StringNullableFilter<"Ong"> | string | null
     quantidade_pessoas_assistidas?: StringNullableFilter<"Ong"> | string | null
     metas?: StringNullableFilter<"Ong"> | string | null
     Causa_da_Organiza__o_?: StringNullableFilter<"Ong"> | string | null
@@ -8113,6 +8128,7 @@ export namespace Prisma {
     Sobre?: SortOrderInput | SortOrder
     Respons_vel_para_contato?: SortOrderInput | SortOrder
     CNPJ_?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
     quantidade_pessoas_assistidas?: SortOrderInput | SortOrder
     metas?: SortOrderInput | SortOrder
     Causa_da_Organiza__o_?: SortOrderInput | SortOrder
@@ -8134,6 +8150,7 @@ export namespace Prisma {
   }
 
   export type OngWhereUniqueInput = Prisma.AtLeast<{
+    email?: string
     id?: number
     AND?: OngWhereInput | OngWhereInput[]
     OR?: OngWhereInput[]
@@ -8160,7 +8177,7 @@ export namespace Prisma {
     possui_produto_social?: StringNullableFilter<"Ong"> | string | null
     mensagem_para_voluntarios?: StringNullableFilter<"Ong"> | string | null
     serve_refeicoes_cozinha_propria?: StringNullableFilter<"Ong"> | string | null
-  }, "id">
+  }, "id" | "email">
 
   export type OngOrderByWithAggregationInput = {
     nome_ong?: SortOrderInput | SortOrder
@@ -8168,6 +8185,7 @@ export namespace Prisma {
     Sobre?: SortOrderInput | SortOrder
     Respons_vel_para_contato?: SortOrderInput | SortOrder
     CNPJ_?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
     quantidade_pessoas_assistidas?: SortOrderInput | SortOrder
     metas?: SortOrderInput | SortOrder
     Causa_da_Organiza__o_?: SortOrderInput | SortOrder
@@ -8202,6 +8220,7 @@ export namespace Prisma {
     Sobre?: StringNullableWithAggregatesFilter<"Ong"> | string | null
     Respons_vel_para_contato?: StringNullableWithAggregatesFilter<"Ong"> | string | null
     CNPJ_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Ong"> | string | null
     quantidade_pessoas_assistidas?: StringNullableWithAggregatesFilter<"Ong"> | string | null
     metas?: StringNullableWithAggregatesFilter<"Ong"> | string | null
     Causa_da_Organiza__o_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
@@ -8781,6 +8800,7 @@ export namespace Prisma {
     Sobre?: string | null
     Respons_vel_para_contato?: string | null
     CNPJ_?: string | null
+    email?: string | null
     quantidade_pessoas_assistidas?: string | null
     metas?: string | null
     Causa_da_Organiza__o_?: string | null
@@ -8806,6 +8826,7 @@ export namespace Prisma {
     Sobre?: string | null
     Respons_vel_para_contato?: string | null
     CNPJ_?: string | null
+    email?: string | null
     quantidade_pessoas_assistidas?: string | null
     metas?: string | null
     Causa_da_Organiza__o_?: string | null
@@ -8832,6 +8853,7 @@ export namespace Prisma {
     Sobre?: NullableStringFieldUpdateOperationsInput | string | null
     Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
     CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8857,6 +8879,7 @@ export namespace Prisma {
     Sobre?: NullableStringFieldUpdateOperationsInput | string | null
     Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
     CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8883,6 +8906,7 @@ export namespace Prisma {
     Sobre?: string | null
     Respons_vel_para_contato?: string | null
     CNPJ_?: string | null
+    email?: string | null
     quantidade_pessoas_assistidas?: string | null
     metas?: string | null
     Causa_da_Organiza__o_?: string | null
@@ -8909,6 +8933,7 @@ export namespace Prisma {
     Sobre?: NullableStringFieldUpdateOperationsInput | string | null
     Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
     CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8934,6 +8959,7 @@ export namespace Prisma {
     Sobre?: NullableStringFieldUpdateOperationsInput | string | null
     Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
     CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9708,6 +9734,7 @@ export namespace Prisma {
     Sobre?: SortOrder
     Respons_vel_para_contato?: SortOrder
     CNPJ_?: SortOrder
+    email?: SortOrder
     quantidade_pessoas_assistidas?: SortOrder
     metas?: SortOrder
     Causa_da_Organiza__o_?: SortOrder
@@ -9739,6 +9766,7 @@ export namespace Prisma {
     Sobre?: SortOrder
     Respons_vel_para_contato?: SortOrder
     CNPJ_?: SortOrder
+    email?: SortOrder
     quantidade_pessoas_assistidas?: SortOrder
     metas?: SortOrder
     Causa_da_Organiza__o_?: SortOrder
@@ -9765,6 +9793,7 @@ export namespace Prisma {
     Sobre?: SortOrder
     Respons_vel_para_contato?: SortOrder
     CNPJ_?: SortOrder
+    email?: SortOrder
     quantidade_pessoas_assistidas?: SortOrder
     metas?: SortOrder
     Causa_da_Organiza__o_?: SortOrder

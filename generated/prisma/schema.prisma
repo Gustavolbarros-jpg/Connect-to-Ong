@@ -57,6 +57,7 @@ model Ong {
   Sobre                                                        String?
   Respons_vel_para_contato                                     String? @map(" Responsável para contato")
   CNPJ_                                                        String? @map("CNPJ ")
+  email                                                        String? @unique @map("email")
   quantidade_pessoas_assistidas                                String?
   metas                                                        String? @map("Metas de curto, médio e longo prazo")
   Causa_da_Organiza__o_                                        String? @map("Causa da Organização\n")

@@ -1,5 +1,13 @@
-import Navbar from "../../Components/Navbar.jsx";
-import Footer from "../../Components/Footer.jsx";
+import fotoMain from "../../assets/images/foto-main.png";
+import comunicationIcon from "../../assets/images/comunicationIcon.png";
+import empathyIcon from "../../assets/images/empathyIcon.png";
+import colaborationIcon from "../../assets/images/colaborationIcon.png";
+import registerIcon from "../../assets/images/registerIcon.png";
+import conectionIcon from "../../assets/images/conectionIcon.png";
+import resultsIcon from "../../assets/images/resultsIcon.png";
+
+import Navbar from "../../Components/Navbar/";
+import Footer from "../../Components/Footer/";
 
 function HomePage({onLogout}) {
   return (
@@ -7,9 +15,11 @@ function HomePage({onLogout}) {
       <Navbar onLogout={onLogout} />
       <main className="pt-24 min-w-screem">
         <section className="relative h-[95vh] w-full">
-          <div className="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
-            <div className="text-gray-500 text-2xl">Main Image</div>
-          </div>
+          <img
+            src={fotoMain}
+            alt="foto da main"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           <div className="relative z-10 h-full flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[50%] font-roboto">
             <div className="container ml-12 md:mb-[140px] text-white">
               <div className="max-w-3xl">
@@ -36,9 +46,11 @@ function HomePage({onLogout}) {
           <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 mt-16 max-w-[1500px] mx-auto">
             {/* Card 1 */}
             <div className="w-full bg-white rounded-lg p-8 shadow-lg">
-              <div className="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold">
-                C
-              </div>
+              <img
+                src={comunicationIcon}
+                alt="icone comunicação"
+                className="w-16"
+              />
               <h2 className="text-2xl font-bold mt-4 text-gray-800">
                 Comunicação
               </h2>
@@ -49,9 +61,7 @@ function HomePage({onLogout}) {
             </div>
 
             <div className="w-full bg-white rounded-lg p-8 shadow-lg">
-              <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center text-green-600 font-bold">
-                E
-              </div>
+              <img src={empathyIcon} alt="icone empatia" className="w-16" />
               <h2 className="text-2xl font-bold mt-4 text-gray-800">Empatia</h2>
               <p className="text-lg mt-2 text-gray-700">
                 É a habilidade de se colocar no lugar do outro, compreendendo
@@ -60,9 +70,11 @@ function HomePage({onLogout}) {
             </div>
 
             <div className="w-full bg-white rounded-lg p-8 shadow-lg">
-              <div className="w-16 h-16 bg-purple-200 rounded-full flex items-center justify-center text-purple-600 font-bold">
-                C
-              </div>
+              <img
+                src={colaborationIcon}
+                alt="icone colaboração"
+                className="w-16"
+              />
               <h2 className="text-2xl font-bold mt-4 text-gray-800">
                 Colaboração
               </h2>
@@ -83,9 +95,7 @@ function HomePage({onLogout}) {
           <div className="flex flex-col container md:flex-row justify-center items-start gap-12 lg:gap-20 mt-20 max-w-7xl mx-auto">
             <div className="flex flex-col items-center text-center">
               <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
-                <div className="w-32 h-32 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold text-4xl">
-                  R
-                </div>
+                <img src={registerIcon} alt="icone cadastro" className="w-32" />
               </div>
               <div className="mt-6">
                 <h2 className="text-3xl font-bold text-blue-950">Cadastro</h2>
@@ -98,7 +108,7 @@ function HomePage({onLogout}) {
 
             <div className="flex flex-col items-center text-center">
               <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
-                <div className="w-32 h-32 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold text-4xl">Cx</div>
+                <img src={conectionIcon} alt="icone conexão" className="w-32" />
               </div>
               <div className="mt-6">
                 <h2 className="text-3xl font-bold text-blue-950">Conexão</h2>
@@ -110,7 +120,11 @@ function HomePage({onLogout}) {
 
             <div className="flex flex-col items-center text-center">
               <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
-                <div className="w-32 h-32 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold text-4xl">Rz</div>
+                <img
+                  src={resultsIcon}
+                  alt="icone resultados"
+                  className="w-32"
+                />
               </div>
               <div className="mt-6">
                 <h2 className="text-3xl font-bold text-blue-950">Resultados</h2>

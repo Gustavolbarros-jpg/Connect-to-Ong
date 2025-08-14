@@ -165,6 +165,7 @@ exports.Prisma.OngScalarFieldEnum = {
   Sobre: 'Sobre',
   Respons_vel_para_contato: 'Respons_vel_para_contato',
   CNPJ_: 'CNPJ_',
+  email: 'email',
   quantidade_pessoas_assistidas: 'quantidade_pessoas_assistidas',
   metas: 'metas',
   Causa_da_Organiza__o_: 'Causa_da_Organiza__o_',

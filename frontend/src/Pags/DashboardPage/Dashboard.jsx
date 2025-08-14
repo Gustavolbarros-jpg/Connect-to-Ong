@@ -2,9 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import ProjectList from "../../Components/ProjectList";
-import Button from "../../Components/Button.jsx";
-import Navbar from "../../Components/Navbar.jsx";
-import Footer from "../../Components/Footer.jsx";
+import Button from "../../Components/Button";
+import DashboardImg from "../../assets/images/dashboardImg.png";
+import Navbar from "../../Components/Navbar/";
+import Footer from "../../Components/Footer/";
 
 const mockProjects = [
   {
@@ -75,9 +76,11 @@ function Dashboard() {
       <Navbar />
       <main className="min-w-screen">
         <section className="relative h-[45vh] md:h-[35vh] w-full">
-          <div className="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
-            <div className="text-gray-500 text-2xl">Dashboard Image</div>
-          </div>
+          <img
+            src={DashboardImg}
+            alt="foto do dashboard"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#001449BF]/80 via-[#1A3A8FBF]/80 flex flex-col items-center justify-center text-center p-8 gap-6 md:flex-row md:items-center md:justify-between md:text-left md:p-16 mt-24">
             <h1 className="text-white text-3xl md:text-4xl font-bold">
