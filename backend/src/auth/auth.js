@@ -37,10 +37,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
             return callback(null, false, { message: 'Credenciais inválidas.' });
         }
         
-        // Remover verificação de e-mail - cadastro direto
-        // if (!user.verified) {
-        //     return callback(null, false, { message: 'Por favor, verifique seu e-mail antes de fazer login.' });
-        // }
+       
 
         const { password: userPass, salt, ...restOfUser } = user;
         return callback(null, restOfUser);

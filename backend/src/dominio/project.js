@@ -23,7 +23,7 @@ export default class ProjectDataAccess {
                     descricao_projeto: projectData.descricao_projeto,
                     professores_atrelados: projectData.professores_atrelados,
                     horas_extensao: horas_extensao,
-                    ong_selecionada: projectData.ong_selecionada || null,
+                    ong_selecionada: projectData.ong_selecionada ? String(projectData.ong_selecionada) : null,
                     categoria_ong: projectData.categoria_ong || null,
                     tempo_previsto: tempo_previsto,
                     user: {
