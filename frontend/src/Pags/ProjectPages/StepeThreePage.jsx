@@ -29,18 +29,22 @@ function StepeThreePage({ onLogout }) {
         navigate("/login");
         return;
       }
-
+      
+      // -- AQUI ESTÁ A ÚNICA MUDANÇA NECESSÁRIA --
+      // Os campos agora são lidos usando os nomes corrigidos (snake_case)
       const projectData = {
-        nome_projeto: projectDetails.nameProject,
-        area_interesse: projectDetails.areaInterest,
-        soft_skills: projectDetails.softSkills,
-        quantidade_alunos: projectDetails.numberStudents,
-        descricao_projeto: projectDetails.descriptionProject,
-        professores_atrelados: projectDetails.teacher,
-        horas_extensao: projectDetails.extensionHours,
-        tempo_previsto: projectDetails.expectedTime,
+        nome_projeto: projectDetails.nome_projeto,
+        area_interesse: projectDetails.area_interesse,
+        soft_skills: projectDetails.soft_skills,
+        quantidade_alunos: projectDetails.quantidade_alunos,
+        descricao_projeto: projectDetails.descricao_projeto,
+        professores_atrelados: projectDetails.professores_atrelados,
+        horas_extensao: projectDetails.horas_extensao,
+        tempo_previsto: projectDetails.tempo_previsto,
+        data_inicio: projectDetails.data_inicio, // Adicionado
+        data_fim: projectDetails.data_fim,     // Adicionado
         ong_selecionada: selectedOng?.name || null,
-        categoria_ong: selectedOng?.area || null, // Usando 'area' como categoria
+        categoria_ong: selectedOng?.area || null,
       };
 
       console.log("Enviando dados para o backend:", projectData);
@@ -83,7 +87,7 @@ function StepeThreePage({ onLogout }) {
                 <div className="w-full sm:w-1/2 px-4 mb-4">
                   <p className="font-medium text-gray-500">Nome do Projeto</p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.nameProject)}
+                    {displayData(projectDetails.nome_projeto)}
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
@@ -91,31 +95,31 @@ function StepeThreePage({ onLogout }) {
                     Professores atrelados
                   </p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.teacher)}
+                    {displayData(projectDetails.professores_atrelados)}
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
                   <p className="font-medium text-gray-500">Área de Interesse</p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.areaInterest)}
+                    {displayData(projectDetails.area_interesse)}
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
                   <p className="font-medium text-gray-500">Horas de Extensão</p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.extensionHours)}
+                    {displayData(projectDetails.horas_extensao)}
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
                   <p className="font-medium text-gray-500">Soft Skills</p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.softSkills)}
+                    {displayData(projectDetails.soft_skills)}
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
                   <p className="font-medium text-gray-500">Tempo Previsto</p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.expectedTime)} meses
+                    {displayData(projectDetails.tempo_previsto)} meses
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
@@ -123,7 +127,7 @@ function StepeThreePage({ onLogout }) {
                     Quantidade de Alunos
                   </p>
                   <p className="text-gray-800">
-                    {displayData(projectDetails.numberStudents)}
+                    {displayData(projectDetails.quantidade_alunos)}
                   </p>
                 </div>
                 {/* Este item ocupa a largura total */}
@@ -132,7 +136,23 @@ function StepeThreePage({ onLogout }) {
                     Descrição do Projeto
                   </p>
                   <p className="text-gray-800 whitespace-pre-wrap break-words">
-                    {displayData(projectDetails.descriptionProject)}
+                    {displayData(projectDetails.descricao_projeto)}
+                  </p>
+                </div>
+                <div className="w-full sm:w-1/2 px-4 mb-4">
+                  <p className="font-medium text-gray-500">
+                    Data de Início
+                  </p>
+                  <p className="text-gray-800">
+                    {displayData(projectDetails.data_inicio)}
+                  </p>
+                </div>
+                <div className="w-full sm:w-1/2 px-4 mb-4">
+                  <p className="font-medium text-gray-500">
+                    Data de Conclusão
+                  </p>
+                  <p className="text-gray-800">
+                    {displayData(projectDetails.data_fim)}
                   </p>
                 </div>
               </div>

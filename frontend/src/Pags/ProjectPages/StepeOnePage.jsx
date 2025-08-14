@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // Importa o hook 'useLocation' para aceder aos dados de navegação
 import { useLocation, useNavigate } from "react-router-dom";
-import { isBefore, startOfToday } from "date-fns";
+import { isBefore, startOfToday, parse } from "date-fns";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import InputField from "../../Components/InputField/";
@@ -99,8 +99,10 @@ function StepeOnePage({ onLogout }) {
       newErrors.extensionHours =
         "A quantidade de horas deve ser maior que zero.";
 
-    const start = new Date(formData.startDate);
-    const end = new Date(formData.endDate);
+    const dateFormat = 'yyyy-MM-dd';
+    const start = parse(formData.startDate, dateFormat, new Date());
+    const end = parse(formData.endDate, dateFormat, new Date());
+
     if (!formData.startDate)
       newErrors.startDate = "A data de início é obrigatória.";
     if (formData.startDate && isBefore(start, startOfToday())) {
@@ -135,7 +137,20 @@ function StepeOnePage({ onLogout }) {
     const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44));
     const expectedTime = diffMonths;
 
-    const projectDetails = { ...formData, expectedTime };
+    
+    const projectDetails = {
+      nome_projeto: formData.nameProject,
+      area_interesse: formData.areaInterest,
+      soft_skills: formData.softSkills,
+      quantidade_alunos: formData.numberStudents,
+      professores_atrelados: formData.teacher,
+      horas_extensao: formData.extensionHours,
+      data_inicio: formData.startDate,
+      data_fim: formData.endDate,
+      descricao_projeto: formData.descriptionProject,
+      tempo_previsto: expectedTime,
+    };
+
     navigate("/stepe-two", { state: { projectDetails } });
   };
 
