@@ -11,6 +11,7 @@ function StepeThreePage({ onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log('CHEGANDO NO PASSO 3 -> location.state recebido:', location.state);
   const state = location.state || {};
   const projectDetails = state.projectDetails || {};
   const selectedOng = state.selectedOng || null;
@@ -43,7 +44,7 @@ function StepeThreePage({ onLogout }) {
         tempo_previsto: projectDetails.tempo_previsto,
         data_inicio: projectDetails.data_inicio, // Adicionado
         data_fim: projectDetails.data_fim,     // Adicionado
-        ong_selecionada: selectedOng?.name || null,
+        ong_selecionada: selectedOng?.id  || null,
         categoria_ong: selectedOng?.area || null,
       };
 

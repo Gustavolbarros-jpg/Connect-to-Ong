@@ -1,5 +1,4 @@
 import React from "react";
-import footerIcon from "../assets/images/footerIcon.png"; // Atenção ao caminho da imagem
 
 /**
  * Componente de rodapé com variantes de estilo.
@@ -22,11 +21,9 @@ function Footer({ variant = "default" }) {
         <div className="flex flex-col items-start">
           {/* O container do ícone agora tem classes condicionais para o fundo */}
           <div className={iconContainerClasses}>
-            <img
-              src={footerIcon}
-              alt="Logo da Prefeitura do Recife"
-              className="w-40"
-            />
+            <div className="w-40 h-20 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
+              LOGO
+            </div>
           </div>
 
           <div className="mt-8">
