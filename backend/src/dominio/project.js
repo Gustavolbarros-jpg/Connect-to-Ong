@@ -1,14 +1,32 @@
-import { PrismaClient } from '../../../generated/prisma/index.js'
-// As bibliotecas de data não são mais necessárias
-// import { parse, isBefore, startOfToday, differenceInMonths } from 'date-fns'
-
-const prisma = new PrismaClient();
+import prisma from '../prisma/prismaClient.js';
+import { parse, isBefore, startOfToday } from 'date-fns';
 
 export default class ProjectDataAccess {
     async create(projectData) {
         try {
-            // A validação de datas foi removida, pois não serão enviadas
-            // A lógica de cálculo do tempo_previsto foi removida, pois ele será enviado diretamente
+            const { data_inicio, data_fim } = projectData;
+
+            if (!data_inicio || !data_fim) {
+                const validationError = new Error('As datas de início e fim são obrigatórias.');
+                validationError.isValidationError = true; 
+                throw validationError;
+            }
+
+            const dateFormat = 'dd-MM-yyyy';
+            const dataInicioObj = parse(data_inicio, dateFormat, new Date());
+            const dataFimObj = parse(data_fim, dateFormat, new Date());
+
+            if (isBefore(dataInicioObj, startOfToday())) {
+                const validationError = new Error('A data de início não pode ser no passado.');
+                validationError.isValidationError = true;
+                throw validationError;
+            }
+
+            if (isBefore(dataFimObj, dataInicioObj)) {
+                const validationError = new Error('A data de fim não pode ser anterior à data de início.');
+                validationError.isValidationError = true;
+                throw validationError;
+            }
             
             const quantidade_alunos = parseInt(projectData.quantidade_alunos) || 0;
             const horas_extensao = parseInt(projectData.horas_extensao) || 0;
@@ -23,18 +41,12 @@ export default class ProjectDataAccess {
                     descricao_projeto: projectData.descricao_projeto,
                     professores_atrelados: projectData.professores_atrelados,
                     horas_extensao: horas_extensao,
-                    ong_selecionada: projectData.ong_selecionada || null,
-                    categoria_ong: projectData.categoria_ong || null,
                     tempo_previsto: tempo_previsto,
-                    user: {
-                        connect: {
-                            id: projectData.user_id
-                        }
-                    }
-                }
+                    data_inicio: data_inicio,
+                    data_fim: data_fim,
+                    user_id: projectData.user_id
+                },
             });
-            
-            console.log('Projeto criado com sucesso:', result);
             return result;
         } catch (error) {
             console.error('Erro ao criar projeto:', error);
@@ -44,7 +56,6 @@ export default class ProjectDataAccess {
 
     async findAll() {
         try {
-            // Removendo o orderBy para evitar erros de índice.
             const result = await prisma.projetos.findMany({
                 include: {
                     user: {
@@ -53,10 +64,9 @@ export default class ProjectDataAccess {
                             institution: true
                         }
                     }
-                }
+                },
+                orderBy: { created_at: 'desc' }
             });
-            // Ordena os resultados em memória.
-            result.sort((a, b) => b.created_at - a.created_at);
             return result;
         } catch (error) {
             console.error('Erro ao buscar projetos:', error);
@@ -86,12 +96,10 @@ export default class ProjectDataAccess {
 
     async findByUserId(userId) {
         try {
-            // Removendo o orderBy para evitar erros de índice.
             const result = await prisma.projetos.findMany({
-                where: { user_id: userId }
+                where: { user_id: userId },
+                orderBy: { created_at: 'desc' }
             });
-            // Ordena os resultados em memória.
-            result.sort((a, b) => b.created_at - a.created_at);
             return result;
         } catch (error) {
             console.error('Erro ao buscar projetos do usuário:', error);
@@ -124,9 +132,6 @@ export default class ProjectDataAccess {
                 throw new Error("Nenhum campo válido para atualizar.");
             }
 
-            // A lógica de recalculo de tempo previsto foi removida
-            // pois os campos de data não existem mais.
-
             const result = await prisma.projetos.update({
                 where: { id: projectId },
                 data: filteredData
@@ -150,3 +155,5 @@ export default class ProjectDataAccess {
         }
     }
 }
+
+

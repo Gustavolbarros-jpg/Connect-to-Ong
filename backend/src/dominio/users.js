@@ -1,24 +1,20 @@
-import { PrismaClient } from '../../../generated/prisma/index.js'
-import crypto from 'crypto'
+// Use conditional import based on environment
+import prisma from '../prisma/prismaClient.js';
+import crypto from 'crypto';
 import { error } from "console";
-
-const prisma = new PrismaClient();
-
 
 export default class UsersDataAcess {
     async getUsers(){
         const result = await prisma.users.findMany();
-        console.log(result)
-        return result
+        console.log(result);
+        return result;
     }
 
-
     async deleteUsers(userId){
-        const result= await prisma.users.delete({
+        const result = await prisma.users.delete({
             where: { id: userId },
-        })
-
-        return result
+        });
+        return result;
     }
 
 

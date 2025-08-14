@@ -5,7 +5,7 @@ import crypto from 'crypto'
 import prisma from '../prisma/prismaClient.js'
 import jwt from 'jsonwebtoken'
 import { v4 as uuidv4 } from 'uuid'
-import * as Brevo from '@getbrevo/brevo';
+import nodemailer from 'nodemailer'
 
 
 // --- FUNÇÃO AUXILIAR PARA HASHING ---
@@ -114,14 +114,12 @@ authRouter.post('/signup', async (req, res) => {
 authRouter.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
         if (error) {
-            console.error("Erro capturado pela estratégia do Passport:", error);
+            console.error("Erro capturado pela estratégia do Passport:", error); // <-- A LINHA MÁGICA
             return res.status(500).send({ message: "Erro durante a autenticação" });
         }
         if (!user) return res.status(401).send({ message: info.message || "Credenciais inválidas." });
         
-        
-        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2d' }); 
-        
+        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2m' });
         return res.status(200).send({ message: "Login realizado com sucesso", user, token });
     })(req, res);
 });
@@ -159,27 +157,19 @@ authRouter.post('/forgot-password', async (req, res) => {
         const resetLink = `http://localhost:5173/recover-password/${resetToken}`;
 
         // 5. Configura e envia o e-mail
-        const apiInstance = new Brevo.TransactionalEmailsApi();
-        apiInstance.apiClient.authentications['api-key'].apiKey = process.env.BREVO_API_KEY;
-        
-        // Define o remetente (deve ser verificado na sua conta Brevo)
-        const sender = {
-            email: process.env.AUTH_EMAIL,
-            name: 'Connect-to-ONG' // O nome que aparecerá para o usuário
-        };
-        
-        // Monta o e-mail
-        await apiInstance.sendTransacEmail({
-            sender,
-            to: [{ email: user.email }],
-            subject: 'Recuperação de Senha',
-            htmlContent: `
-                <p>Você solicitou a recuperação de senha para sua conta na Connect-to-ONG.</p>
-                <p>Clique neste <a href="${resetLink}">link</a> para redefinir sua senha.</p>
-                <p>Este link é válido por 10 minutos.</p>
-                <p>Se você não solicitou isso, pode ignorar este e-mail.</p>
-            `
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: { user: process.env.AUTH_EMAIL, pass: process.env.AUTH_PASS }
         });
+
+        const mailOptions = {
+            from: process.env.AUTH_EMAIL,
+            to: user.email,
+            subject: "Recuperação de Senha",
+            html: `<p>Você solicitou a recuperação de senha.</p><p>Clique neste <a href="${resetLink}">link</a> para redefinir sua senha.</p><p>Este link é válido por 10 minutos.</p>`,
+        };
+
+        await transporter.sendMail(mailOptions);
 
         res.status(200).json({ message: 'Se um usuário com este e-mail existir, um link de recuperação foi enviado.' });
 
@@ -219,7 +209,7 @@ authRouter.post('/reset-password/:token', async (req, res) => {
         const hashedPassword = await hashWithSalt(password, salt);
 
         // 3. Atualiza a senha e limpa os campos de recuperação
-        await prisma.user.update({
+        await prisma.users.update({
             where: { id: user.id },
             data: {
                 password: hashedPassword.toString('hex'),
