@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, onContinue, continueText, children }) => {
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full">
         {children}
         <div className="mt-6 flex justify-center gap-[50px]">
-          <Button onClick={onClose} secondary className="bg-white hover:bg-gray-300">
+          <Button onClick={onClose} className="bg-white hover:bg-gray-300">
             Cancelar
           </Button>
           <Button onClick={onContinue} primary>

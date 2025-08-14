@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../../api/tokenInterceptor";
-import backgroundImage from "../../assets/images/background-login.png";
-import logoRecife from "../../assets/images/logo-recife.png";
-import Button from "../../Components/Button/";
-import InputField from "../../Components/InputField/";
-import InputBack from "../../assets/images/voltar.png";
+import Button from "../../Components/Button.jsx";
+import InputField from "../../Components/InputField.jsx";
 
 function LoginPage({ onLogin }) {
   const navigate = useNavigate();
@@ -22,16 +19,16 @@ function LoginPage({ onLogin }) {
   // Função genérica para atualizar o estado do formulário
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    
+
     if (validationErrors[name]) {
-      setValidationErrors(prevErrors => ({ ...prevErrors, [name]: null }));
+      setValidationErrors((prevErrors) => ({ ...prevErrors, [name]: null }));
     }
-    
-    if(apiError) {
+
+    if (apiError) {
       setApiError("");
     }
   };
@@ -51,7 +48,7 @@ function LoginPage({ onLogin }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setApiError("");
-    
+
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setValidationErrors(formErrors);
@@ -62,9 +59,9 @@ function LoginPage({ onLogin }) {
 
     try {
       // Limpeza completa antes do novo login
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
       // Força uma nova instância do axios para evitar cache
       const freshApiClient = apiClient.create();
       const response = await freshApiClient.post("/auth/login", {
@@ -82,38 +79,36 @@ function LoginPage({ onLogin }) {
 
       // Reset do formulário após login bem-sucedido
       setFormData({ email: "", password: "" });
-      
+
       if (onLogin) {
         onLogin(); // Notifica o App sobre o login
       }
 
-      navigate("/profile");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Erro no login:", error);
-      
+
       // Limpeza em caso de erro
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
       setApiError(
-        error.response?.data?.message || 
-        "Erro ao conectar com o servidor. Tente novamente."
+        error.response?.data?.message ||
+          "Erro ao conectar com o servidor. Tente novamente."
       );
     } finally {
       setIsLoading(false); // Desativa loading em qualquer caso
     }
   };
 
-  /* 
-   * 🔥 Seu JSX original mantido integralmente
-   * Apenas adicionado estado de loading no botão
-   */
   return (
     <div className="flex min-h-screen font-sans bg-gray-50">
       <div className="w-full lg:w-1/2 bg-white p-4 md:p-8 lg:p-12 font-medium flex flex-col justify-between">
         <div className="relative pt-4 pl-4 pb-[70px] md:pb-2">
           <Link to="/" className="absolute z-10">
-            <img src={InputBack} alt="Voltar" className="h-8 md:h-8 lg:h-8" />
+            <div className="h-8 w-8 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-xs">
+              ←
+            </div>
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center">
@@ -140,7 +135,11 @@ function LoginPage({ onLogin }) {
                   className="border-2 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500 py-3 text-gray-800"
                   labelClassName="text-gray-800"
                 />
-                {validationErrors.email && <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>}
+                {validationErrors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.email}
+                  </p>
+                )}
               </div>
               <div>
                 <InputField
@@ -153,7 +152,11 @@ function LoginPage({ onLogin }) {
                   className="border-2 border-blue-600 placeholder-blue-300 focus:ring-blue-500 focus:border-blue-500 py-3 text-gray-800"
                   labelClassName="text-gray-800"
                 />
-                {validationErrors.password && <p className="text-red-500 text-sm mt-1">{validationErrors.password}</p>}
+                {validationErrors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.password}
+                  </p>
+                )}
               </div>
               <Button
                 type="submit"
@@ -186,23 +189,20 @@ function LoginPage({ onLogin }) {
         </div>
 
         <div className="flex justify-between items-end mt-8 w-full">
-          <img
-            src={logoRecife}
-            alt="Logo Recife Proteção"
-            className="h-19 md:h-24"
-          />
+          <div className="h-19 md:h-24 w-32 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">
+            LOGO
+          </div>
           <Link to="/register-ong">
-            <Button primary>
-              Acesso ONGs
-            </Button>
+            <Button primary>Acesso ONGs</Button>
           </Link>
         </div>
       </div>
 
       <div
-        className="hidden lg:block w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: `url('${backgroundImage}')` }}
-      ></div>
+        className="hidden lg:block w-1/2 bg-gray-200 flex items-center justify-center"
+      >
+        <div className="text-gray-500 text-xl">Background Image</div>
+      </div>
     </div>
   );
 }

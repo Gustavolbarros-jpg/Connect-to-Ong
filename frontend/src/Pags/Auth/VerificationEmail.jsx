@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../../api/tokenInterceptor";
-import backgroundImage from "../../assets/images/background-login.png";
-import logoRecife from "../../assets/images/logo-recife.png";
-import Button from "../../Components/Button/";
-import InputField from "../../Components/InputField/";
+import Button from "../../Components/Button.jsx";
+import InputField from "../../Components/InputField.jsx";
 
 function RecoverPasswordPage() {
   const [email, setEmail] = useState("");
@@ -83,17 +81,16 @@ function RecoverPasswordPage() {
           </div>
         </div>
         <div className="flex justify-between items-end mt-8 w-full">
-          <img
-            src={logoRecife}
-            alt="Logo Recife Proteção"
-            className="h-10 md:h-36 lg:h-24"
-          />
+          <div className="h-10 md:h-36 lg:h-24 w-32 bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">
+            LOGO
+          </div>
         </div>
       </div>
       <div
-        className="hidden lg:block w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: `url('${backgroundImage}')` }}
-      ></div>
+        className="hidden lg:block w-1/2 bg-gray-200 flex items-center justify-center"
+      >
+        <div className="text-gray-500 text-xl">Background Image</div>
+      </div>
     </div>
   );
 }
