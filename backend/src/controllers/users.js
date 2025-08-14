@@ -36,5 +36,21 @@ export default class UserControllers {
       
     }
   }
+  
+async getUserById(userId) {
+    try {
+      // se quiser verificar UUID aqui, poderia retornar badRequest antes de chamar dataAccess
+      const user = await this.dataAccess.getUserById(userId)
+      if (!user) return notFound('User not found')
+      return ok(user)
+    } catch (error) {
+      console.error('Erro em getUserById:', error)
+      // se for erro de id inválido (validação manual), devolve 400
+      if (error && error.message === 'Invalid user id') {
+        return badRequest('Invalid user id')
+      }
+      return serverError(error)
+    }
+  }
 
 }

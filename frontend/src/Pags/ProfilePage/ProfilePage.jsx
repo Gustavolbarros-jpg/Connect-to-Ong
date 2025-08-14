@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cameraIcon from "../../assets/images/cameraIcon.png";
 
 import Button from "../../Components/Button/";
@@ -7,29 +7,71 @@ import Footer from "../../Components/Footer/";
 import ProjectsSection from "./ProjectsSection";
 
 function ProfilePage( {onLogout}) {
-  const [nome, setNome] = useState("Seu Nome Completo");
-  const [email, setEmail] = useState("seu.email@institucional.com");
-  const [departamento, setDepartamento] = useState("Departamento de Exemplo");
-  const [description, setDescription] = useState(
-    "Uma breve descrição sobre você..."
-  );
-  const [instituicao, setInstituicao] = useState("Nome da Instituição");
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [departamento, setDepartamento] = useState("");
+  const [description, setDescription] = useState("");
+  const [instituicao, setInstituicao] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [profileImage, setProfileImage] = useState(cameraIcon);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleSaveProfile = async () => {
-    console.log("Salvando dados...");
-    const userProfile = {
-      nome,
-      email,
-      departamento,
-      descricao: description,
-      instituicao,
-      profileImage,
+useEffect(() => {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userId = user.id // depois pode vir do login/JWT
+
+    fetch(`http://localhost:3000/users/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          const u = data.body;
+          setNome(u.fullname || "");
+          setEmail(u.email || "");
+          setInstituicao(u.institution || "");
+          setDescription(u.description || "");
+          setDepartamento(u.departamento || ""); // só se existir no backend
+          setProfileImage(u.photoUrl || cameraIcon);
+        }
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar perfil:", err);
+      });
+  }, []);
+
+const handleSaveProfile = async () => {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userId = user.id
+  if (!userId) return alert("Usuário não encontrado");
+  setIsSaving(true);
+
+  try {
+    const body = {
+      description,
+      photoUrl: profileImage
     };
-    setIsEditing(false);
-    alert("Perfil salvo com sucesso!");
-  };
+
+    const res = await fetch(`http://localhost:3000/users/${userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Perfil atualizado com sucesso!");
+      setIsEditing(false);
+    } else {
+      alert("Erro ao atualizar perfil: " + (data.body?.error || "Desconhecido"));
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao atualizar perfil.");
+  } finally {
+    setIsSaving(false);
+  }
+};
+
 
   const handleImageChange = () => {
     if (!isEditing) return;

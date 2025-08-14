@@ -25,7 +25,7 @@ export default class UsersDataAcess {
     }
    
 
-    const allowedFields = ['description', 'photoUrl'];
+    const allowedFields = ['description', 'photoUrl', 'name', 'institution'];
     const filteredData = {};
 
     for (const field of allowedFields) {
@@ -53,6 +53,32 @@ export default class UsersDataAcess {
 
     return result;
         }
+
+async getUserById(id) {
+  if (!id || typeof id !== 'string' || id.length !== 36) {
+    throw new Error('Invalid user id')
+  }
+
+  const user = await prisma.users.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      fullname: true,
+      email: true,
+      institution: true,
+      verified: true,
+      description: true,
+      photoUrl: true
+    }
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  return user
+}
+
     
     }
 
