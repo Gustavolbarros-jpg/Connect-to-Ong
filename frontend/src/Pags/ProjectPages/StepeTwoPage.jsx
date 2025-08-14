@@ -14,6 +14,9 @@ function StepeTwoPage({onLogout}) {
   // Recebe os detalhes do projeto da página anterior (StepeOnePage)
   const { projectDetails } = location.state || {};
 
+  // Extrai a área de interesse vinda da Etapa 1 para ser usada como filtro.
+  const initialAreaFilter = projectDetails?.areaInterest || "";
+
   // Estado para armazenar a ID da ONG que o usuário selecionou, iniciando como null
   const [selectedOngId, setSelectedOngId] = useState(null);
   // Estado para armazenar o OBJETO completo da ONG selecionada
@@ -35,9 +38,12 @@ function StepeTwoPage({onLogout}) {
     }
   };
 
+  // --- ALTERAÇÃO AQUI ---
   // Lógica para o botão "Voltar"
   const handleGoBack = () => {
-    navigate(-1); // Volta para a página anterior no histórico
+    // Navega de volta para a primeira etapa, passando o estado atual do formulário
+    // para que os campos possam ser repovoados.
+    navigate("/stepe-one", { state: { projectDetails } });
   };
 
   // Lógica para o botão "Continuar"
@@ -75,6 +81,8 @@ function StepeTwoPage({onLogout}) {
               actionButtonText="Selecionar"
               onActionClick={handleOngSelected}
               selectedOngId={selectedOngId}
+              // Passa a área de interesse para o OngList para que ele possa pré-filtrar os resultados.
+              initialAreaFilter={initialAreaFilter}
             />
 
             {/* Exibe o resumo da ONG selecionada acima da lista de busca */}

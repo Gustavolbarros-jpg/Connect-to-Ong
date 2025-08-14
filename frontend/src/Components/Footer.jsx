@@ -44,19 +44,19 @@ function Footer({ variant = "default" }) {
           <h2 className="font-bold text-[24px]">Portal</h2>
 
           <div className="flex flex-col items-start mt-4 space-y-3">
-            <a href="#" className={`${linkClasses} text-[20px]`}>
+            <a href="https://boraimpactar.recife.pe.gov.br/" target="_blank" className={`${linkClasses} text-[20px]`}>
               Voluntariado e doação
             </a>
-            <a href="#" className={`${linkClasses} text-[20px]`}>
+            <a href="https://boraimpactar.recife.pe.gov.br/blood_donations" target="_blank" className={`${linkClasses} text-[20px]`}>
               Doação de Sangue
             </a>
-            <a href="#" className={`${linkClasses} text-[20px]`}>
+            <a href="https://boraimpactar.recife.pe.gov.br/income_tax" target="_blank" className={`${linkClasses} text-[20px]`}>
               Imposto de Renda
             </a>
-            <a href="#" className={`${linkClasses} text-[20px]`}>
+            <a href="https://boraimpactar.recife.pe.gov.br/ngos" target="_blank" className={`${linkClasses} text-[20px]`}>
               Área da ONG
             </a>
-            <a href="#" className={`${linkClasses} text-[20px]`}>
+            <a href="https://boraimpactar.recife.pe.gov.br/events" target="_blank" className={`${linkClasses} text-[20px]`}>
               Agenda de eventos
             </a>
           </div>
