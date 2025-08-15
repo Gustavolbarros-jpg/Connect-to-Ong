@@ -12,7 +12,7 @@ config()
 
 async function main() {
     const hostname = 'localhost'
-    const port = 3000
+const port = process.env.PORT || 3333
 
     const app = express()
 

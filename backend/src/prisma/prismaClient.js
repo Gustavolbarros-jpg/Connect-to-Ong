@@ -1,8 +1,12 @@
-// Verificar se estamos em ambiente de teste
+import PrismaClientPackage from '@prisma/client';
+const { PrismaClient } = PrismaClientPackage;
+
 let prisma;
 
+// Se o ambiente for de teste (geralmente definido pelo Jest), 
+// exportamos um "mock" do Prisma. Isso impede que seus testes 
+// tentem se conectar a um banco de dados real.
 if (process.env.NODE_ENV === 'test') {
-  // Versão mock para testes - usando jest.fn() para simular as funções
   const { jest } = await import('@jest/globals');
   prisma = {
     projetos: {
@@ -37,15 +41,9 @@ if (process.env.NODE_ENV === 'test') {
       }
   };
 } else {
-  // Importação real para ambiente de produção/desenvolvimento
-  try {
-    const { PrismaClient } = await import('../../../generated/prisma/index.js');
-    prisma = new PrismaClient();
-  } catch (error) {
-    console.error('Erro ao importar PrismaClient:', error);
-    // Fallback para um objeto vazio se a importação falhar
-    prisma = {};
-  }
+  // Em qualquer outro ambiente (desenvolvimento, produção), 
+  // criamos e exportamos uma instância real e única do PrismaClient.
+  prisma = new PrismaClient();
 }
 
 export default prisma;

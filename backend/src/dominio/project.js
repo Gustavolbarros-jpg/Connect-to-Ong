@@ -1,8 +1,4 @@
-import { PrismaClient } from '../../../generated/prisma/index.js'
-// As bibliotecas de data não são mais necessárias
-// import { parse, isBefore, startOfToday, differenceInMonths } from 'date-fns'
-
-const prisma = new PrismaClient();
+import prisma from '../prisma/prismaClient.js';
 
 export default class ProjectDataAccess {
     async create(projectData) {

@@ -1,10 +1,7 @@
 import ProjectDataAccess from '../dominio/project.js';
 import { ok, created, notFound, serverError, badRequest } from '../helpers/httpResponse.js';
 import { emailService } from '../services/emailService.js';
-import { PrismaClient } from '../../../generated/prisma/index.js';
-
-const prisma = new PrismaClient();
-
+import prisma from '../prisma/prismaClient.js';
 export default class ProjectControllers {
 
     constructor() {

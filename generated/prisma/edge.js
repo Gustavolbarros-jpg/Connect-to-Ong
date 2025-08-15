@@ -244,7 +244,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\PC\\Desktop\\Connect-to-Ong\\generated\\prisma",
+      "value": "/home/gflb/ds/Connect-to-Ong/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -253,12 +253,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\PC\\Desktop\\Connect-to-Ong\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/gflb/ds/Connect-to-Ong/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
