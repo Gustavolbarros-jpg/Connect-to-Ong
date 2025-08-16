@@ -159,45 +159,21 @@ exports.Prisma.ProjetosScalarFieldEnum = {
   user_id: 'user_id'
 };
 
-exports.Prisma.OngScalarFieldEnum = {
-  nome_ong: 'nome_ong',
-  Motivo_da_cria__o_do_projeto_: 'Motivo_da_cria__o_do_projeto_',
-  Sobre: 'Sobre',
-  Respons_vel_para_contato: 'Respons_vel_para_contato',
-  CNPJ_: 'CNPJ_',
-  email: 'email',
-  quantidade_pessoas_assistidas: 'quantidade_pessoas_assistidas',
-  metas: 'metas',
-  Causa_da_Organiza__o_: 'Causa_da_Organiza__o_',
-  area: 'area',
-  match_area: 'match_area',
-  objetivos_ods: 'objetivos_ods',
-  Atividades_que_o_projeto_desenvolve_: 'Atividades_que_o_projeto_desenvolve_',
-  possui_funcionarios: 'possui_funcionarios',
-  A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: 'A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_',
-  Funcionamento__da_organiza__o: 'Funcionamento__da_organiza__o',
-  Endere_o: 'Endere_o',
-  RPA: 'RPA',
-  contato_divulgacao: 'contato_divulgacao',
-  Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: 'Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__',
-  possui_produto_social: 'possui_produto_social',
-  mensagem_para_voluntarios: 'mensagem_para_voluntarios',
-  serve_refeicoes_cozinha_propria: 'serve_refeicoes_cozinha_propria',
-  id: 'id'
-};
-
-exports.Prisma.Tabela_ongsScalarFieldEnum = {
+exports.Prisma.OngsScalarFieldEnum = {
   id: 'id',
   nome_ong: 'nome_ong',
   motivo_criacao: 'motivo_criacao',
   sobre: 'sobre',
   responsavel_contato: 'responsavel_contato',
   cnpj: 'cnpj',
+  email: 'email',
   quantidade_assistidos: 'quantidade_assistidos',
   metas: 'metas',
   causa_organizacao: 'causa_organizacao',
   area: 'area',
   match_area: 'match_area',
+  objetivos_ods: 'objetivos_ods',
+  atividades_projeto_desenvolve: 'atividades_projeto_desenvolve',
   possui_voluntarios: 'possui_voluntarios',
   possui_funcionarios: 'possui_funcionarios',
   funcionamento: 'funcionamento',
@@ -207,35 +183,7 @@ exports.Prisma.Tabela_ongsScalarFieldEnum = {
   redes_sociais: 'redes_sociais',
   produto_social: 'produto_social',
   mensagem_convite: 'mensagem_convite',
-  serve_refeicao: 'serve_refeicao',
-  Nome_da_ONG_Projeto: 'Nome_da_ONG_Projeto',
-  Motivo_da_cria__o_do_projeto_: 'Motivo_da_cria__o_do_projeto_',
-  Respons_vel_para_contato: 'Respons_vel_para_contato',
-  CNPJ_: 'CNPJ_',
-  Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: 'Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba',
-  Metas_de_curto__m_dio_e_longo_prazo: 'Metas_de_curto__m_dio_e_longo_prazo',
-  Causa_da_Organiza__o_: 'Causa_da_Organiza__o_',
-  rea: 'rea',
-  Match: 'Match',
-  Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: 'Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_',
-  Atividades_que_o_projeto_desenvolve_: 'Atividades_que_o_projeto_desenvolve_',
-  Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: 'Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_',
-  A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: 'A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_',
-  Funcionamento__da_organiza__o: 'Funcionamento__da_organiza__o',
-  endere_o: 'endere_o',
-  Contato_para_divulga__o: 'Contato_para_divulga__o',
-  Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: 'Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__',
-  Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: 'Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_',
-  Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: 'Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co',
-  A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: 'A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara',
-  quantidade_pessoas_assistidas: 'quantidade_pessoas_assistidas',
-  objetivos_ods: 'objetivos_ods',
-  possui_funcionarios_quantos: 'possui_funcionarios_quantos',
-  possui_produto_social_quais: 'possui_produto_social_quais',
-  mensagem_para_voluntarios_doadores: 'mensagem_para_voluntarios_doadores',
-  serve_refeicoes_cozinha_propria: 'serve_refeicoes_cozinha_propria',
-  Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: 'Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con',
-  Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: 'Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__'
+  serve_refeicao: 'serve_refeicao'
 };
 
 exports.Prisma.SortOrder = {
@@ -258,8 +206,7 @@ exports.Prisma.ModelName = {
   user_verifications: 'user_verifications',
   users: 'users',
   projetos: 'projetos',
-  Ong: 'Ong',
-  tabela_ongs: 'tabela_ongs'
+  ongs: 'ongs'
 };
 
 /**

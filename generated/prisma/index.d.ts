@@ -29,15 +29,10 @@ export type users = $Result.DefaultSelection<Prisma.$usersPayload>
  */
 export type projetos = $Result.DefaultSelection<Prisma.$projetosPayload>
 /**
- * Model Ong
+ * Model ongs
  * 
  */
-export type Ong = $Result.DefaultSelection<Prisma.$OngPayload>
-/**
- * Model tabela_ongs
- * 
- */
-export type tabela_ongs = $Result.DefaultSelection<Prisma.$tabela_ongsPayload>
+export type ongs = $Result.DefaultSelection<Prisma.$ongsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -188,24 +183,14 @@ export class PrismaClient<
   get projetos(): Prisma.projetosDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.ong`: Exposes CRUD operations for the **Ong** model.
+   * `prisma.ongs`: Exposes CRUD operations for the **ongs** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Ongs
-    * const ongs = await prisma.ong.findMany()
+    * const ongs = await prisma.ongs.findMany()
     * ```
     */
-  get ong(): Prisma.OngDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.tabela_ongs`: Exposes CRUD operations for the **tabela_ongs** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Tabela_ongs
-    * const tabela_ongs = await prisma.tabela_ongs.findMany()
-    * ```
-    */
-  get tabela_ongs(): Prisma.tabela_ongsDelegate<ExtArgs, ClientOptions>;
+  get ongs(): Prisma.ongsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -649,8 +634,7 @@ export namespace Prisma {
     user_verifications: 'user_verifications',
     users: 'users',
     projetos: 'projetos',
-    Ong: 'Ong',
-    tabela_ongs: 'tabela_ongs'
+    ongs: 'ongs'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -669,7 +653,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user_verifications" | "users" | "projetos" | "ong" | "tabela_ongs"
+      modelProps: "user_verifications" | "users" | "projetos" | "ongs"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -895,151 +879,77 @@ export namespace Prisma {
           }
         }
       }
-      Ong: {
-        payload: Prisma.$OngPayload<ExtArgs>
-        fields: Prisma.OngFieldRefs
+      ongs: {
+        payload: Prisma.$ongsPayload<ExtArgs>
+        fields: Prisma.ongsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.OngFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload> | null
+            args: Prisma.ongsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.OngFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>
+            args: Prisma.ongsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>
           }
           findFirst: {
-            args: Prisma.OngFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload> | null
+            args: Prisma.ongsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.OngFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>
+            args: Prisma.ongsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>
           }
           findMany: {
-            args: Prisma.OngFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>[]
+            args: Prisma.ongsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>[]
           }
           create: {
-            args: Prisma.OngCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>
+            args: Prisma.ongsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>
           }
           createMany: {
-            args: Prisma.OngCreateManyArgs<ExtArgs>
+            args: Prisma.ongsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.OngCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>[]
+            args: Prisma.ongsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>[]
           }
           delete: {
-            args: Prisma.OngDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>
+            args: Prisma.ongsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>
           }
           update: {
-            args: Prisma.OngUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>
+            args: Prisma.ongsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>
           }
           deleteMany: {
-            args: Prisma.OngDeleteManyArgs<ExtArgs>
+            args: Prisma.ongsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.OngUpdateManyArgs<ExtArgs>
+            args: Prisma.ongsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.OngUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>[]
+            args: Prisma.ongsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>[]
           }
           upsert: {
-            args: Prisma.OngUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OngPayload>
+            args: Prisma.ongsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ongsPayload>
           }
           aggregate: {
-            args: Prisma.OngAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateOng>
+            args: Prisma.OngsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOngs>
           }
           groupBy: {
-            args: Prisma.OngGroupByArgs<ExtArgs>
-            result: $Utils.Optional<OngGroupByOutputType>[]
+            args: Prisma.ongsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OngsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.OngCountArgs<ExtArgs>
-            result: $Utils.Optional<OngCountAggregateOutputType> | number
-          }
-        }
-      }
-      tabela_ongs: {
-        payload: Prisma.$tabela_ongsPayload<ExtArgs>
-        fields: Prisma.tabela_ongsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.tabela_ongsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.tabela_ongsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>
-          }
-          findFirst: {
-            args: Prisma.tabela_ongsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.tabela_ongsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>
-          }
-          findMany: {
-            args: Prisma.tabela_ongsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>[]
-          }
-          create: {
-            args: Prisma.tabela_ongsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>
-          }
-          createMany: {
-            args: Prisma.tabela_ongsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.tabela_ongsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>[]
-          }
-          delete: {
-            args: Prisma.tabela_ongsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>
-          }
-          update: {
-            args: Prisma.tabela_ongsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>
-          }
-          deleteMany: {
-            args: Prisma.tabela_ongsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.tabela_ongsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.tabela_ongsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>[]
-          }
-          upsert: {
-            args: Prisma.tabela_ongsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$tabela_ongsPayload>
-          }
-          aggregate: {
-            args: Prisma.Tabela_ongsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTabela_ongs>
-          }
-          groupBy: {
-            args: Prisma.tabela_ongsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Tabela_ongsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.tabela_ongsCountArgs<ExtArgs>
-            result: $Utils.Optional<Tabela_ongsCountAggregateOutputType> | number
+            args: Prisma.ongsCountArgs<ExtArgs>
+            result: $Utils.Optional<OngsCountAggregateOutputType> | number
           }
         }
       }
@@ -1138,8 +1048,7 @@ export namespace Prisma {
     user_verifications?: user_verificationsOmit
     users?: usersOmit
     projetos?: projetosOmit
-    ong?: OngOmit
-    tabela_ongs?: tabela_ongsOmit
+    ongs?: ongsOmit
   }
 
   /* Types for Logging */
@@ -4711,1317 +4620,40 @@ export namespace Prisma {
 
 
   /**
-   * Model Ong
+   * Model ongs
    */
 
-  export type AggregateOng = {
-    _count: OngCountAggregateOutputType | null
-    _avg: OngAvgAggregateOutputType | null
-    _sum: OngSumAggregateOutputType | null
-    _min: OngMinAggregateOutputType | null
-    _max: OngMaxAggregateOutputType | null
+  export type AggregateOngs = {
+    _count: OngsCountAggregateOutputType | null
+    _avg: OngsAvgAggregateOutputType | null
+    _sum: OngsSumAggregateOutputType | null
+    _min: OngsMinAggregateOutputType | null
+    _max: OngsMaxAggregateOutputType | null
   }
 
-  export type OngAvgAggregateOutputType = {
-    RPA: number | null
+  export type OngsAvgAggregateOutputType = {
     id: number | null
   }
 
-  export type OngSumAggregateOutputType = {
-    RPA: number | null
+  export type OngsSumAggregateOutputType = {
     id: number | null
   }
 
-  export type OngMinAggregateOutputType = {
-    nome_ong: string | null
-    Motivo_da_cria__o_do_projeto_: string | null
-    Sobre: string | null
-    Respons_vel_para_contato: string | null
-    CNPJ_: string | null
-    email: string | null
-    quantidade_pessoas_assistidas: string | null
-    metas: string | null
-    Causa_da_Organiza__o_: string | null
-    area: string | null
-    match_area: string | null
-    objetivos_ods: string | null
-    Atividades_que_o_projeto_desenvolve_: string | null
-    possui_funcionarios: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-    Funcionamento__da_organiza__o: string | null
-    Endere_o: string | null
-    RPA: number | null
-    contato_divulgacao: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-    possui_produto_social: string | null
-    mensagem_para_voluntarios: string | null
-    serve_refeicoes_cozinha_propria: string | null
-    id: number | null
-  }
-
-  export type OngMaxAggregateOutputType = {
-    nome_ong: string | null
-    Motivo_da_cria__o_do_projeto_: string | null
-    Sobre: string | null
-    Respons_vel_para_contato: string | null
-    CNPJ_: string | null
-    email: string | null
-    quantidade_pessoas_assistidas: string | null
-    metas: string | null
-    Causa_da_Organiza__o_: string | null
-    area: string | null
-    match_area: string | null
-    objetivos_ods: string | null
-    Atividades_que_o_projeto_desenvolve_: string | null
-    possui_funcionarios: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-    Funcionamento__da_organiza__o: string | null
-    Endere_o: string | null
-    RPA: number | null
-    contato_divulgacao: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-    possui_produto_social: string | null
-    mensagem_para_voluntarios: string | null
-    serve_refeicoes_cozinha_propria: string | null
-    id: number | null
-  }
-
-  export type OngCountAggregateOutputType = {
-    nome_ong: number
-    Motivo_da_cria__o_do_projeto_: number
-    Sobre: number
-    Respons_vel_para_contato: number
-    CNPJ_: number
-    email: number
-    quantidade_pessoas_assistidas: number
-    metas: number
-    Causa_da_Organiza__o_: number
-    area: number
-    match_area: number
-    objetivos_ods: number
-    Atividades_que_o_projeto_desenvolve_: number
-    possui_funcionarios: number
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: number
-    Funcionamento__da_organiza__o: number
-    Endere_o: number
-    RPA: number
-    contato_divulgacao: number
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: number
-    possui_produto_social: number
-    mensagem_para_voluntarios: number
-    serve_refeicoes_cozinha_propria: number
-    id: number
-    _all: number
-  }
-
-
-  export type OngAvgAggregateInputType = {
-    RPA?: true
-    id?: true
-  }
-
-  export type OngSumAggregateInputType = {
-    RPA?: true
-    id?: true
-  }
-
-  export type OngMinAggregateInputType = {
-    nome_ong?: true
-    Motivo_da_cria__o_do_projeto_?: true
-    Sobre?: true
-    Respons_vel_para_contato?: true
-    CNPJ_?: true
-    email?: true
-    quantidade_pessoas_assistidas?: true
-    metas?: true
-    Causa_da_Organiza__o_?: true
-    area?: true
-    match_area?: true
-    objetivos_ods?: true
-    Atividades_que_o_projeto_desenvolve_?: true
-    possui_funcionarios?: true
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: true
-    Funcionamento__da_organiza__o?: true
-    Endere_o?: true
-    RPA?: true
-    contato_divulgacao?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: true
-    possui_produto_social?: true
-    mensagem_para_voluntarios?: true
-    serve_refeicoes_cozinha_propria?: true
-    id?: true
-  }
-
-  export type OngMaxAggregateInputType = {
-    nome_ong?: true
-    Motivo_da_cria__o_do_projeto_?: true
-    Sobre?: true
-    Respons_vel_para_contato?: true
-    CNPJ_?: true
-    email?: true
-    quantidade_pessoas_assistidas?: true
-    metas?: true
-    Causa_da_Organiza__o_?: true
-    area?: true
-    match_area?: true
-    objetivos_ods?: true
-    Atividades_que_o_projeto_desenvolve_?: true
-    possui_funcionarios?: true
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: true
-    Funcionamento__da_organiza__o?: true
-    Endere_o?: true
-    RPA?: true
-    contato_divulgacao?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: true
-    possui_produto_social?: true
-    mensagem_para_voluntarios?: true
-    serve_refeicoes_cozinha_propria?: true
-    id?: true
-  }
-
-  export type OngCountAggregateInputType = {
-    nome_ong?: true
-    Motivo_da_cria__o_do_projeto_?: true
-    Sobre?: true
-    Respons_vel_para_contato?: true
-    CNPJ_?: true
-    email?: true
-    quantidade_pessoas_assistidas?: true
-    metas?: true
-    Causa_da_Organiza__o_?: true
-    area?: true
-    match_area?: true
-    objetivos_ods?: true
-    Atividades_que_o_projeto_desenvolve_?: true
-    possui_funcionarios?: true
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: true
-    Funcionamento__da_organiza__o?: true
-    Endere_o?: true
-    RPA?: true
-    contato_divulgacao?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: true
-    possui_produto_social?: true
-    mensagem_para_voluntarios?: true
-    serve_refeicoes_cozinha_propria?: true
-    id?: true
-    _all?: true
-  }
-
-  export type OngAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Ong to aggregate.
-     */
-    where?: OngWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Ongs to fetch.
-     */
-    orderBy?: OngOrderByWithRelationInput | OngOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: OngWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Ongs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Ongs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Ongs
-    **/
-    _count?: true | OngCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: OngAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: OngSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: OngMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: OngMaxAggregateInputType
-  }
-
-  export type GetOngAggregateType<T extends OngAggregateArgs> = {
-        [P in keyof T & keyof AggregateOng]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateOng[P]>
-      : GetScalarType<T[P], AggregateOng[P]>
-  }
-
-
-
-
-  export type OngGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OngWhereInput
-    orderBy?: OngOrderByWithAggregationInput | OngOrderByWithAggregationInput[]
-    by: OngScalarFieldEnum[] | OngScalarFieldEnum
-    having?: OngScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: OngCountAggregateInputType | true
-    _avg?: OngAvgAggregateInputType
-    _sum?: OngSumAggregateInputType
-    _min?: OngMinAggregateInputType
-    _max?: OngMaxAggregateInputType
-  }
-
-  export type OngGroupByOutputType = {
-    nome_ong: string | null
-    Motivo_da_cria__o_do_projeto_: string | null
-    Sobre: string | null
-    Respons_vel_para_contato: string | null
-    CNPJ_: string | null
-    email: string | null
-    quantidade_pessoas_assistidas: string | null
-    metas: string | null
-    Causa_da_Organiza__o_: string | null
-    area: string | null
-    match_area: string | null
-    objetivos_ods: string | null
-    Atividades_que_o_projeto_desenvolve_: string | null
-    possui_funcionarios: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-    Funcionamento__da_organiza__o: string | null
-    Endere_o: string | null
-    RPA: number | null
-    contato_divulgacao: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-    possui_produto_social: string | null
-    mensagem_para_voluntarios: string | null
-    serve_refeicoes_cozinha_propria: string | null
-    id: number
-    _count: OngCountAggregateOutputType | null
-    _avg: OngAvgAggregateOutputType | null
-    _sum: OngSumAggregateOutputType | null
-    _min: OngMinAggregateOutputType | null
-    _max: OngMaxAggregateOutputType | null
-  }
-
-  type GetOngGroupByPayload<T extends OngGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<OngGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof OngGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], OngGroupByOutputType[P]>
-            : GetScalarType<T[P], OngGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type OngSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    nome_ong?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Sobre?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    email?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    metas?: boolean
-    Causa_da_Organiza__o_?: boolean
-    area?: boolean
-    match_area?: boolean
-    objetivos_ods?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    possui_funcionarios?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    Endere_o?: boolean
-    RPA?: boolean
-    contato_divulgacao?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    possui_produto_social?: boolean
-    mensagem_para_voluntarios?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    id?: boolean
-  }, ExtArgs["result"]["ong"]>
-
-  export type OngSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    nome_ong?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Sobre?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    email?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    metas?: boolean
-    Causa_da_Organiza__o_?: boolean
-    area?: boolean
-    match_area?: boolean
-    objetivos_ods?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    possui_funcionarios?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    Endere_o?: boolean
-    RPA?: boolean
-    contato_divulgacao?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    possui_produto_social?: boolean
-    mensagem_para_voluntarios?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    id?: boolean
-  }, ExtArgs["result"]["ong"]>
-
-  export type OngSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    nome_ong?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Sobre?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    email?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    metas?: boolean
-    Causa_da_Organiza__o_?: boolean
-    area?: boolean
-    match_area?: boolean
-    objetivos_ods?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    possui_funcionarios?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    Endere_o?: boolean
-    RPA?: boolean
-    contato_divulgacao?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    possui_produto_social?: boolean
-    mensagem_para_voluntarios?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    id?: boolean
-  }, ExtArgs["result"]["ong"]>
-
-  export type OngSelectScalar = {
-    nome_ong?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Sobre?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    email?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    metas?: boolean
-    Causa_da_Organiza__o_?: boolean
-    area?: boolean
-    match_area?: boolean
-    objetivos_ods?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    possui_funcionarios?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    Endere_o?: boolean
-    RPA?: boolean
-    contato_divulgacao?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    possui_produto_social?: boolean
-    mensagem_para_voluntarios?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    id?: boolean
-  }
-
-  export type OngOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nome_ong" | "Motivo_da_cria__o_do_projeto_" | "Sobre" | "Respons_vel_para_contato" | "CNPJ_" | "email" | "quantidade_pessoas_assistidas" | "metas" | "Causa_da_Organiza__o_" | "area" | "match_area" | "objetivos_ods" | "Atividades_que_o_projeto_desenvolve_" | "possui_funcionarios" | "A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_" | "Funcionamento__da_organiza__o" | "Endere_o" | "RPA" | "contato_divulgacao" | "Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__" | "possui_produto_social" | "mensagem_para_voluntarios" | "serve_refeicoes_cozinha_propria" | "id", ExtArgs["result"]["ong"]>
-
-  export type $OngPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Ong"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      nome_ong: string | null
-      Motivo_da_cria__o_do_projeto_: string | null
-      Sobre: string | null
-      Respons_vel_para_contato: string | null
-      CNPJ_: string | null
-      email: string | null
-      quantidade_pessoas_assistidas: string | null
-      metas: string | null
-      Causa_da_Organiza__o_: string | null
-      area: string | null
-      match_area: string | null
-      objetivos_ods: string | null
-      Atividades_que_o_projeto_desenvolve_: string | null
-      possui_funcionarios: string | null
-      A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-      Funcionamento__da_organiza__o: string | null
-      Endere_o: string | null
-      RPA: number | null
-      contato_divulgacao: string | null
-      Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-      possui_produto_social: string | null
-      mensagem_para_voluntarios: string | null
-      serve_refeicoes_cozinha_propria: string | null
-      id: number
-    }, ExtArgs["result"]["ong"]>
-    composites: {}
-  }
-
-  type OngGetPayload<S extends boolean | null | undefined | OngDefaultArgs> = $Result.GetResult<Prisma.$OngPayload, S>
-
-  type OngCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<OngFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: OngCountAggregateInputType | true
-    }
-
-  export interface OngDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Ong'], meta: { name: 'Ong' } }
-    /**
-     * Find zero or one Ong that matches the filter.
-     * @param {OngFindUniqueArgs} args - Arguments to find a Ong
-     * @example
-     * // Get one Ong
-     * const ong = await prisma.ong.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends OngFindUniqueArgs>(args: SelectSubset<T, OngFindUniqueArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Ong that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {OngFindUniqueOrThrowArgs} args - Arguments to find a Ong
-     * @example
-     * // Get one Ong
-     * const ong = await prisma.ong.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends OngFindUniqueOrThrowArgs>(args: SelectSubset<T, OngFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Ong that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngFindFirstArgs} args - Arguments to find a Ong
-     * @example
-     * // Get one Ong
-     * const ong = await prisma.ong.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends OngFindFirstArgs>(args?: SelectSubset<T, OngFindFirstArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Ong that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngFindFirstOrThrowArgs} args - Arguments to find a Ong
-     * @example
-     * // Get one Ong
-     * const ong = await prisma.ong.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends OngFindFirstOrThrowArgs>(args?: SelectSubset<T, OngFindFirstOrThrowArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Ongs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Ongs
-     * const ongs = await prisma.ong.findMany()
-     * 
-     * // Get first 10 Ongs
-     * const ongs = await prisma.ong.findMany({ take: 10 })
-     * 
-     * // Only select the `nome_ong`
-     * const ongWithNome_ongOnly = await prisma.ong.findMany({ select: { nome_ong: true } })
-     * 
-     */
-    findMany<T extends OngFindManyArgs>(args?: SelectSubset<T, OngFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Ong.
-     * @param {OngCreateArgs} args - Arguments to create a Ong.
-     * @example
-     * // Create one Ong
-     * const Ong = await prisma.ong.create({
-     *   data: {
-     *     // ... data to create a Ong
-     *   }
-     * })
-     * 
-     */
-    create<T extends OngCreateArgs>(args: SelectSubset<T, OngCreateArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Ongs.
-     * @param {OngCreateManyArgs} args - Arguments to create many Ongs.
-     * @example
-     * // Create many Ongs
-     * const ong = await prisma.ong.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends OngCreateManyArgs>(args?: SelectSubset<T, OngCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Ongs and returns the data saved in the database.
-     * @param {OngCreateManyAndReturnArgs} args - Arguments to create many Ongs.
-     * @example
-     * // Create many Ongs
-     * const ong = await prisma.ong.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Ongs and only return the `nome_ong`
-     * const ongWithNome_ongOnly = await prisma.ong.createManyAndReturn({
-     *   select: { nome_ong: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends OngCreateManyAndReturnArgs>(args?: SelectSubset<T, OngCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Ong.
-     * @param {OngDeleteArgs} args - Arguments to delete one Ong.
-     * @example
-     * // Delete one Ong
-     * const Ong = await prisma.ong.delete({
-     *   where: {
-     *     // ... filter to delete one Ong
-     *   }
-     * })
-     * 
-     */
-    delete<T extends OngDeleteArgs>(args: SelectSubset<T, OngDeleteArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Ong.
-     * @param {OngUpdateArgs} args - Arguments to update one Ong.
-     * @example
-     * // Update one Ong
-     * const ong = await prisma.ong.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends OngUpdateArgs>(args: SelectSubset<T, OngUpdateArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Ongs.
-     * @param {OngDeleteManyArgs} args - Arguments to filter Ongs to delete.
-     * @example
-     * // Delete a few Ongs
-     * const { count } = await prisma.ong.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends OngDeleteManyArgs>(args?: SelectSubset<T, OngDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Ongs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Ongs
-     * const ong = await prisma.ong.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends OngUpdateManyArgs>(args: SelectSubset<T, OngUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Ongs and returns the data updated in the database.
-     * @param {OngUpdateManyAndReturnArgs} args - Arguments to update many Ongs.
-     * @example
-     * // Update many Ongs
-     * const ong = await prisma.ong.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Ongs and only return the `nome_ong`
-     * const ongWithNome_ongOnly = await prisma.ong.updateManyAndReturn({
-     *   select: { nome_ong: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends OngUpdateManyAndReturnArgs>(args: SelectSubset<T, OngUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Ong.
-     * @param {OngUpsertArgs} args - Arguments to update or create a Ong.
-     * @example
-     * // Update or create a Ong
-     * const ong = await prisma.ong.upsert({
-     *   create: {
-     *     // ... data to create a Ong
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Ong we want to update
-     *   }
-     * })
-     */
-    upsert<T extends OngUpsertArgs>(args: SelectSubset<T, OngUpsertArgs<ExtArgs>>): Prisma__OngClient<$Result.GetResult<Prisma.$OngPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Ongs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngCountArgs} args - Arguments to filter Ongs to count.
-     * @example
-     * // Count the number of Ongs
-     * const count = await prisma.ong.count({
-     *   where: {
-     *     // ... the filter for the Ongs we want to count
-     *   }
-     * })
-    **/
-    count<T extends OngCountArgs>(
-      args?: Subset<T, OngCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], OngCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Ong.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends OngAggregateArgs>(args: Subset<T, OngAggregateArgs>): Prisma.PrismaPromise<GetOngAggregateType<T>>
-
-    /**
-     * Group by Ong.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OngGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends OngGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OngGroupByArgs['orderBy'] }
-        : { orderBy?: OngGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, OngGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOngGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Ong model
-   */
-  readonly fields: OngFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Ong.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__OngClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Ong model
-   */
-  interface OngFieldRefs {
-    readonly nome_ong: FieldRef<"Ong", 'String'>
-    readonly Motivo_da_cria__o_do_projeto_: FieldRef<"Ong", 'String'>
-    readonly Sobre: FieldRef<"Ong", 'String'>
-    readonly Respons_vel_para_contato: FieldRef<"Ong", 'String'>
-    readonly CNPJ_: FieldRef<"Ong", 'String'>
-    readonly email: FieldRef<"Ong", 'String'>
-    readonly quantidade_pessoas_assistidas: FieldRef<"Ong", 'String'>
-    readonly metas: FieldRef<"Ong", 'String'>
-    readonly Causa_da_Organiza__o_: FieldRef<"Ong", 'String'>
-    readonly area: FieldRef<"Ong", 'String'>
-    readonly match_area: FieldRef<"Ong", 'String'>
-    readonly objetivos_ods: FieldRef<"Ong", 'String'>
-    readonly Atividades_que_o_projeto_desenvolve_: FieldRef<"Ong", 'String'>
-    readonly possui_funcionarios: FieldRef<"Ong", 'String'>
-    readonly A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: FieldRef<"Ong", 'String'>
-    readonly Funcionamento__da_organiza__o: FieldRef<"Ong", 'String'>
-    readonly Endere_o: FieldRef<"Ong", 'String'>
-    readonly RPA: FieldRef<"Ong", 'Float'>
-    readonly contato_divulgacao: FieldRef<"Ong", 'String'>
-    readonly Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: FieldRef<"Ong", 'String'>
-    readonly possui_produto_social: FieldRef<"Ong", 'String'>
-    readonly mensagem_para_voluntarios: FieldRef<"Ong", 'String'>
-    readonly serve_refeicoes_cozinha_propria: FieldRef<"Ong", 'String'>
-    readonly id: FieldRef<"Ong", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Ong findUnique
-   */
-  export type OngFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * Filter, which Ong to fetch.
-     */
-    where: OngWhereUniqueInput
-  }
-
-  /**
-   * Ong findUniqueOrThrow
-   */
-  export type OngFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * Filter, which Ong to fetch.
-     */
-    where: OngWhereUniqueInput
-  }
-
-  /**
-   * Ong findFirst
-   */
-  export type OngFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * Filter, which Ong to fetch.
-     */
-    where?: OngWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Ongs to fetch.
-     */
-    orderBy?: OngOrderByWithRelationInput | OngOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Ongs.
-     */
-    cursor?: OngWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Ongs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Ongs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Ongs.
-     */
-    distinct?: OngScalarFieldEnum | OngScalarFieldEnum[]
-  }
-
-  /**
-   * Ong findFirstOrThrow
-   */
-  export type OngFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * Filter, which Ong to fetch.
-     */
-    where?: OngWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Ongs to fetch.
-     */
-    orderBy?: OngOrderByWithRelationInput | OngOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Ongs.
-     */
-    cursor?: OngWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Ongs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Ongs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Ongs.
-     */
-    distinct?: OngScalarFieldEnum | OngScalarFieldEnum[]
-  }
-
-  /**
-   * Ong findMany
-   */
-  export type OngFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * Filter, which Ongs to fetch.
-     */
-    where?: OngWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Ongs to fetch.
-     */
-    orderBy?: OngOrderByWithRelationInput | OngOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Ongs.
-     */
-    cursor?: OngWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Ongs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Ongs.
-     */
-    skip?: number
-    distinct?: OngScalarFieldEnum | OngScalarFieldEnum[]
-  }
-
-  /**
-   * Ong create
-   */
-  export type OngCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * The data needed to create a Ong.
-     */
-    data?: XOR<OngCreateInput, OngUncheckedCreateInput>
-  }
-
-  /**
-   * Ong createMany
-   */
-  export type OngCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Ongs.
-     */
-    data: OngCreateManyInput | OngCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Ong createManyAndReturn
-   */
-  export type OngCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * The data used to create many Ongs.
-     */
-    data: OngCreateManyInput | OngCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Ong update
-   */
-  export type OngUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * The data needed to update a Ong.
-     */
-    data: XOR<OngUpdateInput, OngUncheckedUpdateInput>
-    /**
-     * Choose, which Ong to update.
-     */
-    where: OngWhereUniqueInput
-  }
-
-  /**
-   * Ong updateMany
-   */
-  export type OngUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Ongs.
-     */
-    data: XOR<OngUpdateManyMutationInput, OngUncheckedUpdateManyInput>
-    /**
-     * Filter which Ongs to update
-     */
-    where?: OngWhereInput
-    /**
-     * Limit how many Ongs to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Ong updateManyAndReturn
-   */
-  export type OngUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * The data used to update Ongs.
-     */
-    data: XOR<OngUpdateManyMutationInput, OngUncheckedUpdateManyInput>
-    /**
-     * Filter which Ongs to update
-     */
-    where?: OngWhereInput
-    /**
-     * Limit how many Ongs to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Ong upsert
-   */
-  export type OngUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * The filter to search for the Ong to update in case it exists.
-     */
-    where: OngWhereUniqueInput
-    /**
-     * In case the Ong found by the `where` argument doesn't exist, create a new Ong with this data.
-     */
-    create: XOR<OngCreateInput, OngUncheckedCreateInput>
-    /**
-     * In case the Ong was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<OngUpdateInput, OngUncheckedUpdateInput>
-  }
-
-  /**
-   * Ong delete
-   */
-  export type OngDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-    /**
-     * Filter which Ong to delete.
-     */
-    where: OngWhereUniqueInput
-  }
-
-  /**
-   * Ong deleteMany
-   */
-  export type OngDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Ongs to delete
-     */
-    where?: OngWhereInput
-    /**
-     * Limit how many Ongs to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Ong without action
-   */
-  export type OngDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ong
-     */
-    select?: OngSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ong
-     */
-    omit?: OngOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model tabela_ongs
-   */
-
-  export type AggregateTabela_ongs = {
-    _count: Tabela_ongsCountAggregateOutputType | null
-    _avg: Tabela_ongsAvgAggregateOutputType | null
-    _sum: Tabela_ongsSumAggregateOutputType | null
-    _min: Tabela_ongsMinAggregateOutputType | null
-    _max: Tabela_ongsMaxAggregateOutputType | null
-  }
-
-  export type Tabela_ongsAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type Tabela_ongsSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type Tabela_ongsMinAggregateOutputType = {
+  export type OngsMinAggregateOutputType = {
     id: number | null
     nome_ong: string | null
     motivo_criacao: string | null
     sobre: string | null
     responsavel_contato: string | null
     cnpj: string | null
+    email: string | null
     quantidade_assistidos: string | null
     metas: string | null
     causa_organizacao: string | null
     area: string | null
     match_area: string | null
+    objetivos_ods: string | null
+    atividades_projeto_desenvolve: string | null
     possui_voluntarios: string | null
     possui_funcionarios: string | null
     funcionamento: string | null
@@ -6032,48 +4664,23 @@ export namespace Prisma {
     produto_social: string | null
     mensagem_convite: string | null
     serve_refeicao: string | null
-    Nome_da_ONG_Projeto: string | null
-    Motivo_da_cria__o_do_projeto_: string | null
-    Respons_vel_para_contato: string | null
-    CNPJ_: string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: string | null
-    Metas_de_curto__m_dio_e_longo_prazo: string | null
-    Causa_da_Organiza__o_: string | null
-    rea: string | null
-    Match: string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: string | null
-    Atividades_que_o_projeto_desenvolve_: string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-    Funcionamento__da_organiza__o: string | null
-    endere_o: string | null
-    Contato_para_divulga__o: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: string | null
-    quantidade_pessoas_assistidas: string | null
-    objetivos_ods: string | null
-    possui_funcionarios_quantos: string | null
-    possui_produto_social_quais: string | null
-    mensagem_para_voluntarios_doadores: string | null
-    serve_refeicoes_cozinha_propria: string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: string | null
   }
 
-  export type Tabela_ongsMaxAggregateOutputType = {
+  export type OngsMaxAggregateOutputType = {
     id: number | null
     nome_ong: string | null
     motivo_criacao: string | null
     sobre: string | null
     responsavel_contato: string | null
     cnpj: string | null
+    email: string | null
     quantidade_assistidos: string | null
     metas: string | null
     causa_organizacao: string | null
     area: string | null
     match_area: string | null
+    objetivos_ods: string | null
+    atividades_projeto_desenvolve: string | null
     possui_voluntarios: string | null
     possui_funcionarios: string | null
     funcionamento: string | null
@@ -6084,48 +4691,23 @@ export namespace Prisma {
     produto_social: string | null
     mensagem_convite: string | null
     serve_refeicao: string | null
-    Nome_da_ONG_Projeto: string | null
-    Motivo_da_cria__o_do_projeto_: string | null
-    Respons_vel_para_contato: string | null
-    CNPJ_: string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: string | null
-    Metas_de_curto__m_dio_e_longo_prazo: string | null
-    Causa_da_Organiza__o_: string | null
-    rea: string | null
-    Match: string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: string | null
-    Atividades_que_o_projeto_desenvolve_: string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-    Funcionamento__da_organiza__o: string | null
-    endere_o: string | null
-    Contato_para_divulga__o: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: string | null
-    quantidade_pessoas_assistidas: string | null
-    objetivos_ods: string | null
-    possui_funcionarios_quantos: string | null
-    possui_produto_social_quais: string | null
-    mensagem_para_voluntarios_doadores: string | null
-    serve_refeicoes_cozinha_propria: string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: string | null
   }
 
-  export type Tabela_ongsCountAggregateOutputType = {
+  export type OngsCountAggregateOutputType = {
     id: number
     nome_ong: number
     motivo_criacao: number
     sobre: number
     responsavel_contato: number
     cnpj: number
+    email: number
     quantidade_assistidos: number
     metas: number
     causa_organizacao: number
     area: number
     match_area: number
+    objetivos_ods: number
+    atividades_projeto_desenvolve: number
     possui_voluntarios: number
     possui_funcionarios: number
     funcionamento: number
@@ -6136,58 +4718,33 @@ export namespace Prisma {
     produto_social: number
     mensagem_convite: number
     serve_refeicao: number
-    Nome_da_ONG_Projeto: number
-    Motivo_da_cria__o_do_projeto_: number
-    Respons_vel_para_contato: number
-    CNPJ_: number
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: number
-    Metas_de_curto__m_dio_e_longo_prazo: number
-    Causa_da_Organiza__o_: number
-    rea: number
-    Match: number
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: number
-    Atividades_que_o_projeto_desenvolve_: number
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: number
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: number
-    Funcionamento__da_organiza__o: number
-    endere_o: number
-    Contato_para_divulga__o: number
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: number
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: number
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: number
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: number
-    quantidade_pessoas_assistidas: number
-    objetivos_ods: number
-    possui_funcionarios_quantos: number
-    possui_produto_social_quais: number
-    mensagem_para_voluntarios_doadores: number
-    serve_refeicoes_cozinha_propria: number
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: number
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: number
     _all: number
   }
 
 
-  export type Tabela_ongsAvgAggregateInputType = {
+  export type OngsAvgAggregateInputType = {
     id?: true
   }
 
-  export type Tabela_ongsSumAggregateInputType = {
+  export type OngsSumAggregateInputType = {
     id?: true
   }
 
-  export type Tabela_ongsMinAggregateInputType = {
+  export type OngsMinAggregateInputType = {
     id?: true
     nome_ong?: true
     motivo_criacao?: true
     sobre?: true
     responsavel_contato?: true
     cnpj?: true
+    email?: true
     quantidade_assistidos?: true
     metas?: true
     causa_organizacao?: true
     area?: true
     match_area?: true
+    objetivos_ods?: true
+    atividades_projeto_desenvolve?: true
     possui_voluntarios?: true
     possui_funcionarios?: true
     funcionamento?: true
@@ -6198,48 +4755,23 @@ export namespace Prisma {
     produto_social?: true
     mensagem_convite?: true
     serve_refeicao?: true
-    Nome_da_ONG_Projeto?: true
-    Motivo_da_cria__o_do_projeto_?: true
-    Respons_vel_para_contato?: true
-    CNPJ_?: true
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: true
-    Metas_de_curto__m_dio_e_longo_prazo?: true
-    Causa_da_Organiza__o_?: true
-    rea?: true
-    Match?: true
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: true
-    Atividades_que_o_projeto_desenvolve_?: true
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: true
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: true
-    Funcionamento__da_organiza__o?: true
-    endere_o?: true
-    Contato_para_divulga__o?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: true
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: true
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: true
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: true
-    quantidade_pessoas_assistidas?: true
-    objetivos_ods?: true
-    possui_funcionarios_quantos?: true
-    possui_produto_social_quais?: true
-    mensagem_para_voluntarios_doadores?: true
-    serve_refeicoes_cozinha_propria?: true
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: true
   }
 
-  export type Tabela_ongsMaxAggregateInputType = {
+  export type OngsMaxAggregateInputType = {
     id?: true
     nome_ong?: true
     motivo_criacao?: true
     sobre?: true
     responsavel_contato?: true
     cnpj?: true
+    email?: true
     quantidade_assistidos?: true
     metas?: true
     causa_organizacao?: true
     area?: true
     match_area?: true
+    objetivos_ods?: true
+    atividades_projeto_desenvolve?: true
     possui_voluntarios?: true
     possui_funcionarios?: true
     funcionamento?: true
@@ -6250,48 +4782,23 @@ export namespace Prisma {
     produto_social?: true
     mensagem_convite?: true
     serve_refeicao?: true
-    Nome_da_ONG_Projeto?: true
-    Motivo_da_cria__o_do_projeto_?: true
-    Respons_vel_para_contato?: true
-    CNPJ_?: true
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: true
-    Metas_de_curto__m_dio_e_longo_prazo?: true
-    Causa_da_Organiza__o_?: true
-    rea?: true
-    Match?: true
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: true
-    Atividades_que_o_projeto_desenvolve_?: true
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: true
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: true
-    Funcionamento__da_organiza__o?: true
-    endere_o?: true
-    Contato_para_divulga__o?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: true
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: true
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: true
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: true
-    quantidade_pessoas_assistidas?: true
-    objetivos_ods?: true
-    possui_funcionarios_quantos?: true
-    possui_produto_social_quais?: true
-    mensagem_para_voluntarios_doadores?: true
-    serve_refeicoes_cozinha_propria?: true
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: true
   }
 
-  export type Tabela_ongsCountAggregateInputType = {
+  export type OngsCountAggregateInputType = {
     id?: true
     nome_ong?: true
     motivo_criacao?: true
     sobre?: true
     responsavel_contato?: true
     cnpj?: true
+    email?: true
     quantidade_assistidos?: true
     metas?: true
     causa_organizacao?: true
     area?: true
     match_area?: true
+    objetivos_ods?: true
+    atividades_projeto_desenvolve?: true
     possui_voluntarios?: true
     possui_funcionarios?: true
     funcionamento?: true
@@ -6302,135 +4809,110 @@ export namespace Prisma {
     produto_social?: true
     mensagem_convite?: true
     serve_refeicao?: true
-    Nome_da_ONG_Projeto?: true
-    Motivo_da_cria__o_do_projeto_?: true
-    Respons_vel_para_contato?: true
-    CNPJ_?: true
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: true
-    Metas_de_curto__m_dio_e_longo_prazo?: true
-    Causa_da_Organiza__o_?: true
-    rea?: true
-    Match?: true
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: true
-    Atividades_que_o_projeto_desenvolve_?: true
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: true
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: true
-    Funcionamento__da_organiza__o?: true
-    endere_o?: true
-    Contato_para_divulga__o?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: true
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: true
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: true
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: true
-    quantidade_pessoas_assistidas?: true
-    objetivos_ods?: true
-    possui_funcionarios_quantos?: true
-    possui_produto_social_quais?: true
-    mensagem_para_voluntarios_doadores?: true
-    serve_refeicoes_cozinha_propria?: true
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: true
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: true
     _all?: true
   }
 
-  export type Tabela_ongsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OngsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which tabela_ongs to aggregate.
+     * Filter which ongs to aggregate.
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of tabela_ongs to fetch.
+     * Determine the order of ongs to fetch.
      */
-    orderBy?: tabela_ongsOrderByWithRelationInput | tabela_ongsOrderByWithRelationInput[]
+    orderBy?: ongsOrderByWithRelationInput | ongsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: tabela_ongsWhereUniqueInput
+    cursor?: ongsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` tabela_ongs from the position of the cursor.
+     * Take `±n` ongs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` tabela_ongs.
+     * Skip the first `n` ongs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned tabela_ongs
+     * Count returned ongs
     **/
-    _count?: true | Tabela_ongsCountAggregateInputType
+    _count?: true | OngsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: Tabela_ongsAvgAggregateInputType
+    _avg?: OngsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: Tabela_ongsSumAggregateInputType
+    _sum?: OngsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: Tabela_ongsMinAggregateInputType
+    _min?: OngsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: Tabela_ongsMaxAggregateInputType
+    _max?: OngsMaxAggregateInputType
   }
 
-  export type GetTabela_ongsAggregateType<T extends Tabela_ongsAggregateArgs> = {
-        [P in keyof T & keyof AggregateTabela_ongs]: P extends '_count' | 'count'
+  export type GetOngsAggregateType<T extends OngsAggregateArgs> = {
+        [P in keyof T & keyof AggregateOngs]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTabela_ongs[P]>
-      : GetScalarType<T[P], AggregateTabela_ongs[P]>
+        : GetScalarType<T[P], AggregateOngs[P]>
+      : GetScalarType<T[P], AggregateOngs[P]>
   }
 
 
 
 
-  export type tabela_ongsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: tabela_ongsWhereInput
-    orderBy?: tabela_ongsOrderByWithAggregationInput | tabela_ongsOrderByWithAggregationInput[]
-    by: Tabela_ongsScalarFieldEnum[] | Tabela_ongsScalarFieldEnum
-    having?: tabela_ongsScalarWhereWithAggregatesInput
+  export type ongsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ongsWhereInput
+    orderBy?: ongsOrderByWithAggregationInput | ongsOrderByWithAggregationInput[]
+    by: OngsScalarFieldEnum[] | OngsScalarFieldEnum
+    having?: ongsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: Tabela_ongsCountAggregateInputType | true
-    _avg?: Tabela_ongsAvgAggregateInputType
-    _sum?: Tabela_ongsSumAggregateInputType
-    _min?: Tabela_ongsMinAggregateInputType
-    _max?: Tabela_ongsMaxAggregateInputType
+    _count?: OngsCountAggregateInputType | true
+    _avg?: OngsAvgAggregateInputType
+    _sum?: OngsSumAggregateInputType
+    _min?: OngsMinAggregateInputType
+    _max?: OngsMaxAggregateInputType
   }
 
-  export type Tabela_ongsGroupByOutputType = {
+  export type OngsGroupByOutputType = {
     id: number
     nome_ong: string | null
     motivo_criacao: string | null
     sobre: string | null
     responsavel_contato: string | null
     cnpj: string | null
+    email: string | null
     quantidade_assistidos: string | null
     metas: string | null
     causa_organizacao: string | null
     area: string | null
     match_area: string | null
+    objetivos_ods: string | null
+    atividades_projeto_desenvolve: string | null
     possui_voluntarios: string | null
     possui_funcionarios: string | null
     funcionamento: string | null
@@ -6441,67 +4923,42 @@ export namespace Prisma {
     produto_social: string | null
     mensagem_convite: string | null
     serve_refeicao: string | null
-    Nome_da_ONG_Projeto: string | null
-    Motivo_da_cria__o_do_projeto_: string | null
-    Respons_vel_para_contato: string | null
-    CNPJ_: string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: string | null
-    Metas_de_curto__m_dio_e_longo_prazo: string | null
-    Causa_da_Organiza__o_: string | null
-    rea: string | null
-    Match: string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: string | null
-    Atividades_que_o_projeto_desenvolve_: string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-    Funcionamento__da_organiza__o: string | null
-    endere_o: string | null
-    Contato_para_divulga__o: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: string | null
-    quantidade_pessoas_assistidas: string | null
-    objetivos_ods: string | null
-    possui_funcionarios_quantos: string | null
-    possui_produto_social_quais: string | null
-    mensagem_para_voluntarios_doadores: string | null
-    serve_refeicoes_cozinha_propria: string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: string | null
-    _count: Tabela_ongsCountAggregateOutputType | null
-    _avg: Tabela_ongsAvgAggregateOutputType | null
-    _sum: Tabela_ongsSumAggregateOutputType | null
-    _min: Tabela_ongsMinAggregateOutputType | null
-    _max: Tabela_ongsMaxAggregateOutputType | null
+    _count: OngsCountAggregateOutputType | null
+    _avg: OngsAvgAggregateOutputType | null
+    _sum: OngsSumAggregateOutputType | null
+    _min: OngsMinAggregateOutputType | null
+    _max: OngsMaxAggregateOutputType | null
   }
 
-  type GetTabela_ongsGroupByPayload<T extends tabela_ongsGroupByArgs> = Prisma.PrismaPromise<
+  type GetOngsGroupByPayload<T extends ongsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<Tabela_ongsGroupByOutputType, T['by']> &
+      PickEnumerable<OngsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof Tabela_ongsGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof OngsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], Tabela_ongsGroupByOutputType[P]>
-            : GetScalarType<T[P], Tabela_ongsGroupByOutputType[P]>
+              : GetScalarType<T[P], OngsGroupByOutputType[P]>
+            : GetScalarType<T[P], OngsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type tabela_ongsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ongsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nome_ong?: boolean
     motivo_criacao?: boolean
     sobre?: boolean
     responsavel_contato?: boolean
     cnpj?: boolean
+    email?: boolean
     quantidade_assistidos?: boolean
     metas?: boolean
     causa_organizacao?: boolean
     area?: boolean
     match_area?: boolean
+    objetivos_ods?: boolean
+    atividades_projeto_desenvolve?: boolean
     possui_voluntarios?: boolean
     possui_funcionarios?: boolean
     funcionamento?: boolean
@@ -6512,48 +4969,23 @@ export namespace Prisma {
     produto_social?: boolean
     mensagem_convite?: boolean
     serve_refeicao?: boolean
-    Nome_da_ONG_Projeto?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: boolean
-    Metas_de_curto__m_dio_e_longo_prazo?: boolean
-    Causa_da_Organiza__o_?: boolean
-    rea?: boolean
-    Match?: boolean
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    endere_o?: boolean
-    Contato_para_divulga__o?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: boolean
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: boolean
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    objetivos_ods?: boolean
-    possui_funcionarios_quantos?: boolean
-    possui_produto_social_quais?: boolean
-    mensagem_para_voluntarios_doadores?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: boolean
-  }, ExtArgs["result"]["tabela_ongs"]>
+  }, ExtArgs["result"]["ongs"]>
 
-  export type tabela_ongsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ongsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nome_ong?: boolean
     motivo_criacao?: boolean
     sobre?: boolean
     responsavel_contato?: boolean
     cnpj?: boolean
+    email?: boolean
     quantidade_assistidos?: boolean
     metas?: boolean
     causa_organizacao?: boolean
     area?: boolean
     match_area?: boolean
+    objetivos_ods?: boolean
+    atividades_projeto_desenvolve?: boolean
     possui_voluntarios?: boolean
     possui_funcionarios?: boolean
     funcionamento?: boolean
@@ -6564,48 +4996,23 @@ export namespace Prisma {
     produto_social?: boolean
     mensagem_convite?: boolean
     serve_refeicao?: boolean
-    Nome_da_ONG_Projeto?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: boolean
-    Metas_de_curto__m_dio_e_longo_prazo?: boolean
-    Causa_da_Organiza__o_?: boolean
-    rea?: boolean
-    Match?: boolean
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    endere_o?: boolean
-    Contato_para_divulga__o?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: boolean
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: boolean
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    objetivos_ods?: boolean
-    possui_funcionarios_quantos?: boolean
-    possui_produto_social_quais?: boolean
-    mensagem_para_voluntarios_doadores?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: boolean
-  }, ExtArgs["result"]["tabela_ongs"]>
+  }, ExtArgs["result"]["ongs"]>
 
-  export type tabela_ongsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ongsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nome_ong?: boolean
     motivo_criacao?: boolean
     sobre?: boolean
     responsavel_contato?: boolean
     cnpj?: boolean
+    email?: boolean
     quantidade_assistidos?: boolean
     metas?: boolean
     causa_organizacao?: boolean
     area?: boolean
     match_area?: boolean
+    objetivos_ods?: boolean
+    atividades_projeto_desenvolve?: boolean
     possui_voluntarios?: boolean
     possui_funcionarios?: boolean
     funcionamento?: boolean
@@ -6616,48 +5023,23 @@ export namespace Prisma {
     produto_social?: boolean
     mensagem_convite?: boolean
     serve_refeicao?: boolean
-    Nome_da_ONG_Projeto?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: boolean
-    Metas_de_curto__m_dio_e_longo_prazo?: boolean
-    Causa_da_Organiza__o_?: boolean
-    rea?: boolean
-    Match?: boolean
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    endere_o?: boolean
-    Contato_para_divulga__o?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: boolean
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: boolean
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    objetivos_ods?: boolean
-    possui_funcionarios_quantos?: boolean
-    possui_produto_social_quais?: boolean
-    mensagem_para_voluntarios_doadores?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: boolean
-  }, ExtArgs["result"]["tabela_ongs"]>
+  }, ExtArgs["result"]["ongs"]>
 
-  export type tabela_ongsSelectScalar = {
+  export type ongsSelectScalar = {
     id?: boolean
     nome_ong?: boolean
     motivo_criacao?: boolean
     sobre?: boolean
     responsavel_contato?: boolean
     cnpj?: boolean
+    email?: boolean
     quantidade_assistidos?: boolean
     metas?: boolean
     causa_organizacao?: boolean
     area?: boolean
     match_area?: boolean
+    objetivos_ods?: boolean
+    atividades_projeto_desenvolve?: boolean
     possui_voluntarios?: boolean
     possui_funcionarios?: boolean
     funcionamento?: boolean
@@ -6668,40 +5050,12 @@ export namespace Prisma {
     produto_social?: boolean
     mensagem_convite?: boolean
     serve_refeicao?: boolean
-    Nome_da_ONG_Projeto?: boolean
-    Motivo_da_cria__o_do_projeto_?: boolean
-    Respons_vel_para_contato?: boolean
-    CNPJ_?: boolean
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: boolean
-    Metas_de_curto__m_dio_e_longo_prazo?: boolean
-    Causa_da_Organiza__o_?: boolean
-    rea?: boolean
-    Match?: boolean
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: boolean
-    Atividades_que_o_projeto_desenvolve_?: boolean
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: boolean
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: boolean
-    Funcionamento__da_organiza__o?: boolean
-    endere_o?: boolean
-    Contato_para_divulga__o?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: boolean
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: boolean
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: boolean
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: boolean
-    quantidade_pessoas_assistidas?: boolean
-    objetivos_ods?: boolean
-    possui_funcionarios_quantos?: boolean
-    possui_produto_social_quais?: boolean
-    mensagem_para_voluntarios_doadores?: boolean
-    serve_refeicoes_cozinha_propria?: boolean
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: boolean
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: boolean
   }
 
-  export type tabela_ongsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome_ong" | "motivo_criacao" | "sobre" | "responsavel_contato" | "cnpj" | "quantidade_assistidos" | "metas" | "causa_organizacao" | "area" | "match_area" | "possui_voluntarios" | "possui_funcionarios" | "funcionamento" | "endereco" | "rpa" | "contato_divulgacao" | "redes_sociais" | "produto_social" | "mensagem_convite" | "serve_refeicao" | "Nome_da_ONG_Projeto" | "Motivo_da_cria__o_do_projeto_" | "Respons_vel_para_contato" | "CNPJ_" | "Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba" | "Metas_de_curto__m_dio_e_longo_prazo" | "Causa_da_Organiza__o_" | "rea" | "Match" | "Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_" | "Atividades_que_o_projeto_desenvolve_" | "Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_" | "A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_" | "Funcionamento__da_organiza__o" | "endere_o" | "Contato_para_divulga__o" | "Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__" | "Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_" | "Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co" | "A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara" | "quantidade_pessoas_assistidas" | "objetivos_ods" | "possui_funcionarios_quantos" | "possui_produto_social_quais" | "mensagem_para_voluntarios_doadores" | "serve_refeicoes_cozinha_propria" | "Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con" | "Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__", ExtArgs["result"]["tabela_ongs"]>
+  export type ongsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome_ong" | "motivo_criacao" | "sobre" | "responsavel_contato" | "cnpj" | "email" | "quantidade_assistidos" | "metas" | "causa_organizacao" | "area" | "match_area" | "objetivos_ods" | "atividades_projeto_desenvolve" | "possui_voluntarios" | "possui_funcionarios" | "funcionamento" | "endereco" | "rpa" | "contato_divulgacao" | "redes_sociais" | "produto_social" | "mensagem_convite" | "serve_refeicao", ExtArgs["result"]["ongs"]>
 
-  export type $tabela_ongsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "tabela_ongs"
+  export type $ongsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ongs"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6710,11 +5064,14 @@ export namespace Prisma {
       sobre: string | null
       responsavel_contato: string | null
       cnpj: string | null
+      email: string | null
       quantidade_assistidos: string | null
       metas: string | null
       causa_organizacao: string | null
       area: string | null
       match_area: string | null
+      objetivos_ods: string | null
+      atividades_projeto_desenvolve: string | null
       possui_voluntarios: string | null
       possui_funcionarios: string | null
       funcionamento: string | null
@@ -6725,164 +5082,136 @@ export namespace Prisma {
       produto_social: string | null
       mensagem_convite: string | null
       serve_refeicao: string | null
-      Nome_da_ONG_Projeto: string | null
-      Motivo_da_cria__o_do_projeto_: string | null
-      Respons_vel_para_contato: string | null
-      CNPJ_: string | null
-      Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: string | null
-      Metas_de_curto__m_dio_e_longo_prazo: string | null
-      Causa_da_Organiza__o_: string | null
-      rea: string | null
-      Match: string | null
-      Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: string | null
-      Atividades_que_o_projeto_desenvolve_: string | null
-      Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: string | null
-      A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: string | null
-      Funcionamento__da_organiza__o: string | null
-      endere_o: string | null
-      Contato_para_divulga__o: string | null
-      Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: string | null
-      Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: string | null
-      Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: string | null
-      A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: string | null
-      quantidade_pessoas_assistidas: string | null
-      objetivos_ods: string | null
-      possui_funcionarios_quantos: string | null
-      possui_produto_social_quais: string | null
-      mensagem_para_voluntarios_doadores: string | null
-      serve_refeicoes_cozinha_propria: string | null
-      Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: string | null
-      Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: string | null
-    }, ExtArgs["result"]["tabela_ongs"]>
+    }, ExtArgs["result"]["ongs"]>
     composites: {}
   }
 
-  type tabela_ongsGetPayload<S extends boolean | null | undefined | tabela_ongsDefaultArgs> = $Result.GetResult<Prisma.$tabela_ongsPayload, S>
+  type ongsGetPayload<S extends boolean | null | undefined | ongsDefaultArgs> = $Result.GetResult<Prisma.$ongsPayload, S>
 
-  type tabela_ongsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<tabela_ongsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Tabela_ongsCountAggregateInputType | true
+  type ongsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ongsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OngsCountAggregateInputType | true
     }
 
-  export interface tabela_ongsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tabela_ongs'], meta: { name: 'tabela_ongs' } }
+  export interface ongsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ongs'], meta: { name: 'ongs' } }
     /**
-     * Find zero or one Tabela_ongs that matches the filter.
-     * @param {tabela_ongsFindUniqueArgs} args - Arguments to find a Tabela_ongs
+     * Find zero or one Ongs that matches the filter.
+     * @param {ongsFindUniqueArgs} args - Arguments to find a Ongs
      * @example
-     * // Get one Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.findUnique({
+     * // Get one Ongs
+     * const ongs = await prisma.ongs.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends tabela_ongsFindUniqueArgs>(args: SelectSubset<T, tabela_ongsFindUniqueArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ongsFindUniqueArgs>(args: SelectSubset<T, ongsFindUniqueArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Tabela_ongs that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Ongs that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {tabela_ongsFindUniqueOrThrowArgs} args - Arguments to find a Tabela_ongs
+     * @param {ongsFindUniqueOrThrowArgs} args - Arguments to find a Ongs
      * @example
-     * // Get one Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.findUniqueOrThrow({
+     * // Get one Ongs
+     * const ongs = await prisma.ongs.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends tabela_ongsFindUniqueOrThrowArgs>(args: SelectSubset<T, tabela_ongsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ongsFindUniqueOrThrowArgs>(args: SelectSubset<T, ongsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Tabela_ongs that matches the filter.
+     * Find the first Ongs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {tabela_ongsFindFirstArgs} args - Arguments to find a Tabela_ongs
+     * @param {ongsFindFirstArgs} args - Arguments to find a Ongs
      * @example
-     * // Get one Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.findFirst({
+     * // Get one Ongs
+     * const ongs = await prisma.ongs.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends tabela_ongsFindFirstArgs>(args?: SelectSubset<T, tabela_ongsFindFirstArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ongsFindFirstArgs>(args?: SelectSubset<T, ongsFindFirstArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Tabela_ongs that matches the filter or
+     * Find the first Ongs that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {tabela_ongsFindFirstOrThrowArgs} args - Arguments to find a Tabela_ongs
+     * @param {ongsFindFirstOrThrowArgs} args - Arguments to find a Ongs
      * @example
-     * // Get one Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.findFirstOrThrow({
+     * // Get one Ongs
+     * const ongs = await prisma.ongs.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends tabela_ongsFindFirstOrThrowArgs>(args?: SelectSubset<T, tabela_ongsFindFirstOrThrowArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ongsFindFirstOrThrowArgs>(args?: SelectSubset<T, ongsFindFirstOrThrowArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Tabela_ongs that matches the filter.
+     * Find zero or more Ongs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {tabela_ongsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ongsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.findMany()
+     * // Get all Ongs
+     * const ongs = await prisma.ongs.findMany()
      * 
-     * // Get first 10 Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.findMany({ take: 10 })
+     * // Get first 10 Ongs
+     * const ongs = await prisma.ongs.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const tabela_ongsWithIdOnly = await prisma.tabela_ongs.findMany({ select: { id: true } })
+     * const ongsWithIdOnly = await prisma.ongs.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends tabela_ongsFindManyArgs>(args?: SelectSubset<T, tabela_ongsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ongsFindManyArgs>(args?: SelectSubset<T, ongsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Tabela_ongs.
-     * @param {tabela_ongsCreateArgs} args - Arguments to create a Tabela_ongs.
+     * Create a Ongs.
+     * @param {ongsCreateArgs} args - Arguments to create a Ongs.
      * @example
-     * // Create one Tabela_ongs
-     * const Tabela_ongs = await prisma.tabela_ongs.create({
+     * // Create one Ongs
+     * const Ongs = await prisma.ongs.create({
      *   data: {
-     *     // ... data to create a Tabela_ongs
+     *     // ... data to create a Ongs
      *   }
      * })
      * 
      */
-    create<T extends tabela_ongsCreateArgs>(args: SelectSubset<T, tabela_ongsCreateArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ongsCreateArgs>(args: SelectSubset<T, ongsCreateArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Tabela_ongs.
-     * @param {tabela_ongsCreateManyArgs} args - Arguments to create many Tabela_ongs.
+     * Create many Ongs.
+     * @param {ongsCreateManyArgs} args - Arguments to create many Ongs.
      * @example
-     * // Create many Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.createMany({
+     * // Create many Ongs
+     * const ongs = await prisma.ongs.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends tabela_ongsCreateManyArgs>(args?: SelectSubset<T, tabela_ongsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ongsCreateManyArgs>(args?: SelectSubset<T, ongsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Tabela_ongs and returns the data saved in the database.
-     * @param {tabela_ongsCreateManyAndReturnArgs} args - Arguments to create many Tabela_ongs.
+     * Create many Ongs and returns the data saved in the database.
+     * @param {ongsCreateManyAndReturnArgs} args - Arguments to create many Ongs.
      * @example
-     * // Create many Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.createManyAndReturn({
+     * // Create many Ongs
+     * const ongs = await prisma.ongs.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Tabela_ongs and only return the `id`
-     * const tabela_ongsWithIdOnly = await prisma.tabela_ongs.createManyAndReturn({
+     * // Create many Ongs and only return the `id`
+     * const ongsWithIdOnly = await prisma.ongs.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -6892,28 +5221,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends tabela_ongsCreateManyAndReturnArgs>(args?: SelectSubset<T, tabela_ongsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ongsCreateManyAndReturnArgs>(args?: SelectSubset<T, ongsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Tabela_ongs.
-     * @param {tabela_ongsDeleteArgs} args - Arguments to delete one Tabela_ongs.
+     * Delete a Ongs.
+     * @param {ongsDeleteArgs} args - Arguments to delete one Ongs.
      * @example
-     * // Delete one Tabela_ongs
-     * const Tabela_ongs = await prisma.tabela_ongs.delete({
+     * // Delete one Ongs
+     * const Ongs = await prisma.ongs.delete({
      *   where: {
-     *     // ... filter to delete one Tabela_ongs
+     *     // ... filter to delete one Ongs
      *   }
      * })
      * 
      */
-    delete<T extends tabela_ongsDeleteArgs>(args: SelectSubset<T, tabela_ongsDeleteArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ongsDeleteArgs>(args: SelectSubset<T, ongsDeleteArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Tabela_ongs.
-     * @param {tabela_ongsUpdateArgs} args - Arguments to update one Tabela_ongs.
+     * Update one Ongs.
+     * @param {ongsUpdateArgs} args - Arguments to update one Ongs.
      * @example
-     * // Update one Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.update({
+     * // Update one Ongs
+     * const ongs = await prisma.ongs.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6923,30 +5252,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends tabela_ongsUpdateArgs>(args: SelectSubset<T, tabela_ongsUpdateArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ongsUpdateArgs>(args: SelectSubset<T, ongsUpdateArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Tabela_ongs.
-     * @param {tabela_ongsDeleteManyArgs} args - Arguments to filter Tabela_ongs to delete.
+     * Delete zero or more Ongs.
+     * @param {ongsDeleteManyArgs} args - Arguments to filter Ongs to delete.
      * @example
-     * // Delete a few Tabela_ongs
-     * const { count } = await prisma.tabela_ongs.deleteMany({
+     * // Delete a few Ongs
+     * const { count } = await prisma.ongs.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends tabela_ongsDeleteManyArgs>(args?: SelectSubset<T, tabela_ongsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ongsDeleteManyArgs>(args?: SelectSubset<T, ongsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Tabela_ongs.
+     * Update zero or more Ongs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {tabela_ongsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ongsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.updateMany({
+     * // Update many Ongs
+     * const ongs = await prisma.ongs.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6956,14 +5285,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends tabela_ongsUpdateManyArgs>(args: SelectSubset<T, tabela_ongsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ongsUpdateManyArgs>(args: SelectSubset<T, ongsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Tabela_ongs and returns the data updated in the database.
-     * @param {tabela_ongsUpdateManyAndReturnArgs} args - Arguments to update many Tabela_ongs.
+     * Update zero or more Ongs and returns the data updated in the database.
+     * @param {ongsUpdateManyAndReturnArgs} args - Arguments to update many Ongs.
      * @example
-     * // Update many Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.updateManyAndReturn({
+     * // Update many Ongs
+     * const ongs = await prisma.ongs.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6972,8 +5301,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Tabela_ongs and only return the `id`
-     * const tabela_ongsWithIdOnly = await prisma.tabela_ongs.updateManyAndReturn({
+     * // Update zero or more Ongs and only return the `id`
+     * const ongsWithIdOnly = await prisma.ongs.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -6986,56 +5315,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends tabela_ongsUpdateManyAndReturnArgs>(args: SelectSubset<T, tabela_ongsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ongsUpdateManyAndReturnArgs>(args: SelectSubset<T, ongsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Tabela_ongs.
-     * @param {tabela_ongsUpsertArgs} args - Arguments to update or create a Tabela_ongs.
+     * Create or update one Ongs.
+     * @param {ongsUpsertArgs} args - Arguments to update or create a Ongs.
      * @example
-     * // Update or create a Tabela_ongs
-     * const tabela_ongs = await prisma.tabela_ongs.upsert({
+     * // Update or create a Ongs
+     * const ongs = await prisma.ongs.upsert({
      *   create: {
-     *     // ... data to create a Tabela_ongs
+     *     // ... data to create a Ongs
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Tabela_ongs we want to update
+     *     // ... the filter for the Ongs we want to update
      *   }
      * })
      */
-    upsert<T extends tabela_ongsUpsertArgs>(args: SelectSubset<T, tabela_ongsUpsertArgs<ExtArgs>>): Prisma__tabela_ongsClient<$Result.GetResult<Prisma.$tabela_ongsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ongsUpsertArgs>(args: SelectSubset<T, ongsUpsertArgs<ExtArgs>>): Prisma__ongsClient<$Result.GetResult<Prisma.$ongsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Tabela_ongs.
+     * Count the number of Ongs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {tabela_ongsCountArgs} args - Arguments to filter Tabela_ongs to count.
+     * @param {ongsCountArgs} args - Arguments to filter Ongs to count.
      * @example
-     * // Count the number of Tabela_ongs
-     * const count = await prisma.tabela_ongs.count({
+     * // Count the number of Ongs
+     * const count = await prisma.ongs.count({
      *   where: {
-     *     // ... the filter for the Tabela_ongs we want to count
+     *     // ... the filter for the Ongs we want to count
      *   }
      * })
     **/
-    count<T extends tabela_ongsCountArgs>(
-      args?: Subset<T, tabela_ongsCountArgs>,
+    count<T extends ongsCountArgs>(
+      args?: Subset<T, ongsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], Tabela_ongsCountAggregateOutputType>
+          : GetScalarType<T['select'], OngsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Tabela_ongs.
+     * Allows you to perform aggregations operations on a Ongs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Tabela_ongsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {OngsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7055,13 +5384,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends Tabela_ongsAggregateArgs>(args: Subset<T, Tabela_ongsAggregateArgs>): Prisma.PrismaPromise<GetTabela_ongsAggregateType<T>>
+    aggregate<T extends OngsAggregateArgs>(args: Subset<T, OngsAggregateArgs>): Prisma.PrismaPromise<GetOngsAggregateType<T>>
 
     /**
-     * Group by Tabela_ongs.
+     * Group by Ongs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {tabela_ongsGroupByArgs} args - Group by arguments.
+     * @param {ongsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7076,14 +5405,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends tabela_ongsGroupByArgs,
+      T extends ongsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: tabela_ongsGroupByArgs['orderBy'] }
-        : { orderBy?: tabela_ongsGroupByArgs['orderBy'] },
+        ? { orderBy: ongsGroupByArgs['orderBy'] }
+        : { orderBy?: ongsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7132,20 +5461,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, tabela_ongsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTabela_ongsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ongsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOngsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the tabela_ongs model
+   * Fields of the ongs model
    */
-  readonly fields: tabela_ongsFieldRefs;
+  readonly fields: ongsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for tabela_ongs.
+   * The delegate class that acts as a "Promise-like" for ongs.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__tabela_ongsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ongsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7173,421 +5502,396 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the tabela_ongs model
+   * Fields of the ongs model
    */
-  interface tabela_ongsFieldRefs {
-    readonly id: FieldRef<"tabela_ongs", 'Int'>
-    readonly nome_ong: FieldRef<"tabela_ongs", 'String'>
-    readonly motivo_criacao: FieldRef<"tabela_ongs", 'String'>
-    readonly sobre: FieldRef<"tabela_ongs", 'String'>
-    readonly responsavel_contato: FieldRef<"tabela_ongs", 'String'>
-    readonly cnpj: FieldRef<"tabela_ongs", 'String'>
-    readonly quantidade_assistidos: FieldRef<"tabela_ongs", 'String'>
-    readonly metas: FieldRef<"tabela_ongs", 'String'>
-    readonly causa_organizacao: FieldRef<"tabela_ongs", 'String'>
-    readonly area: FieldRef<"tabela_ongs", 'String'>
-    readonly match_area: FieldRef<"tabela_ongs", 'String'>
-    readonly possui_voluntarios: FieldRef<"tabela_ongs", 'String'>
-    readonly possui_funcionarios: FieldRef<"tabela_ongs", 'String'>
-    readonly funcionamento: FieldRef<"tabela_ongs", 'String'>
-    readonly endereco: FieldRef<"tabela_ongs", 'String'>
-    readonly rpa: FieldRef<"tabela_ongs", 'String'>
-    readonly contato_divulgacao: FieldRef<"tabela_ongs", 'String'>
-    readonly redes_sociais: FieldRef<"tabela_ongs", 'String'>
-    readonly produto_social: FieldRef<"tabela_ongs", 'String'>
-    readonly mensagem_convite: FieldRef<"tabela_ongs", 'String'>
-    readonly serve_refeicao: FieldRef<"tabela_ongs", 'String'>
-    readonly Nome_da_ONG_Projeto: FieldRef<"tabela_ongs", 'String'>
-    readonly Motivo_da_cria__o_do_projeto_: FieldRef<"tabela_ongs", 'String'>
-    readonly Respons_vel_para_contato: FieldRef<"tabela_ongs", 'String'>
-    readonly CNPJ_: FieldRef<"tabela_ongs", 'String'>
-    readonly Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: FieldRef<"tabela_ongs", 'String'>
-    readonly Metas_de_curto__m_dio_e_longo_prazo: FieldRef<"tabela_ongs", 'String'>
-    readonly Causa_da_Organiza__o_: FieldRef<"tabela_ongs", 'String'>
-    readonly rea: FieldRef<"tabela_ongs", 'String'>
-    readonly Match: FieldRef<"tabela_ongs", 'String'>
-    readonly Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: FieldRef<"tabela_ongs", 'String'>
-    readonly Atividades_que_o_projeto_desenvolve_: FieldRef<"tabela_ongs", 'String'>
-    readonly Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: FieldRef<"tabela_ongs", 'String'>
-    readonly A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: FieldRef<"tabela_ongs", 'String'>
-    readonly Funcionamento__da_organiza__o: FieldRef<"tabela_ongs", 'String'>
-    readonly endere_o: FieldRef<"tabela_ongs", 'String'>
-    readonly Contato_para_divulga__o: FieldRef<"tabela_ongs", 'String'>
-    readonly Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: FieldRef<"tabela_ongs", 'String'>
-    readonly Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: FieldRef<"tabela_ongs", 'String'>
-    readonly Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: FieldRef<"tabela_ongs", 'String'>
-    readonly A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: FieldRef<"tabela_ongs", 'String'>
-    readonly quantidade_pessoas_assistidas: FieldRef<"tabela_ongs", 'String'>
-    readonly objetivos_ods: FieldRef<"tabela_ongs", 'String'>
-    readonly possui_funcionarios_quantos: FieldRef<"tabela_ongs", 'String'>
-    readonly possui_produto_social_quais: FieldRef<"tabela_ongs", 'String'>
-    readonly mensagem_para_voluntarios_doadores: FieldRef<"tabela_ongs", 'String'>
-    readonly serve_refeicoes_cozinha_propria: FieldRef<"tabela_ongs", 'String'>
-    readonly Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: FieldRef<"tabela_ongs", 'String'>
-    readonly Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: FieldRef<"tabela_ongs", 'String'>
+  interface ongsFieldRefs {
+    readonly id: FieldRef<"ongs", 'Int'>
+    readonly nome_ong: FieldRef<"ongs", 'String'>
+    readonly motivo_criacao: FieldRef<"ongs", 'String'>
+    readonly sobre: FieldRef<"ongs", 'String'>
+    readonly responsavel_contato: FieldRef<"ongs", 'String'>
+    readonly cnpj: FieldRef<"ongs", 'String'>
+    readonly email: FieldRef<"ongs", 'String'>
+    readonly quantidade_assistidos: FieldRef<"ongs", 'String'>
+    readonly metas: FieldRef<"ongs", 'String'>
+    readonly causa_organizacao: FieldRef<"ongs", 'String'>
+    readonly area: FieldRef<"ongs", 'String'>
+    readonly match_area: FieldRef<"ongs", 'String'>
+    readonly objetivos_ods: FieldRef<"ongs", 'String'>
+    readonly atividades_projeto_desenvolve: FieldRef<"ongs", 'String'>
+    readonly possui_voluntarios: FieldRef<"ongs", 'String'>
+    readonly possui_funcionarios: FieldRef<"ongs", 'String'>
+    readonly funcionamento: FieldRef<"ongs", 'String'>
+    readonly endereco: FieldRef<"ongs", 'String'>
+    readonly rpa: FieldRef<"ongs", 'String'>
+    readonly contato_divulgacao: FieldRef<"ongs", 'String'>
+    readonly redes_sociais: FieldRef<"ongs", 'String'>
+    readonly produto_social: FieldRef<"ongs", 'String'>
+    readonly mensagem_convite: FieldRef<"ongs", 'String'>
+    readonly serve_refeicao: FieldRef<"ongs", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * tabela_ongs findUnique
+   * ongs findUnique
    */
-  export type tabela_ongsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * Filter, which tabela_ongs to fetch.
+     * Filter, which ongs to fetch.
      */
-    where: tabela_ongsWhereUniqueInput
+    where: ongsWhereUniqueInput
   }
 
   /**
-   * tabela_ongs findUniqueOrThrow
+   * ongs findUniqueOrThrow
    */
-  export type tabela_ongsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * Filter, which tabela_ongs to fetch.
+     * Filter, which ongs to fetch.
      */
-    where: tabela_ongsWhereUniqueInput
+    where: ongsWhereUniqueInput
   }
 
   /**
-   * tabela_ongs findFirst
+   * ongs findFirst
    */
-  export type tabela_ongsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * Filter, which tabela_ongs to fetch.
+     * Filter, which ongs to fetch.
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of tabela_ongs to fetch.
+     * Determine the order of ongs to fetch.
      */
-    orderBy?: tabela_ongsOrderByWithRelationInput | tabela_ongsOrderByWithRelationInput[]
+    orderBy?: ongsOrderByWithRelationInput | ongsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for tabela_ongs.
+     * Sets the position for searching for ongs.
      */
-    cursor?: tabela_ongsWhereUniqueInput
+    cursor?: ongsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` tabela_ongs from the position of the cursor.
+     * Take `±n` ongs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` tabela_ongs.
+     * Skip the first `n` ongs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of tabela_ongs.
+     * Filter by unique combinations of ongs.
      */
-    distinct?: Tabela_ongsScalarFieldEnum | Tabela_ongsScalarFieldEnum[]
+    distinct?: OngsScalarFieldEnum | OngsScalarFieldEnum[]
   }
 
   /**
-   * tabela_ongs findFirstOrThrow
+   * ongs findFirstOrThrow
    */
-  export type tabela_ongsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * Filter, which tabela_ongs to fetch.
+     * Filter, which ongs to fetch.
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of tabela_ongs to fetch.
+     * Determine the order of ongs to fetch.
      */
-    orderBy?: tabela_ongsOrderByWithRelationInput | tabela_ongsOrderByWithRelationInput[]
+    orderBy?: ongsOrderByWithRelationInput | ongsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for tabela_ongs.
+     * Sets the position for searching for ongs.
      */
-    cursor?: tabela_ongsWhereUniqueInput
+    cursor?: ongsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` tabela_ongs from the position of the cursor.
+     * Take `±n` ongs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` tabela_ongs.
+     * Skip the first `n` ongs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of tabela_ongs.
+     * Filter by unique combinations of ongs.
      */
-    distinct?: Tabela_ongsScalarFieldEnum | Tabela_ongsScalarFieldEnum[]
+    distinct?: OngsScalarFieldEnum | OngsScalarFieldEnum[]
   }
 
   /**
-   * tabela_ongs findMany
+   * ongs findMany
    */
-  export type tabela_ongsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * Filter, which tabela_ongs to fetch.
+     * Filter, which ongs to fetch.
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of tabela_ongs to fetch.
+     * Determine the order of ongs to fetch.
      */
-    orderBy?: tabela_ongsOrderByWithRelationInput | tabela_ongsOrderByWithRelationInput[]
+    orderBy?: ongsOrderByWithRelationInput | ongsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing tabela_ongs.
+     * Sets the position for listing ongs.
      */
-    cursor?: tabela_ongsWhereUniqueInput
+    cursor?: ongsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` tabela_ongs from the position of the cursor.
+     * Take `±n` ongs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` tabela_ongs.
+     * Skip the first `n` ongs.
      */
     skip?: number
-    distinct?: Tabela_ongsScalarFieldEnum | Tabela_ongsScalarFieldEnum[]
+    distinct?: OngsScalarFieldEnum | OngsScalarFieldEnum[]
   }
 
   /**
-   * tabela_ongs create
+   * ongs create
    */
-  export type tabela_ongsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * The data needed to create a tabela_ongs.
+     * The data needed to create a ongs.
      */
-    data?: XOR<tabela_ongsCreateInput, tabela_ongsUncheckedCreateInput>
+    data?: XOR<ongsCreateInput, ongsUncheckedCreateInput>
   }
 
   /**
-   * tabela_ongs createMany
+   * ongs createMany
    */
-  export type tabela_ongsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many tabela_ongs.
+     * The data used to create many ongs.
      */
-    data: tabela_ongsCreateManyInput | tabela_ongsCreateManyInput[]
+    data: ongsCreateManyInput | ongsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * tabela_ongs createManyAndReturn
+   * ongs createManyAndReturn
    */
-  export type tabela_ongsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ongsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * The data used to create many tabela_ongs.
+     * The data used to create many ongs.
      */
-    data: tabela_ongsCreateManyInput | tabela_ongsCreateManyInput[]
+    data: ongsCreateManyInput | ongsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * tabela_ongs update
+   * ongs update
    */
-  export type tabela_ongsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * The data needed to update a tabela_ongs.
+     * The data needed to update a ongs.
      */
-    data: XOR<tabela_ongsUpdateInput, tabela_ongsUncheckedUpdateInput>
+    data: XOR<ongsUpdateInput, ongsUncheckedUpdateInput>
     /**
-     * Choose, which tabela_ongs to update.
+     * Choose, which ongs to update.
      */
-    where: tabela_ongsWhereUniqueInput
+    where: ongsWhereUniqueInput
   }
 
   /**
-   * tabela_ongs updateMany
+   * ongs updateMany
    */
-  export type tabela_ongsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update tabela_ongs.
+     * The data used to update ongs.
      */
-    data: XOR<tabela_ongsUpdateManyMutationInput, tabela_ongsUncheckedUpdateManyInput>
+    data: XOR<ongsUpdateManyMutationInput, ongsUncheckedUpdateManyInput>
     /**
-     * Filter which tabela_ongs to update
+     * Filter which ongs to update
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
-     * Limit how many tabela_ongs to update.
+     * Limit how many ongs to update.
      */
     limit?: number
   }
 
   /**
-   * tabela_ongs updateManyAndReturn
+   * ongs updateManyAndReturn
    */
-  export type tabela_ongsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ongsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * The data used to update tabela_ongs.
+     * The data used to update ongs.
      */
-    data: XOR<tabela_ongsUpdateManyMutationInput, tabela_ongsUncheckedUpdateManyInput>
+    data: XOR<ongsUpdateManyMutationInput, ongsUncheckedUpdateManyInput>
     /**
-     * Filter which tabela_ongs to update
+     * Filter which ongs to update
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
-     * Limit how many tabela_ongs to update.
+     * Limit how many ongs to update.
      */
     limit?: number
   }
 
   /**
-   * tabela_ongs upsert
+   * ongs upsert
    */
-  export type tabela_ongsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * The filter to search for the tabela_ongs to update in case it exists.
+     * The filter to search for the ongs to update in case it exists.
      */
-    where: tabela_ongsWhereUniqueInput
+    where: ongsWhereUniqueInput
     /**
-     * In case the tabela_ongs found by the `where` argument doesn't exist, create a new tabela_ongs with this data.
+     * In case the ongs found by the `where` argument doesn't exist, create a new ongs with this data.
      */
-    create: XOR<tabela_ongsCreateInput, tabela_ongsUncheckedCreateInput>
+    create: XOR<ongsCreateInput, ongsUncheckedCreateInput>
     /**
-     * In case the tabela_ongs was found with the provided `where` argument, update it with this data.
+     * In case the ongs was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<tabela_ongsUpdateInput, tabela_ongsUncheckedUpdateInput>
+    update: XOR<ongsUpdateInput, ongsUncheckedUpdateInput>
   }
 
   /**
-   * tabela_ongs delete
+   * ongs delete
    */
-  export type tabela_ongsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
     /**
-     * Filter which tabela_ongs to delete.
+     * Filter which ongs to delete.
      */
-    where: tabela_ongsWhereUniqueInput
+    where: ongsWhereUniqueInput
   }
 
   /**
-   * tabela_ongs deleteMany
+   * ongs deleteMany
    */
-  export type tabela_ongsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which tabela_ongs to delete
+     * Filter which ongs to delete
      */
-    where?: tabela_ongsWhereInput
+    where?: ongsWhereInput
     /**
-     * Limit how many tabela_ongs to delete.
+     * Limit how many ongs to delete.
      */
     limit?: number
   }
 
   /**
-   * tabela_ongs without action
+   * ongs without action
    */
-  export type tabela_ongsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ongsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the tabela_ongs
+     * Select specific fields to fetch from the ongs
      */
-    select?: tabela_ongsSelect<ExtArgs> | null
+    select?: ongsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the tabela_ongs
+     * Omit specific fields from the ongs
      */
-    omit?: tabela_ongsOmit<ExtArgs> | null
+    omit?: ongsOmit<ExtArgs> | null
   }
 
 
@@ -7653,48 +5957,21 @@ export namespace Prisma {
   export type ProjetosScalarFieldEnum = (typeof ProjetosScalarFieldEnum)[keyof typeof ProjetosScalarFieldEnum]
 
 
-  export const OngScalarFieldEnum: {
-    nome_ong: 'nome_ong',
-    Motivo_da_cria__o_do_projeto_: 'Motivo_da_cria__o_do_projeto_',
-    Sobre: 'Sobre',
-    Respons_vel_para_contato: 'Respons_vel_para_contato',
-    CNPJ_: 'CNPJ_',
-    email: 'email',
-    quantidade_pessoas_assistidas: 'quantidade_pessoas_assistidas',
-    metas: 'metas',
-    Causa_da_Organiza__o_: 'Causa_da_Organiza__o_',
-    area: 'area',
-    match_area: 'match_area',
-    objetivos_ods: 'objetivos_ods',
-    Atividades_que_o_projeto_desenvolve_: 'Atividades_que_o_projeto_desenvolve_',
-    possui_funcionarios: 'possui_funcionarios',
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: 'A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_',
-    Funcionamento__da_organiza__o: 'Funcionamento__da_organiza__o',
-    Endere_o: 'Endere_o',
-    RPA: 'RPA',
-    contato_divulgacao: 'contato_divulgacao',
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: 'Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__',
-    possui_produto_social: 'possui_produto_social',
-    mensagem_para_voluntarios: 'mensagem_para_voluntarios',
-    serve_refeicoes_cozinha_propria: 'serve_refeicoes_cozinha_propria',
-    id: 'id'
-  };
-
-  export type OngScalarFieldEnum = (typeof OngScalarFieldEnum)[keyof typeof OngScalarFieldEnum]
-
-
-  export const Tabela_ongsScalarFieldEnum: {
+  export const OngsScalarFieldEnum: {
     id: 'id',
     nome_ong: 'nome_ong',
     motivo_criacao: 'motivo_criacao',
     sobre: 'sobre',
     responsavel_contato: 'responsavel_contato',
     cnpj: 'cnpj',
+    email: 'email',
     quantidade_assistidos: 'quantidade_assistidos',
     metas: 'metas',
     causa_organizacao: 'causa_organizacao',
     area: 'area',
     match_area: 'match_area',
+    objetivos_ods: 'objetivos_ods',
+    atividades_projeto_desenvolve: 'atividades_projeto_desenvolve',
     possui_voluntarios: 'possui_voluntarios',
     possui_funcionarios: 'possui_funcionarios',
     funcionamento: 'funcionamento',
@@ -7704,38 +5981,10 @@ export namespace Prisma {
     redes_sociais: 'redes_sociais',
     produto_social: 'produto_social',
     mensagem_convite: 'mensagem_convite',
-    serve_refeicao: 'serve_refeicao',
-    Nome_da_ONG_Projeto: 'Nome_da_ONG_Projeto',
-    Motivo_da_cria__o_do_projeto_: 'Motivo_da_cria__o_do_projeto_',
-    Respons_vel_para_contato: 'Respons_vel_para_contato',
-    CNPJ_: 'CNPJ_',
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba: 'Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba',
-    Metas_de_curto__m_dio_e_longo_prazo: 'Metas_de_curto__m_dio_e_longo_prazo',
-    Causa_da_Organiza__o_: 'Causa_da_Organiza__o_',
-    rea: 'rea',
-    Match: 'Match',
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_: 'Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_',
-    Atividades_que_o_projeto_desenvolve_: 'Atividades_que_o_projeto_desenvolve_',
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_: 'Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_',
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_: 'A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_',
-    Funcionamento__da_organiza__o: 'Funcionamento__da_organiza__o',
-    endere_o: 'endere_o',
-    Contato_para_divulga__o: 'Contato_para_divulga__o',
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__: 'Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__',
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_: 'Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_',
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co: 'Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co',
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara: 'A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara',
-    quantidade_pessoas_assistidas: 'quantidade_pessoas_assistidas',
-    objetivos_ods: 'objetivos_ods',
-    possui_funcionarios_quantos: 'possui_funcionarios_quantos',
-    possui_produto_social_quais: 'possui_produto_social_quais',
-    mensagem_para_voluntarios_doadores: 'mensagem_para_voluntarios_doadores',
-    serve_refeicoes_cozinha_propria: 'serve_refeicoes_cozinha_propria',
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con: 'Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con',
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__: 'Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__'
+    serve_refeicao: 'serve_refeicao'
   };
 
-  export type Tabela_ongsScalarFieldEnum = (typeof Tabela_ongsScalarFieldEnum)[keyof typeof Tabela_ongsScalarFieldEnum]
+  export type OngsScalarFieldEnum = (typeof OngsScalarFieldEnum)[keyof typeof OngsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8092,222 +6341,108 @@ export namespace Prisma {
     user_id?: UuidWithAggregatesFilter<"projetos"> | string
   }
 
-  export type OngWhereInput = {
-    AND?: OngWhereInput | OngWhereInput[]
-    OR?: OngWhereInput[]
-    NOT?: OngWhereInput | OngWhereInput[]
-    nome_ong?: StringNullableFilter<"Ong"> | string | null
-    Motivo_da_cria__o_do_projeto_?: StringNullableFilter<"Ong"> | string | null
-    Sobre?: StringNullableFilter<"Ong"> | string | null
-    Respons_vel_para_contato?: StringNullableFilter<"Ong"> | string | null
-    CNPJ_?: StringNullableFilter<"Ong"> | string | null
-    email?: StringNullableFilter<"Ong"> | string | null
-    quantidade_pessoas_assistidas?: StringNullableFilter<"Ong"> | string | null
-    metas?: StringNullableFilter<"Ong"> | string | null
-    Causa_da_Organiza__o_?: StringNullableFilter<"Ong"> | string | null
-    area?: StringNullableFilter<"Ong"> | string | null
-    match_area?: StringNullableFilter<"Ong"> | string | null
-    objetivos_ods?: StringNullableFilter<"Ong"> | string | null
-    Atividades_que_o_projeto_desenvolve_?: StringNullableFilter<"Ong"> | string | null
-    possui_funcionarios?: StringNullableFilter<"Ong"> | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: StringNullableFilter<"Ong"> | string | null
-    Funcionamento__da_organiza__o?: StringNullableFilter<"Ong"> | string | null
-    Endere_o?: StringNullableFilter<"Ong"> | string | null
-    RPA?: FloatNullableFilter<"Ong"> | number | null
-    contato_divulgacao?: StringNullableFilter<"Ong"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: StringNullableFilter<"Ong"> | string | null
-    possui_produto_social?: StringNullableFilter<"Ong"> | string | null
-    mensagem_para_voluntarios?: StringNullableFilter<"Ong"> | string | null
-    serve_refeicoes_cozinha_propria?: StringNullableFilter<"Ong"> | string | null
-    id?: IntFilter<"Ong"> | number
+  export type ongsWhereInput = {
+    AND?: ongsWhereInput | ongsWhereInput[]
+    OR?: ongsWhereInput[]
+    NOT?: ongsWhereInput | ongsWhereInput[]
+    id?: IntFilter<"ongs"> | number
+    nome_ong?: StringNullableFilter<"ongs"> | string | null
+    motivo_criacao?: StringNullableFilter<"ongs"> | string | null
+    sobre?: StringNullableFilter<"ongs"> | string | null
+    responsavel_contato?: StringNullableFilter<"ongs"> | string | null
+    cnpj?: StringNullableFilter<"ongs"> | string | null
+    email?: StringNullableFilter<"ongs"> | string | null
+    quantidade_assistidos?: StringNullableFilter<"ongs"> | string | null
+    metas?: StringNullableFilter<"ongs"> | string | null
+    causa_organizacao?: StringNullableFilter<"ongs"> | string | null
+    area?: StringNullableFilter<"ongs"> | string | null
+    match_area?: StringNullableFilter<"ongs"> | string | null
+    objetivos_ods?: StringNullableFilter<"ongs"> | string | null
+    atividades_projeto_desenvolve?: StringNullableFilter<"ongs"> | string | null
+    possui_voluntarios?: StringNullableFilter<"ongs"> | string | null
+    possui_funcionarios?: StringNullableFilter<"ongs"> | string | null
+    funcionamento?: StringNullableFilter<"ongs"> | string | null
+    endereco?: StringNullableFilter<"ongs"> | string | null
+    rpa?: StringNullableFilter<"ongs"> | string | null
+    contato_divulgacao?: StringNullableFilter<"ongs"> | string | null
+    redes_sociais?: StringNullableFilter<"ongs"> | string | null
+    produto_social?: StringNullableFilter<"ongs"> | string | null
+    mensagem_convite?: StringNullableFilter<"ongs"> | string | null
+    serve_refeicao?: StringNullableFilter<"ongs"> | string | null
   }
 
-  export type OngOrderByWithRelationInput = {
+  export type ongsOrderByWithRelationInput = {
+    id?: SortOrder
     nome_ong?: SortOrderInput | SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrderInput | SortOrder
-    Sobre?: SortOrderInput | SortOrder
-    Respons_vel_para_contato?: SortOrderInput | SortOrder
-    CNPJ_?: SortOrderInput | SortOrder
+    motivo_criacao?: SortOrderInput | SortOrder
+    sobre?: SortOrderInput | SortOrder
+    responsavel_contato?: SortOrderInput | SortOrder
+    cnpj?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
-    quantidade_pessoas_assistidas?: SortOrderInput | SortOrder
+    quantidade_assistidos?: SortOrderInput | SortOrder
     metas?: SortOrderInput | SortOrder
-    Causa_da_Organiza__o_?: SortOrderInput | SortOrder
+    causa_organizacao?: SortOrderInput | SortOrder
     area?: SortOrderInput | SortOrder
     match_area?: SortOrderInput | SortOrder
     objetivos_ods?: SortOrderInput | SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrderInput | SortOrder
+    atividades_projeto_desenvolve?: SortOrderInput | SortOrder
+    possui_voluntarios?: SortOrderInput | SortOrder
     possui_funcionarios?: SortOrderInput | SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrderInput | SortOrder
-    Funcionamento__da_organiza__o?: SortOrderInput | SortOrder
-    Endere_o?: SortOrderInput | SortOrder
-    RPA?: SortOrderInput | SortOrder
+    funcionamento?: SortOrderInput | SortOrder
+    endereco?: SortOrderInput | SortOrder
+    rpa?: SortOrderInput | SortOrder
     contato_divulgacao?: SortOrderInput | SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrderInput | SortOrder
-    possui_produto_social?: SortOrderInput | SortOrder
-    mensagem_para_voluntarios?: SortOrderInput | SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrderInput | SortOrder
-    id?: SortOrder
+    redes_sociais?: SortOrderInput | SortOrder
+    produto_social?: SortOrderInput | SortOrder
+    mensagem_convite?: SortOrderInput | SortOrder
+    serve_refeicao?: SortOrderInput | SortOrder
   }
 
-  export type OngWhereUniqueInput = Prisma.AtLeast<{
-    email?: string
+  export type ongsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: OngWhereInput | OngWhereInput[]
-    OR?: OngWhereInput[]
-    NOT?: OngWhereInput | OngWhereInput[]
-    nome_ong?: StringNullableFilter<"Ong"> | string | null
-    Motivo_da_cria__o_do_projeto_?: StringNullableFilter<"Ong"> | string | null
-    Sobre?: StringNullableFilter<"Ong"> | string | null
-    Respons_vel_para_contato?: StringNullableFilter<"Ong"> | string | null
-    CNPJ_?: StringNullableFilter<"Ong"> | string | null
-    quantidade_pessoas_assistidas?: StringNullableFilter<"Ong"> | string | null
-    metas?: StringNullableFilter<"Ong"> | string | null
-    Causa_da_Organiza__o_?: StringNullableFilter<"Ong"> | string | null
-    area?: StringNullableFilter<"Ong"> | string | null
-    match_area?: StringNullableFilter<"Ong"> | string | null
-    objetivos_ods?: StringNullableFilter<"Ong"> | string | null
-    Atividades_que_o_projeto_desenvolve_?: StringNullableFilter<"Ong"> | string | null
-    possui_funcionarios?: StringNullableFilter<"Ong"> | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: StringNullableFilter<"Ong"> | string | null
-    Funcionamento__da_organiza__o?: StringNullableFilter<"Ong"> | string | null
-    Endere_o?: StringNullableFilter<"Ong"> | string | null
-    RPA?: FloatNullableFilter<"Ong"> | number | null
-    contato_divulgacao?: StringNullableFilter<"Ong"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: StringNullableFilter<"Ong"> | string | null
-    possui_produto_social?: StringNullableFilter<"Ong"> | string | null
-    mensagem_para_voluntarios?: StringNullableFilter<"Ong"> | string | null
-    serve_refeicoes_cozinha_propria?: StringNullableFilter<"Ong"> | string | null
+    email?: string
+    AND?: ongsWhereInput | ongsWhereInput[]
+    OR?: ongsWhereInput[]
+    NOT?: ongsWhereInput | ongsWhereInput[]
+    nome_ong?: StringNullableFilter<"ongs"> | string | null
+    motivo_criacao?: StringNullableFilter<"ongs"> | string | null
+    sobre?: StringNullableFilter<"ongs"> | string | null
+    responsavel_contato?: StringNullableFilter<"ongs"> | string | null
+    cnpj?: StringNullableFilter<"ongs"> | string | null
+    quantidade_assistidos?: StringNullableFilter<"ongs"> | string | null
+    metas?: StringNullableFilter<"ongs"> | string | null
+    causa_organizacao?: StringNullableFilter<"ongs"> | string | null
+    area?: StringNullableFilter<"ongs"> | string | null
+    match_area?: StringNullableFilter<"ongs"> | string | null
+    objetivos_ods?: StringNullableFilter<"ongs"> | string | null
+    atividades_projeto_desenvolve?: StringNullableFilter<"ongs"> | string | null
+    possui_voluntarios?: StringNullableFilter<"ongs"> | string | null
+    possui_funcionarios?: StringNullableFilter<"ongs"> | string | null
+    funcionamento?: StringNullableFilter<"ongs"> | string | null
+    endereco?: StringNullableFilter<"ongs"> | string | null
+    rpa?: StringNullableFilter<"ongs"> | string | null
+    contato_divulgacao?: StringNullableFilter<"ongs"> | string | null
+    redes_sociais?: StringNullableFilter<"ongs"> | string | null
+    produto_social?: StringNullableFilter<"ongs"> | string | null
+    mensagem_convite?: StringNullableFilter<"ongs"> | string | null
+    serve_refeicao?: StringNullableFilter<"ongs"> | string | null
   }, "id" | "email">
 
-  export type OngOrderByWithAggregationInput = {
+  export type ongsOrderByWithAggregationInput = {
+    id?: SortOrder
     nome_ong?: SortOrderInput | SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrderInput | SortOrder
-    Sobre?: SortOrderInput | SortOrder
-    Respons_vel_para_contato?: SortOrderInput | SortOrder
-    CNPJ_?: SortOrderInput | SortOrder
+    motivo_criacao?: SortOrderInput | SortOrder
+    sobre?: SortOrderInput | SortOrder
+    responsavel_contato?: SortOrderInput | SortOrder
+    cnpj?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
-    quantidade_pessoas_assistidas?: SortOrderInput | SortOrder
-    metas?: SortOrderInput | SortOrder
-    Causa_da_Organiza__o_?: SortOrderInput | SortOrder
-    area?: SortOrderInput | SortOrder
-    match_area?: SortOrderInput | SortOrder
-    objetivos_ods?: SortOrderInput | SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrderInput | SortOrder
-    possui_funcionarios?: SortOrderInput | SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrderInput | SortOrder
-    Funcionamento__da_organiza__o?: SortOrderInput | SortOrder
-    Endere_o?: SortOrderInput | SortOrder
-    RPA?: SortOrderInput | SortOrder
-    contato_divulgacao?: SortOrderInput | SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrderInput | SortOrder
-    possui_produto_social?: SortOrderInput | SortOrder
-    mensagem_para_voluntarios?: SortOrderInput | SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrderInput | SortOrder
-    id?: SortOrder
-    _count?: OngCountOrderByAggregateInput
-    _avg?: OngAvgOrderByAggregateInput
-    _max?: OngMaxOrderByAggregateInput
-    _min?: OngMinOrderByAggregateInput
-    _sum?: OngSumOrderByAggregateInput
-  }
-
-  export type OngScalarWhereWithAggregatesInput = {
-    AND?: OngScalarWhereWithAggregatesInput | OngScalarWhereWithAggregatesInput[]
-    OR?: OngScalarWhereWithAggregatesInput[]
-    NOT?: OngScalarWhereWithAggregatesInput | OngScalarWhereWithAggregatesInput[]
-    nome_ong?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Motivo_da_cria__o_do_projeto_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Sobre?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Respons_vel_para_contato?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    CNPJ_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    email?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    quantidade_pessoas_assistidas?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    metas?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Causa_da_Organiza__o_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    area?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    match_area?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    objetivos_ods?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Atividades_que_o_projeto_desenvolve_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    possui_funcionarios?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Funcionamento__da_organiza__o?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Endere_o?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    RPA?: FloatNullableWithAggregatesFilter<"Ong"> | number | null
-    contato_divulgacao?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    possui_produto_social?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    mensagem_para_voluntarios?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    serve_refeicoes_cozinha_propria?: StringNullableWithAggregatesFilter<"Ong"> | string | null
-    id?: IntWithAggregatesFilter<"Ong"> | number
-  }
-
-  export type tabela_ongsWhereInput = {
-    AND?: tabela_ongsWhereInput | tabela_ongsWhereInput[]
-    OR?: tabela_ongsWhereInput[]
-    NOT?: tabela_ongsWhereInput | tabela_ongsWhereInput[]
-    id?: IntFilter<"tabela_ongs"> | number
-    nome_ong?: StringNullableFilter<"tabela_ongs"> | string | null
-    motivo_criacao?: StringNullableFilter<"tabela_ongs"> | string | null
-    sobre?: StringNullableFilter<"tabela_ongs"> | string | null
-    responsavel_contato?: StringNullableFilter<"tabela_ongs"> | string | null
-    cnpj?: StringNullableFilter<"tabela_ongs"> | string | null
-    quantidade_assistidos?: StringNullableFilter<"tabela_ongs"> | string | null
-    metas?: StringNullableFilter<"tabela_ongs"> | string | null
-    causa_organizacao?: StringNullableFilter<"tabela_ongs"> | string | null
-    area?: StringNullableFilter<"tabela_ongs"> | string | null
-    match_area?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_voluntarios?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_funcionarios?: StringNullableFilter<"tabela_ongs"> | string | null
-    funcionamento?: StringNullableFilter<"tabela_ongs"> | string | null
-    endereco?: StringNullableFilter<"tabela_ongs"> | string | null
-    rpa?: StringNullableFilter<"tabela_ongs"> | string | null
-    contato_divulgacao?: StringNullableFilter<"tabela_ongs"> | string | null
-    redes_sociais?: StringNullableFilter<"tabela_ongs"> | string | null
-    produto_social?: StringNullableFilter<"tabela_ongs"> | string | null
-    mensagem_convite?: StringNullableFilter<"tabela_ongs"> | string | null
-    serve_refeicao?: StringNullableFilter<"tabela_ongs"> | string | null
-    Nome_da_ONG_Projeto?: StringNullableFilter<"tabela_ongs"> | string | null
-    Motivo_da_cria__o_do_projeto_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Respons_vel_para_contato?: StringNullableFilter<"tabela_ongs"> | string | null
-    CNPJ_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: StringNullableFilter<"tabela_ongs"> | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: StringNullableFilter<"tabela_ongs"> | string | null
-    Causa_da_Organiza__o_?: StringNullableFilter<"tabela_ongs"> | string | null
-    rea?: StringNullableFilter<"tabela_ongs"> | string | null
-    Match?: StringNullableFilter<"tabela_ongs"> | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Atividades_que_o_projeto_desenvolve_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: StringNullableFilter<"tabela_ongs"> | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Funcionamento__da_organiza__o?: StringNullableFilter<"tabela_ongs"> | string | null
-    endere_o?: StringNullableFilter<"tabela_ongs"> | string | null
-    Contato_para_divulga__o?: StringNullableFilter<"tabela_ongs"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: StringNullableFilter<"tabela_ongs"> | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: StringNullableFilter<"tabela_ongs"> | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: StringNullableFilter<"tabela_ongs"> | string | null
-    quantidade_pessoas_assistidas?: StringNullableFilter<"tabela_ongs"> | string | null
-    objetivos_ods?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_funcionarios_quantos?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_produto_social_quais?: StringNullableFilter<"tabela_ongs"> | string | null
-    mensagem_para_voluntarios_doadores?: StringNullableFilter<"tabela_ongs"> | string | null
-    serve_refeicoes_cozinha_propria?: StringNullableFilter<"tabela_ongs"> | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: StringNullableFilter<"tabela_ongs"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: StringNullableFilter<"tabela_ongs"> | string | null
-  }
-
-  export type tabela_ongsOrderByWithRelationInput = {
-    id?: SortOrder
-    nome_ong?: SortOrderInput | SortOrder
-    motivo_criacao?: SortOrderInput | SortOrder
-    sobre?: SortOrderInput | SortOrder
-    responsavel_contato?: SortOrderInput | SortOrder
-    cnpj?: SortOrderInput | SortOrder
     quantidade_assistidos?: SortOrderInput | SortOrder
     metas?: SortOrderInput | SortOrder
     causa_organizacao?: SortOrderInput | SortOrder
     area?: SortOrderInput | SortOrder
     match_area?: SortOrderInput | SortOrder
+    objetivos_ods?: SortOrderInput | SortOrder
+    atividades_projeto_desenvolve?: SortOrderInput | SortOrder
     possui_voluntarios?: SortOrderInput | SortOrder
     possui_funcionarios?: SortOrderInput | SortOrder
     funcionamento?: SortOrderInput | SortOrder
@@ -8318,201 +6453,41 @@ export namespace Prisma {
     produto_social?: SortOrderInput | SortOrder
     mensagem_convite?: SortOrderInput | SortOrder
     serve_refeicao?: SortOrderInput | SortOrder
-    Nome_da_ONG_Projeto?: SortOrderInput | SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrderInput | SortOrder
-    Respons_vel_para_contato?: SortOrderInput | SortOrder
-    CNPJ_?: SortOrderInput | SortOrder
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: SortOrderInput | SortOrder
-    Metas_de_curto__m_dio_e_longo_prazo?: SortOrderInput | SortOrder
-    Causa_da_Organiza__o_?: SortOrderInput | SortOrder
-    rea?: SortOrderInput | SortOrder
-    Match?: SortOrderInput | SortOrder
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: SortOrderInput | SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrderInput | SortOrder
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: SortOrderInput | SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrderInput | SortOrder
-    Funcionamento__da_organiza__o?: SortOrderInput | SortOrder
-    endere_o?: SortOrderInput | SortOrder
-    Contato_para_divulga__o?: SortOrderInput | SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrderInput | SortOrder
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: SortOrderInput | SortOrder
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: SortOrderInput | SortOrder
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: SortOrderInput | SortOrder
-    quantidade_pessoas_assistidas?: SortOrderInput | SortOrder
-    objetivos_ods?: SortOrderInput | SortOrder
-    possui_funcionarios_quantos?: SortOrderInput | SortOrder
-    possui_produto_social_quais?: SortOrderInput | SortOrder
-    mensagem_para_voluntarios_doadores?: SortOrderInput | SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrderInput | SortOrder
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: SortOrderInput | SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: SortOrderInput | SortOrder
+    _count?: ongsCountOrderByAggregateInput
+    _avg?: ongsAvgOrderByAggregateInput
+    _max?: ongsMaxOrderByAggregateInput
+    _min?: ongsMinOrderByAggregateInput
+    _sum?: ongsSumOrderByAggregateInput
   }
 
-  export type tabela_ongsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: tabela_ongsWhereInput | tabela_ongsWhereInput[]
-    OR?: tabela_ongsWhereInput[]
-    NOT?: tabela_ongsWhereInput | tabela_ongsWhereInput[]
-    nome_ong?: StringNullableFilter<"tabela_ongs"> | string | null
-    motivo_criacao?: StringNullableFilter<"tabela_ongs"> | string | null
-    sobre?: StringNullableFilter<"tabela_ongs"> | string | null
-    responsavel_contato?: StringNullableFilter<"tabela_ongs"> | string | null
-    cnpj?: StringNullableFilter<"tabela_ongs"> | string | null
-    quantidade_assistidos?: StringNullableFilter<"tabela_ongs"> | string | null
-    metas?: StringNullableFilter<"tabela_ongs"> | string | null
-    causa_organizacao?: StringNullableFilter<"tabela_ongs"> | string | null
-    area?: StringNullableFilter<"tabela_ongs"> | string | null
-    match_area?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_voluntarios?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_funcionarios?: StringNullableFilter<"tabela_ongs"> | string | null
-    funcionamento?: StringNullableFilter<"tabela_ongs"> | string | null
-    endereco?: StringNullableFilter<"tabela_ongs"> | string | null
-    rpa?: StringNullableFilter<"tabela_ongs"> | string | null
-    contato_divulgacao?: StringNullableFilter<"tabela_ongs"> | string | null
-    redes_sociais?: StringNullableFilter<"tabela_ongs"> | string | null
-    produto_social?: StringNullableFilter<"tabela_ongs"> | string | null
-    mensagem_convite?: StringNullableFilter<"tabela_ongs"> | string | null
-    serve_refeicao?: StringNullableFilter<"tabela_ongs"> | string | null
-    Nome_da_ONG_Projeto?: StringNullableFilter<"tabela_ongs"> | string | null
-    Motivo_da_cria__o_do_projeto_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Respons_vel_para_contato?: StringNullableFilter<"tabela_ongs"> | string | null
-    CNPJ_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: StringNullableFilter<"tabela_ongs"> | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: StringNullableFilter<"tabela_ongs"> | string | null
-    Causa_da_Organiza__o_?: StringNullableFilter<"tabela_ongs"> | string | null
-    rea?: StringNullableFilter<"tabela_ongs"> | string | null
-    Match?: StringNullableFilter<"tabela_ongs"> | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Atividades_que_o_projeto_desenvolve_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: StringNullableFilter<"tabela_ongs"> | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Funcionamento__da_organiza__o?: StringNullableFilter<"tabela_ongs"> | string | null
-    endere_o?: StringNullableFilter<"tabela_ongs"> | string | null
-    Contato_para_divulga__o?: StringNullableFilter<"tabela_ongs"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: StringNullableFilter<"tabela_ongs"> | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: StringNullableFilter<"tabela_ongs"> | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: StringNullableFilter<"tabela_ongs"> | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: StringNullableFilter<"tabela_ongs"> | string | null
-    quantidade_pessoas_assistidas?: StringNullableFilter<"tabela_ongs"> | string | null
-    objetivos_ods?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_funcionarios_quantos?: StringNullableFilter<"tabela_ongs"> | string | null
-    possui_produto_social_quais?: StringNullableFilter<"tabela_ongs"> | string | null
-    mensagem_para_voluntarios_doadores?: StringNullableFilter<"tabela_ongs"> | string | null
-    serve_refeicoes_cozinha_propria?: StringNullableFilter<"tabela_ongs"> | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: StringNullableFilter<"tabela_ongs"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: StringNullableFilter<"tabela_ongs"> | string | null
-  }, "id">
-
-  export type tabela_ongsOrderByWithAggregationInput = {
-    id?: SortOrder
-    nome_ong?: SortOrderInput | SortOrder
-    motivo_criacao?: SortOrderInput | SortOrder
-    sobre?: SortOrderInput | SortOrder
-    responsavel_contato?: SortOrderInput | SortOrder
-    cnpj?: SortOrderInput | SortOrder
-    quantidade_assistidos?: SortOrderInput | SortOrder
-    metas?: SortOrderInput | SortOrder
-    causa_organizacao?: SortOrderInput | SortOrder
-    area?: SortOrderInput | SortOrder
-    match_area?: SortOrderInput | SortOrder
-    possui_voluntarios?: SortOrderInput | SortOrder
-    possui_funcionarios?: SortOrderInput | SortOrder
-    funcionamento?: SortOrderInput | SortOrder
-    endereco?: SortOrderInput | SortOrder
-    rpa?: SortOrderInput | SortOrder
-    contato_divulgacao?: SortOrderInput | SortOrder
-    redes_sociais?: SortOrderInput | SortOrder
-    produto_social?: SortOrderInput | SortOrder
-    mensagem_convite?: SortOrderInput | SortOrder
-    serve_refeicao?: SortOrderInput | SortOrder
-    Nome_da_ONG_Projeto?: SortOrderInput | SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrderInput | SortOrder
-    Respons_vel_para_contato?: SortOrderInput | SortOrder
-    CNPJ_?: SortOrderInput | SortOrder
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: SortOrderInput | SortOrder
-    Metas_de_curto__m_dio_e_longo_prazo?: SortOrderInput | SortOrder
-    Causa_da_Organiza__o_?: SortOrderInput | SortOrder
-    rea?: SortOrderInput | SortOrder
-    Match?: SortOrderInput | SortOrder
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: SortOrderInput | SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrderInput | SortOrder
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: SortOrderInput | SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrderInput | SortOrder
-    Funcionamento__da_organiza__o?: SortOrderInput | SortOrder
-    endere_o?: SortOrderInput | SortOrder
-    Contato_para_divulga__o?: SortOrderInput | SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrderInput | SortOrder
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: SortOrderInput | SortOrder
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: SortOrderInput | SortOrder
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: SortOrderInput | SortOrder
-    quantidade_pessoas_assistidas?: SortOrderInput | SortOrder
-    objetivos_ods?: SortOrderInput | SortOrder
-    possui_funcionarios_quantos?: SortOrderInput | SortOrder
-    possui_produto_social_quais?: SortOrderInput | SortOrder
-    mensagem_para_voluntarios_doadores?: SortOrderInput | SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrderInput | SortOrder
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: SortOrderInput | SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: SortOrderInput | SortOrder
-    _count?: tabela_ongsCountOrderByAggregateInput
-    _avg?: tabela_ongsAvgOrderByAggregateInput
-    _max?: tabela_ongsMaxOrderByAggregateInput
-    _min?: tabela_ongsMinOrderByAggregateInput
-    _sum?: tabela_ongsSumOrderByAggregateInput
-  }
-
-  export type tabela_ongsScalarWhereWithAggregatesInput = {
-    AND?: tabela_ongsScalarWhereWithAggregatesInput | tabela_ongsScalarWhereWithAggregatesInput[]
-    OR?: tabela_ongsScalarWhereWithAggregatesInput[]
-    NOT?: tabela_ongsScalarWhereWithAggregatesInput | tabela_ongsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"tabela_ongs"> | number
-    nome_ong?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    motivo_criacao?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    sobre?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    responsavel_contato?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    cnpj?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    quantidade_assistidos?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    metas?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    causa_organizacao?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    area?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    match_area?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    possui_voluntarios?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    possui_funcionarios?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    funcionamento?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    endereco?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    rpa?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    contato_divulgacao?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    redes_sociais?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    produto_social?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    mensagem_convite?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    serve_refeicao?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Nome_da_ONG_Projeto?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Motivo_da_cria__o_do_projeto_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Respons_vel_para_contato?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    CNPJ_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Causa_da_Organiza__o_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    rea?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Match?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Atividades_que_o_projeto_desenvolve_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Funcionamento__da_organiza__o?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    endere_o?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Contato_para_divulga__o?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    quantidade_pessoas_assistidas?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    objetivos_ods?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    possui_funcionarios_quantos?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    possui_produto_social_quais?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    mensagem_para_voluntarios_doadores?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    serve_refeicoes_cozinha_propria?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: StringNullableWithAggregatesFilter<"tabela_ongs"> | string | null
+  export type ongsScalarWhereWithAggregatesInput = {
+    AND?: ongsScalarWhereWithAggregatesInput | ongsScalarWhereWithAggregatesInput[]
+    OR?: ongsScalarWhereWithAggregatesInput[]
+    NOT?: ongsScalarWhereWithAggregatesInput | ongsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ongs"> | number
+    nome_ong?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    motivo_criacao?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    sobre?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    responsavel_contato?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    cnpj?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    email?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    quantidade_assistidos?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    metas?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    causa_organizacao?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    area?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    match_area?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    objetivos_ods?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    atividades_projeto_desenvolve?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    possui_voluntarios?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    possui_funcionarios?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    funcionamento?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    endereco?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    rpa?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    contato_divulgacao?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    redes_sociais?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    produto_social?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    mensagem_convite?: StringNullableWithAggregatesFilter<"ongs"> | string | null
+    serve_refeicao?: StringNullableWithAggregatesFilter<"ongs"> | string | null
   }
 
   export type user_verificationsCreateInput = {
@@ -8794,203 +6769,20 @@ export namespace Prisma {
     user_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type OngCreateInput = {
-    nome_ong?: string | null
-    Motivo_da_cria__o_do_projeto_?: string | null
-    Sobre?: string | null
-    Respons_vel_para_contato?: string | null
-    CNPJ_?: string | null
-    email?: string | null
-    quantidade_pessoas_assistidas?: string | null
-    metas?: string | null
-    Causa_da_Organiza__o_?: string | null
-    area?: string | null
-    match_area?: string | null
-    objetivos_ods?: string | null
-    Atividades_que_o_projeto_desenvolve_?: string | null
-    possui_funcionarios?: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: string | null
-    Funcionamento__da_organiza__o?: string | null
-    Endere_o?: string | null
-    RPA?: number | null
-    contato_divulgacao?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: string | null
-    possui_produto_social?: string | null
-    mensagem_para_voluntarios?: string | null
-    serve_refeicoes_cozinha_propria?: string | null
-  }
-
-  export type OngUncheckedCreateInput = {
-    nome_ong?: string | null
-    Motivo_da_cria__o_do_projeto_?: string | null
-    Sobre?: string | null
-    Respons_vel_para_contato?: string | null
-    CNPJ_?: string | null
-    email?: string | null
-    quantidade_pessoas_assistidas?: string | null
-    metas?: string | null
-    Causa_da_Organiza__o_?: string | null
-    area?: string | null
-    match_area?: string | null
-    objetivos_ods?: string | null
-    Atividades_que_o_projeto_desenvolve_?: string | null
-    possui_funcionarios?: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: string | null
-    Funcionamento__da_organiza__o?: string | null
-    Endere_o?: string | null
-    RPA?: number | null
-    contato_divulgacao?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: string | null
-    possui_produto_social?: string | null
-    mensagem_para_voluntarios?: string | null
-    serve_refeicoes_cozinha_propria?: string | null
-    id?: number
-  }
-
-  export type OngUpdateInput = {
-    nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Sobre?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    metas?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    area?: NullableStringFieldUpdateOperationsInput | string | null
-    match_area?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    RPA?: NullableFloatFieldUpdateOperationsInput | number | null
-    contato_divulgacao?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type OngUncheckedUpdateInput = {
-    nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Sobre?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    metas?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    area?: NullableStringFieldUpdateOperationsInput | string | null
-    match_area?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    RPA?: NullableFloatFieldUpdateOperationsInput | number | null
-    contato_divulgacao?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type OngCreateManyInput = {
-    nome_ong?: string | null
-    Motivo_da_cria__o_do_projeto_?: string | null
-    Sobre?: string | null
-    Respons_vel_para_contato?: string | null
-    CNPJ_?: string | null
-    email?: string | null
-    quantidade_pessoas_assistidas?: string | null
-    metas?: string | null
-    Causa_da_Organiza__o_?: string | null
-    area?: string | null
-    match_area?: string | null
-    objetivos_ods?: string | null
-    Atividades_que_o_projeto_desenvolve_?: string | null
-    possui_funcionarios?: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: string | null
-    Funcionamento__da_organiza__o?: string | null
-    Endere_o?: string | null
-    RPA?: number | null
-    contato_divulgacao?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: string | null
-    possui_produto_social?: string | null
-    mensagem_para_voluntarios?: string | null
-    serve_refeicoes_cozinha_propria?: string | null
-    id?: number
-  }
-
-  export type OngUpdateManyMutationInput = {
-    nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Sobre?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    metas?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    area?: NullableStringFieldUpdateOperationsInput | string | null
-    match_area?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    RPA?: NullableFloatFieldUpdateOperationsInput | number | null
-    contato_divulgacao?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type OngUncheckedUpdateManyInput = {
-    nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Sobre?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    metas?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    area?: NullableStringFieldUpdateOperationsInput | string | null
-    match_area?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    RPA?: NullableFloatFieldUpdateOperationsInput | number | null
-    contato_divulgacao?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type tabela_ongsCreateInput = {
+  export type ongsCreateInput = {
     nome_ong?: string | null
     motivo_criacao?: string | null
     sobre?: string | null
     responsavel_contato?: string | null
     cnpj?: string | null
+    email?: string | null
     quantidade_assistidos?: string | null
     metas?: string | null
     causa_organizacao?: string | null
     area?: string | null
     match_area?: string | null
+    objetivos_ods?: string | null
+    atividades_projeto_desenvolve?: string | null
     possui_voluntarios?: string | null
     possui_funcionarios?: string | null
     funcionamento?: string | null
@@ -9001,48 +6793,23 @@ export namespace Prisma {
     produto_social?: string | null
     mensagem_convite?: string | null
     serve_refeicao?: string | null
-    Nome_da_ONG_Projeto?: string | null
-    Motivo_da_cria__o_do_projeto_?: string | null
-    Respons_vel_para_contato?: string | null
-    CNPJ_?: string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: string | null
-    Causa_da_Organiza__o_?: string | null
-    rea?: string | null
-    Match?: string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: string | null
-    Atividades_que_o_projeto_desenvolve_?: string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: string | null
-    Funcionamento__da_organiza__o?: string | null
-    endere_o?: string | null
-    Contato_para_divulga__o?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: string | null
-    quantidade_pessoas_assistidas?: string | null
-    objetivos_ods?: string | null
-    possui_funcionarios_quantos?: string | null
-    possui_produto_social_quais?: string | null
-    mensagem_para_voluntarios_doadores?: string | null
-    serve_refeicoes_cozinha_propria?: string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: string | null
   }
 
-  export type tabela_ongsUncheckedCreateInput = {
+  export type ongsUncheckedCreateInput = {
     id?: number
     nome_ong?: string | null
     motivo_criacao?: string | null
     sobre?: string | null
     responsavel_contato?: string | null
     cnpj?: string | null
+    email?: string | null
     quantidade_assistidos?: string | null
     metas?: string | null
     causa_organizacao?: string | null
     area?: string | null
     match_area?: string | null
+    objetivos_ods?: string | null
+    atividades_projeto_desenvolve?: string | null
     possui_voluntarios?: string | null
     possui_funcionarios?: string | null
     funcionamento?: string | null
@@ -9053,47 +6820,22 @@ export namespace Prisma {
     produto_social?: string | null
     mensagem_convite?: string | null
     serve_refeicao?: string | null
-    Nome_da_ONG_Projeto?: string | null
-    Motivo_da_cria__o_do_projeto_?: string | null
-    Respons_vel_para_contato?: string | null
-    CNPJ_?: string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: string | null
-    Causa_da_Organiza__o_?: string | null
-    rea?: string | null
-    Match?: string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: string | null
-    Atividades_que_o_projeto_desenvolve_?: string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: string | null
-    Funcionamento__da_organiza__o?: string | null
-    endere_o?: string | null
-    Contato_para_divulga__o?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: string | null
-    quantidade_pessoas_assistidas?: string | null
-    objetivos_ods?: string | null
-    possui_funcionarios_quantos?: string | null
-    possui_produto_social_quais?: string | null
-    mensagem_para_voluntarios_doadores?: string | null
-    serve_refeicoes_cozinha_propria?: string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: string | null
   }
 
-  export type tabela_ongsUpdateInput = {
+  export type ongsUpdateInput = {
     nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
     motivo_criacao?: NullableStringFieldUpdateOperationsInput | string | null
     sobre?: NullableStringFieldUpdateOperationsInput | string | null
     responsavel_contato?: NullableStringFieldUpdateOperationsInput | string | null
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_assistidos?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     causa_organizacao?: NullableStringFieldUpdateOperationsInput | string | null
     area?: NullableStringFieldUpdateOperationsInput | string | null
     match_area?: NullableStringFieldUpdateOperationsInput | string | null
+    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
+    atividades_projeto_desenvolve?: NullableStringFieldUpdateOperationsInput | string | null
     possui_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
     possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
     funcionamento?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9104,48 +6846,23 @@ export namespace Prisma {
     produto_social?: NullableStringFieldUpdateOperationsInput | string | null
     mensagem_convite?: NullableStringFieldUpdateOperationsInput | string | null
     serve_refeicao?: NullableStringFieldUpdateOperationsInput | string | null
-    Nome_da_ONG_Projeto?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: NullableStringFieldUpdateOperationsInput | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    rea?: NullableStringFieldUpdateOperationsInput | string | null
-    Match?: NullableStringFieldUpdateOperationsInput | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    Contato_para_divulga__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: NullableStringFieldUpdateOperationsInput | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios_quantos?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social_quais?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios_doadores?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type tabela_ongsUncheckedUpdateInput = {
+  export type ongsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
     motivo_criacao?: NullableStringFieldUpdateOperationsInput | string | null
     sobre?: NullableStringFieldUpdateOperationsInput | string | null
     responsavel_contato?: NullableStringFieldUpdateOperationsInput | string | null
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_assistidos?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     causa_organizacao?: NullableStringFieldUpdateOperationsInput | string | null
     area?: NullableStringFieldUpdateOperationsInput | string | null
     match_area?: NullableStringFieldUpdateOperationsInput | string | null
+    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
+    atividades_projeto_desenvolve?: NullableStringFieldUpdateOperationsInput | string | null
     possui_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
     possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
     funcionamento?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9156,48 +6873,23 @@ export namespace Prisma {
     produto_social?: NullableStringFieldUpdateOperationsInput | string | null
     mensagem_convite?: NullableStringFieldUpdateOperationsInput | string | null
     serve_refeicao?: NullableStringFieldUpdateOperationsInput | string | null
-    Nome_da_ONG_Projeto?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: NullableStringFieldUpdateOperationsInput | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    rea?: NullableStringFieldUpdateOperationsInput | string | null
-    Match?: NullableStringFieldUpdateOperationsInput | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    Contato_para_divulga__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: NullableStringFieldUpdateOperationsInput | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios_quantos?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social_quais?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios_doadores?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type tabela_ongsCreateManyInput = {
+  export type ongsCreateManyInput = {
     id?: number
     nome_ong?: string | null
     motivo_criacao?: string | null
     sobre?: string | null
     responsavel_contato?: string | null
     cnpj?: string | null
+    email?: string | null
     quantidade_assistidos?: string | null
     metas?: string | null
     causa_organizacao?: string | null
     area?: string | null
     match_area?: string | null
+    objetivos_ods?: string | null
+    atividades_projeto_desenvolve?: string | null
     possui_voluntarios?: string | null
     possui_funcionarios?: string | null
     funcionamento?: string | null
@@ -9208,47 +6900,22 @@ export namespace Prisma {
     produto_social?: string | null
     mensagem_convite?: string | null
     serve_refeicao?: string | null
-    Nome_da_ONG_Projeto?: string | null
-    Motivo_da_cria__o_do_projeto_?: string | null
-    Respons_vel_para_contato?: string | null
-    CNPJ_?: string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: string | null
-    Causa_da_Organiza__o_?: string | null
-    rea?: string | null
-    Match?: string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: string | null
-    Atividades_que_o_projeto_desenvolve_?: string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: string | null
-    Funcionamento__da_organiza__o?: string | null
-    endere_o?: string | null
-    Contato_para_divulga__o?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: string | null
-    quantidade_pessoas_assistidas?: string | null
-    objetivos_ods?: string | null
-    possui_funcionarios_quantos?: string | null
-    possui_produto_social_quais?: string | null
-    mensagem_para_voluntarios_doadores?: string | null
-    serve_refeicoes_cozinha_propria?: string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: string | null
   }
 
-  export type tabela_ongsUpdateManyMutationInput = {
+  export type ongsUpdateManyMutationInput = {
     nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
     motivo_criacao?: NullableStringFieldUpdateOperationsInput | string | null
     sobre?: NullableStringFieldUpdateOperationsInput | string | null
     responsavel_contato?: NullableStringFieldUpdateOperationsInput | string | null
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_assistidos?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     causa_organizacao?: NullableStringFieldUpdateOperationsInput | string | null
     area?: NullableStringFieldUpdateOperationsInput | string | null
     match_area?: NullableStringFieldUpdateOperationsInput | string | null
+    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
+    atividades_projeto_desenvolve?: NullableStringFieldUpdateOperationsInput | string | null
     possui_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
     possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
     funcionamento?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9259,48 +6926,23 @@ export namespace Prisma {
     produto_social?: NullableStringFieldUpdateOperationsInput | string | null
     mensagem_convite?: NullableStringFieldUpdateOperationsInput | string | null
     serve_refeicao?: NullableStringFieldUpdateOperationsInput | string | null
-    Nome_da_ONG_Projeto?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: NullableStringFieldUpdateOperationsInput | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    rea?: NullableStringFieldUpdateOperationsInput | string | null
-    Match?: NullableStringFieldUpdateOperationsInput | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    Contato_para_divulga__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: NullableStringFieldUpdateOperationsInput | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios_quantos?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social_quais?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios_doadores?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type tabela_ongsUncheckedUpdateManyInput = {
+  export type ongsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nome_ong?: NullableStringFieldUpdateOperationsInput | string | null
     motivo_criacao?: NullableStringFieldUpdateOperationsInput | string | null
     sobre?: NullableStringFieldUpdateOperationsInput | string | null
     responsavel_contato?: NullableStringFieldUpdateOperationsInput | string | null
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     quantidade_assistidos?: NullableStringFieldUpdateOperationsInput | string | null
     metas?: NullableStringFieldUpdateOperationsInput | string | null
     causa_organizacao?: NullableStringFieldUpdateOperationsInput | string | null
     area?: NullableStringFieldUpdateOperationsInput | string | null
     match_area?: NullableStringFieldUpdateOperationsInput | string | null
+    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
+    atividades_projeto_desenvolve?: NullableStringFieldUpdateOperationsInput | string | null
     possui_voluntarios?: NullableStringFieldUpdateOperationsInput | string | null
     possui_funcionarios?: NullableStringFieldUpdateOperationsInput | string | null
     funcionamento?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9311,34 +6953,6 @@ export namespace Prisma {
     produto_social?: NullableStringFieldUpdateOperationsInput | string | null
     mensagem_convite?: NullableStringFieldUpdateOperationsInput | string | null
     serve_refeicao?: NullableStringFieldUpdateOperationsInput | string | null
-    Nome_da_ONG_Projeto?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto_?: NullableStringFieldUpdateOperationsInput | string | null
-    Respons_vel_para_contato?: NullableStringFieldUpdateOperationsInput | string | null
-    CNPJ_?: NullableStringFieldUpdateOperationsInput | string | null
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: NullableStringFieldUpdateOperationsInput | string | null
-    Metas_de_curto__m_dio_e_longo_prazo?: NullableStringFieldUpdateOperationsInput | string | null
-    Causa_da_Organiza__o_?: NullableStringFieldUpdateOperationsInput | string | null
-    rea?: NullableStringFieldUpdateOperationsInput | string | null
-    Match?: NullableStringFieldUpdateOperationsInput | string | null
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: NullableStringFieldUpdateOperationsInput | string | null
-    Atividades_que_o_projeto_desenvolve_?: NullableStringFieldUpdateOperationsInput | string | null
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: NullableStringFieldUpdateOperationsInput | string | null
-    Funcionamento__da_organiza__o?: NullableStringFieldUpdateOperationsInput | string | null
-    endere_o?: NullableStringFieldUpdateOperationsInput | string | null
-    Contato_para_divulga__o?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: NullableStringFieldUpdateOperationsInput | string | null
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: NullableStringFieldUpdateOperationsInput | string | null
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: NullableStringFieldUpdateOperationsInput | string | null
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: NullableStringFieldUpdateOperationsInput | string | null
-    quantidade_pessoas_assistidas?: NullableStringFieldUpdateOperationsInput | string | null
-    objetivos_ods?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_funcionarios_quantos?: NullableStringFieldUpdateOperationsInput | string | null
-    possui_produto_social_quais?: NullableStringFieldUpdateOperationsInput | string | null
-    mensagem_para_voluntarios_doadores?: NullableStringFieldUpdateOperationsInput | string | null
-    serve_refeicoes_cozinha_propria?: NullableStringFieldUpdateOperationsInput | string | null
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: NullableStringFieldUpdateOperationsInput | string | null
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -9717,136 +7331,21 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type OngCountOrderByAggregateInput = {
-    nome_ong?: SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrder
-    Sobre?: SortOrder
-    Respons_vel_para_contato?: SortOrder
-    CNPJ_?: SortOrder
-    email?: SortOrder
-    quantidade_pessoas_assistidas?: SortOrder
-    metas?: SortOrder
-    Causa_da_Organiza__o_?: SortOrder
-    area?: SortOrder
-    match_area?: SortOrder
-    objetivos_ods?: SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrder
-    possui_funcionarios?: SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrder
-    Funcionamento__da_organiza__o?: SortOrder
-    Endere_o?: SortOrder
-    RPA?: SortOrder
-    contato_divulgacao?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrder
-    possui_produto_social?: SortOrder
-    mensagem_para_voluntarios?: SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrder
-    id?: SortOrder
-  }
-
-  export type OngAvgOrderByAggregateInput = {
-    RPA?: SortOrder
-    id?: SortOrder
-  }
-
-  export type OngMaxOrderByAggregateInput = {
-    nome_ong?: SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrder
-    Sobre?: SortOrder
-    Respons_vel_para_contato?: SortOrder
-    CNPJ_?: SortOrder
-    email?: SortOrder
-    quantidade_pessoas_assistidas?: SortOrder
-    metas?: SortOrder
-    Causa_da_Organiza__o_?: SortOrder
-    area?: SortOrder
-    match_area?: SortOrder
-    objetivos_ods?: SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrder
-    possui_funcionarios?: SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrder
-    Funcionamento__da_organiza__o?: SortOrder
-    Endere_o?: SortOrder
-    RPA?: SortOrder
-    contato_divulgacao?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrder
-    possui_produto_social?: SortOrder
-    mensagem_para_voluntarios?: SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrder
-    id?: SortOrder
-  }
-
-  export type OngMinOrderByAggregateInput = {
-    nome_ong?: SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrder
-    Sobre?: SortOrder
-    Respons_vel_para_contato?: SortOrder
-    CNPJ_?: SortOrder
-    email?: SortOrder
-    quantidade_pessoas_assistidas?: SortOrder
-    metas?: SortOrder
-    Causa_da_Organiza__o_?: SortOrder
-    area?: SortOrder
-    match_area?: SortOrder
-    objetivos_ods?: SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrder
-    possui_funcionarios?: SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrder
-    Funcionamento__da_organiza__o?: SortOrder
-    Endere_o?: SortOrder
-    RPA?: SortOrder
-    contato_divulgacao?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrder
-    possui_produto_social?: SortOrder
-    mensagem_para_voluntarios?: SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrder
-    id?: SortOrder
-  }
-
-  export type OngSumOrderByAggregateInput = {
-    RPA?: SortOrder
-    id?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type tabela_ongsCountOrderByAggregateInput = {
+  export type ongsCountOrderByAggregateInput = {
     id?: SortOrder
     nome_ong?: SortOrder
     motivo_criacao?: SortOrder
     sobre?: SortOrder
     responsavel_contato?: SortOrder
     cnpj?: SortOrder
+    email?: SortOrder
     quantidade_assistidos?: SortOrder
     metas?: SortOrder
     causa_organizacao?: SortOrder
     area?: SortOrder
     match_area?: SortOrder
+    objetivos_ods?: SortOrder
+    atividades_projeto_desenvolve?: SortOrder
     possui_voluntarios?: SortOrder
     possui_funcionarios?: SortOrder
     funcionamento?: SortOrder
@@ -9857,52 +7356,27 @@ export namespace Prisma {
     produto_social?: SortOrder
     mensagem_convite?: SortOrder
     serve_refeicao?: SortOrder
-    Nome_da_ONG_Projeto?: SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrder
-    Respons_vel_para_contato?: SortOrder
-    CNPJ_?: SortOrder
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: SortOrder
-    Metas_de_curto__m_dio_e_longo_prazo?: SortOrder
-    Causa_da_Organiza__o_?: SortOrder
-    rea?: SortOrder
-    Match?: SortOrder
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrder
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrder
-    Funcionamento__da_organiza__o?: SortOrder
-    endere_o?: SortOrder
-    Contato_para_divulga__o?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrder
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: SortOrder
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: SortOrder
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: SortOrder
-    quantidade_pessoas_assistidas?: SortOrder
-    objetivos_ods?: SortOrder
-    possui_funcionarios_quantos?: SortOrder
-    possui_produto_social_quais?: SortOrder
-    mensagem_para_voluntarios_doadores?: SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrder
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: SortOrder
   }
 
-  export type tabela_ongsAvgOrderByAggregateInput = {
+  export type ongsAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type tabela_ongsMaxOrderByAggregateInput = {
+  export type ongsMaxOrderByAggregateInput = {
     id?: SortOrder
     nome_ong?: SortOrder
     motivo_criacao?: SortOrder
     sobre?: SortOrder
     responsavel_contato?: SortOrder
     cnpj?: SortOrder
+    email?: SortOrder
     quantidade_assistidos?: SortOrder
     metas?: SortOrder
     causa_organizacao?: SortOrder
     area?: SortOrder
     match_area?: SortOrder
+    objetivos_ods?: SortOrder
+    atividades_projeto_desenvolve?: SortOrder
     possui_voluntarios?: SortOrder
     possui_funcionarios?: SortOrder
     funcionamento?: SortOrder
@@ -9913,48 +7387,23 @@ export namespace Prisma {
     produto_social?: SortOrder
     mensagem_convite?: SortOrder
     serve_refeicao?: SortOrder
-    Nome_da_ONG_Projeto?: SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrder
-    Respons_vel_para_contato?: SortOrder
-    CNPJ_?: SortOrder
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: SortOrder
-    Metas_de_curto__m_dio_e_longo_prazo?: SortOrder
-    Causa_da_Organiza__o_?: SortOrder
-    rea?: SortOrder
-    Match?: SortOrder
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrder
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrder
-    Funcionamento__da_organiza__o?: SortOrder
-    endere_o?: SortOrder
-    Contato_para_divulga__o?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrder
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: SortOrder
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: SortOrder
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: SortOrder
-    quantidade_pessoas_assistidas?: SortOrder
-    objetivos_ods?: SortOrder
-    possui_funcionarios_quantos?: SortOrder
-    possui_produto_social_quais?: SortOrder
-    mensagem_para_voluntarios_doadores?: SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrder
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: SortOrder
   }
 
-  export type tabela_ongsMinOrderByAggregateInput = {
+  export type ongsMinOrderByAggregateInput = {
     id?: SortOrder
     nome_ong?: SortOrder
     motivo_criacao?: SortOrder
     sobre?: SortOrder
     responsavel_contato?: SortOrder
     cnpj?: SortOrder
+    email?: SortOrder
     quantidade_assistidos?: SortOrder
     metas?: SortOrder
     causa_organizacao?: SortOrder
     area?: SortOrder
     match_area?: SortOrder
+    objetivos_ods?: SortOrder
+    atividades_projeto_desenvolve?: SortOrder
     possui_voluntarios?: SortOrder
     possui_funcionarios?: SortOrder
     funcionamento?: SortOrder
@@ -9965,37 +7414,9 @@ export namespace Prisma {
     produto_social?: SortOrder
     mensagem_convite?: SortOrder
     serve_refeicao?: SortOrder
-    Nome_da_ONG_Projeto?: SortOrder
-    Motivo_da_cria__o_do_projeto_?: SortOrder
-    Respons_vel_para_contato?: SortOrder
-    CNPJ_?: SortOrder
-    Quantidade_de_pessoas_assistidas_beneficiadas_atrav_s_do_traba?: SortOrder
-    Metas_de_curto__m_dio_e_longo_prazo?: SortOrder
-    Causa_da_Organiza__o_?: SortOrder
-    rea?: SortOrder
-    Match?: SortOrder
-    Objetivos_de_Desenvolvimento_Sustent_vel_ODS_que_a_institui_?: SortOrder
-    Atividades_que_o_projeto_desenvolve_?: SortOrder
-    Possui_Volunt_rios_fixos__Se_sim__quantos_s_o_?: SortOrder
-    A_sua_organiza__o_possui_funcion_rios__Se_sim__quantos_s_o_?: SortOrder
-    Funcionamento__da_organiza__o?: SortOrder
-    endere_o?: SortOrder
-    Contato_para_divulga__o?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__o__?: SortOrder
-    Voc_s_possuem_algum_produto_social__Explicando_melhor__Voc_s_?: SortOrder
-    Qual_mensagem_voc__mandaria_para_as_pessoas_que_ainda_n_o_co?: SortOrder
-    A_sua_entidade_serve_refei__es__se_sim__a_cozinha_que_prepara?: SortOrder
-    quantidade_pessoas_assistidas?: SortOrder
-    objetivos_ods?: SortOrder
-    possui_funcionarios_quantos?: SortOrder
-    possui_produto_social_quais?: SortOrder
-    mensagem_para_voluntarios_doadores?: SortOrder
-    serve_refeicoes_cozinha_propria?: SortOrder
-    Motivo_da_cria__o_do_projeto__Sobre__Respons_vel_para_con?: SortOrder
-    Espa_o_para_informarem_as_redes_sociais_da_sua_Organiza__?: SortOrder
   }
 
-  export type tabela_ongsSumOrderByAggregateInput = {
+  export type ongsSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -10145,14 +7566,6 @@ export namespace Prisma {
     upsert?: usersUpsertWithoutProjetosInput
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutProjetosInput, usersUpdateWithoutProjetosInput>, usersUncheckedUpdateWithoutProjetosInput>
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -10386,33 +7799,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type usersCreateWithoutVerificationsInput = {
