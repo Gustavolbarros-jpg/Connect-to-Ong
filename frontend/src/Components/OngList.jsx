@@ -152,13 +152,13 @@ function OngList({
 
         if (data.success && data.body) {
           const mappedOngs = data.body.map((ong) => ({
-            id: ong.id,
-            name: ong.nome_ong,
-            area: ong.match_area || "Não informada",
-            location: ong.Endere_o || "Não informado",
-            description: ong.Sobre || "Descrição não disponível.",
-            logo: ong.logo_ong || "/logo-ong-placeholder.png",
-          }));
+          id: ong.id,
+    name: ong.nome_ong,
+    area: ong.area || "Não informada", // CORRIGIDO
+    location: ong.endereco || "Não informado", // CORRIGIDO
+    description: ong.sobre || "Descrição não disponível.",
+    logo: ong.logo_ong || "/logo-ong-placeholder.png",
+}));
           const mockedOngForMatchTest = {
             id: 9999, // ID único para teste
             name: "ONG de Teste EEMM (Mock)",
@@ -168,7 +168,6 @@ function OngList({
             logo: null,
             email: "gmomenezes@gmail.com"
           };
-          
           // Adiciona a ONG mockada no início da lista
           mappedOngs.unshift(mockedOngForMatchTest);
           // --- FIM: MOCK PARA TESTE DE MATCH ---
@@ -205,31 +204,33 @@ function OngList({
     }
   }, [allOngs]);
 
-  useEffect(() => {
+// Este trecho do código já está correto, mas só vai funcionar
+// depois que você corrigir o mapeamento dos dados da API.
+useEffect(() => {
     let currentOngs = [...allOngs];
 
     if (searchTerm) {
-      currentOngs = currentOngs.filter(
-        (ong) =>
-          ong.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (ong.description &&
-            ong.description.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
+        currentOngs = currentOngs.filter(
+            (ong) =>
+                ong.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (ong.description &&
+                    ong.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
     }
     if (selectedArea) {
-      currentOngs = currentOngs.filter((ong) =>
-        ong.area.includes(selectedArea)
-      );
+        currentOngs = currentOngs.filter((ong) =>
+            ong.area.includes(selectedArea)
+        );
     }
     if (selectedLocation) {
-      currentOngs = currentOngs.filter((ong) =>
-        ong.location.includes(selectedLocation)
-      );
+        currentOngs = currentOngs.filter((ong) =>
+            ong.location.includes(selectedLocation)
+        );
     }
 
     setFilteredOngs(currentOngs);
     setCurrentPage(1);
-  }, [searchTerm, selectedArea, selectedLocation, allOngs]);
+}, [searchTerm, selectedArea, selectedLocation, allOngs]);
 
   const handleSearchChange = (event) => setSearchTerm(event.target.value);
   const handleAreaChange = (event) => setSelectedArea(event.target.value);

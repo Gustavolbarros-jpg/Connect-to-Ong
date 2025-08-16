@@ -1,18 +1,26 @@
+// src/dominio/OngDataAccess.js
+// O arquivo de acesso a dados para a entidade ONG, usando o Prisma Client.
 import prisma from '../prisma/prismaClient.js';
 
 export default class OngDataAccess {
+    /**
+     * Cria um novo registro de ONG no banco de dados.
+     * @param {Object} ongData - Os dados da ONG a serem criados.
+     * @returns {Promise<Object>} O objeto ONG criado.
+     */
     async create(ongData) {
         try {
-            const result = await prisma.ong.create({
+            // A correção está aqui: agora usamos 'ongs' e mapeamos os campos corretamente
+            const result = await prisma.ongs.create({
                 data: {
-                    nome: ongData.nome,
-                    area: ongData.area,
-                    descricao: ongData.descricao,
-                    cnpj: ongData.cnpj,
-                    responsavel: ongData.responsavel,
-                    qtd_associados: parseInt(ongData.qtd_associados) || 0,
-                    motivo_criacao: ongData.motivo_criacao,
-                    redes_sociais: ongData.redes_sociais,
+                    nome_ong: ongData.nome,
+                    Area: ongData.area, // Mapeado para 'Área'
+                    Sobre: ongData.sobre, // Mapeado para 'Sobre'
+                    CNPJ: ongData.cnpj, // Mapeado para 'CNPJ'
+                    Responsavel_para_contato: ongData.responsavel, // Mapeado para 'Responsável_para_contato'
+                    quantidade_pessoas_assistidas: parseInt(ongData.qtd_associados) || 0, // Mapeado para 'quantidade_pessoas_assistidas'
+                    Motivo_da_criacao_do_projeto: ongData.motivo_criacao, // Mapeado para 'Motivo_da_criação_do_projeto'
+                    Espaco_para_informarem_as_redes_sociais_da_suaOrganização: ongData.redes_sociais, // Mapeado para 'Espaço_para_informarem_as_redes_sociais_da_suaOrganização'
                 },
             });
             return result;
@@ -22,50 +30,55 @@ export default class OngDataAccess {
         }
     }
 
-    
+    /**
+     * Busca todos os registros de ONGs, com a opção de filtrar por área, CNPJ, nome e localização.
+     * @param {Object} filters - Um objeto com filtros opcionais.
+     * @returns {Promise<Array<Object>>} Uma lista de objetos ONG.
+     */
     async findAll(filters = {}) {
         try {
             const whereClause = {};
 
-            // Filtro 1: Por área (já existe)
             if (filters.area) {
-                whereClause.match_area = { 
+                // Mapeado para a coluna 'Área'
+                whereClause.Área = {
                     contains: filters.area,
                     mode: 'insensitive'
                 };
             }
 
-            // Filtro 2: Por CNPJ (já existe)
             if (filters.has_cnpj === 'true') {
-                whereClause.cnpj = {
-                    not: null
-                };
+                // Mapeado para a coluna 'CNPJ'
+                whereClause.CNPJ = { not: null };
             }
 
-            // Filtro 3: Por Nome da ONG (A NOVA LÓGICA)
             if (filters.nome) {
-                whereClause.nome_ong = { // O nome do campo no seu banco
+                // Mapeado para a coluna 'nome_ong'
+                whereClause.nome_ong = {
                     contains: filters.nome,
                     mode: 'insensitive'
                 };
             }
 
             if (filters.localizacao) {
-                whereClause.Endere_o = { // O nome do campo do endereço no seu banco
+                // Mapeado para a coluna 'Endereço'
+                whereClause.Endereço = {
                     contains: filters.localizacao,
                     mode: 'insensitive'
                 };
             }
 
-            const result = await prisma.ong.findMany({
+            const result = await prisma.ongs.findMany({
                 where: whereClause,
                 orderBy: {
                     id: 'asc'
                 }
             });
+
             if (result && result.length > 0) {
-                console.log("!!! TESTE DATA ACCESS: ESTRUTURA DO PRIMEIRO OBJETO ONG:", result[0]);
+                console.log("Primeiro objeto ONG:", result[0]);
             }
+
             return result;
         } catch (error) {
             console.error('Erro ao buscar todas as ONGs:', error);
@@ -73,11 +86,17 @@ export default class OngDataAccess {
         }
     }
 
+    /**
+     * Busca um registro de ONG pelo nome.
+     * @param {string} name - O nome da ONG a ser buscada.
+     * @returns {Promise<Object | null>} O objeto ONG encontrado ou null.
+     */
     async findByName(name) {
         try {
-            const ong = await prisma.ngo.findFirst({
+            // Mapeado para a coluna 'nome_ong'
+            const ong = await prisma.ongs.findFirst({
                 where: {
-                    name: name
+                    nome_ong: name
                 }
             });
             return ong;
@@ -87,15 +106,20 @@ export default class OngDataAccess {
         }
     }
 
+    /**
+     * Busca um registro de ONG pelo ID.
+     * @param {string} ongId - O ID da ONG a ser buscada.
+     * @returns {Promise<Object | null>} O objeto ONG encontrado ou null.
+     */
     async findById(ongId) {
         try {
             const numericId = parseInt(ongId, 10);
 
             if (isNaN(numericId)) {
-                return null; 
+                return null;
             }
-            
-            const result = await prisma.ong.findUnique({
+
+            const result = await prisma.ongs.findUnique({
                 where: { id: numericId },
             });
             return result;
