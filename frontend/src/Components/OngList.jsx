@@ -1,8 +1,9 @@
 // src/components/OngList.jsx
 import React, { useState, useEffect } from "react";
 import OngCard from "./OngCard";
+import apiClient from '../api/tokenInterceptor.js'; // <-- Caminho correto
 
-const API_BASE_URL = "http://localhost:3000/api/ongs";
+
 const ITEMS_PER_PAGE = 5;
 
 const AREA_KEYWORDS = [
@@ -139,59 +140,59 @@ function OngList({
     useState(RECIFE_NEIGHBORHOODS);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    const fetchAllOngs = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(API_BASE_URL);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+ 
+useEffect(() => {
+  const fetchAllOngs = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      // 1. A chamada agora usa apiClient.get com a URL relativa
+      const response = await apiClient.get('/api/ongs');
+      
+      // 2. Os dados da resposta já vêm prontos em response.data
+      const data = response.data;
 
-        if (data.success && data.body) {
-          const mappedOngs = data.body.map((ong) => ({
-            id: ong.id,
-            // ✨ LINHA CORRIGIDA: Adicionado fallback para o nome da ONG
-            name: ong.nome_ong || "Nome não informado",
-            area: ong.area || "Não informada",
-            location: ong.endereco || "Não informado",
-            description: ong.sobre || "Descrição não disponível.",
-            logo: ong.logo_ong || "/logo-ong-placeholder.png",
-          }));
+      if (data.success && data.body) {
+        const mappedOngs = data.body.map((ong) => ({
+          id: ong.id,
+          name: ong.nome_ong || "Nome não informado",
+          area: ong.area || "Não informada",
+          location: ong.endereco || "Não informado",
+          description: ong.sobre || "Descrição não disponível.",
+          logo: ong.logo_ong || "/logo-ong-placeholder.png",
+        }));
 
-          const mockedOngForMatchTest = {
-            id: 91,
-            name: "ONG de Teste EEMM (Mock)",
-            area: "Educação / Tecnologia",
-            location: "CIn/UFPE, Recife",
-            description:
-              "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
-            logo: null,
-            email: "gustavo.lbarros1@gmail.com",
-          };
-          mappedOngs.unshift(mockedOngForMatchTest);
+        const mockedOngForMatchTest = {
+          id: 91,
+          name: "ONG de Teste EEMM (Mock)",
+          area: "Educação / Tecnologia",
+          location: "CIn/UFPE, Recife",
+          description:
+            "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
+          logo: null,
+          email: "gustavo.lbarros1@gmail.com",
+        };
+        mappedOngs.unshift(mockedOngForMatchTest);
 
-          setAllOngs(mappedOngs);
-        } else {
-          throw new Error(
-            data.body.message || "Erro ao processar dados da API."
-          );
-        }
-      } catch (err) {
-        console.error("Falha ao buscar ONGs:", err);
-        setError(
-          "Não foi possível carregar as ONGs. Tente novamente mais tarde."
+        setAllOngs(mappedOngs);
+      } else {
+        throw new Error(
+          data.body.message || "Erro ao processar dados da API."
         );
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (err) {
+      console.error("Falha ao buscar ONGs:", err);
+      // 3. O .catch do Axios já lida com erros de rede e de HTTP (404, 500, etc)
+      setError(
+        "Não foi possível carregar as ONGs. Tente novamente mais tarde."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchAllOngs();
-  }, []);
-
+  fetchAllOngs();
+}, []);
   useEffect(() => {
     if (allOngs.length > 0) {
       const foundKeywords = new Set();

@@ -6,9 +6,10 @@ export const triggerTokenExpired = () => {
   window.dispatchEvent(event);
 };
 
-// Cria a instância do axios
+// Cria a instância do axios 
+//mudança agora para consumir o .env do fron
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
