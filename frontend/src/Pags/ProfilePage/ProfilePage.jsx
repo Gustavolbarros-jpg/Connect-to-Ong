@@ -6,7 +6,7 @@ import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import ProjectsSection from "./ProjectsSection";
 
-function ProfilePage( {onLogout}) {
+function ProfilePage({ onLogout }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [departamento, setDepartamento] = useState("");
@@ -16,9 +16,9 @@ function ProfilePage( {onLogout}) {
   const [profileImage, setProfileImage] = useState(cameraIcon);
   const [isSaving, setIsSaving] = useState(false);
 
-useEffect(() => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const userId = user.id // depois pode vir do login/JWT
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const userId = user.id; // depois pode vir do login/JWT
 
     fetch(`http://localhost:3000/users/${userId}`)
       .then((res) => res.json())
@@ -38,40 +38,41 @@ useEffect(() => {
       });
   }, []);
 
-const handleSaveProfile = async () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const userId = user.id
-  if (!userId) return alert("Usuário não encontrado");
-  setIsSaving(true);
+  const handleSaveProfile = async () => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const userId = user.id;
+    if (!userId) return alert("Usuário não encontrado");
+    setIsSaving(true);
 
-  try {
-    const body = {
-      description,
-      photoUrl: profileImage
-    };
+    try {
+      const body = {
+        description,
+        photoUrl: profileImage,
+      };
 
-    const res = await fetch(`http://localhost:3000/users/${userId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+      const res = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      alert("Perfil atualizado com sucesso!");
-      setIsEditing(false);
-    } else {
-      alert("Erro ao atualizar perfil: " + (data.body?.error || "Desconhecido"));
+      if (data.success) {
+        alert("Perfil atualizado com sucesso!");
+        setIsEditing(false);
+      } else {
+        alert(
+          "Erro ao atualizar perfil: " + (data.body?.error || "Desconhecido")
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao atualizar perfil.");
+    } finally {
+      setIsSaving(false);
     }
-  } catch (err) {
-    console.error(err);
-    alert("Erro ao atualizar perfil.");
-  } finally {
-    setIsSaving(false);
-  }
-};
-
+  };
 
   const handleImageChange = () => {
     if (!isEditing) return;
@@ -120,7 +121,11 @@ const handleSaveProfile = async () => {
                 />
               </div>
               {isEditing && (
-                <Button onClick={handleRemoveImage} primary className="text-[20px] font-semibold px-5">
+                <Button
+                  onClick={handleRemoveImage}
+                  primary
+                  className="text-[20px] font-semibold px-5"
+                >
                   Remover Foto
                 </Button>
               )}
@@ -212,11 +217,19 @@ const handleSaveProfile = async () => {
 
               <div className="w-full flex justify-end mt-4">
                 {isEditing ? (
-                  <Button onClick={handleSaveProfile} primary className="text-[20px] font-semibold px-5">
+                  <Button
+                    onClick={handleSaveProfile}
+                    primary
+                    className="text-[20px] font-semibold px-5"
+                  >
                     Salvar Alterações
                   </Button>
                 ) : (
-                  <Button onClick={() => setIsEditing(true)} primary className="text-[20px] font-semibold px-5">
+                  <Button
+                    onClick={() => setIsEditing(true)}
+                    primary
+                    className="text-[20px] font-semibold px-5"
+                  >
                     Editar Perfil
                   </Button>
                 )}

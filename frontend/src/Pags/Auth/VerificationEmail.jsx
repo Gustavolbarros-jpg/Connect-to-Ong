@@ -22,19 +22,22 @@ function RecoverPasswordPage() {
       // ======================================================================
       // ✅ ESTE É O PONTO CRÍTICO: CHAMANDO O ENDPOINT DE RECUPERAÇÃO DE SENHA
       // ======================================================================
-              await apiClient.post('/auth/forgot-password', {
+      await apiClient.post("/auth/forgot-password", {
         email: email,
       });
 
       // Se a requisição for bem-sucedida, avisa o usuário e navega
-      alert("Se este e-mail estiver cadastrado, um código de verificação foi enviado para sua caixa de entrada.");
-      
+      alert(
+        "Se este e-mail estiver cadastrado, um código de verificação foi enviado para sua caixa de entrada."
+      );
+
       // Navega para a página de verificação de código, passando o e-mail
       navigate("/verify-code", { state: { email: email } });
-
     } catch (error) {
       // Captura qualquer erro do backend (ex: e-mail não encontrado)
-      const errorMessage = error.response?.data?.message || "E-mail não encontrado ou erro no servidor.";
+      const errorMessage =
+        error.response?.data?.message ||
+        "E-mail não encontrado ou erro no servidor.";
       console.error("Erro ao solicitar recuperação de senha:", error);
       alert(errorMessage);
     }
@@ -50,7 +53,8 @@ function RecoverPasswordPage() {
               Recupere sua Conta
             </h1>
             <p className="text-gray-600 mb-8">
-              Digite o seu e-mail cadastrado para enviarmos um código de verificação.
+              Digite o seu e-mail cadastrado para enviarmos um código de
+              verificação.
             </p>
             <form onSubmit={handleSubmit} className="space-y-6">
               <InputField

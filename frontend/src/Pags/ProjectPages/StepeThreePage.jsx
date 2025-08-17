@@ -11,7 +11,10 @@ function StepeThreePage({ onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log('CHEGANDO NO PASSO 3 -> location.state recebido:', location.state);
+  console.log(
+    "CHEGANDO NO PASSO 3 -> location.state recebido:",
+    location.state
+  );
   const state = location.state || {};
   const projectDetails = state.projectDetails || {};
   const selectedOng = state.selectedOng || null;
@@ -30,7 +33,7 @@ function StepeThreePage({ onLogout }) {
         navigate("/login");
         return;
       }
-      
+
       // -- AQUI ESTÁ A ÚNICA MUDANÇA NECESSÁRIA --
       // Os campos agora são lidos usando os nomes corrigidos (snake_case)
       const projectData = {
@@ -43,8 +46,8 @@ function StepeThreePage({ onLogout }) {
         horas_extensao: projectDetails.horas_extensao,
         tempo_previsto: projectDetails.tempo_previsto,
         data_inicio: projectDetails.data_inicio, // Adicionado
-        data_fim: projectDetails.data_fim,     // Adicionado
-        ong_selecionada: selectedOng?.id  || null,
+        data_fim: projectDetails.data_fim, // Adicionado
+        ong_selecionada: selectedOng?.id || null,
         categoria_ong: selectedOng?.area || null,
       };
 
@@ -141,17 +144,13 @@ function StepeThreePage({ onLogout }) {
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
-                  <p className="font-medium text-gray-500">
-                    Data de Início
-                  </p>
+                  <p className="font-medium text-gray-500">Data de Início</p>
                   <p className="text-gray-800">
                     {displayData(projectDetails.data_inicio)}
                   </p>
                 </div>
                 <div className="w-full sm:w-1/2 px-4 mb-4">
-                  <p className="font-medium text-gray-500">
-                    Data de Conclusão
-                  </p>
+                  <p className="font-medium text-gray-500">Data de Conclusão</p>
                   <p className="text-gray-800">
                     {displayData(projectDetails.data_fim)}
                   </p>

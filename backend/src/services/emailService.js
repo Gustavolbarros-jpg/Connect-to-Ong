@@ -1,7 +1,7 @@
 // backend/src/services/emailService.js
 
-import * as Brevo from '@getbrevo/brevo';
-import 'dotenv/config';
+import * as Brevo from "@getbrevo/brevo";
+import "dotenv/config";
 
 // 1. Configura a instância da API com a chave do .env
 const apiInstance = new Brevo.TransactionalEmailsApi();
@@ -22,22 +22,31 @@ const sendSmtpEmail = new Brevo.SendSmtpEmail();
  * @param {string} html - O corpo do e-mail em formato HTML.
  */
 async function sendMail({ to, subject, htmlContent }) {
-    sendSmtpEmail.subject = subject;
-    sendSmtpEmail.htmlContent = htmlContent;
-    sendSmtpEmail.sender = { name: "Connect To ONG", email: "connecttoong@gmail.com" }; // IMPORTANTE: Use um email verificado no Brevo
-    sendSmtpEmail.to = [{ email: to }];
-    // sendSmtpEmail.replyTo = { email: "seu-email-de-contato@exemplo.com" }; // Opcional
+  sendSmtpEmail.subject = subject;
+  sendSmtpEmail.htmlContent = htmlContent;
+  sendSmtpEmail.sender = {
+    name: "Connect To ONG",
+    email: "connecttoong@gmail.com",
+  }; // IMPORTANTE: Use um email verificado no Brevo
+  sendSmtpEmail.to = [{ email: to }];
+  // sendSmtpEmail.replyTo = { email: "seu-email-de-contato@exemplo.com" }; // Opcional
 
-    try {
-        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
-        console.log("E-mail enviado com sucesso via Brevo. ID da mensagem: ", data.body.messageId);
-        return { success: true, messageId: data.body.messageId };
-    } catch (error) {
-        console.error("Erro ao enviar e-mail via Brevo:", error.response?.body || error.message);
-        return { success: false, error: error.response?.body || error.message };
-    }
+  try {
+    const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log(
+      "E-mail enviado com sucesso via Brevo. ID da mensagem: ",
+      data.body.messageId
+    );
+    return { success: true, messageId: data.body.messageId };
+  } catch (error) {
+    console.error(
+      "Erro ao enviar e-mail via Brevo:",
+      error.response?.body || error.message
+    );
+    return { success: false, error: error.response?.body || error.message };
+  }
 }
 
 export const emailService = {
-    sendMail,
+  sendMail,
 };

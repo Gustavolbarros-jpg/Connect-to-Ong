@@ -9,7 +9,7 @@ import resultsIcon from "../../assets/images/resultsIcon.png";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 
-function HomePage({onLogout}) {
+function HomePage({ onLogout }) {
   return (
     <div className="bg-white font-roboto">
       <Navbar onLogout={onLogout} />

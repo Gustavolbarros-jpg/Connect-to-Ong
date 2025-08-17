@@ -6,27 +6,118 @@ const API_BASE_URL = "http://localhost:3000/api/ongs";
 const ITEMS_PER_PAGE = 5;
 
 const AREA_KEYWORDS = [
-  "Acolhimento", "Acompanhamento Familiar", "Acompanhamento Jurídico", "Agricultura",
-  "Alimentar", "Ambiental", "Apoio Comunitário", "Apoio Psicossocial", "Artesanato",
-  "Assistência Social", "Bem-estar", "Cultura", "Educação", "Empregabilidade",
-  "Empoderamento Feminino", "Esporte", "Geração de Renda", "Inclusão Social", "Lazer",
-  "Liderança", "Meio Ambiente", "Profissionalização", "Saúde", "Sustentabilidade", "Tecnologia",
+  "Acolhimento",
+  "Acompanhamento Familiar",
+  "Acompanhamento Jurídico",
+  "Agricultura",
+  "Alimentar",
+  "Ambiental",
+  "Apoio Comunitário",
+  "Apoio Psicossocial",
+  "Artesanato",
+  "Assistência Social",
+  "Bem-estar",
+  "Cultura",
+  "Educação",
+  "Empregabilidade",
+  "Empoderamento Feminino",
+  "Esporte",
+  "Geração de Renda",
+  "Inclusão Social",
+  "Lazer",
+  "Liderança",
+  "Meio Ambiente",
+  "Profissionalização",
+  "Saúde",
+  "Sustentabilidade",
+  "Tecnologia",
 ].sort();
 
 const RECIFE_NEIGHBORHOODS = [
-  "Aflitos", "Afogados", "Água Fria", "Alto José Bonifácio", "Alto José do Pinho", "Apipucos",
-  "Areias", "Arruda", "Barro", "Beberibe", "Boa Viagem", "Boa Vista", "Bomba do Hemetério",
-  "Bongi", "Brasília Teimosa", "Brejo da Guabiraba", "Brejo de Beberibe", "Cabanga", "Caçote",
-  "Cajueiro", "Campina do Barreto", "Campo Grande", "Casa Amarela", "Casa Forte", "Caxangá",
-  "Cidade Universitária", "Coelhos", "Coqueiral", "Cordeiro", "Derby", "Dois Irmãos",
-  "Dois Unidos", "Encruzilhada", "Espinheiro", "Estância", "Fundão", "Graças", "Guabiraba",
-  "Hipódromo", "Ibura", "Ilha do Leite", "Ilha do Retiro", "Ilha Joana Bezerra", "Imbiribeira",
-  "Iputinga", "Jaqueira", "Jardim São Paulo", "Jiquiá", "Jordão", "Linha do Tiro", "Macaxeira",
-  "Madalena", "Mangabeira", "Mangueira", "Monteiro", "Morro da Conceição", "Mustardinha",
-  "Nova Descoberta", "Paissandu", "Parnamirim", "Passarinho", "Pau Ferro", "Pina", "Poço da Panela",
-  "Ponto de Parada", "Porto da Madeira", "Prado", "Recife", "Rosarinho", "San Martin", "Santana",
-  "Santo Amaro", "Santo Antônio", "São José", "Sítio dos Pintos", "Soledade", "Tamarineira",
-  "Tejipió", "Torre", "Torreão", "Torrões", "Totó", "Várzea", "Zumbi",
+  "Aflitos",
+  "Afogados",
+  "Água Fria",
+  "Alto José Bonifácio",
+  "Alto José do Pinho",
+  "Apipucos",
+  "Areias",
+  "Arruda",
+  "Barro",
+  "Beberibe",
+  "Boa Viagem",
+  "Boa Vista",
+  "Bomba do Hemetério",
+  "Bongi",
+  "Brasília Teimosa",
+  "Brejo da Guabiraba",
+  "Brejo de Beberibe",
+  "Cabanga",
+  "Caçote",
+  "Cajueiro",
+  "Campina do Barreto",
+  "Campo Grande",
+  "Casa Amarela",
+  "Casa Forte",
+  "Caxangá",
+  "Cidade Universitária",
+  "Coelhos",
+  "Coqueiral",
+  "Cordeiro",
+  "Derby",
+  "Dois Irmãos",
+  "Dois Unidos",
+  "Encruzilhada",
+  "Espinheiro",
+  "Estância",
+  "Fundão",
+  "Graças",
+  "Guabiraba",
+  "Hipódromo",
+  "Ibura",
+  "Ilha do Leite",
+  "Ilha do Retiro",
+  "Ilha Joana Bezerra",
+  "Imbiribeira",
+  "Iputinga",
+  "Jaqueira",
+  "Jardim São Paulo",
+  "Jiquiá",
+  "Jordão",
+  "Linha do Tiro",
+  "Macaxeira",
+  "Madalena",
+  "Mangabeira",
+  "Mangueira",
+  "Monteiro",
+  "Morro da Conceição",
+  "Mustardinha",
+  "Nova Descoberta",
+  "Paissandu",
+  "Parnamirim",
+  "Passarinho",
+  "Pau Ferro",
+  "Pina",
+  "Poço da Panela",
+  "Ponto de Parada",
+  "Porto da Madeira",
+  "Prado",
+  "Recife",
+  "Rosarinho",
+  "San Martin",
+  "Santana",
+  "Santo Amaro",
+  "Santo Antônio",
+  "São José",
+  "Sítio dos Pintos",
+  "Soledade",
+  "Tamarineira",
+  "Tejipió",
+  "Torre",
+  "Torreão",
+  "Torrões",
+  "Totó",
+  "Várzea",
+  "Zumbi",
 ].sort();
 
 function OngList({
@@ -75,9 +166,10 @@ function OngList({
             name: "ONG de Teste EEMM (Mock)",
             area: "Educação / Tecnologia",
             location: "CIn/UFPE, Recife",
-            description: "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
+            description:
+              "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
             logo: null,
-            email: "gustavo.lbarros1@gmail.com"
+            email: "gustavo.lbarros1@gmail.com",
           };
           mappedOngs.unshift(mockedOngForMatchTest);
 
@@ -183,19 +275,29 @@ function OngList({
     }
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) pageNumbers.push("...");
-      if (!pageNumbers.includes(totalPages) && totalPages > 1) pageNumbers.push(totalPages);
+      if (!pageNumbers.includes(totalPages) && totalPages > 1)
+        pageNumbers.push(totalPages);
     }
 
     return pageNumbers.map((num, index) => {
       if (num === "...") {
-        return <span key={`ellipsis-${index}`} className="mx-1 px-2 py-1 text-[18px] text-gray-700">...</span>;
+        return (
+          <span
+            key={`ellipsis-${index}`}
+            className="mx-1 px-2 py-1 text-[18px] text-gray-700"
+          >
+            ...
+          </span>
+        );
       }
       return (
         <button
           key={num}
           onClick={() => handlePageChange(num)}
           className={`mx-1 px-3 py-1 text-[20px] md:px-4 md:py-2 rounded-[4px] font-medium transition-colors ${
-            currentPage === num ? "bg-blue-800 text-white" : "bg-blue-600 text-white text-[18px] hover:bg-blue-700"
+            currentPage === num
+              ? "bg-blue-800 text-white"
+              : "bg-blue-600 text-white text-[18px] hover:bg-blue-700"
           }`}
         >
           {num}
@@ -209,8 +311,18 @@ function OngList({
       <section className="container mx-auto p-4 md:p-6 max-w-6xl bg-white rounded-[4px] shadow-md mt-4">
         <div className="relative mb-4">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg className="h-5 w-5 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
+            <svg
+              className="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clipRule="evenodd"
+              ></path>
             </svg>
           </div>
           <input
@@ -230,7 +342,9 @@ function OngList({
             >
               <option value="">Todas as Áreas</option>
               {areasOptions.map((area) => (
-                <option key={area} value={area}>{area}</option>
+                <option key={area} value={area}>
+                  {area}
+                </option>
               ))}
             </select>
             <select
@@ -240,7 +354,9 @@ function OngList({
             >
               <option value="">Todas as Localidades</option>
               {locationsOptions.map((loc) => (
-                <option key={loc} value={loc}>{loc}</option>
+                <option key={loc} value={loc}>
+                  {loc}
+                </option>
               ))}
             </select>
           </div>
@@ -254,7 +370,9 @@ function OngList({
       </section>
 
       <section className="container mx-auto p-4 md:p-8 max-w-6xl mt-8">
-        {loading && <p className="text-center text-gray-500">A carregar ONGs...</p>}
+        {loading && (
+          <p className="text-center text-gray-500">A carregar ONGs...</p>
+        )}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && currentOngsToDisplay.length === 0 && (
           <p className="text-gray-600 col-span-full text-center py-10">

@@ -1,4 +1,4 @@
-import apiClient from '../../api/apiClient';
+import apiClient from "../../api/apiClient";
 
 // Mock localStorage
 const localStorageMock = {
@@ -9,20 +9,20 @@ const localStorageMock = {
 };
 global.localStorage = localStorageMock;
 
-describe('API Client', () => {
+describe("API Client", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    localStorageMock.getItem.mockReturnValue('test-token');
+    localStorageMock.getItem.mockReturnValue("test-token");
   });
 
-  test('has axios instance with interceptors', () => {
+  test("has axios instance with interceptors", () => {
     expect(apiClient).toBeDefined();
     expect(apiClient.interceptors).toBeDefined();
     expect(apiClient.interceptors.request).toBeDefined();
     expect(apiClient.interceptors.response).toBeDefined();
   });
 
-  test('creates axios instance with defaults object available', () => {
+  test("creates axios instance with defaults object available", () => {
     expect(apiClient).toBeDefined();
     expect(apiClient.defaults).toBeDefined();
   });

@@ -1,20 +1,20 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from '../App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import App from "../App";
 
-describe('App Component', () => {
-  test('renders without crashing', () => {
+describe("App Component", () => {
+  test("renders without crashing", () => {
     render(<App />);
-    expect(screen.getByText('Connect To Ong')).toBeInTheDocument();
+    expect(screen.getByText("Connect To Ong")).toBeInTheDocument();
   });
 
-  test('renders navigation', () => {
+  test("renders navigation", () => {
     render(<App />);
-    expect(screen.getByText('Início')).toBeInTheDocument();
+    expect(screen.getByText("Início")).toBeInTheDocument();
   });
 
-  test('renders login link', () => {
+  test("renders login link", () => {
     render(<App />);
-    expect(screen.getByText('Acessar Conta')).toBeInTheDocument();
+    expect(screen.getByText("Acessar Conta")).toBeInTheDocument();
   });
 });

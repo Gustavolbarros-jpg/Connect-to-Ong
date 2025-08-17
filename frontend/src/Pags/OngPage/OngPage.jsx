@@ -11,49 +11,51 @@ import BGImage from "../../assets/images/OngPage/bgImage.png"; // Imagem do cabe
  * Ela usa o componente OngList para exibir os dados e gerencia
  * a abertura do modal de detalhes.
  */
-function OngPage({onLogout}) {
-    // Estado para controlar qual ONG está selecionada para ver os detalhes no modal
-    const [selectedOng, setSelectedOng] = useState(null);
+function OngPage({ onLogout }) {
+  // Estado para controlar qual ONG está selecionada para ver os detalhes no modal
+  const [selectedOng, setSelectedOng] = useState(null);
 
-    // Função para abrir o modal. Será passada como prop para o OngList.
-    const handleOpenDetails = (ong) => {
-        console.log("Abrindo detalhes para:", ong);
-        setSelectedOng(ong);
-    };
+  // Função para abrir o modal. Será passada como prop para o OngList.
+  const handleOpenDetails = (ong) => {
+    console.log("Abrindo detalhes para:", ong);
+    setSelectedOng(ong);
+  };
 
-    // Função para fechar o modal
-    const handleCloseDetails = () => {
-        setSelectedOng(null);
-    };
+  // Função para fechar o modal
+  const handleCloseDetails = () => {
+    setSelectedOng(null);
+  };
 
-    return (
-        <div className="font-roboto h-full min-h-screen w-full bg-[#F4F0F0] text-[#001449]">
-            <Navbar onLogout={onLogout} />
-            
-            <main className="w-full pt-16 md:pt-20 lg:pt-24 pb-12">
-                {/* Seção do cabeçalho com imagem de fundo e título */}
-                <section className="flex justify-start items-center // text-white // w-full h-[300px] bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url('${BGImage}')` }} >
-                    <div className=" z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%] font-roboto">
-                        <h1 className="text-[36px] pl-12  font-bold pb-4">Conecte seus alunos a causas que transformam a sociedade.</h1>
-                    </div>
-                </section>
-                <OngList 
-                    showActionButton={true}
-                    actionButtonText="Ver Detalhes"
-                    onActionClick={handleOpenDetails}
-                />
+  return (
+    <div className="font-roboto h-full min-h-screen w-full bg-[#F4F0F0] text-[#001449]">
+      <Navbar onLogout={onLogout} />
 
-                {selectedOng && (
-                    <OngDetailModal 
-                        ong={selectedOng} 
-                        onClose={handleCloseDetails} 
-                    />
-                )}
-            </main>
+      <main className="w-full pt-16 md:pt-20 lg:pt-24 pb-12">
+        {/* Seção do cabeçalho com imagem de fundo e título */}
+        <section
+          className="flex justify-start items-center // text-white // w-full h-[300px] bg-no-repeat bg-center bg-cover"
+          style={{ backgroundImage: `url('${BGImage}')` }}
+        >
+          <div className=" z-10 h-full w-full max-w-[1500px] flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[80%] font-roboto">
+            <h1 className="text-[36px] pl-12  font-bold pb-4">
+              Conecte seus alunos a causas que transformam a sociedade.
+            </h1>
+          </div>
+        </section>
+        <OngList
+          showActionButton={true}
+          actionButtonText="Ver Detalhes"
+          onActionClick={handleOpenDetails}
+        />
 
-            <Footer />
-        </div>
-    );
+        {selectedOng && (
+          <OngDetailModal ong={selectedOng} onClose={handleCloseDetails} />
+        )}
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
 export default OngPage;

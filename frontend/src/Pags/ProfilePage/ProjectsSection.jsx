@@ -48,7 +48,11 @@ function ProjectsSection() {
     <section className="bg-white p-8 rounded-lg shadow-md mt-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Seus Projetos</h1>
-        <Button onClick={handleCreateProject} primary className="text-[20px] font-semibold px-5">
+        <Button
+          onClick={handleCreateProject}
+          primary
+          className="text-[20px] font-semibold px-5"
+        >
           Criar Projeto
         </Button>
       </div>

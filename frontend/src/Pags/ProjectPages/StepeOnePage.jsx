@@ -99,7 +99,7 @@ function StepeOnePage({ onLogout }) {
       newErrors.extensionHours =
         "A quantidade de horas deve ser maior que zero.";
 
-    const dateFormat = 'yyyy-MM-dd';
+    const dateFormat = "yyyy-MM-dd";
     const start = parse(formData.startDate, dateFormat, new Date());
     const end = parse(formData.endDate, dateFormat, new Date());
 
@@ -137,7 +137,6 @@ function StepeOnePage({ onLogout }) {
     const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44));
     const expectedTime = diffMonths;
 
-    
     const projectDetails = {
       nome_projeto: formData.nameProject,
       area_interesse: formData.areaInterest,

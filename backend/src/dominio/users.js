@@ -1,31 +1,32 @@
 // Use conditional import based on environment
-import prisma from '../prisma/prismaClient.js';
-import crypto from 'crypto';
+import prisma from "../prisma/prismaClient.js";
+import crypto from "crypto";
 import { error } from "console";
 
 export default class UsersDataAcess {
-    async getUsers(){
-        const result = await prisma.users.findMany();
-        console.log(result);
-        return result;
+  async getUsers() {
+    const result = await prisma.users.findMany();
+    console.log(result);
+    return result;
+  }
+
+  async deleteUsers(userId) {
+    const result = await prisma.users.delete({
+      where: { id: userId },
+    });
+    return result;
+  }
+
+  async updateUsers(userId, userData) {
+    if (
+      !userId ||
+      typeof userId !== "string" ||
+      !userId.match(/^[0-9a-fA-F-]{36}$/)
+    ) {
+      throw new Error("ID inválido para update: " + userId);
     }
 
-    async deleteUsers(userId){
-        const result = await prisma.users.delete({
-            where: { id: userId },
-        });
-        return result;
-    }
-
-
-    async updateUsers(userId, userData) {
-
-    if (!userId || typeof userId !== 'string' || !userId.match(/^[0-9a-fA-F-]{36}$/)) {
-        throw new Error("ID inválido para update: " + userId);
-    }
-   
-
-    const allowedFields = ['description', 'photoUrl', 'name', 'institution'];
+    const allowedFields = ["description", "photoUrl", "name", "institution"];
     const filteredData = {};
 
     for (const field of allowedFields) {
@@ -35,8 +36,10 @@ export default class UsersDataAcess {
     }
 
     if (userData.password) {
-      const salt = crypto.randomBytes(16).toString('hex');
-      const hashedPassword = crypto.pbkdf2Sync(userData.password, salt, 310000, 16, 'sha256').toString('hex');
+      const salt = crypto.randomBytes(16).toString("hex");
+      const hashedPassword = crypto
+        .pbkdf2Sync(userData.password, salt, 310000, 16, "sha256")
+        .toString("hex");
 
       filteredData.password = hashedPassword;
       filteredData.salt = salt;
@@ -52,33 +55,30 @@ export default class UsersDataAcess {
     });
 
     return result;
-        }
-
-async getUserById(id) {
-  if (!id || typeof id !== 'string' || id.length !== 36) {
-    throw new Error('Invalid user id')
   }
 
-  const user = await prisma.users.findUnique({
-    where: { id },
-    select: {
-      id: true,
-      fullname: true,
-      email: true,
-      institution: true,
-      verified: true,
-      description: true,
-      photoUrl: true
+  async getUserById(id) {
+    if (!id || typeof id !== "string" || id.length !== 36) {
+      throw new Error("Invalid user id");
     }
-  })
 
-  if (!user) {
-    throw new Error('User not found')
+    const user = await prisma.users.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        fullname: true,
+        email: true,
+        institution: true,
+        verified: true,
+        description: true,
+        photoUrl: true,
+      },
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return user;
   }
-
-  return user
 }
-
-    
-    }
-

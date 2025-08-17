@@ -27,10 +27,12 @@ function RecoverPasswordPage() {
       alert("As senhas não coincidem. Tente novamente.");
       return;
     }
-    
+
     if (!token) {
-        alert("Token de redefinição não encontrado. Por favor, use o link do seu e-mail.");
-        return;
+      alert(
+        "Token de redefinição não encontrado. Por favor, use o link do seu e-mail."
+      );
+      return;
     }
 
     // 4. Lógica de envio para o backend dentro de um bloco try...catch
@@ -45,10 +47,11 @@ function RecoverPasswordPage() {
       console.log(response.data.message);
       alert("Senha alterada com sucesso! Você já pode fazer login.");
       navigate("/"); // Redireciona para a página de login
-
     } catch (error) {
       // Se ocorrer um erro (token inválido, expirado, etc.)
-      const errorMessage = error.response?.data?.message || "Não foi possível redefinir a senha. Tente novamente.";
+      const errorMessage =
+        error.response?.data?.message ||
+        "Não foi possível redefinir a senha. Tente novamente.";
       console.error("Erro ao redefinir senha:", error);
       alert(errorMessage);
     }

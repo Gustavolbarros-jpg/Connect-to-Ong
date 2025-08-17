@@ -1,23 +1,29 @@
-import axios from 'axios';
+import apiClient from "../../api/apiClient";
 
-const apiClient = axios.create({
-  baseURL: 'http://localhost:3000',
+// Mock localStorage
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
+global.localStorage = localStorageMock;
+
+describe("API Client", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    localStorageMock.getItem.mockReturnValue("test-token");
+  });
+
+  test("has axios instance with interceptors", () => {
+    expect(apiClient).toBeDefined();
+    expect(apiClient.interceptors).toBeDefined();
+    expect(apiClient.interceptors.request).toBeDefined();
+    expect(apiClient.interceptors.response).toBeDefined();
+  });
+
+  test("creates axios instance with defaults object available", () => {
+    expect(apiClient).toBeDefined();
+    expect(apiClient.defaults).toBeDefined();
+  });
 });
-
-apiClient.interceptors.request.use(config => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-}, error => Promise.reject(error));
-
-apiClient.interceptors.response.use(response => response, error => {
-  if (error.response?.status === 401) {
-    localStorage.removeItem('token'); // Limpa o token inválido
-    window.dispatchEvent(new CustomEvent('tokenExpired'));
-  }
-  return Promise.reject(error);
-});
-
-export default apiClient;
