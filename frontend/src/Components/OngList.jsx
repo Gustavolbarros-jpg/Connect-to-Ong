@@ -71,13 +71,13 @@ function OngList({
           }));
 
           const mockedOngForMatchTest = {
-            id: 9999,
+            id: 91,
             name: "ONG de Teste EEMM (Mock)",
             area: "Educação / Tecnologia",
             location: "CIn/UFPE, Recife",
-            description: "Esta é uma ONG de teste para a funcionalidade de match com o e-mail eemm@cin.ufpe.br.",
+            description: "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
             logo: null,
-            email: "gmomenezes@gmail.com"
+            email: "gustavo.lbarros1@gmail.com"
           };
           mappedOngs.unshift(mockedOngForMatchTest);
 
