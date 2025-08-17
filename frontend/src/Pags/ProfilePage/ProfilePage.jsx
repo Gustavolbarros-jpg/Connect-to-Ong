@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import cameraIcon from "../../assets/images/cameraIcon.png";
-
-import Button from "../../Components/Button/";
+import apiClient from '../../api/tokenInterceptor.js'; // <-- Caminho correto para este arquivoimport Button from "../../Components/Button/";
 import Navbar from "../../Components/Navbar/";
 import Footer from "../../Components/Footer/";
 import ProjectsSection from "./ProjectsSection";
+import Button from '../../Components/Button.jsx';
 
 function ProfilePage({ onLogout }) {
   const [nome, setNome] = useState("");
@@ -20,11 +20,11 @@ function ProfilePage({ onLogout }) {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     const userId = user.id; // depois pode vir do login/JWT
 
-    fetch(`http://localhost:3000/users/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          const u = data.body;
+    apiClient.get(`/users/${userId}`) // URL relativa, token é enviado automaticamente
+    .then((response) => {
+      const data = response.data; // Dados já estão em response.data
+      if (data.success) {
+        const u = data.body;
           setNome(u.fullname || "");
           setEmail(u.email || "");
           setInstituicao(u.institution || "");
@@ -44,35 +44,32 @@ function ProfilePage({ onLogout }) {
     if (!userId) return alert("Usuário não encontrado");
     setIsSaving(true);
 
-    try {
-      const body = {
-        description,
-        photoUrl: profileImage,
-      };
+   try {
+    const body = {
+      description,
+      photoUrl: profileImage,
+    };
 
-      const res = await fetch(`http://localhost:3000/users/${userId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+    // O apiClient já sabe o header e vai enviar o token!
+    const response = await apiClient.put(`/users/${userId}`, body);
 
-      const data = await res.json();
+    const data = response.data; // Dados já estão em response.data
 
-      if (data.success) {
-        alert("Perfil atualizado com sucesso!");
-        setIsEditing(false);
-      } else {
-        alert(
-          "Erro ao atualizar perfil: " + (data.body?.error || "Desconhecido")
-        );
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Erro ao atualizar perfil.");
-    } finally {
-      setIsSaving(false);
+    if (data.success) {
+      alert("Perfil atualizado com sucesso!");
+      setIsEditing(false);
+    } else {
+      alert(
+        "Erro ao atualizar perfil: " + (data.body?.error || "Desconhecido")
+      );
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao atualizar perfil.");
+  } finally {
+    setIsSaving(false);
+  }
+};
 
   const handleImageChange = () => {
     if (!isEditing) return;

@@ -58,7 +58,7 @@ jest.mock("axios", () => ({
     post: jest.fn(),
     put: jest.fn(),
     delete: jest.fn(),
-    defaults: { baseURL: "http://localhost:3000", timeout: 10000 },
+    defaults: { baseURL: import.meta.env.VITE_API_BASE_URL, timeout: 10000 },
     interceptors: {
       request: { use: jest.fn() },
       response: { use: jest.fn() },
