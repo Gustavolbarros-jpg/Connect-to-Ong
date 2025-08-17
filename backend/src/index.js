@@ -20,7 +20,9 @@ const port = process.env.PORT || 3333
     console.log(MongoConecction)
 
     app.use(express.json())
-    app.use(cors())
+    app.use(cors()); // libera todas as origens
+
+
 
     app.get('/', (req, res) => {
         res.send({
@@ -34,6 +36,11 @@ const port = process.env.PORT || 3333
     app.use('/auth', authRouter);
     app.use('/projects', projectRouter); 
     app.use('/api/ongs', ongRouter);
+
+    app.get('/teste-cors', (req, res) => {
+    res.json({ message: 'CORS funcionando!' });
+    });
+
     
     app.listen(port, () => {
         console.log(`Server running on: http://${hostname}:${port}`)

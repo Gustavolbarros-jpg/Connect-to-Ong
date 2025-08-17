@@ -21,7 +21,7 @@ export default class ProjectControllers {
                 if (!isNaN(ongIdAsNumber)) {
                     // Busca a ONG e o Professor em paralelo para mais eficiência
                     const [ong, professor] = await Promise.all([
-                        prisma.ong.findUnique({ where: { id: ongIdAsNumber } }),
+                        prisma.ongs.findUnique({ where: { id: ongIdAsNumber } }),
                         prisma.users.findUnique({ where: { id: result.user_id } })
                     ]);
 
@@ -161,7 +161,17 @@ export default class ProjectControllers {
             }
             
             const { usuario, projeto } = subscription;
-            const ong = projeto.ongs;
+            let ong = null;
+
+            if(projeto.ong_selecionada){
+                const ongIdAsNumber = parseInt(projeto.ong_selecionada, 10);
+                if(!isNaN(ongIdAsNumber)){
+                    ong = await prisma.ongs.findUnique({where: {id: ongIdAsNumber}});
+                }
+            }
+            if(!ong){
+                console.log("AVISO: ONG não encontrada para envio de e-mails")
+            }else{
 
             await emailService.sendMail({
                 to: ong.email,
@@ -188,6 +198,7 @@ export default class ProjectControllers {
                     <p>Equipe Connect To ONG</p>
                 `
             });
+        }
 
             return created({ message: "Inscrição realizada com sucesso!", data: subscription });
 
