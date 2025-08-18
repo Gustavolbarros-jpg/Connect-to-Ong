@@ -43,7 +43,6 @@ jobs:
       - name: 🏗️ Build frontend
         run: npm run build --prefix frontend
         env:
-          # Define a URL da API para o ambiente de CI/teste
           VITE_BASE_URL: http://localhost:5000
 
       # === CHECKS RÁPIDOS ===
@@ -58,17 +57,16 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: 🐳 Docker build (backend)
-        # O contexto '.' é a raiz do projeto, exatamente como no seu docker-compose.yml
-        run: docker build --context . --file backend/Dockerfile -t connect-ong-backend:ci
+        # CORRIGIDO: O contexto '.' foi movido para o final do comando
+        run: docker build --file backend/Dockerfile -t connect-ong-backend:ci .
 
       - name: 🐳 Docker build (frontend)
-        # O contexto '.' é a raiz do projeto, exatamente como no seu docker-compose.yml
-        run: docker build --context . --file frontend/Dockerfile -t connect-ong-frontend:ci
+        # CORRIGIDO: O contexto '.' foi movido para o final do comando
+        run: docker build --file frontend/Dockerfile -t connect-ong-frontend:ci .
 
       # === DOCKER COMPOSE VALIDATION ===
       - name: 📝 Create .env.backend file
         run: |
-          # --- Variáveis que vêm dos Secrets do GitHub ---
           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.backend
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.backend
           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.backend
@@ -77,11 +75,9 @@ jobs:
           echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}" >> .env.backend
           echo "AUTH_EMAIL=${{ secrets.AUTH_EMAIL }}" >> .env.backend
           echo "AUTH_PASS=${{ secrets.AUTH_PASS }}" >> .env.backend
-
-          # --- Variáveis de configuração (valores fixos para CI) ---
           echo "NODE_ENV=test" >> .env.backend
-          echo "PORT=3007" >> .env.backend # Usando a mesma porta do seu docker-compose
-          echo "APP_URL=http://localhost:8087" >> .env.backend # Apontando para o frontend
+          echo "PORT=3007" >> .env.backend
+          echo "APP_URL=http://localhost:8087" >> .env.backend
 
       - name: 🧩 docker compose config
         run: docker compose -f docker-compose.yml config
