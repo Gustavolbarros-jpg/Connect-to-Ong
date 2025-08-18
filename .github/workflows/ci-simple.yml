@@ -31,9 +31,13 @@ jobs:
       # === PRISMA (usa prisma da RAIZ) ===
       - name: 🔎 Validate Prisma schema
         run: npx prisma validate --schema=./prisma/schema.prisma
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: 🔧 Generate Prisma Client
         run: npx prisma generate --schema=./prisma/schema.prisma
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       # === BUILD FRONTEND ===
       - name: 🏗️ Build frontend
