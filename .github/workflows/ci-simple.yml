@@ -2,60 +2,65 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  # === TESTE E BUILD COMPLETO ===
   test-and-build:
     name: Test & Build
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: 📁 Checkout code
-      uses: actions/checkout@v4
+      - name: 📁 Checkout code
+        uses: actions/checkout@v4
 
-    - name: 🟢 Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22" # combina com node:22-alpine dos Dockerfiles
+          cache: "npm"
 
-    - name: 📦 Install backend dependencies
-      working-directory: ./backend
-      run: npm ci
+      # === DEPENDÊNCIAS ===
+      - name: 📦 Install backend dependencies
+        run: npm ci --prefix backend --no-audit --no-fund
 
-    - name: 📦 Install frontend dependencies
-      working-directory: ./frontend
-      run: npm ci
+      - name: 📦 Install frontend dependencies
+        run: npm ci --prefix frontend --no-audit --no-fund
 
-    - name: 🔧 Setup Prisma
-      working-directory: ./backend
-      run: |
-        cp ../prisma ./prisma -r
-        npx prisma generate
+      # === PRISMA (usa prisma da RAIZ) ===
+      - name: 🔎 Validate Prisma schema
+        run: npx prisma validate --schema=./prisma/schema.prisma
 
-    - name: 🏗️ Build frontend
-      working-directory: ./frontend
-      run: npm run build
+      - name: 🔧 Generate Prisma Client
+        run: npx prisma generate --schema=./prisma/schema.prisma
 
-    - name: 🧪 Test application startup
-      run: |
-        echo "✅ Backend dependencies installed"
-        echo "✅ Frontend built successfully"
-        echo "✅ Prisma client generated"
+      # === BUILD FRONTEND ===
+      - name: 🏗️ Build frontend
+        run: npm run build --prefix frontend
 
-    - name: 🐳 Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      # === CHECKS RÁPIDOS ===
+      - name: 🧪 Sanity checks
+        run: |
+          echo "✅ Backend deps instaladas"
+          echo "✅ Frontend build concluído"
+          echo "✅ Prisma Client gerado"
 
-    - name: 🐳 Test Docker build
-      run: |
-        docker build -f backend/Dockerfile .
-        docker build -f frontend/Dockerfile frontend/
-        echo "✅ Docker images built successfully"
+      # === DOCKER BUILD ===
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: 🎉 Success notification
-      run: |
-        echo "🎉 All checks passed!"
-        echo "Ready for deployment!"
+      - name: 🐳 Docker build (backend)
+        run: docker build -f backend/Dockerfile -t connect-ong-backend:ci .
+
+      - name: 🐳 Docker build (frontend)
+        run: docker build -f frontend/Dockerfile -t connect-ong-frontend:ci .
+
+      # (Opcional) validar compose com as imagens locais
+      - name: 🧩 docker compose config
+        run: docker compose -f docker-compose.yml config
+
+      - name: 🎉 Success notification
+        run: |
+          echo "🎉 All checks passed!"
+          echo "Ready for deployment!"

@@ -1,7 +1,5 @@
 # docker-compose.yml (VERSÃO FINAL E SEGURA)
 
-version: '3.8'
-
 services:
   # --- O Serviço do Banco de Dados ---
   database:
