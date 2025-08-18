@@ -1,6 +1,6 @@
 describe("Testes da Página de Login", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/login");
+    cy.visit("/login");
   });
 
   // --- Teste 1: Carregamento da Página e Elementos Principais ---
@@ -25,20 +25,20 @@ describe("Testes da Página de Login", () => {
   // --- Teste 3: Navegação para a Página de Cadastro ---
   it('deve navegar para a página de cadastro ao clicar em "Cadastre-se"', () => {
     cy.contains("Cadastre-se").click();
-    cy.url().should("include", "http://localhost:5173/register"); // <- Mudar o local host
+    cy.url().should("include", "/register"); // <- Mudar o local host
   });
 
   // --- Teste 4: Navegação para a Página de Recuperação de Senha ---
   it('deve navegar para a página de recuperação de senha ao clicar em "Esqueci a senha"', () => {
     cy.contains("Esqueci a senha").click();
     // A URL agora é '/verification-email' conforme solicitado
-    cy.url().should("include", "http://localhost:5173/verification-email"); // <- Mudar o local host
+    cy.url().should("include", "/verification-email"); // <- Mudar o local host
   });
 
   // --- Teste 5: Navegação para a Página de Acesso ONGs ---
   it("deve navegar para a página de Acesso ONGs", () => {
     cy.contains("Acesso ONGs").click();
     // Assume que este botão leva diretamente para a página de listagem de ONGs
-    cy.url().should("include", "http://localhost:5173/ongs"); // <- Mudar o local host
+    cy.url().should("include", "/ongs"); // <- Mudar o local host
   });
 });

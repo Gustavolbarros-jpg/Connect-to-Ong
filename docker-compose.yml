@@ -1,0 +1,44 @@
+# docker-compose.yml (VERSÃO FINAL E SEGURA)
+
+version: '3.8'
+
+services:
+  # --- O Serviço do Banco de Dados ---
+  database:
+    image: postgres:15-alpine
+    container_name: connect-ong-db
+    restart: always
+    env_file:
+      - .env.backend # <-- Lê as variáveis do banco a partir daqui
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # --- O Serviço do Backend ---
+  backend:
+    container_name: connect-ong-backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: always
+    ports:
+      - "3007:3007"
+      - "5555:5555" # <-- Já deixamos a porta do Prisma Studio aqui
+    depends_on:
+      - database
+    env_file:
+      - .env.backend # <-- Lê TODAS as variáveis para o backend a partir daqui
+
+  # --- O Serviço do Frontend ---
+  frontend:
+    container_name: connect-ong-frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    restart: always
+    ports:
+      - "8087:80"
+
+volumes:
+  postgres_data:

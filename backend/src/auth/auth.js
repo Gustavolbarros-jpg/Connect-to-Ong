@@ -172,7 +172,7 @@ authRouter.post("/forgot-password", async (req, res) => {
     });
 
     // 4. Cria o link para o front-end
-    const resetLink = `http://localhost:5173/recover-password/${resetToken}`;
+  const resetLink = `${process.env.APP_URL}/recover-password/${resetToken}`;
 
     // 5. Configura e envia o e-mail
     const apiInstance = new Brevo.TransactionalEmailsApi();

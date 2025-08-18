@@ -1,6 +1,6 @@
 describe("Testes da Página de Verificação de Email", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/verification-email");
+    cy.visit("/verification-email");
   });
 
   // --- Teste 1: Carregamento da Página e Elementos Principais ---
@@ -22,6 +22,6 @@ describe("Testes da Página de Verificação de Email", () => {
 
   it('deve navegar de volta para a página de login ao clicar em "Voltar para o Login"', () => {
     cy.contains("Voltar para o Login").click();
-    cy.url().should("include", "http://localhost:5173/login");
+    cy.url().should("include", "/login");
   });
 });
