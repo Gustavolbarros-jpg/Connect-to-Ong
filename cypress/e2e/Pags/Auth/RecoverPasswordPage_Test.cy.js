@@ -1,6 +1,6 @@
 describe("Testes da Página de Redefinição de Senha", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/recover-password"); // <- Mudar o local host
+    cy.visit("/recover-password"); // <- Mudar o local host
   });
 
   // --- Teste 1: Carregamento da Página e Elementos Principais ---

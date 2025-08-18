@@ -9,7 +9,7 @@ describe("Testes da Página de Cadastro", () => {
   const EXISTING_EMAIL = "existente@universidade.com";
 
   beforeEach(() => {
-    cy.visit("http://localhost:5173/register"); // <- Mudar o local host
+    cy.visit("/register"); // <- Mudar o local host
   });
 
   // --- Teste 1: Carregamento da Página e Elementos Principais ---

@@ -1,6 +1,6 @@
 describe("Testes da Página Universidades (InfoPage)", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/university");
+    cy.visit("/university");
   });
 
   // --- Teste 1: Carregamento da Página main section ---

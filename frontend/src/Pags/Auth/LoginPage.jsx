@@ -195,7 +195,7 @@ function LoginPage({ onLogin }) {
             alt="Logo Recife Proteção"
             className="h-19 md:h-24"
           />
-          <Link to="/register-ong">
+          <Link to="/ongs">
             <Button primary>Acesso ONGs</Button>
           </Link>
         </div>

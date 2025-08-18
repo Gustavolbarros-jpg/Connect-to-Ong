@@ -1,7 +1,7 @@
 describe('Testes da Página de Confirmação de Envio de E-mail de Redefinição', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:5173/verify-code');// <- Mudar o local host
+        cy.visit('/verify-code');// <- Mudar o local host
     });
 
     // --- Teste 1: Carregamento da Página e Conteúdo Principal ---

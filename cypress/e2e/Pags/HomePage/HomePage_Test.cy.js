@@ -1,6 +1,6 @@
 describe("Testes da Página Inicial (HomePage)", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/"); // <- Mudar o local host
+    cy.visit("/"); // <- Mudar o local host
   });
 
   // --- Teste 1: NavBar ---
@@ -8,31 +8,31 @@ describe("Testes da Página Inicial (HomePage)", () => {
   // --- Teste 1: Navegação da Navbar - Link 'Início' ---
   it('O NavBar. O botão "Ínicio" deve dar um reload na página incial', () => {
     cy.contains("Início").click();
-    cy.url().should("include", "http://localhost:5173/"); // <- Mudar o local host
+    cy.url().should("include", "/"); // <- Mudar o local host
   });
 
   // --- Teste 2: Navegação da Navbar - Link 'Universidades' ---
   it('O botão "Universidades" deve navegar para a página de Universidades.', () => {
     cy.contains("Universidade").click();
-    cy.url().should("include", "http://localhost:5173/university"); //<- Mudar o local host
+    cy.url().should("include", "/university"); //<- Mudar o local host
   });
 
   // --- Teste 3: Navegação da Navbar - Link 'ONGs' ---
   it('O botão "ONGs" deve navegar para a página das ONGs.', () => {
     cy.contains("ONGs").click();
-    cy.url().should("include", "http://localhost:5173/ongs");
+    cy.url().should("include", "/ongs");
   });
 
   // --- Teste 4: Navegação da Navbar - Link 'Acessar Perfil/Login' ---
   it('O botão "Login" deve navegar para a página de Login', () => {
     cy.contains("Login").click();
-    cy.url().should("include", "http://localhost:5173/login");
+    cy.url().should("include", "/login");
   });
 
   // --- Teste 5: Navegação da Navbar - Botão 'Cadastre-se' ---
   it('O botão "Cadastre-se" deve navegar para a página de cadastro', () => {
     cy.contains("Cadastre-se").click();
-    cy.url().should("include", "http://localhost:5173/register");
+    cy.url().should("include", "/register");
   });
 
   // --- Test 2: Sections ---
