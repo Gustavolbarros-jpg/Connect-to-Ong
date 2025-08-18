@@ -18,7 +18,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22" # combina com node:22-alpine dos Dockerfiles
+          node-version: "22"
           cache: "npm"
 
       # === DEPENDÊNCIAS ===
@@ -42,6 +42,9 @@ jobs:
       # === BUILD FRONTEND ===
       - name: 🏗️ Build frontend
         run: npm run build --prefix frontend
+        env:
+          # Define a URL da API para o ambiente de CI/teste
+          VITE_BASE_URL: http://localhost:5000
 
       # === CHECKS RÁPIDOS ===
       - name: 🧪 Sanity checks
@@ -55,12 +58,31 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: 🐳 Docker build (backend)
-        run: docker build -f backend/Dockerfile -t connect-ong-backend:ci .
+        # O contexto '.' é a raiz do projeto, exatamente como no seu docker-compose.yml
+        run: docker build --context . --file backend/Dockerfile -t connect-ong-backend:ci
 
       - name: 🐳 Docker build (frontend)
-        run: docker build -f frontend/Dockerfile -t connect-ong-frontend:ci .
+        # O contexto '.' é a raiz do projeto, exatamente como no seu docker-compose.yml
+        run: docker build --context . --file frontend/Dockerfile -t connect-ong-frontend:ci
 
-      # (Opcional) validar compose com as imagens locais
+      # === DOCKER COMPOSE VALIDATION ===
+      - name: 📝 Create .env.backend file
+        run: |
+          # --- Variáveis que vêm dos Secrets do GitHub ---
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.backend
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.backend
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.backend
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.backend
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env.backend
+          echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}" >> .env.backend
+          echo "AUTH_EMAIL=${{ secrets.AUTH_EMAIL }}" >> .env.backend
+          echo "AUTH_PASS=${{ secrets.AUTH_PASS }}" >> .env.backend
+
+          # --- Variáveis de configuração (valores fixos para CI) ---
+          echo "NODE_ENV=test" >> .env.backend
+          echo "PORT=3007" >> .env.backend # Usando a mesma porta do seu docker-compose
+          echo "APP_URL=http://localhost:8087" >> .env.backend # Apontando para o frontend
+
       - name: 🧩 docker compose config
         run: docker compose -f docker-compose.yml config
 
