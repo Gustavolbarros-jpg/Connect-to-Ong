@@ -8,7 +8,6 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  // Estado para o utilizador, inicializado a partir do localStorage
   const [user, setUser] = useState(() => {
     try {
       const savedUser = localStorage.getItem("user");
@@ -19,7 +18,6 @@ function Navbar() {
     }
   });
 
-  // Este useEffect "ouve" por alterações no estado de autenticação
   useEffect(() => {
     const handleAuthChange = () => {
       try {
@@ -33,17 +31,12 @@ function Navbar() {
         setUser(null);
       }
     };
-
-    // Adiciona um listener para o nosso evento customizado
     window.addEventListener("auth-change", handleAuthChange);
-
-    // Limpa o listener quando o componente é desmontado para evitar fugas de memória
     return () => {
       window.removeEventListener("auth-change", handleAuthChange);
     };
-  }, []); // O array de dependências vazio garante que isto só corre uma vez
+  }, []);
 
-  // Efeito para fechar os menus dropdown quando se clica fora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".profile-menu-container")) {
@@ -57,13 +50,10 @@ function Navbar() {
   function handleLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
     window.dispatchEvent(new Event("auth-change"));
-
     navigate("/login");
   }
 
-  // Estilos originais mantidos
   const activeLinkClasses =
     "text-white font-bold text-[20px] bg-blue-600 hover:bg-blue-800 py-2 px-5 rounded-[4px]";
   const inactiveLinkClasses =
@@ -75,15 +65,9 @@ function Navbar() {
     <header className="bg-white fixed top-0 w-full z-50">
       <nav className="flex items-center justify-between px-5 py-7 font-semibold shadow-lg mx-auto">
         <div className="flex-shrink-0">
-          {/* --- ALTERAÇÃO AQUI: O TEXTO FOI SUBSTITUÍDO PELA IMAGEM E TEXTO ALINHADOS --- */}
           <Link to="/" className="flex items-center">
-            {" "}
-            {/* Use 'items-center' para alinhar verticalmente e 'gap' para espaçamento */}
-            <img src={logoImage} alt="Logo Connect to ONGs" className="h-12" />{" "}
-            {/* Ajuste a altura (h-12) conforme necessário */}
+            <img src={logoImage} alt="Logo Connect to ONGs" className="h-12" />
             <div className="text-blue-600 font-bold leading-tight">
-              {" "}
-              {/* 'leading-tight' para juntar as linhas */}
               <h1 className="-mb-1">Connect</h1>
               <h1 className="-mb-1">to</h1>
               <h1 className="-mb-1">ONG</h1>
@@ -95,7 +79,7 @@ function Navbar() {
           <ul className="flex items-center gap-10">
             <li>
               <NavLink
-                to="/"
+                to={user ? "/dashboard" : "/"}
                 className={({ isActive }) =>
                   isActive ? activeLinkClasses : inactiveLinkClasses
                 }
@@ -221,7 +205,7 @@ function Navbar() {
           <ul className="text-[20px] font-bold flex flex-col items-center gap-4 pt-4">
             <li>
               <NavLink
-                to="/"
+                to={user ? "/dashboard" : "/"}
                 className={({ isActive }) =>
                   isActive
                     ? "bg-blue-600 py-2 px-5 rounded-[4px] text-white hover:bg-blue-800"

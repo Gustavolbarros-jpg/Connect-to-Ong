@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"; // <-- MUDANÇA 1: Importação adicionada
+import { motion } from "framer-motion";
+
 import fotoMain from "../../assets/images/foto-main.png";
 import comunicationIcon from "../../assets/images/comunicationIcon.png";
 import empathyIcon from "../../assets/images/empathyIcon.png";
@@ -14,6 +17,7 @@ function HomePage({ onLogout }) {
     <div className="bg-white font-roboto">
       <Navbar onLogout={onLogout} />
       <main className="pt-24 min-w-screem">
+        {/* SEÇÃO HERO */}
         <section className="relative h-[95vh] w-full">
           <img
             src={fotoMain}
@@ -23,29 +27,62 @@ function HomePage({ onLogout }) {
           <div className="relative z-10 h-full flex items-center bg-gradient-to-r from-[#001449BF] via-[#1A3A8FBF] via-[50%] font-roboto">
             <div className="container ml-12 md:mb-[140px] text-white">
               <div className="max-w-3xl">
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight w-100%">
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="text-4xl md:text-5xl font-bold leading-tight w-100%"
+                >
                   Conecte-se a ONGs e transforme sua pesquisa em impacto social.
-                </h1>
-                <p className="mt-5 text-xl text-gray-200 w-[600px] ">
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="mt-5 text-xl text-gray-200 w-[600px] "
+                >
                   Conectamos universidades e ONGs em projetos sociais que
                   desenvolvem soft skills e geram impacto real.
-                </p>
-                <button className="py-3 px-5 text-[20px] bg-blue-600 font-semibold focus:outline-none rounded-[4px] hover:bg-blue-800 mt-[24px]">
-                  <a href="/register">Começar projeto agora!</a>
-                </button>
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  {/* v MUDANÇA 2: <a> foi trocado por <Link> e href por to v */}
+                  <Link to="/login">
+                    <button className="py-3 px-5 text-[20px] bg-blue-600 font-semibold focus:outline-none rounded-[4px] hover:bg-blue-800 mt-[24px] transition-colors duration-300">
+                      Começar projeto agora!
+                    </button>
+                  </Link>
+                </motion.div>
               </div>
             </div>
           </div>
         </section>
+
+        {/* SEÇÃO SOFT SKILLS */}
         <section className="bg-blue-600 py-16 px-4">
-          <h1 className="text-blue-950 font-semibold text-4xl md:text-5xl text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-blue-950 font-semibold text-4xl md:text-5xl text-center"
+          >
             Soluções de <span className="text-white">soft skills</span>{" "}
             fortalecem competências.
-          </h1>
+          </motion.h1>
 
           <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 mt-16 max-w-[1500px] mx-auto">
             {/* Card 1 */}
-            <div className="w-full bg-white rounded-lg p-8 shadow-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="w-full bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            >
               <img
                 src={comunicationIcon}
                 alt="icone comunicação"
@@ -58,18 +95,32 @@ function HomePage({ onLogout }) {
                 É a capacidade de transmitir e receber informações de forma
                 clara, objetiva e respeitosa.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="w-full bg-white rounded-lg p-8 shadow-lg">
+            {/* Card 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="w-full bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            >
               <img src={empathyIcon} alt="icone empatia" className="w-16" />
               <h2 className="text-2xl font-bold mt-4 text-gray-800">Empatia</h2>
               <p className="text-lg mt-2 text-gray-700">
                 É a habilidade de se colocar no lugar do outro, compreendendo
                 seus sentimentos e perspectivas.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="w-full bg-white rounded-lg p-8 shadow-lg">
+            {/* Card 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="w-full bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            >
               <img
                 src={colaborationIcon}
                 alt="icone colaboração"
@@ -83,18 +134,32 @@ function HomePage({ onLogout }) {
                 com ideias, respeitando diferentes opiniões e buscando objetivos
                 comuns.
               </p>
-            </div>
+            </motion.div>
           </div>
         </section>
 
+        {/* SEÇÃO COMO FUNCIONA */}
         <section className="bg-white py-20 px-4 w-full">
-          <h1 className="text-blue-950 font-semibold text-4xl md:text-5xl text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-blue-950 font-semibold text-4xl md:text-5xl text-center"
+          >
             Como Funciona?
-          </h1>
+          </motion.h1>
 
           <div className="flex flex-col container md:flex-row justify-center items-start gap-12 lg:gap-20 mt-20 max-w-7xl mx-auto">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
+            {/* Passo 1 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="flex flex-col items-center text-center"
+            >
+              <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg transition-transform duration-300 hover:scale-105">
                 <img src={registerIcon} alt="icone cadastro" className="w-32" />
               </div>
               <div className="mt-6">
@@ -104,10 +169,17 @@ function HomePage({ onLogout }) {
                   atuação.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col items-center text-center">
-              <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
+            {/* Passo 2 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="flex flex-col items-center text-center"
+            >
+              <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg transition-transform duration-300 hover:scale-105">
                 <img src={conectionIcon} alt="icone conexão" className="w-32" />
               </div>
               <div className="mt-6">
@@ -116,10 +188,17 @@ function HomePage({ onLogout }) {
                   A plataforma cruza os dados e sugere parcerias ideais.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col items-center text-center">
-              <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg">
+            {/* Passo 3 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="flex flex-col items-center text-center"
+            >
+              <div className="w-60 h-60 bg-blue-600 rounded-full flex justify-center items-center shadow-lg transition-transform duration-300 hover:scale-105">
                 <img
                   src={resultsIcon}
                   alt="icone resultados"
@@ -133,7 +212,7 @@ function HomePage({ onLogout }) {
                   comunidade.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>

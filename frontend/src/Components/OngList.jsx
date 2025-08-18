@@ -1,8 +1,8 @@
 // src/components/OngList.jsx
 import React, { useState, useEffect } from "react";
 import OngCard from "./OngCard";
-import apiClient from '../api/tokenInterceptor.js'; // <-- Caminho correto
-
+import apiClient from "../api/tokenInterceptor.js"; // <-- Caminho correto
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -140,59 +140,58 @@ function OngList({
     useState(RECIFE_NEIGHBORHOODS);
   const [currentPage, setCurrentPage] = useState(1);
 
- 
-useEffect(() => {
-  const fetchAllOngs = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      // 1. A chamada agora usa apiClient.get com a URL relativa
-      const response = await apiClient.get('/api/ongs');
-      
-      // 2. Os dados da resposta já vêm prontos em response.data
-      const data = response.data;
+  useEffect(() => {
+    const fetchAllOngs = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        // 1. A chamada agora usa apiClient.get com a URL relativa
+        const response = await apiClient.get("/api/ongs");
 
-      if (data.success && data.body) {
-        const mappedOngs = data.body.map((ong) => ({
-          id: ong.id,
-          name: ong.nome_ong || "Nome não informado",
-          area: ong.area || "Não informada",
-          location: ong.endereco || "Não informado",
-          description: ong.sobre || "Descrição não disponível.",
-          logo: ong.logo_ong || "/logo-ong-placeholder.png",
-        }));
+        // 2. Os dados da resposta já vêm prontos em response.data
+        const data = response.data;
 
-        const mockedOngForMatchTest = {
-          id: 91,
-          name: "ONG de Teste EEMM (Mock)",
-          area: "Educação / Tecnologia",
-          location: "CIn/UFPE, Recife",
-          description:
-            "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
-          logo: null,
-          email: "gustavo.lbarros1@gmail.com",
-        };
-        mappedOngs.unshift(mockedOngForMatchTest);
+        if (data.success && data.body) {
+          const mappedOngs = data.body.map((ong) => ({
+            id: ong.id,
+            name: ong.nome_ong || "Nome não informado",
+            area: ong.area || "Não informada",
+            location: ong.endereco || "Não informado",
+            description: ong.sobre || "Descrição não disponível.",
+            logo: ong.logo_ong || "/logo-ong-placeholder.png",
+          }));
 
-        setAllOngs(mappedOngs);
-      } else {
-        throw new Error(
-          data.body.message || "Erro ao processar dados da API."
+          const mockedOngForMatchTest = {
+            id: 91,
+            name: "ONG de Teste EEMM (Mock)",
+            area: "Educação / Tecnologia",
+            location: "CIn/UFPE, Recife",
+            description:
+              "Esta é uma ONG de teste para a funcionalidade de match com o e-mail gustavo.lbarros1@gmail.com",
+            logo: null,
+            email: "gustavo.lbarros1@gmail.com",
+          };
+          mappedOngs.unshift(mockedOngForMatchTest);
+
+          setAllOngs(mappedOngs);
+        } else {
+          throw new Error(
+            data.body.message || "Erro ao processar dados da API."
+          );
+        }
+      } catch (err) {
+        console.error("Falha ao buscar ONGs:", err);
+        // 3. O .catch do Axios já lida com erros de rede e de HTTP (404, 500, etc)
+        setError(
+          "Não foi possível carregar as ONGs. Tente novamente mais tarde."
         );
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error("Falha ao buscar ONGs:", err);
-      // 3. O .catch do Axios já lida com erros de rede e de HTTP (404, 500, etc)
-      setError(
-        "Não foi possível carregar as ONGs. Tente novamente mais tarde."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  fetchAllOngs();
-}, []);
+    fetchAllOngs();
+  }, []);
   useEffect(() => {
     if (allOngs.length > 0) {
       const foundKeywords = new Set();
@@ -372,7 +371,9 @@ useEffect(() => {
 
       <section className="container mx-auto p-4 md:p-8 max-w-6xl mt-8">
         {loading && (
-          <p className="text-center text-gray-500">A carregar ONGs...</p>
+          <div className="flex justify-center py-10">
+            <LoadingSpinner />
+          </div>
         )}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && currentOngsToDisplay.length === 0 && (

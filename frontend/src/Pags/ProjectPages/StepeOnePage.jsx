@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// Importa o hook 'useLocation' para aceder aos dados de navegação
 import { useLocation, useNavigate } from "react-router-dom";
 import { isBefore, startOfToday, parse } from "date-fns";
 import Navbar from "../../Components/Navbar/";
@@ -8,7 +7,6 @@ import InputField from "../../Components/InputField/";
 import Button from "../../Components/Button/";
 import ProgressBar from "../../Components/ProgressBar/";
 
-// Dicionário de palavras-chave para padronizar o filtro de Área de Atuação
 const AREA_KEYWORDS = [
   "Acolhimento",
   "Acompanhamento Familiar",
@@ -39,11 +37,8 @@ const AREA_KEYWORDS = [
 
 function StepeOnePage({ onLogout }) {
   const navigate = useNavigate();
-  const location = useLocation(); // Hook para obter o estado da navegação
+  const location = useLocation();
 
-  // --- ALTERAÇÃO AQUI ---
-  // O estado do formulário agora é inicializado com os dados recebidos da navegação (se existirem),
-  // caso contrário, começa com os campos vazios.
   const [formData, setFormData] = useState(
     location.state?.projectDetails || {
       nameProject: "",
@@ -60,7 +55,6 @@ function StepeOnePage({ onLogout }) {
 
   const [errors, setErrors] = useState({});
 
-  // Função única para lidar com a mudança de todos os inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -75,7 +69,6 @@ function StepeOnePage({ onLogout }) {
     }
   };
 
-  // Função de validação
   const validateForm = () => {
     const newErrors = {};
 
@@ -163,7 +156,6 @@ function StepeOnePage({ onLogout }) {
             onSubmit={handleSubmit}
             className="bg-white p-8 rounded-lg shadow-md mt-8"
           >
-            {/* Layout do formulário usando FLEXBOX */}
             <div className="flex flex-wrap -mx-4">
               <div className="w-full md:w-1/2 px-4 mb-6">
                 <InputField
@@ -194,11 +186,13 @@ function StepeOnePage({ onLogout }) {
                   name="areaInterest"
                   value={formData.areaInterest}
                   onChange={handleChange}
-                  className={`mt-1 block w-full p-3 border rounded-[4px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[20px] bg-white ${
-                    errors.areaInterest ? "border-red-500" : "border-gray-300"
+                  className={`form-select mt-1 block w-full p-3 border rounded-[4px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[20px] bg-white ${
+                    errors.areaInterest
+                      ? "border-red-500 border-4"
+                      : "border-blue-500 border-4"
                   }`}
                 >
-                  <option value="" disabled>
+                  <option value="" disabled className="text-gray-500">
                     Selecione uma área...
                   </option>
                   {AREA_KEYWORDS.map((area, index) => (
@@ -320,10 +314,10 @@ function StepeOnePage({ onLogout }) {
                   value={formData.descriptionProject}
                   onChange={handleChange}
                   rows="5"
-                  className={`mt-1 block w-full px-3 py-3 border rounded-[4px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[20px] ${
+                  className={`mt-1 block w-full px-3 py-3 border-4 rounded-[4px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[20px] placeholder-gray-700 ${
                     errors.descriptionProject
                       ? "border-red-500"
-                      : "border-gray-300"
+                      : "border-blue-500"
                   }`}
                 ></textarea>
                 {errors.descriptionProject && (
