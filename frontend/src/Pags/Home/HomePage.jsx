@@ -9,8 +9,8 @@ import registerIcon from "../../assets/images/registerIcon.png";
 import conectionIcon from "../../assets/images/conectionIcon.png";
 import resultsIcon from "../../assets/images/resultsIcon.png";
 
-import Navbar from "../../Components/Navbar/";
-import Footer from "../../Components/Footer/";
+import Navbar from "../../Components/Navbar.jsx";
+import Footer from "../../Components/Footer.jsx";
 
 function HomePage({ onLogout }) {
   return (

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ProjectList from "../../Components/ProjectList";
 import Button from "../../Components/Button";
 import DashboardImg from "../../assets/images/dashboardImg.png";
-import Navbar from "../../Components/Navbar/";
+import Navbar from "../../Components/Navbar.jsx";
 import Footer from "../../Components/Footer/";
 
 const mockProjects = [
