@@ -82,7 +82,7 @@ function App() {
     });
 
     useEffect(() => {
-      console.log(`⏳ [TIMER] Novo timer iniciado (${IDLE_TIMEOUT / 1000}s)`);
+      
 
       // Armazenar a referência do timer
       inactivityTimer.current = reset;
@@ -91,12 +91,12 @@ function App() {
       const debugInterval = setInterval(() => {
         const remaining = Math.ceil(getRemainingTime() / 1000);
 
-        console.log(`⚠️ [TIMER] ATENÇÃO: Expirando em ${remaining}s...`);
+        
       }, 1000);
 
       return () => {
         clearInterval(debugInterval);
-        console.log("🗑️ [TIMER] Timer destruído");
+        
       };
     }, [getRemainingTime, reset]);
 

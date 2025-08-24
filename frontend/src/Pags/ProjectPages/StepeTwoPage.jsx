@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; // Para navegação e dados de rota
 
-import Navbar from "../../Components/Navbar/"; // Ajuste o caminho
-import Footer from "../../Components/Footer/"; // Ajuste o caminho
+import Navbar from "../../Components/Navbar.jsx"; // Ajuste o caminho
+import Footer from "../../Components/Footer.jsx"; // Ajuste o caminho
 import ProgressBar from "../../Components/ProgressBar"; // Ajuste o caminho
 import OngList from "../../Components/OngList"; // Ajuste o caminho
 import Button from "../../Components/Button"; // Importa o componente Button

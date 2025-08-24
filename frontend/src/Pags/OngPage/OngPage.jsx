@@ -1,6 +1,6 @@
 // src/pages/OngPage.jsx
 import React, { useState } from "react";
-import Navbar from "../../Components/Navbar/"; // Ajuste o caminho se necessário
+import Navbar from "../../Components/Navbar.jsx"; // Ajuste o caminho se necessário
 import Footer from "../../Components/Footer/"; // Ajuste o caminho se necessário
 import OngList from "../../Components/OngList"; // Importa o componente autônomo OngList
 import OngDetailModal from "../../Components/OngDetailModal"; // Para exibir os detalhes

@@ -5,7 +5,7 @@ import Footer from "../../Components/Footer";
 describe("Footer Component", () => {
   test("renders footer with logo placeholder", () => {
     render(<Footer />);
-    expect(screen.getByText("LOGO")).toBeInTheDocument();
+    expect(screen.getByAltText("Logo da Prefeitura do Recife")).toBeInTheDocument();
   });
 
   test("renders footer links", () => {

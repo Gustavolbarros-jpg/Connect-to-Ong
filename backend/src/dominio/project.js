@@ -1,5 +1,4 @@
-import { PrismaClient } from "../../../generated/prisma/index.js";
-// As bibliotecas de data não são mais necessárias
+import { PrismaClient } from '@prisma/client';// As bibliotecas de data não são mais necessárias
 // import { parse, isBefore, startOfToday, differenceInMonths } from 'date-fns'
 
 const prisma = new PrismaClient();

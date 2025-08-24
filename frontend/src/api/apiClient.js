@@ -1,5 +1,4 @@
-import apiClient from "../../api/apiClient";
-
+import apiClient from '../../api/tokenInterceptor.js';
 // Mock localStorage
 const localStorageMock = {
   getItem: jest.fn(),
@@ -27,3 +26,4 @@ describe("API Client", () => {
     expect(apiClient.defaults).toBeDefined();
   });
 });
+export default apiClient;

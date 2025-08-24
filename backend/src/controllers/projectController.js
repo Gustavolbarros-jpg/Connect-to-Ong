@@ -7,7 +7,7 @@ import {
   badRequest,
 } from "../helpers/httpResponse.js";
 import { emailService } from "../services/emailService.js";
-import { PrismaClient } from "../../../generated/prisma/index.js";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

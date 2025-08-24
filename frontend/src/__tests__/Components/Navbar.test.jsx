@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Navbar from "../../Components/Navbar";
+import { BrowserRouter } from 'react-router-dom';
 
 describe("Navbar Component", () => {
   beforeEach(() => {
@@ -9,18 +10,32 @@ describe("Navbar Component", () => {
   });
 
   test("renders navbar with logo", () => {
-    render(<Navbar />);
-    expect(screen.getByText("Connect To Ong")).toBeInTheDocument();
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
+    expect(screen.getByAltText("Logo Connect to ONGs")).toBeInTheDocument();
   });
 
   test("renders navigation menu items", () => {
-    render(<Navbar />);
+    // CORREÇÃO: Adicionado BrowserRouter
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
     expect(screen.getByText("Início")).toBeInTheDocument();
     expect(screen.getByText("Universidade")).toBeInTheDocument();
   });
 
   test("renders login and register links when not authenticated", () => {
-    render(<Navbar />);
+    // CORREÇÃO: Adicionado BrowserRouter
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
     expect(screen.getByText("Acessar Conta")).toBeInTheDocument();
     expect(screen.getByText("Cadastre-se")).toBeInTheDocument();
   });

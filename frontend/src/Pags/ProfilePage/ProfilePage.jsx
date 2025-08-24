@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import cameraIcon from "../../assets/images/cameraIcon.png";
 import apiClient from '../../api/tokenInterceptor.js'; // <-- Caminho correto para este arquivoimport Button from "../../Components/Button/";
-import Navbar from "../../Components/Navbar/";
-import Footer from "../../Components/Footer/";
+import Navbar from "../../Components/Navbar.jsx";
+import Footer from "../../Components/Footer.jsx";
 import ProjectsSection from "./ProjectsSection";
 import Button from '../../Components/Button.jsx';
 

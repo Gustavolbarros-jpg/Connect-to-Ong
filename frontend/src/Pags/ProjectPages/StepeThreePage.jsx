@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiClient from "../../api/tokenInterceptor";
-import Navbar from "../../Components/Navbar/";
-import Footer from "../../Components/Footer/";
+import Navbar from "../../Components/Navbar.jsx";
+import Footer from "../../Components/Footer.jsx";
 import Button from "../../Components/Button/";
 import ProgressBar from "../../Components/ProgressBar";
 import Modal from "../../Components/Modal";
