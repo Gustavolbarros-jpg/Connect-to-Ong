@@ -34,7 +34,7 @@ jobs:
       # === VALIDAÇÃO E TESTES ===
       - name: 🔎 Validate Prisma Schema
         # CORREÇÃO: Executa o prisma a partir do workspace do backend
-        run: npm exec --prefix backend -- prisma validate
+        run: npm exec --prefix backend -- prisma validate --schema=./backend/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
