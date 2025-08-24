@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "test") {
 } else {
   // Importação real para ambiente de produção/desenvolvimento
   try {
-    const { PrismaClient } = await import("../../../generated/prisma/index.js");
+    const { PrismaClient } = await import("@prisma/client");
     prisma = new PrismaClient();
   } catch (error) {
     console.error("Erro ao importar PrismaClient:", error);

@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI - Test and Build
 
 on:
   push:
@@ -22,67 +22,69 @@ jobs:
           cache: "npm"
 
       # === DEPENDÊNCIAS ===
-      - name: 📦 Install backend dependencies
-        run: npm ci --prefix backend --no-audit --no-fund
+      - name: 📦 Install Root Dependencies
+        run: npm ci
 
-      - name: 📦 Install frontend dependencies
-        run: npm ci --prefix frontend --no-audit --no-fund
+      - name: 📦 Install Backend Dependencies
+        run: npm ci --prefix backend
 
-      # === PRISMA (usa prisma da RAIZ) ===
-      - name: 🔎 Validate Prisma schema
-        run: npx prisma validate --schema=./prisma/schema.prisma
+      - name: 📦 Install Frontend Dependencies
+        run: npm ci --prefix frontend
+
+      # === VALIDAÇÃO E TESTES ===
+      - name: 🔎 Validate Prisma Schema
+        # CORREÇÃO: Executa o prisma a partir do workspace do backend
+        run: npm exec --prefix backend -- prisma validate
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
-      - name: 🔧 Generate Prisma Client
-        run: npx prisma generate --schema=./prisma/schema.prisma
+      - name: 🧪 Run Backend Tests (Jest)
+        # NOVO: Adiciona a etapa de teste do backend
+        run: npm run test:back
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          # Adicione as variáveis de ambiente que seus testes precisam
+          DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
-      # === BUILD FRONTEND ===
-      - name: 🏗️ Build frontend
+      - name: 🧪 Run Frontend Tests (Jest/Vitest)
+        # NOVO: Adiciona a etapa de teste do frontend
+        run: npm run test:front
+
+      # === BUILD ===
+      - name: 🏗️ Build Frontend Application
         run: npm run build --prefix frontend
         env:
-          VITE_BASE_URL: http://localhost:5000
-
-      # === CHECKS RÁPIDOS ===
-      - name: 🧪 Sanity checks
-        run: |
-          echo "✅ Backend deps instaladas"
-          echo "✅ Frontend build concluído"
-          echo "✅ Prisma Client gerado"
+          # Exemplo de variável de ambiente para o build
+          VITE_BASE_URL: /
 
       # === DOCKER BUILD ===
       - name: 🐳 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: 🐳 Docker build (backend)
-        # CORRIGIDO: O contexto '.' foi movido para o final do comando
+      - name: 🐳 Build Backend Docker Image
         run: docker build --file backend/Dockerfile -t connect-ong-backend:ci .
 
-      - name: 🐳 Docker build (frontend)
-        # CORRIGIDO: O contexto '.' foi movido para o final do comando
+      - name: 🐳 Build Frontend Docker Image
         run: docker build --file frontend/Dockerfile -t connect-ong-frontend:ci .
 
-      # === DOCKER COMPOSE VALIDATION ===
-      - name: 📝 Create .env.backend file
+      # === VALIDAÇÃO DO DOCKER COMPOSE ===
+      - name: 📝 Create .env file for Compose
+        # CORREÇÃO: Cria o arquivo .env, não .env.backend
         run: |
-          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.backend
-          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.backend
-          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.backend
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.backend
-          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env.backend
-          echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}" >> .env.backend
-          echo "AUTH_EMAIL=${{ secrets.AUTH_EMAIL }}" >> .env.backend
-          echo "AUTH_PASS=${{ secrets.AUTH_PASS }}" >> .env.backend
-          echo "NODE_ENV=test" >> .env.backend
-          echo "PORT=3007" >> .env.backend
-          echo "APP_URL=http://localhost:8087" >> .env.backend
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}" >> .env
+          echo "AUTH_EMAIL=${{ secrets.AUTH_EMAIL }}" >> .env
+          echo "AUTH_PASS=${{ secrets.AUTH_PASS }}" >> .env
+          echo "NODE_ENV=production" >> .env
+          echo "PORT=3007" >> .env
+          echo "APP_URL=http://localhost:8087" >> .env
 
-      - name: 🧩 docker compose config
+      - name: 🧩 Validate Docker Compose Configuration
         run: docker compose -f docker-compose.yml config
 
       - name: 🎉 Success notification
-        run: |
-          echo "🎉 All checks passed!"
-          echo "Ready for deployment!"
+        run: echo "🎉 CI Pipeline finished successfully!"

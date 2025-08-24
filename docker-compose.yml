@@ -7,7 +7,7 @@ services:
     container_name: connect-ong-db
     restart: always
     env_file:
-      - .env.backend # <-- Lê as variáveis do banco a partir daqui
+      - .env # <-- Lê as variáveis do banco a partir daqui
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -26,7 +26,7 @@ services:
     depends_on:
       - database
     env_file:
-      - .env.backend # <-- Lê TODAS as variáveis para o backend a partir daqui
+      - .env # <-- Lê TODAS as variáveis para o backend a partir daqui
 
   # --- O Serviço do Frontend ---
   frontend:
