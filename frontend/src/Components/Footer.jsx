@@ -29,7 +29,7 @@ function Footer({ variant = "default" }) {
             <img
               src={footerIcon}
               alt="Logo da Prefeitura do Recife"
-              className="w-40"
+              className="w-48"
             />
           </div>
 

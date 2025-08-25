@@ -1,5 +1,6 @@
 // src/Components/OngCard.jsx
 import React, { useState } from "react";
+import logoImagem from "../assets/images/logoImage.png"; // 1. Importe a imagem aqui
 
 // O componente agora também aceita a prop 'isSelected' para controle visual
 function OngCard({
@@ -45,7 +46,7 @@ function OngCard({
       {/* Seção Superior: Logo, Nome e Subtítulo/Área */}
       <section className="flex items-center mb-4">
         <img
-          src={ong.logo || "/logo-ong-placeholder.png"}
+          src={logoImagem} // 2. Altere o 'src' para usar a imagem importada
           alt={`Logo da ${ong.name}`}
           className="w-16 h-16 rounded-full mr-4 flex-shrink-0 object-cover"
         />
