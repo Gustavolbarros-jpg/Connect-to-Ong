@@ -87,7 +87,7 @@ function LoginPage({ onLogin }) {
         onLogin(); // Notifica o App sobre o login
       }
 
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       console.error("Erro no login:", error);
 

@@ -7,6 +7,8 @@ import Button from "../../Components/Button/";
 import ProgressBar from "../../Components/ProgressBar";
 import Modal from "../../Components/Modal";
 import StatusSpinner from "../../Components/StatusSpinner";
+// Importe a logo aqui
+import logoImage from "../../assets/images/logoImage.png";
 
 function StepeThreePage({ onLogout }) {
   const navigate = useNavigate();
@@ -159,7 +161,7 @@ function StepeThreePage({ onLogout }) {
               {selectedOng ? (
                 <div className="flex items-center gap-4 bg-blue-100 p-4 rounded-[4px]">
                   <img
-                    src={selectedOng.logo || "/logo-ong-placeholder.png"}
+                    src={logoImage}
                     alt={`Logo da ${selectedOng.name}`}
                     className="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-full object-cover"
                   />
@@ -205,16 +207,15 @@ function StepeThreePage({ onLogout }) {
 
       <Modal
         isOpen={isSuccessModalOpen}
-        onClose={() => navigate("/dashboard")}
-        onContinue={() => navigate("/dashboard")}
+        onClose={() => navigate("/")}
+        onContinue={() => navigate("/")}
         continueText="Ir para Meus Projetos"
       >
         <h2 className="text-xl md:text-2xl font-bold text-green-600 mb-4">
           Projeto Criado com Sucesso!
         </h2>
         <p className="text-gray-700 text-base">
-          Sua conexão com a ONG "{selectedOng?.name}" foi iniciada. Você pode
-          acompanhar o status do seu projeto no seu DashBoard
+          Sua conexão com a ONG "{selectedOng?.name}" foi iniciada.
         </p>
       </Modal>
 

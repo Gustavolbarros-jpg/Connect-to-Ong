@@ -75,11 +75,13 @@ function Navbar() {
           </Link>
         </div>
 
+        {/* Menu para Desktop */}
         <div className="hidden md:flex flex-grow justify-center pl-[150px]">
           <ul className="flex items-center gap-10">
             <li>
+              {/* CORREÇÃO AQUI */}
               <NavLink
-                to={user ? "/dashboard" : "/"}
+                to="/"
                 className={({ isActive }) =>
                   isActive ? activeLinkClasses : inactiveLinkClasses
                 }
@@ -200,12 +202,14 @@ function Navbar() {
         </div>
       </nav>
 
+      {/* Menu para Mobile */}
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg px-5 pb-5 absolute top-full left-0 w-full">
           <ul className="text-[20px] font-bold flex flex-col items-center gap-4 pt-4">
             <li>
+              {/* CORREÇÃO AQUI */}
               <NavLink
-                to={user ? "/dashboard" : "/"}
+                to="/"
                 className={({ isActive }) =>
                   isActive
                     ? "bg-blue-600 py-2 px-5 rounded-[4px] text-white hover:bg-blue-800"
