@@ -1,6 +1,14 @@
 import express from "express";
 import cors from "cors";
-import { config } from "dotenv";
+import { config } from "dotenv"; // 1. Adicione esta linha para importar o 'config'
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+// Carrega o .env da pasta raiz
+config({ path: path.resolve(dirname, '../../.env') });
 
 import userRouter from "./routes/users.js";
 import authRouter from "./auth/auth.js";
