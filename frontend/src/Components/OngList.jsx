@@ -158,7 +158,6 @@ function OngList({
             area: ong.area || "Não informada",
             location: ong.endereco || "Não informado",
             description: ong.sobre || "Descrição não disponível.",
-            logo: ong.logo_ong || "/logo-ong-placeholder.png",
           }));
 
           const mockedOngForMatchTest = {
