@@ -1,19 +1,18 @@
-# docker-compose.yml (VERSÃO FINAL E SEGURA)
+# docker-compose.yml (VERSÃO AJUSTADA)
 
 services:
-  # --- O Serviço do Banco de Dados ---
+  # ... (database e backend ficam iguais) ...
   database:
     image: postgres:15-alpine
     container_name: connect-ong-db
     restart: always
     env_file:
-      - .env # <-- Lê as variáveis do banco a partir daqui
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
-  # --- O Serviço do Backend ---
   backend:
     container_name: connect-ong-backend
     build:
@@ -22,13 +21,13 @@ services:
     restart: always
     ports:
       - "3007:3007"
-      - "5555:5555" # <-- Já deixamos a porta do Prisma Studio aqui
+      - "5555:5555"
     depends_on:
       - database
     env_file:
-      - .env # <-- Lê TODAS as variáveis para o backend a partir daqui
+      - .env
 
-  # --- O Serviço do Frontend ---
+  # --- O Serviço do Frontend (COM A ALTERAÇÃO) ---
   frontend:
     container_name: connect-ong-frontend
     build:
@@ -36,7 +35,7 @@ services:
       dockerfile: frontend/Dockerfile
     restart: always
     ports:
-      - "8087:80"
+      - "8087:3000" # <-- AQUI! Mudei de "8087:80" para "8087:3000"
 
 volumes:
   postgres_data:
