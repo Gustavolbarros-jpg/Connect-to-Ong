@@ -7,7 +7,6 @@ services:
     restart: always
     ports:
       - "3007:3007"
-      - "5555:5555"
     env_file:
       - .env
     networks:
