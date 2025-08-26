@@ -8,8 +8,6 @@ services:
     ports:
       - "3007:3007"
       - "5555:5555"
-    depends_on:
-      - database
     env_file:
       - .env
     networks:
