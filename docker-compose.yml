@@ -35,7 +35,7 @@ services:
       dockerfile: frontend/Dockerfile
     restart: always
     ports:
-      - "8087:3000" # <-- AQUI! Mudei de "8087:80" para "8087:3000"
+      - "8087:3017" # <-- AQUI! Mudei de "8087:80" para "8087:3000"
 
 volumes:
   postgres_data:
