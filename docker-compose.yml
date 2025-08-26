@@ -1,18 +1,4 @@
-# docker-compose.yml (VERSÃO AJUSTADA)
-
 services:
-  # ... (database e backend ficam iguais) ...
-  database:
-    image: postgres:15-alpine
-    container_name: connect-ong-db
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
   backend:
     container_name: connect-ong-backend
     build:
@@ -26,6 +12,8 @@ services:
       - database
     env_file:
       - .env
+    networks:
+      - boraimpactar2
 
   # --- O Serviço do Frontend (COM A ALTERAÇÃO) ---
   frontend:
@@ -36,6 +24,9 @@ services:
     restart: always
     ports:
       - "3017:3017" # <-- AQUI! Mudei de "8087:80" para "8087:3000"
+    networks:
+      - boraimpactar2
 
-volumes:
-  postgres_data:
+networks:
+  boraimpactar2:
+    external: true
