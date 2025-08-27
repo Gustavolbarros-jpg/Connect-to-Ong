@@ -2,16 +2,16 @@
 
 services:
   # ... (database e backend ficam iguais) ...
-  database:
-    image: postgres:15-alpine
-    container_name: connect-ong-db
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+  # database:
+  #   image: postgres:15-alpine
+  #   container_name: connect-ong-db
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
 
   backend:
     container_name: connect-ong-backend
