@@ -194,7 +194,7 @@ function App() {
 
 export default function AppWrapper() {
   return (
-    <Router>
+    <Router basename="/connecttoong/">
       <App />
     </Router>
   );
