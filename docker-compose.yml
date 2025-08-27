@@ -12,7 +12,6 @@ services:
     networks:
       - boraimpactar2
 
-  # --- O Serviço do Frontend (COM A ALTERAÇÃO) ---
   frontend:
     container_name: connect-ong-frontend
     build:
@@ -20,10 +19,10 @@ services:
       dockerfile: frontend/Dockerfile
     restart: always
     ports:
-      - "3017:3017" # <-- AQUI! Mudei de "8087:80" para "8087:3000"
+      - "3017:3017"
     networks:
       - boraimpactar2
 
 networks:
   boraimpactar2:
-    driver: bridge
+    external: true
