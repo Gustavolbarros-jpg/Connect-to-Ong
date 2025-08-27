@@ -22,8 +22,8 @@ jobs:
           cache: "npm"
 
       # === DEPENDÊNCIAS ===
-      - name: 📦 Install Root Dependencies
-        run: npm ci
+      # - name: 📦 Install Root Dependencies
+      #   run: npm ci
 
       - name: 📦 Install Backend Dependencies
         run: npm ci --prefix backend
