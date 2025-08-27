@@ -48,7 +48,7 @@ jobs:
 
       - name: 🧪 Run Frontend Tests (Jest/Vitest)
         # NOVO: Adiciona a etapa de teste do frontend
-        run: npm run test:front
+        run: npm run test --prefix frontend
 
       # === BUILD ===
       - name: 🏗️ Build Frontend Application
