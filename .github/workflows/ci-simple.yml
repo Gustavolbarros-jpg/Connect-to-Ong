@@ -40,7 +40,7 @@ jobs:
 
       - name: 🧪 Run Backend Tests (Jest)
         # NOVO: Adiciona a etapa de teste do backend
-        run: npm run test:back
+        run: npm run test --prefix backend
         env:
           # Adicione as variáveis de ambiente que seus testes precisam
           DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
