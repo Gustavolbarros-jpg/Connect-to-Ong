@@ -1,11 +1,11 @@
-# backend/Dockerfile (VERSÃO FINAL E MAIS ROBUSTA)
-
 # 1. Base do Node.js
 FROM node:22-alpine
 
 # 2. Copia a pasta inteira do backend para dentro do container
 # O .dockerignore garantirá que a node_modules local não seja copiada
 COPY backend /app/backend/
+
+COPY .env /app/backend/.env
 
 # 3. Define o diretório de trabalho para a pasta do backend
 WORKDIR /app/backend/
@@ -19,4 +19,4 @@ RUN npm install
 RUN npx prisma generate
 
 # 6. Define o comando para iniciar o servidor
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npx prisma migrate dev --name init && npm start"]
