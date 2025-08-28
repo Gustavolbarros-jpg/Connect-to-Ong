@@ -28,4 +28,4 @@ EXPOSE 3017
 
 # Comando para iniciar o servidor, FORÇANDO ele a usar a porta 3007
 # É exatamente a sua sugestão!
-CMD ["serve", "-s", ".", "-l", "3017"]
+CMD ["serve", "-s", ".", "-l", "3017", "--listen", "0.0.0.0"]
